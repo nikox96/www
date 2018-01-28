@@ -1,0 +1,16 @@
+The magic happens on port 9081
+Connected!
+[0mGET /login [36m304 [0m30.837 ms - -[0m
+sql password: $2a$10$/6Sb0krhVIAs0DTJtJifUeAdZnlNpSHWLGACEU/sAHRz8m5kSnUQK
+html passord: 1234
+compare result: false
+compare error: null
+Welcome admin admin
+local-login err null
+local-login res 9999 admin
+serialize: [object Object]
+[0mPOST /login [36m302 [0m58.072 ms - 54[0m
+deserialize: [object Object]
+[0mGET /home [36m304 [0m3.349 ms - -[0m
+deserialize: [object Object]
+error: Error: ER_PROCACCESS_DENIED_ERROR: execute command denied to user 'portale'@'%' for routine 'b.SUM'

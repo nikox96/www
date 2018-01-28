@@ -1,0 +1,91 @@
+<!-- views/new-order-sum.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Portale Innovazioni - Nuovo ordine</title>
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+          integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <style>
+        body {
+            padding-top: 0%;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+<nav id="navbar-ordine" class="navbar navbar-light bg-light"
+     style="position: fixed !important; width: 100% !important;">
+    <a class="navbar-brand" href="#">Nuovo Ordine
+        <%= idOrd %>
+    </a>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" href="/new-order">Cliente</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/new-order-product">Prodotti</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/new-order-cond-pag">Condizione di pagamento</a>
+        </li>
+    </ul>
+</nav>
+<div class="container-fluid" data-target="#navbar-ordine" style="padding-top: 2%">
+    <div class="row">
+        <div class="col">
+            <h4>Cliente: <%= client.ccod %>
+                <small class="text-muted"><%= client.xragsoc %></small>
+            </h4>
+        </div>
+        <div class="col">
+            <h4>Ordine N°: <%= idOrd %></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col">
+            <h4>Condizione di pagamento: <%= condpag.xcond %>
+                <small class="text-muted">N° scadenze: <%= condpag.nsca %></small>
+            </h4>
+        </div>
+    </div>
+    <div data-spy="scroll" data-offset="0">
+        <div id="product">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Codice Prodotto</th>
+                    <th scope="col">Descrizione</th>
+                    <th scope="col">Prezzo</th>
+                    <th scope="col">Quantità</th>
+                    <th scope="col">Importo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for(var i = 0; i < products.length;i++) { %>
+                <tr>
+                    <th scope="row"><%= products[i].ccod %></th>
+                    <td><%= products[i].xdesc %></td>
+                    <td><%= products[i].iprz %></td>
+                    <td><%= products[i].iqta %></td>
+                    <td><%= products[i].iimp %></td>
+                </tr>
+                <% } %>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a class="btn btn-primary" href="/home" role="button">Chiudi</a></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
