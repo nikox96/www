@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
           integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <link rel="stylesheet" href="../node_modules/material-design-icons/iconfont/material-icons.css">
+    <link rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
     <style>
         body {
             padding-top: 0%;
@@ -58,7 +58,7 @@
                     <th scope="col">Data</th>
                     <th></th>
                     <th></th>
-                    <% if (user.cage = 9999) { %>
+                    <% if (user.cage == 9999) { %>
                     <th></th>
                     <th></th>
                     <% } %>
@@ -68,20 +68,38 @@
                 <% orders.forEach(function(order) { %>
                 <tr>
                     <th scope="row"><%= order.ccod %></th>
-                    <td><%= order.ccli %></td>
+                    <td><%= order.xragsoc %></td>
                     <td><%= order.iimp %></td>
                     <td><%= order.data %></td>
                     <td>
                         <form action="/detail-order" method="get">
                             <input type="hidden" name="ccod" value="<%= order.ccod %>">
-                            <button type="submit"><i class="material-icons">&#xe88f</i></button>
+                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe88f</i></button>
                         </form>
                     </td>
-                    <% if (user.cage = 9999) { %>
-                    <form action="/del-order" method="post">
-                        <input type="hidden" name="ccod" value="<%= order.ccod %>">
-                        <button type="submit"><i class="material-icons">&#xe872</i></button>
-                    </form>
+                    <td>
+                        <% if (order.cstt == 10 || user.cage == 9999) { %>
+                        <form action="/new-order-product" method="get">
+                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
+                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe254</i></button>
+                        </form>
+                        <% } %>
+                    </td>
+                    <% if (user.cage == 9999) { %>
+                    <td>
+                        <form action="/del-order" method="post">
+                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
+
+                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe872</i></button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/get-csv" method="get">
+                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
+
+                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe2c4</i></button>
+                        </form>
+                    </td>
                     <% } %>
                 </tr>
                 <% }); %>

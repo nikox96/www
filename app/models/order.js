@@ -24,6 +24,33 @@ Ordine.find = function find(ccod, callback) {
         });
 };
 
+Ordine.delOrder = function delOrder(ccod, callback) {
+    //ricerca ordine per codice
+    db.query("DELETE FROM ordini WHERE ccod = "
+        + ccod
+        , function (queryErr, queryRes) {
+            if (queryErr) {
+                console.log("error: " + queryErr);
+            }
+            else {
+                callback(null, 'Ordine cancellato');
+                db.query("DELETE FROM righe_ordini WHERE ccod = "
+                    + ccod
+                    , function (err2, res2) {
+                        if (err2) {
+                            console.log("errore canc righe ordini");
+                        } else {
+                            callback(null, "Cancellato sia ordine che dettaglio");
+                            return
+                        }
+                        callback("Errore cancellazione dettaglio: comunicare n° ordine all'amministratore: " + ccod, null);
+                    });
+                return;
+            }
+            callback("Errore cancellazione ordine", null);
+        });
+};
+
 Ordine.findProduct = function find(ccod, callback) {
     //ricerco i prodotti per un determinato ordine
     db.query("SELECT * FROM righe_ordini WHERE ccod = "
@@ -148,13 +175,23 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
     });
 };
 
-Ordine.getUserOrder = function (cage, cstt, ccli, callback) {
+Ordine.getUserOrder = function (cage, cstt, xcli, callback) {
     //ricerca ordine per codice agente/status/cliente
-    db.query("SELECT a.* , b.SUM(iimp) as iimp " +
-        "FROM ordini AS a JOIN righe_ordini AS b ON a.ccod=b.ccod WHERE "
-        + (cage && cage !== '' ? "cage = " + cage : '1 <> 1')
-        + (cstt && cstt !== '' ? " AND cstt = " + cstt : '')
-        + (ccli && ccli !== '' ? " AND ccli = " + ccli : '')
+    var query = "SELECT a.*, b.iimp, c.xragsoc " +
+        "FROM " +
+        "(SELECT ccod, dreg, cstt, cage, ccli " +
+        "FROM ordini)  AS a, " +
+        "(SELECT ccod, SUM(iimp) AS iimp " +
+        "FROM righe_ordini " +
+        "GROUP BY ccod) AS b, " +
+        "(SELECT ccod, xragsoc " +
+        "FROM clienti) AS c " +
+        "WHERE a.ccod = b.ccod AND a.ccli = c.ccod "
+        + (cage && cage !== '' ? "AND a.cage = " + cage : 'AND 1 <> 1')
+        + (cstt && cstt !== '' ? " AND a.cstt = " + cstt : '')
+        + (xcli && xcli !== '' ? " AND c.xragsoc like '%" + xcli + "%'" : '');
+    //console.log(query);
+    db.query(query
         , function (queryErr, queryRes) {
             if (queryErr) {
                 console.log("error: " + queryErr);

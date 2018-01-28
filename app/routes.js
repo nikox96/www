@@ -207,6 +207,15 @@ module.exports = function (app, passport) {
         })
     });
 
+    app.post('/del-order', isLoggedIn, function (req, res) {
+        Order.delOrder(req.body.ccod, 0, function (queryErr, queryRes) {
+            if (queryErr)
+                console.log('impossibile ma vero');
+            else
+                res.redirect('/home');
+        })
+    });
+
     // =====================================
     // LOGIN ===============================
     // =====================================
@@ -222,7 +231,33 @@ module.exports = function (app, passport) {
                 for (i = 0; i < ordRes.length; i++) {
                     order = {};
                     order.ccod = ordRes[i].ccod;
-                    order.ccli = ordRes[i].ccli;
+                    order.xragsoc = ordRes[i].xragsoc;
+                    order.iimp = ordRes[i].iimp;
+                    order.data = ordRes[i].dreg;
+                    orders[i] = order;
+                }
+
+                res.render('order-list.ejs', {
+                    orders: orders,
+                    user: req.user
+                });
+            }
+        });
+    });
+
+
+    app.post('/order-list', isLoggedIn, function (req, res) {
+        var orders = [];
+
+        Order.getUserOrder(req.user.cage, req.body.cstt, req.body.xragsoc, function (ordErr, ordRes) {
+            if (ordErr) {
+                req.flash('list-order-message', ordErr);
+            } else {
+                var order = {};
+                for (i = 0; i < ordRes.length; i++) {
+                    order = {};
+                    order.ccod = ordRes[i].ccod;
+                    order.xragsoc = ordRes[i].xragsoc;
                     order.iimp = ordRes[i].iimp;
                     order.data = ordRes[i].dreg;
                     orders[i] = order;
