@@ -168,6 +168,7 @@ module.exports = function (app, passport) {
             }
         });
     });
+
     app.post('/new-order-cond-pag', isLoggedIn, function (req, res) {
         Order.updateCondPag(req.body.ccod, req.body.ccodpag, function (queryErr, queryRes) {
             if (queryErr)
@@ -207,6 +208,251 @@ module.exports = function (app, passport) {
         })
     });
 
+    app.get('/edit-products', isLoggedIn, function (req, res) {
+        Order.findProduct(req.body.ccod, function (queryErr, queryRes) {
+            Product.list(0, 999999, '', '', '', function (productErr, productRes) {
+                if (productErr) {
+                    req.flash('editProducts', 'Nessun prodotto disponibile');
+                } else {
+                    var products = [];
+                    var product;
+                    for (i = 0; i < productRes.length; i++) {
+                        product = {};
+                        product.ccod = productRes[i].ccod;
+                        product.xdesc = productRes[i].xdesc;
+                        if (queryRes.length > 0) {
+                            product.iqta = queryRes.find(getIqta(product.ccod));
+                        } else {
+                            product.iqta = 0;
+                        }
+                        products[i] = product;
+                    }
+
+                    products = _.sortBy(products, "iqta");
+                    res.render('edit-products.ejs', {
+                        message: req.flash('editProducts'),
+                        idOrd: req.body.ccod,
+                        products: products
+                    })
+                }
+            });
+        });
+    });
+
+    app.get('/get-csv',isLoggedIn,function (req, res) {
+        var rig = {}, tes={}:
+        rig.tipRec='';
+        tes.cDocAut='';
+        tes.dreg='';
+        tes.tipDocFttVen='';
+        tes.tipDocFttAcq='';
+        tes.tipDocPreVen='';
+        tes.tipDocPreAcq='';
+        tes.tipDocOrdVen='';
+        tes.tipDocOrdAcq='';
+        tes.tipDocDdtVen='';
+        tes.tipDocDdtAcq='';
+        tes.nreg='';
+        tes.appDigReg='';
+        tes.nAttIva='';
+        tes.nAttIvaAltroSis='';
+        tes.tipRegIva='';
+        tes.cRegIva='';
+        tes.cRegIvaAltroSis='';
+        tes.ddoc='';
+        tes.ndoc='';
+        tes.nregAnn='';
+        tes.appDigRegAnn='';
+        tes.cConCont='';
+        tes.cConContAltroSis='';
+        tes.cPartAltroSis='';
+        tes.cPart='';
+        tes.cfisPart='';
+        tes.pivaPart='';
+        tes.addAut='';
+        tes.cValDoc='';
+        tes.camb='';
+        tes.cValIntr='';
+        tes.cimp='';
+        tes.filler='';
+        tes.iimp='';
+        tes.fpag='';
+        tes.civaNonImp='';
+        tes.civaNonImpAltroSis='';
+        tes.ccatRegIvaSpec='';
+        tes.regIvaSpecPrev='';
+        tes.contRegDocIva='';
+        tes.indetr='';
+        tes.cas1='';
+        tes.cas2='';
+        tes.cas3='';
+        tes.rifVs='';
+        tes.rifNs='';
+        tes.ddtDaFtt='';
+        tes.ddtInc='';
+        tes.ddtFttSosp='';
+        tes.ddtDaFttTipFtt='';
+        tes.ragrFtt='';
+        tes.cage='';
+        tes.cageAltroSis='';
+        tes.provvAge='';
+        tes.provCapoArea='';
+        tes.ccondPag='';
+        tes.ccondPagAltroSis='';
+        tes.scoCondPag='';
+        tes.rilTrackFlussiFin='';
+        tes.rilTrackFlussiFinAltroSis='';
+        tes.idGara='';
+        tes.idProg='';
+        tes.descTrackFlussiFin='';
+        tes.scoTes='';
+        tes.sScoAna='';
+        tes.dini='';
+        tes.dfin='';
+        tes.eseComp='';
+        tes.ddecor='';
+        tes.cBancaNs='';
+        tes.cBancaNsAltroSis='';
+        tes.descBancaRif='';
+        tes.cAppBanc='';
+        tes.cabi='';
+        tes.ccab='';
+        tes.ccin='';
+        tes.ccin2='';
+        tes.nconcor='';
+        tes.cbic='';
+        tes.cpae='';
+        tes.rifBancaEstera='';
+        tes.ciban='';
+        tes.xcau='';
+        tes.cauAggRegIva1='';
+        tes.cauAggRegIva2='';
+        tes.cauAggRegIva3='';
+        tes.cauAggRegIva4='';
+        tes.annCompIva='';
+        tes.perCompIva='';
+        tes.dopr='';
+        tes.cessCliPriv='';
+        tes.annRifOpr='';
+        tes.perRifOpr='';
+        tes.rilBlackList='';
+        tes.cAziendaRapp='';
+        tes.cAziendaRappAltroSis='';
+        tes.terrIva='';
+        tes.filler2='';
+        tes.totDocVal='';
+        tes.nRifInd='';
+        tes.ragSoc1='';
+        tes.ragSoc2='';
+        tes.xind1='';
+        tes.xind2='';
+        tes.ccap='';
+        tes.xloc1='';
+        tes.xloc2='';
+        tes.cprv='';
+        tes.ciso='';
+        tes.ccatCli='';
+        tes.xcatCli='';
+        tes.tipGesList='';
+        tes.clis='';
+        tes.cdep='';
+        tes.cdepRic='';
+        tes.ccauTrasp='';
+        tes.xcauTrasp='';
+        tes.aspBen='';
+        tes.xAspBen='';
+        tes.cporto='';
+        tes.xporto='';
+        tes.traspMez='';
+        tes.xTraspMex='';
+        tes.diniTrasp='';
+        tes.oiniTrasp='';
+        tes.xmezz='';
+        tes.targaMez='';
+        tes.cvet='';
+        tes.cvetAltroSis='';
+        tes.vetRagSoc1='';
+        tes.vetRagSoc2='';
+        tes.xvettInd1='';
+        tes.xvettInd2='';
+        tes.ccapVet='';
+        tes.xvetLoc1='';
+        tes.xvetLoc2='';
+        tes.cprvVet='';
+        tes.cisoVet='';
+        tes.cvet2='';
+        tes.cvetAltroSis2='';
+        tes.vetRagSoc12='';
+        tes.vetRagSoc22='';
+        tes.xvettInd12='';
+        tes.xvettInd22='';
+        tes.ccapVet2='';
+        tes.xvetLoc12='';
+        tes.xvetLoc22='';
+        tes.cprvVet2='';
+        tes.cisoVet2='';
+        tes.copr='';
+        tes.compElenchiIvaAnniPrec='';
+        tes.partitaCollRit='';
+        tes.ctipOprRit='';
+        tes.ctipOprRitAltroSis='';
+        tes.tipContributoPrev='';
+        tes.tipContributoPrevAltroSis='';
+        tes.derivaSpesePie='';
+        tes.iBollo='';
+        tes.iInc='';
+        tes.iSpesa1='';
+        tes.iSpesa2='';
+        tes.iBolloOprEse='';
+        tes.codCoint1='';
+        tes.cfisCoin1='';
+        tes.pivaCoin1='';
+        tes.ragSoc1Coin1='';
+        tes.ragSoc2Coin1='';
+        tes.xnoteCoin1='';
+        tes.codCoint2='';
+        tes.cfisCoin2='';
+        tes.pivaCoin2='';
+        tes.ragSoc1Coin2='';
+        tes.ragSoc2Coin2='';
+        tes.xnoteCoin2='';
+        tes.codCoint3='';
+        tes.cfisCoin3='';
+        tes.pivaCoin3='';
+        tes.ragSoc1Coin3='';
+        tes.ragSoc2Coin3='';
+        tes.xnoteCoin3='';
+        tes.codCoint4='';
+        tes.cfisCoin4='';
+        tes.pivaCoin4='';
+        tes.ragSoc1Coin4='';
+        tes.ragSoc2Coin4='';
+        tes.xnoteCoin4='';
+        tes.codCoint5='';
+        tes.cfisCoin5='';
+        tes.pivaCoin5='';
+        tes.ragSoc1Coin5='';
+        tes.ragSoc2Coin5='';
+        tes.xnoteCoin5='';
+        tes.tipProd='';
+        tes.ddecorPag='';
+        tes.datiAggFttEle='';
+        tes.ccentroAnalisi='';
+        tes.ccentroAnalisiAltroSis='';
+        tes.ccomm='';
+        tes.ccommALtroSis='';
+        tes.docRil='';
+        tes.cfisDef='';
+        tes.xcognDef='';
+        tes.xnomeDef='';
+        tes.intAutPlafond='';
+        tes.tipAnaVen='';
+        tes.cven='';
+        tes.cvenEst='';
+        tes.cvenInd='';
+        rig.tipRig='';
+    });
+
     app.post('/del-order', isLoggedIn, function (req, res) {
         Order.delOrder(req.body.ccod, 0, function (queryErr, queryRes) {
             if (queryErr)
@@ -222,7 +468,7 @@ module.exports = function (app, passport) {
     // show the login form
     app.get('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
-        
+
         Order.getUserOrder(req.user.cage, null, null, function (ordErr, ordRes) {
             if (ordErr) {
                 req.flash('list-order-message', ordErr);
@@ -393,4 +639,9 @@ function getRighe(res, req, righe, cliente, cond) {
             getRighe(res, req, righe, cliente, cond);
         }
     });
+}
+
+function getIqta(ccod, task) {
+
+    return obj.ccod === ccod;
 }

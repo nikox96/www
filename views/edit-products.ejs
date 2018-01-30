@@ -1,0 +1,156 @@
+<!-- views/edit-products.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Portale Innovazioni - Nuovo ordine</title>
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+          integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
+    <style>
+        body {
+            padding-top: 0%;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+<nav id="navbar-ordine" class="navbar navbar-light bg-light"
+     style="position: fixed !important; width: 100% !important;">
+    <a class="navbar-brand" href="#">
+        <h4>Modifica Ordine
+            <small class="text-muted"><%= idOrd %></small>
+        </h4>
+    </a>
+</nav>
+<div class="container" style="padding-top: 3%">
+    <form action="/new-order-product" method="post" style="position: fixed !important;">
+        <input type="hidden" name="idOrd" value="<%= idOrd %>">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormCodDa">Codice prodotto da</label>
+                <input type="number" name="ccodda" class="form-control mb-2" id="inlineFormInputCodDa"
+                       placeholder="Codice prodotto da">
+            </div>
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormCodA">A</label>
+                <input type="number" name="ccoda" class="form-control mb-2" id="inlineFormInputCodA"
+                       placeholder="Codice prodotto a">
+            </div>
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormXprod">A</label>
+                <input type="number" name="xprod" class="form-control mb-2" id="inlineFormInputXprod"
+                       placeholder="Descrizione prodotto">
+            </div>
+            <div class="col-auto">
+                <select class="custom-select custom-select-lg mb-2" name="sven">
+                    <option value="" selected>Tipo vendita</option>
+                    <% lven.forEach(function(lven){ %>
+                    <option value="<%= lven.sven %>">
+                        <%= lven.sven %>
+                    </option>
+                    <% }); %>
+                </select>
+            </div>
+            <div class="col-auto">
+                <select class="custom-select custom-select-lg mb-2" name="xgrp">
+                    <option value="" selected>Categoria prodotto</option>
+                    <% xgrp.forEach(function(xgrp){ %>
+                    <option value="<%= xgrp.xgrp %>">
+                        <%= xgrp.xgrp %>
+                    </option>
+                    <% }); %>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-2">Cerca</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container-fluid" style="padding-top: 2%">
+    <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
+        <div id="product">
+            <!--<div style="display: table; width: 100%; border-collapse: collapse; background: rgba(139,139,139,0.67);">
+                <div style="display: table-row; height: 5%; width: 100%; border:1px solid #000000;">
+                    <span style="display: table-cell; width: 25%;">Codice Prodotto</span>
+                    <span style="display: table-cell; width: 25%;">Descrizione</span>
+                    <span style="display: table-cell; width: 25%;">Prezzo</span>
+                    <span style="display: table-cell; width: 25%;">Quantità</span>
+                </div>
+                < % for(var i = 0; i < products.length;i++) { % >
+                <form action="/new-order-product-row" method="get"
+                      style="display: table-row; height: 5%; width: 100%; border:1px solid #000000; position: relative !important;">
+                    <span style="display: table-cell; width: 8%;">
+                        <input type="number" value="< %= products[i].ccod % >" style="border-radius: 5px; width: 100%;"
+                               readonly="readonly">
+                    </span>
+                    <span style="display: table-cell; width: 40%;">
+                        <input type="text" value="< %= products[i].xdesc % >" style="border-radius: 5px; width: 100%;"
+                               readonly="readonly">
+                    </span>
+                    <span style="display: table-cell; width: 22%;">
+                        <input type="text" value="< %= products[i].iprz % >" style="border-radius: 5px; width: 100%;"
+                               readonly="readonly">
+                    </span>
+                    <span style="display: table-cell; width: 15%;">
+                        <input type="number" name="iqta" style="border-radius: 5px; width: auto;">
+                    </span>
+                    <span style="display: table-cell; width: 15%;">
+                        <button type="submit">
+                            <img src="/img/ic_add_shopping_cart_black_24dp_2x.png">
+                        </button>
+                    </span>
+                </form>
+                < % } % >
+                <div style="display: table-row; width: 100%; border:1px solid #000000;">
+                    <span style="display: table-cell; width: 25%;"></span>
+                    <span style="display: table-cell; width: 25%;"></span>
+                    <span style="display: table-cell; width: 25%;"></span>
+                    <span style="display: table-cell; width: 25%;">
+                        <a class="btn btn-primary" href="/new-order-cond-pag" role="button">Avanti</a>
+                    </span>
+                </div>
+            </div>-->
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Codice Prodotto</th>
+                    <th scope="col">Descrizione</th>
+                    <th scope="col">Prezzo</th>
+                    <th scope="col">Quantità</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for(var i = 0; i < products.length;i++) { %>
+                <tr>
+                    <th scope="row"><%= products[i].ccod %></th>
+                    <td><%= products[i].xdesc %></td>
+                    <td><%= products[i].iprz %></td>
+                    <td>
+                        <form action="/new-order-product-row" method="get">
+                            <input type="hidden" name="ccod" value="<%= idOrd %>">
+                            <input type="hidden" name="ccodprod" value="<%= products[i].ccod %>">
+                            <input type="number" name="iqta" class="form-control">
+                            <button type="submit"><i class="material-icons">&#xe854</i></button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a class="btn btn-primary" href="/new-order-cond-pag?idOrd=<%= idOrd %>"
+                           role="button">Avanti</a></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

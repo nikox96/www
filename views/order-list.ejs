@@ -79,7 +79,7 @@
                     </td>
                     <td>
                         <% if (order.cstt == 10 || user.cage == 9999) { %>
-                        <form action="/new-order-product" method="get">
+                        <form action="/edit-products" method="get">
                             <input type="hidden" name="ccod" value="<%= order.ccod %>">
                             <button type="submit" class="btn btn-link"><i class="material-icons">&#xe254</i></button>
                         </form>
