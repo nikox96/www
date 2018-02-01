@@ -451,6 +451,36 @@ module.exports = function (app, passport) {
         tes.cvenEst='';
         tes.cvenInd='';
         rig.tipRig='';
+        rig.carticolo='';
+        rig.carticoloAltroSis='';
+        rig.cbarre='';
+        rig.carticoloTerzi='';
+        rig.cconto='';
+        rig.ccontoAltroSis='';
+        rig.cpartitarioAltroSis='';
+        rig.cpartitarioAna='';
+        rig.cbanca='';
+        rig.cbancaAltroSis='';
+        rig.ccatCespite='';
+        rig.ccatCespiteAltroSis='';
+        rig.cpartitarioAltriConti='';
+        rig.cpartitarioAltriContiAltroSis='';
+        rig.opzComposto='';
+        rig.descrizione1='';
+        rig.descrizione2='';
+        rig.descrizione3='';
+        rig.descrizione4='';
+        rig.descrizione5='';
+        rig.descrizioneInterna='';
+        rig.tipGesListino='';
+        rig.clistino='';
+        rig.dconsegna='';
+        rig.calcVar1='';
+        rig.calcVar2='';
+        rig.calcVar3='';
+        rig.calcVar4='';
+        rig.pesoLordo='';
+        rig.tara='';
     });
 
     app.post('/del-order', isLoggedIn, function (req, res) {
