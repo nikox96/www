@@ -240,8 +240,8 @@ module.exports = function (app, passport) {
     });
 
     app.get('/get-csv',isLoggedIn,function (req, res) {
-        var rig = {}, tes={}:
-        rig.tipRec='';
+        var rig = {}, tes={}, rec = {}, ltc = {}:
+        rec.tipRec='';
         tes.cDocAut='';
         tes.dreg='';
         tes.tipDocFttVen='';
@@ -481,6 +481,40 @@ module.exports = function (app, passport) {
         rig.calcVar4='';
         rig.pesoLordo='';
         rig.tara='';
+        rig.vol='';
+        rig.ncolli='';
+        rig.uMis='';
+        rig.qdoc='';
+        rig.qdocScoMerce='';
+        rig.qExpUmSec='';
+        rig.qExpUmMag='';
+        rig.iprz='';
+        rig.sco1='';
+        rig.fscoAna='';
+        rig.sco2='';
+        rig.sco3='';
+        rig.scoUni='';
+        rig.provvAge='';
+        rig.impVal='';
+        rig.cimp='';
+        rig.copeMag='';
+        rig.cdep='';
+        rig.classeStat='';
+        rig.cdep2='';
+        rig.datiAggFttEle='';
+        rig.datiAggDdtPepp='';
+        rig.rifLotCalf='';
+        rig.rifLotData='';
+        rig.rifLotNum='';
+        ltc.qdoc='';
+        ltc.qExpUmSec='';
+        ltc.qExpUmMag='';
+        rig.calcSpe='';
+        rig.oggRilev='';
+        rig.filler1='';
+        rec.tes=tes;
+        rec.rig=rig;
+        rec.ltc=ltc;
     });
 
     app.post('/del-order', isLoggedIn, function (req, res) {
