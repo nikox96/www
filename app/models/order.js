@@ -208,4 +208,30 @@ Ordine.getUserOrder = function (cage, cstt, xcli, callback) {
         });
 };
 
+Ordine.updateNreg = function updateNreg(ccod, callback) {
+    db.query("SELECT max(nreg) AS nreg FROM ordini WHERE cstt = 20", function (nregErr, nregRes) {
+        if (nregErr) {
+            callback('Nessun numero di registrazione presente in archivio', null);
+        } else {
+            //se non è presente nreg è il primo ordine nreg=0
+            if (!(nregRes[0].nreg))
+                nregRes[0].nreg = 0;
+
+            nregRes[0].nreg = nregRes[0].nreg + 1;
+
+            //inserisco l'ordine con il numero di registrazione calcolato
+            db.query("UPDATE ordini set nreg = nregRes[0].nreg WHERE "
+                + (ccod && ccod !== '' ? 'ccod = ' + ccod : '1 <> 1')
+                , function (queryErr, queryRes) {
+                    if (queryErr) {
+                        callback('Errore aggiornamento numero di registrazione ordine', null);
+                    }
+                    else {
+                        callback(null, "Numero di registrazione aggiornato!");
+                    }
+                });
+        }
+    });
+};
+
 module.exports = Ordine;
