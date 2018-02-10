@@ -1,2 +1,40 @@
 The magic happens on port 9081
 Connected!
+[0mGET / [36m304 [0m105.506 ms - -[0m
+[0mGET /favicon.ico [33m404 [0m3.214 ms - 150[0m
+[0mGET /login [32m200 [0m21.802 ms - 1328[0m
+sql password: $2a$10$/6Sb0krhVIAs0DTJtJifUeAdZnlNpSHWLGACEU/sAHRz8m5kSnUQK
+html passord: 1234
+compare result: false
+compare error: null
+Welcome admin admin
+local-login err null
+local-login res 9999 admin
+serialize: [object Object]
+[0mPOST /login [36m302 [0m242.721 ms - 54[0m
+deserialize: [object Object]
+[0mGET /home [36m304 [0m23.509 ms - -[0m
+deserialize: [object Object]
+[0mGET /order-list [36m304 [0m38.229 ms - -[0m
+deserialize: [object Object]
+[0mGET /material-design-icons/iconfont/material-icons.css [36m304 [0m4.417 ms - -[0m
+deserialize: [object Object]
+[0mGET /material-design-icons/iconfont/MaterialIcons-Regular.woff2 [36m304 [0m2.976 ms - -[0m
+deserialize: [object Object]
+error: Error: ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'where clause'
+[0mGET /get-csv?ccod=1 [0m- [0m- ms - -[0m
+deserialize: [object Object]
+error: Error: ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'where clause'
+[0mGET /get-csv?ccod=1 [0m- [0m- ms - -[0m
+deserialize: [object Object]
+error: Error: ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'where clause'
+[0mGET /get-csv?ccod=1 [0m- [0m- ms - -[0m
+deserialize: [object Object]
+error: Error: ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'where clause'
+[0mGET /get-csv?ccod=1 [0m- [0m- ms - -[0m
+deserialize: [object Object]
+error: Error: ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'where clause'
+[0mGET /get-csv?ccod=1 [0m- [0m- ms - -[0m
+deserialize: [object Object]
+error: Error: ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'where clause'
+[0mGET /get-csv?ccod=1 [0m- [0m- ms - -[0m

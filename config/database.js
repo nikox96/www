@@ -8,12 +8,14 @@ db.user = "portale";
 db.password = "portale";
 db.database = "portale";
 db.host = "localhost";
+db.dateStrings = "date";
 
 var sql = mysql.createConnection({
     host: db.host,
     user: db.user,
     password: db.password,
-    database: db.database
+    database: db.database,
+    dateStrings: db.dateStrings
 });
 
 sql.connect(function (err) {

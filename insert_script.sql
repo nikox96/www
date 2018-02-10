@@ -1,5 +1,6 @@
 -- create table agenti
 CREATE TABLE agenti (	cage INT(5) NOT NULL COMMENT 'Codice agente',
+                        percProvv DECIMAL(5,2) NOT NULL COMMENT 'Percenuale provvigione',
 			PRIMARY KEY(cage));
             
 -- create table users
