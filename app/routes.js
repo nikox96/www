@@ -4,8 +4,7 @@ var Order = require("./models/order.js");
 var Product = require("./models/product.js");
 var Agent = require("./models/agent.js");
 var i = 0, csvEl = 0;
-var rig, tes, rec, ltc, iva, par, csv;
-rec.tipRec = '';
+var rig, tes, rec, iva, par, csv;
 
 module.exports = function (app, passport) {
 
@@ -243,6 +242,7 @@ module.exports = function (app, passport) {
     });
 
     app.get('/get-csv', isLoggedIn, function (req, res) {
+        rec = {};
         initializeCSV();
         csv = [];
         csvEl = 0;
@@ -284,8 +284,8 @@ module.exports = function (app, passport) {
                                     tes.appDigRegAnn = '';
                                     tes.cConCont = '';
                                     tes.cConContAltroSis = '';
-                                    tes.cPart = (ordRes.ccli && ordRes.ccli !== '' ? ordRes.ccli : '');
                                     tes.cPartAltroSis = '';
+                                    tes.cPart = (ordRes.ccli && ordRes.ccli !== '' ? ordRes.ccli : '');
                                     tes.cfisPart = (cliRes.cfis && cliRes.cfis !== '' ? cliRes.cfis : '');
                                     tes.pivaPart = (cliRes.piva && cliRes.piva !== '' ? cliRes.piva : '');
                                     tes.addAut = '';
@@ -294,7 +294,8 @@ module.exports = function (app, passport) {
                                     tes.cValIntr = '';
                                     tes.cCambIntr = '';
                                     tes.cimp = '1';
-                                    tes.iInc = (ordRes.iinc && ordRes.iinc !== '' ? ordRes.iinc : '');
+                                    tes.filler = '';
+                                    tes.iimp = (ordRes.iinc && ordRes.iinc !== '' ? ordRes.iinc : '');
                                     tes.fpag = '000';
                                     tes.civaNonImp = '';
                                     tes.civaNonImpAltroSis = '';
@@ -326,8 +327,8 @@ module.exports = function (app, passport) {
                                     tes.descTrackFlussiFin = '';
                                     tes.scoTes = '0.00';
                                     tes.sScoAna = '';
-                                    tes.diniComp = '';
-                                    tes.dfineComp = '';
+                                    tes.dini = '';
+                                    tes.dfin = '';
                                     tes.eseComp = '';
                                     tes.ddecor = '';
                                     tes.cBancaNs = '';
@@ -471,13 +472,13 @@ module.exports = function (app, passport) {
                                     tes.cvenInd = '';
 
                                     rec.tes = tes;
-                                    rec.iva = iva;
-                                    rec.ltc = ltc;
-                                    rec.par = par;
                                     rec.rig = rig;
+                                    rec.iva = iva;
+                                    rec.par = par;
 
                                     csvRig();
-                                    getRigheCSV(res, req, righeRes, cliRes);
+                                    i = 0;
+                                    getRigheCSV(res, req, ordRes.nreg, righeRes, cliRes, ageRes);
                                 });
                             }
                         });
@@ -679,12 +680,10 @@ function initializeCSV() {
 
     rig = {};
     tes = {};
-    rec = {};
-    ltc = {};
     iva = {};
     par = {};
 
-    //rec.tipRec = '';
+    rec.tipRec = '';
     tes.cDocAut = '';
     tes.dreg = '';
     tes.tipDocFttVen = '';
@@ -909,7 +908,7 @@ function initializeCSV() {
     rig.ccatCespiteAltroSis = '';
     rig.cpartitarioAltriConti = '';
     rig.cpartitarioAltriContiAltroSis = '';
-    rig.descPartAltriConti='';
+    rig.descPartAltriConti = '';
     rig.opzComposto = '';
     rig.descrizione1 = '';
     rig.descrizione2 = '';
@@ -929,7 +928,7 @@ function initializeCSV() {
     rig.vol = '';
     rig.ncolli = '';
     rig.uMis = '';
-    rig.uMisAltroSis='';
+    rig.uMisAltroSis = '';
     rig.qdoc = '';
     rig.qdocScoMerce = '';
     rig.qExpUmSec = '';
@@ -952,9 +951,9 @@ function initializeCSV() {
     rig.rifLotCalf = '';
     rig.rifLotData = '';
     rig.rifLotNum = '';
-    rig.qdoc = '';
-    rig.qExpUmSec = '';
-    rig.qExpUmMag = '';
+    rig.qdocLtc = '';
+    rig.qExpUmSecLtc = '';
+    rig.qExpUmMagLtc = '';
     rig.calcSpe = '';
     rig.oggRilev = '';
     rig.filler1 = '';
@@ -988,7 +987,7 @@ function initializeCSV() {
     rig.cpaeOrig = '';
     rig.cnomenComb = '';
     rig.iudc = '';
-    rig.impVal = '';
+    rig.impValIntra = '';
     rig.massaNetta = '';
     rig.qExpUmSuppl = '';
     rig.valStatNettoMag = '';
@@ -1012,12 +1011,12 @@ function initializeCSV() {
     rig.ordApprovigionamento = '';
     rig.cFornitoreAbituale = '';
     rig.cFornitoreAbitualeAltroSis = '';
-    rig.rigaSaldata='';
-    rig.annotazione='';
-    rig.opposizione='';
-    rig.assistenzaDiretta='';
-    rig.cCentroAnalisi='';
-    rig.ccentroAnalisiAltroSis='';
+    rig.rigaSaldata = '';
+    rig.annotazione = '';
+    rig.opposizione = '';
+    rig.assistenzaDiretta = '';
+    rig.cCentroAnalisi = '';
+    rig.ccentroAnalisiAltroSis = '';
     rig.ccommessa = '';
     rig.ccommessaAltroSis = '';
     rig.diniComp = '';
@@ -1097,8 +1096,8 @@ function csvRig() {
     str += rec.tes.appDigRegAnn + ';';
     str += rec.tes.cConCont + ';';
     str += rec.tes.cConContAltroSis + ';';
-    str += rec.tes.cPart + ';';
     str += rec.tes.cPartAltroSis + ';';
+    str += rec.tes.cPart + ';';
     str += rec.tes.cfisPart + ';';
     str += rec.tes.pivaPart + ';';
     str += rec.tes.addAut + ';';
@@ -1107,7 +1106,8 @@ function csvRig() {
     str += rec.tes.cValIntr + ';';
     str += rec.tes.cCambIntr + ';';
     str += rec.tes.cimp + ';';
-    str += rec.tes.iInc + ';';
+    str += rec.tes.filler + ';';
+    str += rec.tes.iimp + ';';
     str += rec.tes.fpag + ';';
     str += rec.tes.civaNonImp + ';';
     str += rec.tes.civaNonImpAltroSis + ';';
@@ -1139,8 +1139,8 @@ function csvRig() {
     str += rec.tes.descTrackFlussiFin + ';';
     str += rec.tes.scoTes + ';';
     str += rec.tes.sScoAna + ';';
-    str += rec.tes.diniComp + ';';
-    str += rec.tes.dfineComp + ';';
+    str += rec.tes.dini + ';';
+    str += rec.tes.dfin + ';';
     str += rec.tes.eseComp + ';';
     str += rec.tes.ddecor + ';';
     str += rec.tes.cBancaNs + ';';
@@ -1297,6 +1297,7 @@ function csvRig() {
     str += rec.rig.ccatCespiteAltroSis + ';';
     str += rec.rig.cpartitarioAltriConti + ';';
     str += rec.rig.cpartitarioAltriContiAltroSis + ';';
+    str += rec.rig.descPartAltriConti + ';';
     str += rec.rig.opzComposto + ';';
     str += rec.rig.descrizione1 + ';';
     str += rec.rig.descrizione2 + ';';
@@ -1316,6 +1317,7 @@ function csvRig() {
     str += rec.rig.vol + ';';
     str += rec.rig.ncolli + ';';
     str += rec.rig.uMis + ';';
+    str += rec.rig.uMisAltroSis + ';';
     str += rec.rig.qdoc + ';';
     str += rec.rig.qdocScoMerce + ';';
     str += rec.rig.qExpUmSec + ';';
@@ -1338,9 +1340,9 @@ function csvRig() {
     str += rec.rig.rifLotCalf + ';';
     str += rec.rig.rifLotData + ';';
     str += rec.rig.rifLotNum + ';';
-    str += rec.ltc.qdoc + ';';
-    str += rec.ltc.qExpUmSec + ';';
-    str += rec.ltc.qExpUmMag + ';';
+    str += rec.rig.qdocLtc + ';';
+    str += rec.rig.qExpUmSecLtc + ';';
+    str += rec.rig.qExpUmMagLtc + ';';
     str += rec.rig.calcSpe + ';';
     str += rec.rig.oggRilev + ';';
     str += rec.rig.filler1 + ';';
@@ -1374,7 +1376,7 @@ function csvRig() {
     str += rec.rig.cpaeOrig + ';';
     str += rec.rig.cnomenComb + ';';
     str += rec.rig.iudc + ';';
-    str += rec.rig.impVal + ';';
+    str += rec.rig.impValIntra + ';';
     str += rec.rig.massaNetta + ';';
     str += rec.rig.qExpUmSuppl + ';';
     str += rec.rig.valStatNettoMag + ';';
@@ -1398,6 +1400,12 @@ function csvRig() {
     str += rec.rig.ordApprovigionamento + ';';
     str += rec.rig.cFornitoreAbituale + ';';
     str += rec.rig.cFornitoreAbitualeAltroSis + ';';
+    str += rec.rig.rigaSaldata + ';';
+    str += rec.rig.annotazione + ';';
+    str += rec.rig.opposizione + ';';
+    str += rec.rig.assistenzaDiretta + ';';
+    str += rec.rig.cCentroAnalisi + ';';
+    str += rec.rig.ccentroAnalisiAltroSis = ';';
     str += rec.rig.ccommessa + ';';
     str += rec.rig.ccommessaAltroSis + ';';
     str += rec.rig.diniComp + ';';
@@ -1411,17 +1419,17 @@ function csvRig() {
     str += rec.iva.regIvaSpec + ';';
     str += rec.iva.impVal + ';';
     str += rec.iva.impIvaValRig + ';';
-    str += rec.rig.percIndetraibilitaOgg + ';';
-    str += rec.rig.impIvaOggIndetraibileVal + ';';
-    str += rec.rig.percIndetraibilitaProRata + ';';
-    str += rec.rig.impIvaOggIndetraibileProRataVal + ';';
-    str += rec.rig.filler3 + ';';
-    str += rec.rig.filler4 + ';';
-    str += rec.rig.filler5 + ';';
-    str += rec.rig.filler6 + ';';
-    str += rec.rig.filler7 + ';';
-    str += rec.rig.filler8 + ';';
-    str += rec.rig.filler9 + ';';
+    str += rec.iva.percIndetraibilitaOgg + ';';
+    str += rec.iva.impIvaOggIndetraibileVal + ';';
+    str += rec.iva.percIndetraibilitaProRata + ';';
+    str += rec.iva.impIvaOggIndetraibileProRataVal + ';';
+    str += rec.iva.filler1 + ';';
+    str += rec.iva.filler2 + ';';
+    str += rec.iva.filler3 + ';';
+    str += rec.iva.filler4 + ';';
+    str += rec.iva.filler5 + ';';
+    str += rec.iva.filler6 + ';';
+    str += rec.iva.filler7 + ';';
     str += rec.par.dsca + ';';
     str += rec.par.pagBloccato + ';';
     str += rec.par.nsContoBanca + ';';
@@ -1445,6 +1453,8 @@ function csvRig() {
     str += rec.par.descComponente + ';';
     str += rec.par.iqta + ';';
     str += rec.par.qExpUmSec + ';';
+    str += rec.par.cdep + ';';
+
 
     csv[csvEl] = str;
     csvEl++;
@@ -1452,7 +1462,7 @@ function csvRig() {
     console.log(str);
 }
 
-function getRigheCSV(res, req, righe, cliente) {
+function getRigheCSV(res, req, nreg, righe, cliente, agente) {
     var products = [];
     var product = {};
     var riga = {};
@@ -1471,32 +1481,32 @@ function getRigheCSV(res, req, righe, cliente) {
             product.iimp = riga.iimp;
             products[i] = product;
             initializeCSV();
-            rec.tipRec= 'RIG';
-            rig.tipRig = '';
-            rig.carticolo = '';
+            rec.tipRec = 'RIG';
+            rig.tipRig = '1';
+            rig.carticolo = product.ccod;
             rig.carticoloAltroSis = '';
             rig.cbarre = '';
             rig.carticoloTerzi = '';
             rig.cconto = '';
             rig.ccontoAltroSis = '';
             rig.cpartitarioAltroSis = '';
-            rig.cpartitarioAna = '';
+            rig.cpartitarioAna = cliente.ccod;
             rig.cbanca = '';
             rig.cbancaAltroSis = '';
             rig.ccatCespite = '';
             rig.ccatCespiteAltroSis = '';
             rig.cpartitarioAltriConti = '';
             rig.cpartitarioAltriContiAltroSis = '';
-            rig.descPartAltriConti='';
+            rig.descPartAltriConti = '';
             rig.opzComposto = '';
-            rig.descrizione1 = '';
+            rig.descrizione1 = product.xdesc;
             rig.descrizione2 = '';
             rig.descrizione3 = '';
             rig.descrizione4 = '';
             rig.descrizione5 = '';
-            rig.descrizioneInterna = '';
+            rig.descrizioneInterna = rig.descrizione1;
             rig.tipGesListino = '';
-            rig.clistino = '';
+            rig.clistino = '01';
             rig.dconsegna = '';
             rig.calcVar1 = '';
             rig.calcVar2 = '';
@@ -1506,21 +1516,21 @@ function getRigheCSV(res, req, righe, cliente) {
             rig.tara = '';
             rig.vol = '';
             rig.ncolli = '';
-            rig.uMis = '';
-            rig.uMisAltroSis='';
-            rig.qdoc = '';
+            rig.uMis = 'pz';
+            rig.uMisAltroSis = '';
+            rig.qdoc = product.iqta;
             rig.qdocScoMerce = '';
             rig.qExpUmSec = '';
             rig.qExpUmMag = '';
-            rig.iprz = '';
+            rig.iprz = prodRes.iprz;
             rig.sco1 = '';
             rig.fscoAna = '';
             rig.sco2 = '';
             rig.sco3 = '';
             rig.scoUni = '';
-            rig.provvAge = '';
-            rig.impVal = '';
-            rig.cimp = '';
+            rig.provvAge = agente.percProvv;
+            rig.impVal = product.iimp;
+            rig.cimp = '1';
             rig.copeMag = '';
             rig.cdep = '';
             rig.classeStat = '';
@@ -1530,9 +1540,9 @@ function getRigheCSV(res, req, righe, cliente) {
             rig.rifLotCalf = '';
             rig.rifLotData = '';
             rig.rifLotNum = '';
-            rig.qdoc = '';
-            rig.qExpUmSec = '';
-            rig.qExpUmMag = '';
+            rig.qdocLtc = '';
+            rig.qExpUmSecLtc = '';
+            rig.qExpUmMagLtc = '';
             rig.calcSpe = '';
             rig.oggRilev = '';
             rig.filler1 = '';
@@ -1541,7 +1551,7 @@ function getRigheCSV(res, req, righe, cliente) {
             rig.cig = '';
             rig.cup = '';
             rig.descTraccFlussiFin = '';
-            rig.civa = '';
+            rig.civa = '22';
             rig.civaAltroSis = '';
             rig.civaVentilazione = '';
             rig.civaVentilazioneAltroSis = '';
@@ -1566,7 +1576,7 @@ function getRigheCSV(res, req, righe, cliente) {
             rig.cpaeOrig = '';
             rig.cnomenComb = '';
             rig.iudc = '';
-            rig.impVal = '';
+            rig.impValIntra = '';
             rig.massaNetta = '';
             rig.qExpUmSuppl = '';
             rig.valStatNettoMag = '';
@@ -1590,12 +1600,12 @@ function getRigheCSV(res, req, righe, cliente) {
             rig.ordApprovigionamento = '';
             rig.cFornitoreAbituale = '';
             rig.cFornitoreAbitualeAltroSis = '';
-            rig.rigaSaldata='';
-            rig.annotazione='';
-            rig.opposizione='';
-            rig.assistenzaDiretta='';
-            rig.cCentroAnalisi='';
-            rig.ccentroAnalisiAltroSis='';
+            rig.rigaSaldata = '';
+            rig.annotazione = '';
+            rig.opposizione = '';
+            rig.assistenzaDiretta = '';
+            rig.cCentroAnalisi = '';
+            rig.ccentroAnalisiAltroSis = '';
             rig.ccommessa = '';
             rig.ccommessaAltroSis = '';
             rig.diniComp = '';
@@ -1607,12 +1617,33 @@ function getRigheCSV(res, req, righe, cliente) {
 
 
             if (i === righe.length - 1) {
-                sendFile();
+                sendFile(nreg, righe[0].ccod);
+                return;
             }
             i++;
-            getRigheCSV(res, req, righe, cliente);
+            getRigheCSV(res, req, nreg, righe, cliente);
         }
     });
+}
+
+function sendFile(nreg, idOrd) {
+    var fs = require('fs');
+    var dateFormat = require('dateformat');
+    var fd;
+    var d = new Date();
+    d = dateFormat(d, "isoDateTime");
+
+    try {
+        fd = fs.openSync('./public/file/ord_' + idOrd + '_nreg_' + nreg + '_' + d + '.csv', 'a');
+        for (csvEl = 0; csvEl < csv.length; csvEl++) {
+            fs.appendFileSync(fd, csv[csvEl].toString() + "\n", 'utf8');
+        }
+    } catch (err) {
+        console.log('Errore creazione file!');
+    } finally {
+        if (fd !== undefined)
+            fs.closeSync(fd);
+    }
 }
 
 function getIqta(ccod, task) {
