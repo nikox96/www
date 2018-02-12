@@ -1634,7 +1634,11 @@ function sendFile(nreg, idOrd) {
     d = dateFormat(d, "isoDateTime");
 
     try {
-        fd = fs.openSync('./public/file/ord_' + idOrd + '_nreg_' + nreg + '_' + d + '.csv', 'a');
+        if (!(fs.existsSynch('/media/sf_www/public/file/'))){
+            console.log("zio can filesystem de merda!");
+            return;
+        }
+        fd = fs.openSync('/media/sf_www/public/file/ord_' + idOrd + '_nreg_' + nreg + '_' + d + '.csv', 'a');
         for (csvEl = 0; csvEl < csv.length; csvEl++) {
             fs.appendFileSync(fd, csv[csvEl].toString() + "\n", 'utf8');
         }
