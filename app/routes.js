@@ -3,6 +3,7 @@ var Client = require("./models/client.js");
 var Order = require("./models/order.js");
 var Product = require("./models/product.js");
 var Agent = require("./models/agent.js");
+var Appoggio = require("./models/appoggio.js");
 var i = 0, csvEl = 0;
 var rig, tes, rec, iva, par, csv;
 
@@ -36,42 +37,47 @@ module.exports = function (app, passport) {
     // =====================================
     // show the login form
     app.get('/new-order-product', isLoggedIn, function (req, res) {
-        Order.newOrder('TES', req.param('ccodcli'), req.user.cage, function (err, qres) {
-            if (qres) {
-                Product.list(0, 999999, '', '', '', function (productErr, productRes) {
-                    if (productErr) {
-                        req.flash('orderMessage', 'Nessun prodotto trovato');
-                    }
-                    if (productRes) {
-                        console.log('prodotti: ' + productRes.length);
-                        req.flash('orderMessage', productRes.length + ' risultati');
-                        Product.getSven(function (venErr, venRes) {
-                            if (venErr) {
-                                console.log("errore sven");
-                                venRes = {};
-                            } else {
-                                console.log("sven trovate: " + venRes.length);
-                            }
-                            Product.getXgrp(function (grpErr, grpRes) {
-                                if (grpErr) {
-                                    console.log("errore xgrp");
-                                    grpRes = {};
+        if (req.query.ccodcli && req.query.ccodcli !== '') {
+            Order.newOrder('TES', req.query.ccodcli, req.user.cage, function (err, qres) {
+                if (qres) {
+                    Product.list(0, 999999, '', '', '', function (productErr, productRes) {
+                        if (productErr) {
+                            req.flash('orderMessage', 'Nessun prodotto trovato');
+                        }
+                        if (productRes) {
+                            console.log('prodotti: ' + productRes.length);
+                            req.flash('orderMessage', productRes.length + ' risultati');
+                            Product.getSven(function (venErr, venRes) {
+                                if (venErr) {
+                                    console.log("errore sven");
+                                    venRes = {};
                                 } else {
-                                    console.log("xgrp trovate" + grpRes);
+                                    console.log("sven trovate: " + venRes.length);
                                 }
-                                res.render('new-order-product.ejs', {
-                                    message: req.flash('orderMessage'),
-                                    products: productRes,
-                                    lven: venRes,
-                                    xgrp: grpRes,
-                                    idOrd: qres
+                                Product.getXgrp(function (grpErr, grpRes) {
+                                    if (grpErr) {
+                                        console.log("errore xgrp");
+                                        grpRes = {};
+                                    } else {
+                                        console.log("xgrp trovate" + grpRes);
+                                    }
+                                    res.render('new-order-product.ejs', {
+                                        message: req.flash('orderMessage'),
+                                        products: productRes,
+                                        lven: venRes,
+                                        xgrp: grpRes,
+                                        idOrd: qres
+                                    });
                                 });
                             });
-                        });
-                    }
-                });
-            }
-        });
+                        }
+                    });
+                }
+            });
+        } else {
+            req.flash('orderMessage', 'Nessun cliente selezionato');
+            getClients(req,res);
+        }
     });
 
     app.post('/new-order-product', isLoggedIn, function (req, res) {
@@ -1617,7 +1623,19 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
 
 
             if (i === righe.length - 1) {
-                sendFile(nreg, righe[0].ccod);
+                Order.updateNreg(righe[0].ccod, function (nregErr, nregRes) {
+                    if (nregErr) {
+                        console.log(nregErr);
+                    } else {
+                        Order.updateStatus(righe[0].ccod, 50, function (sttErr, sttRes) {
+                            if (sttErr) {
+                                console.log(sttErr);
+                            } else {
+                                res.download(sendFile(nregRes, righe[0].ccod));
+                            }
+                        });
+                    }
+                });
                 return;
             }
             i++;
@@ -1631,17 +1649,20 @@ function sendFile(nreg, idOrd) {
     var dateFormat = require('dateformat');
     var fd;
     var d = new Date();
+    var file = '';
     d = dateFormat(d, "isoDateTime");
 
     try {
-        if (!(fs.existsSynch('/media/sf_www/public/file/'))){
-            console.log("zio can filesystem de merda!");
+        if (!(fs.existsSync('/media/sf_www/public/file/'))) {
+            console.log("filesystem de merda!");
             return;
         }
-        fd = fs.openSync('/media/sf_www/public/file/ord_' + idOrd + '_nreg_' + nreg + '_' + d + '.csv', 'a');
+        file = '/media/sf_www/public/file/ord_' + idOrd + '_nreg_' + nreg + '_' + d.replace(/:/g, '.').substr(0, 19) + '.csv';
+        fd = fs.openSync(file, 'a');
         for (csvEl = 0; csvEl < csv.length; csvEl++) {
             fs.appendFileSync(fd, csv[csvEl].toString() + "\n", 'utf8');
         }
+        return file;
     } catch (err) {
         console.log('Errore creazione file!');
     } finally {

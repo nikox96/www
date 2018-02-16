@@ -25,29 +25,43 @@ Ordine.find = function find(ccod, callback) {
 };
 
 Ordine.delOrder = function delOrder(ccod, callback) {
-    //ricerca ordine per codice
-    db.query("DELETE FROM ordini WHERE ccod = "
+    db.query("SELECT cstt FROM ordini WHERE ccod = "
         + ccod
         , function (queryErr, queryRes) {
             if (queryErr) {
                 console.log("error: " + queryErr);
             }
             else {
-                callback(null, 'Ordine cancellato');
-                db.query("DELETE FROM righe_ordini WHERE ccod = "
-                    + ccod
-                    , function (err2, res2) {
-                        if (err2) {
-                            console.log("errore canc righe ordini");
-                        } else {
-                            callback(null, "Cancellato sia ordine che dettaglio");
-                            return
-                        }
-                        callback("Errore cancellazione dettaglio: comunicare n° ordine all'amministratore: " + ccod, null);
-                    });
-                return;
+                if (queryRes.length > 0 && queryRes[0].cstt !== 50) {
+                    //ricerca ordine per codice
+                    db.query("DELETE FROM ordini WHERE ccod = "
+                        + ccod
+                        , function (delErr, delRes) {
+                            if (delErr) {
+                                console.log("error: " + delErr);
+                            }
+                            else {
+                                db.query("DELETE FROM righe_ordini WHERE ccod = "
+                                    + ccod
+                                    , function (err2, res2) {
+                                        if (err2) {
+                                            console.log("errore canc righe ordini");
+                                        } else {
+                                            callback(null, "Cancellato sia ordine che dettaglio");
+                                            return
+                                        }
+                                        callback("Errore cancellazione dettaglio: comunicare n° ordine all'amministratore: " + ccod, null);
+                                    });
+                                return;
+                            }
+                            callback("Errore cancellazione ordine", null);
+                        });
+                    return;
+                } else {
+                    console.log("non ghe mia");
+                }
             }
-            callback("Errore cancellazione ordine", null);
+            callback("Nessun ordine trovato", null);
         });
 };
 
@@ -88,7 +102,7 @@ Ordine.updateCondPag = function find(ccod, cond_pag, callback) {
 
 Ordine.updateStatus = function find(ccod, cstt, callback) {
     //aggiorno lo status dell'ordine
-    db.query("UPDATE ordini SET cstt = " + cstt + "WHERE ccod = "
+    db.query("UPDATE ordini SET cstt = " + cstt + " WHERE ccod = "
         + ccod
         , function (queryErr, queryRes) {
             if (queryErr) {
@@ -209,7 +223,7 @@ Ordine.getUserOrder = function (cage, cstt, xcli, callback) {
 };
 
 Ordine.updateNreg = function updateNreg(ccod, callback) {
-    db.query("SELECT max(nreg) AS nreg FROM ordini WHERE cstt = 20", function (nregErr, nregRes) {
+    db.query("SELECT max(nreg) AS nreg FROM ordini WHERE cstt = 50", function (nregErr, nregRes) {
         if (nregErr) {
             callback('Nessun numero di registrazione presente in archivio', null);
         } else {
@@ -220,14 +234,14 @@ Ordine.updateNreg = function updateNreg(ccod, callback) {
             nregRes[0].nreg = nregRes[0].nreg + 1;
 
             //inserisco l'ordine con il numero di registrazione calcolato
-            db.query("UPDATE ordini set nreg = nregRes[0].nreg WHERE "
+            db.query("UPDATE ordini set nreg = " + nregRes[0].nreg + " WHERE "
                 + (ccod && ccod !== '' ? 'ccod = ' + ccod : '1 <> 1')
                 , function (queryErr, queryRes) {
                     if (queryErr) {
                         callback('Errore aggiornamento numero di registrazione ordine', null);
                     }
                     else {
-                        callback(null, "Numero di registrazione aggiornato!");
+                        callback(null, nregRes[0].nreg);
                     }
                 });
         }
