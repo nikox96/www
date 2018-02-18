@@ -1,4 +1,4 @@
-var db = require("../../config/database.js");
+var db = require("../../config/database_mysql.js");
 var mysql = require('mysql');
 
 var Client = {};

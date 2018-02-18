@@ -1,4 +1,4 @@
-var db = require("../config/database.js");
+var db = require("../config/database_mysql.js");
 var Client = require("./models/client.js");
 var Order = require("./models/order.js");
 var Product = require("./models/product.js");
@@ -1653,11 +1653,11 @@ function sendFile(nreg, idOrd) {
     d = dateFormat(d, "isoDateTime");
 
     try {
-        if (!(fs.existsSync('/media/sf_www/public/file/'))) {
+        if (!(fs.existsSync('../public/file/'))) {
             console.log("filesystem de merda!");
             return;
         }
-        file = '/media/sf_www/public/file/ord_' + idOrd + '_nreg_' + nreg + '_' + d.replace(/:/g, '.').substr(0, 19) + '.csv';
+        file = '../public/file/ord_' + idOrd + '_nreg_' + nreg + '_' + d.replace(/:/g, '.').substr(0, 19) + '.csv';
         fd = fs.openSync(file, 'a');
         for (csvEl = 0; csvEl < csv.length; csvEl++) {
             fs.appendFileSync(fd, csv[csvEl].toString() + "\n", 'utf8');
