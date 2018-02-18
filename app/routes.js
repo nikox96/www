@@ -1,4 +1,4 @@
-var db = require("../config/database_mysql.js");
+var db = require("../config/database_psql.js");
 var Client = require("./models/client.js");
 var Order = require("./models/order.js");
 var Product = require("./models/product.js");

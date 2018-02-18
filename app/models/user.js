@@ -1,4 +1,4 @@
-var db = require("../../config/database_mysql.js");
+var db = require("../../config/database_psql.js");
 var mysql = require('mysql');
 var bcrypt = require("bcryptjs");
 

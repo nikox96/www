@@ -1,4 +1,4 @@
-var db = require("../../config/database_mysql.js");
+var db = require("../../config/database_psql.js");
 var Appoggio = {};
 
 Appoggio.insert = function insert(cage, idOrd, callback) {

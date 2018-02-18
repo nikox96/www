@@ -1,4 +1,4 @@
-var db = require("../../config/database_mysql.js");
+var db = require("../../config/database_psql.js");
 var Agente = {};
 
 Agente.find = function find(cage, callback) {
