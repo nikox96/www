@@ -46,7 +46,7 @@ Ordine.delOrder = function delOrder(ccod, callback) {
                                 console.log("error: " + delErr);
                             }
                             else {
-                                delRes = (delRes.rows && delRes.rows.length > 0 ? delRes.rows : queryRes);
+                                delRes = (delRes.rows && delRes.rows.length > 0 ? delRes.rows : delRes);
                                 db.query("DELETE FROM portale.righe_ordini WHERE ccod = "
                                     + ccod
 //                                    , function (err2, res2) {
@@ -72,7 +72,7 @@ Ordine.delOrder = function delOrder(ccod, callback) {
         });
 };
 
-Ordine.findProduct = function find(ccod, callback) {
+Ordine.findProduct = function findProduct(ccod, callback) {
     //ricerco i prodotti per un determinato ordine
     db.query("SELECT * FROM portale.righe_ordini WHERE ccod = "
         + ccod
@@ -94,7 +94,7 @@ Ordine.findProduct = function find(ccod, callback) {
         });
 };
 
-Ordine.updateCondPag = function find(ccod, cond_pag, callback) {
+Ordine.updateCondPag = function updateCondPag(ccod, cond_pag, callback) {
     //aggiorno condizione di pagamento ordine
     var query = "UPDATE portale.ordini SET ccondpag = " + cond_pag + " WHERE ccod = "
         + ccod;
@@ -111,7 +111,7 @@ Ordine.updateCondPag = function find(ccod, cond_pag, callback) {
     });
 };
 
-Ordine.updateStatus = function find(ccod, cstt, callback) {
+Ordine.updateStatus = function updateStatus(ccod, cstt, callback) {
     //aggiorno lo status dell'ordine
     db.query("UPDATE portale.ordini SET cstt = " + cstt + " WHERE ccod = "
         + ccod
@@ -210,7 +210,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
     });
 };
 
-Ordine.getUserOrder = function (cage, cstt, xcli, callback) {
+Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, callback) {
     //ricerca ordine per codice agente/status/cliente
     var query = "SELECT a.*, b.iimp, c.xragsoc " +
         "FROM " +
