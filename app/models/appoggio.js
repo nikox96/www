@@ -6,7 +6,7 @@ Appoggio.insert = function insert(cage, idOrd, callback) {
         callback("parametri non valorizzati", null);
         return;
     }
-    db.query("INSERT INTO appoggio cage, idord VALUES ("
+    db.query("INSERT INTO portale.appoggio cage, idord VALUES ("
         + cage + ", " + idOrd + ")"
         , function (queryErr, queryRes) {
             if (queryErr) {
@@ -19,7 +19,7 @@ Appoggio.insert = function insert(cage, idOrd, callback) {
 };
 
 Appoggio.find = function find(cage, idOrd, callback) {
-    db.query("SELECT * FROM appoggio WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
+    db.query("SELECT * FROM portale.appoggio WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
         + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "AND 1<>1")
         , function (queryErr, queryRes) {
             if (queryErr) {
@@ -32,7 +32,7 @@ Appoggio.find = function find(cage, idOrd, callback) {
 };
 
 Appoggio.delApp = function delApp(cage, idOrd, callback) {
-    db.query("DELETE FROM appoggio WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
+    db.query("DELETE FROM portale.appoggio WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
         + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "AND 1<>1")
         , function (queryErr, queryRes) {
             if (queryErr) {
