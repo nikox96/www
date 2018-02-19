@@ -29,7 +29,7 @@ Ordine.delOrder = function delOrder(ccod, callback) {
     db.query("SELECT cstt FROM ordini WHERE ccod = "
         + ccod
 //        , function (queryErr, queryRes) {
-        , function (queryErr, queryRes) => {
+        , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("error: " + queryErr);
             }
