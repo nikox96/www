@@ -1,7 +1,9 @@
 {
   "name": "portale-innovazioni",
-  "main": "node portale.js",
-  "start": "node portale.js",
+  "main": "portale.js",
+  "scripts": {
+    "start": "node portale.js"
+  },
   "dependencies": {
     "bcrypt-nodejs": "~0.0.3",
     "bcryptjs": "^2.4.3",
