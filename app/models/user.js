@@ -17,7 +17,8 @@ User.createUser = function createUser(newUser, callback) {
                 + mysql.escape(newUser.xpwd) + ")";
             console.log(query);
             db.query(query
-                , function (queryErr, queryRes) {
+//                , function (queryErr, queryRes) {
+                , (queryErr, queryRes) => {
                     if (queryErr) {
                         callback(queryErr, null);
                         console.log("error: " + queryErr);
@@ -40,7 +41,8 @@ User.login = function login(cage, xpwd, callback) {
         + cage;
     console.log("se non bestemmio guarda: "+ query);
     db.query(query
-        , function (queryErr, queryRes) {
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("error: " + queryErr);
                 callback('Nessun utente trovato', null);
@@ -74,9 +76,10 @@ User.login = function login(cage, xpwd, callback) {
 };
 
 User.findOne = function findOne(cage, callback) {
-    bd.query("SELECT 1 FROM portale.users WHERE cage = "
+    db.query("SELECT 1 FROM portale.users WHERE cage = "
         + cage
-        , function (queryErr, queryRes) {
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("error: " + queryErr);
             }
