@@ -94,7 +94,7 @@ module.exports = function (passport) {
             User.login(cage, xpwd, function (err, user) {
                 // if there are any errors, return the error
                 console.log("local-login err " + err);
-                console.log("local-login res " + user.cage + " " + user.xnome);
+                //console.log("local-login res " + user.cage + " " + user.xnome);
                 if (err)
                     return done(null, false, req.flash('loginMessage', err));
                 // check to see if theres already a user with that email
