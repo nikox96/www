@@ -660,7 +660,7 @@ function getRighe(res, req, righe, cliente, cond) {
             products[i] = product;
             if (i === righe.length - 1) {
                 var condpag;
-                db.query("SELECT * FROM condizioni_pagamento WHERE ccod = " + cond.ccondpag,
+                db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag,
                     function (condErr, condRes) {
                         if (condErr) {
                             req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
