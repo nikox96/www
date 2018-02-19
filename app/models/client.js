@@ -8,7 +8,8 @@ Client.find = function find(ccod, callback) {
     var query = "SELECT * FROM portale.clienti WHERE ccod = " + ccod;
     console.log(query);
     db.query(query
-        , function (queryErr, queryRes) {
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
             if (queryErr) {
                 callback(queryErr, null);
                 console.log("error: " + queryErr);
@@ -28,7 +29,8 @@ Client.list = function list(ccod, xragsoc, callback) {
     var query = "SELECT * FROM portale.clienti WHERE " + (ccod && ccod !== '' ? "ccod = " + ccod + " AND " : "") + "xragsoc LIKE " + mysql.escape(xragsoc);
     console.log(query);
     db.query(query
-        , function (queryErr, queryRes) {
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
             if (queryErr) {
                 callback(queryErr, null);
                 console.log("error: " + queryErr);
