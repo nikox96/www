@@ -9,7 +9,7 @@ User.createUser = function createUser(newUser, callback) {
         bcrypt.hash(newUser.xpwd, salt, function (err, hash) {
             console.log(hash);
             newUser.xpwd = hash;
-            var query = "INSERT INTO users (cage, cuser, xnome, xcogn, xpwd) VALUES ("
+            var query = "INSERT INTO portale.users (cage, cuser, xnome, xcogn, xpwd) VALUES ("
                 + newUser.cage + ", "
                 + mysql.escape(newUser.cuser) + ", "
                 + mysql.escape(newUser.xnome) + ", "
@@ -36,7 +36,7 @@ User.login = function login(cage, xpwd, callback) {
         callback('Codice agente non numerico o maggiore di 9999', null);
         return;
     }
-    db.query("SELECT * FROM users WHERE cage = "
+    db.query("SELECT * FROM portale.users WHERE cage = "
         + cage
         , function (queryErr, queryRes) {
             if (queryErr) {
@@ -67,7 +67,7 @@ User.login = function login(cage, xpwd, callback) {
 };
 
 User.findOne = function findOne(cage, callback) {
-    bd.query("SELECT 1 FROM users WHERE cage = "
+    bd.query("SELECT 1 FROM portale.users WHERE cage = "
         + mysql.escape(cage)
         , function (queryErr, queryRes) {
             if (queryErr) {
