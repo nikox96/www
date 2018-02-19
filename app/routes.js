@@ -222,6 +222,7 @@ module.exports = function (app, passport) {
                 if (productErr) {
                     req.flash('editProducts', 'Nessun prodotto disponibile');
                 } else {
+                    productRes = (product.rows && productRes.rows.length > 0 ? productRes.rows : productRes);
                     var products = [];
                     var product;
                     for (i = 0; i < productRes.length; i++) {
