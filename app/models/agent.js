@@ -11,6 +11,7 @@ Agente.find = function find(cage, callback) {
                 console.log("error: " + queryErr);
             }
             else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
                     console.log("catà");
                     callback(queryErr, queryRes[0]);
