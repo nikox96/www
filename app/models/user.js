@@ -48,6 +48,7 @@ User.login = function login(cage, xpwd, callback) {
                 callback('Nessun utente trovato', null);
             }
             else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
                     console.log('sql password: ' + queryRes[0].xpwd);
                     console.log('html passord: ' + xpwd);
@@ -84,6 +85,7 @@ User.findOne = function findOne(cage, callback) {
                 console.log("error: " + queryErr);
             }
             else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
                     console.log("catà");
                     callback(queryErr, queryRes[0]);
