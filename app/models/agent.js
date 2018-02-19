@@ -5,7 +5,8 @@ Agente.find = function find(cage, callback) {
     console.log("ricerca agente");
     db.query("SELECT * FROM portale.agenti WHERE cage = "
         + cage
-        , function (queryErr, queryRes) {
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("error: " + queryErr);
             }
