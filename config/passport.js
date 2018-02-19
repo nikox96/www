@@ -90,7 +90,7 @@ module.exports = function (passport) {
         },
         function (req, cage, xpwd, done) {
             // asynchronous
-
+            console.log('login for: ' + cage +' '+ xpwd);
             User.login(cage, xpwd, function (err, user) {
                 // if there are any errors, return the error
                 console.log("local-login err " + err);
