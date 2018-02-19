@@ -4,7 +4,7 @@
 // get all the tools we need
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 9081;
+var port = process.env.PORT;
 var passport = require('passport');
 var flash = require('connect-flash');
 
