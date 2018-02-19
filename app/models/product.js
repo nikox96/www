@@ -47,7 +47,7 @@ Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, callback) {
         });
 };
 
-Product.getSven = function (callback) {
+Product.getSven = function getSven(callback) {
     console.log("ricerca tipo vendita");
     var query = "SELECT sven FROM portale.prodotti group by sven";
     console.log(query);
@@ -63,7 +63,7 @@ Product.getSven = function (callback) {
         })
 };
 
-Product.getXgrp = function (callback) {
+Product.getXgrp = function getXgrp(callback) {
     console.log("ricerca categoria prodotto");
     var query = "SELECT xgrp FROM portale.prodotti group by xgrp";
     console.log(query);
