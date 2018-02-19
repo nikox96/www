@@ -68,7 +68,7 @@ User.login = function login(cage, xpwd, callback) {
 
 User.findOne = function findOne(cage, callback) {
     bd.query("SELECT 1 FROM portale.users WHERE cage = "
-        + mysql.escape(cage)
+        + cage
         , function (queryErr, queryRes) {
             if (queryErr) {
                 console.log("error: " + queryErr);
