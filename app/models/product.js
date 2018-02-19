@@ -14,6 +14,7 @@ Product.find = function find(cprod, callback) {
                 console.log("error: " + queryErr);
             }
             else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 callback(null, queryRes[0]);
                 console.log("record: " + queryRes.length);
             }
@@ -39,6 +40,7 @@ Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, callback) {
                 console.log("error: " + queryErr);
             }
             else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 callback(null, queryRes);
                 console.log("record: " + queryRes.length);
             }
@@ -52,10 +54,12 @@ Product.getSven = function (callback) {
     db.query(query
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
-            if (queryErr)
+            if (queryErr){
                 callback(queryErr, null);
-            else
+            }else{
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 callback(null, queryRes);
+            }
         })
 };
 
@@ -66,10 +70,12 @@ Product.getXgrp = function (callback) {
     db.query(query
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
-            if (queryErr)
+            if (queryErr){
                 callback(queryErr, null);
-            else
+            }else{
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 callback(null, queryRes);
+            }
         })
 };
 
