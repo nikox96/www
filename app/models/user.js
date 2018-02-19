@@ -36,8 +36,10 @@ User.login = function login(cage, xpwd, callback) {
         callback('Codice agente non numerico o maggiore di 9999', null);
         return;
     }
-    db.query("SELECT * FROM portale.users WHERE cage = "
-        + cage
+    var query = "SELECT * FROM portale.users WHERE cage = "
+        + cage;
+    console.log("se non bestemmio guarda: "+ query);
+    db.query(query
         , function (queryErr, queryRes) {
             if (queryErr) {
                 console.log("error: " + queryErr);
@@ -59,6 +61,11 @@ User.login = function login(cage, xpwd, callback) {
                         }
                     });
                 } else {
+                    console.log("length: " + queryRes.length);
+                    for(const j = 0; j< queryRes.length;j++){
+                        console.log("cage: " + queryRes[j].cage);
+                        console.log("cuser: " + queryRes[j].cuser);
+                    }
                     console.log("Username and/or password are wrong!");
                     callback("Username and/or password are wrong", null);
                 }
