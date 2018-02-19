@@ -6,7 +6,7 @@ var Ordine = {};
 
 Ordine.find = function find(ccod, callback) {
     //ricerca ordine per codice
-    db.query("SELECT * FROM ordini WHERE ccod = "
+    db.query("SELECT * FROM portale.ordini WHERE ccod = "
         + ccod
         , function (queryErr, queryRes) {
             if (queryErr) {
@@ -34,14 +34,14 @@ Ordine.delOrder = function delOrder(ccod, callback) {
             else {
                 if (queryRes.length > 0 && queryRes[0].cstt !== 50) {
                     //ricerca ordine per codice
-                    db.query("DELETE FROM ordini WHERE ccod = "
+                    db.query("DELETE FROM portale.ordini WHERE ccod = "
                         + ccod
                         , function (delErr, delRes) {
                             if (delErr) {
                                 console.log("error: " + delErr);
                             }
                             else {
-                                db.query("DELETE FROM righe_ordini WHERE ccod = "
+                                db.query("DELETE FROM portale.righe_ordini WHERE ccod = "
                                     + ccod
                                     , function (err2, res2) {
                                         if (err2) {
@@ -67,7 +67,7 @@ Ordine.delOrder = function delOrder(ccod, callback) {
 
 Ordine.findProduct = function find(ccod, callback) {
     //ricerco i prodotti per un determinato ordine
-    db.query("SELECT * FROM righe_ordini WHERE ccod = "
+    db.query("SELECT * FROM portale.righe_ordini WHERE ccod = "
         + ccod
         , function (queryErr, queryRes) {
             if (queryErr) {
@@ -87,7 +87,7 @@ Ordine.findProduct = function find(ccod, callback) {
 
 Ordine.updateCondPag = function find(ccod, cond_pag, callback) {
     //aggiorno condizione di pagamento ordine
-    var query = "UPDATE ordini SET ccondpag = " + cond_pag + " WHERE ccod = "
+    var query = "UPDATE portale.ordini SET ccondpag = " + cond_pag + " WHERE ccod = "
         + ccod;
 
     db.query(query, function (queryErr, queryRes) {
@@ -102,7 +102,7 @@ Ordine.updateCondPag = function find(ccod, cond_pag, callback) {
 
 Ordine.updateStatus = function find(ccod, cstt, callback) {
     //aggiorno lo status dell'ordine
-    db.query("UPDATE ordini SET cstt = " + cstt + " WHERE ccod = "
+    db.query("UPDATE portale.ordini SET cstt = " + cstt + " WHERE ccod = "
         + ccod
         , function (queryErr, queryRes) {
             if (queryErr) {
@@ -115,7 +115,7 @@ Ordine.updateStatus = function find(ccod, cstt, callback) {
 };
 
 Ordine.newOrder = function newOrder(ctiprec, ccli, cage, callback) {
-    db.query("SELECT max(nreg) AS nreg FROM ordini", function (nregErr, nregRes) {
+    db.query("SELECT max(nreg) AS nreg FROM portale.ordini", function (nregErr, nregRes) {
         if (nregErr) {
             callback('Nessun numero di registrazione presente in archivio', null);
         } else {
@@ -126,7 +126,7 @@ Ordine.newOrder = function newOrder(ctiprec, ccli, cage, callback) {
             nregRes[0].nreg = nregRes[0].nreg + 1;
 
             //inserisco l'ordine con il numero di registrazione calcolato
-            db.query("INSERT INTO ordini (nreg, ctiprec, ctipdoc, dreg, ccli, cval, cimp, cstt, cage) VALUES("
+            db.query("INSERT INTO portale.ordini (nreg, ctiprec, ctipdoc, dreg, ccli, cval, cimp, cstt, cage) VALUES("
                 + nregRes[0].nreg + ", "
                 + mysql.escape(ctiprec) + ", 701, "
                 + mysql.escape(new Date()) + ", "
@@ -154,10 +154,10 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
             var iimp = res.iprz * iqta;
 
             //se il prodotto era già presente nel carrello per quest'ordine allora aggiorno quantità e importo
-            db.query("SELECT 1 FROM righe_ordini WHERE ccod = " + ccod + "AND ccodprod = " + ccodprod
+            db.query("SELECT 1 FROM portale.righe_ordini WHERE ccod = " + ccod + "AND ccodprod = " + ccodprod
                 , function (queryErr, queryRes) {
                     if (queryErr) {
-                        db.query("INSERT INTO righe_ordini (ccod, ccodprod, iqta, iimp) VALUES("
+                        db.query("INSERT INTO portale.righe_ordini (ccod, ccodprod, iqta, iimp) VALUES("
                             + ccod + ", "
                             + ccodprod + ", "
                             + iqta + ", "
@@ -172,7 +172,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
                             });
                     }
                     else {
-                        db.query("UPDATE righe_ordini SET iqta = " + iqta + ", iimp = " + iimp
+                        db.query("UPDATE portale.righe_ordini SET iqta = " + iqta + ", iimp = " + iimp
                             + " WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod
                             , function (queryErr, queryRes) {
                                 if (queryErr) {
@@ -194,12 +194,12 @@ Ordine.getUserOrder = function (cage, cstt, xcli, callback) {
     var query = "SELECT a.*, b.iimp, c.xragsoc " +
         "FROM " +
         "(SELECT ccod, dreg, cstt, cage, ccli " +
-        "FROM ordini)  AS a, " +
+        "FROM portale.ordini)  AS a, " +
         "(SELECT ccod, SUM(iimp) AS iimp " +
-        "FROM righe_ordini " +
+        "FROM portale.righe_ordini " +
         "GROUP BY ccod) AS b, " +
         "(SELECT ccod, xragsoc " +
-        "FROM clienti) AS c " +
+        "FROM portale.clienti) AS c " +
         "WHERE a.ccod = b.ccod AND a.ccli = c.ccod "
         + (cage && cage !== '' ? "AND a.cage = " + cage : 'AND 1 <> 1')
         + (cstt && cstt !== '' ? " AND a.cstt = " + cstt : '')
@@ -223,7 +223,7 @@ Ordine.getUserOrder = function (cage, cstt, xcli, callback) {
 };
 
 Ordine.updateNreg = function updateNreg(ccod, callback) {
-    db.query("SELECT max(nreg) AS nreg FROM ordini WHERE cstt = 50", function (nregErr, nregRes) {
+    db.query("SELECT max(nreg) AS nreg FROM portale.ordini WHERE cstt = 50", function (nregErr, nregRes) {
         if (nregErr) {
             callback('Nessun numero di registrazione presente in archivio', null);
         } else {
@@ -234,7 +234,7 @@ Ordine.updateNreg = function updateNreg(ccod, callback) {
             nregRes[0].nreg = nregRes[0].nreg + 1;
 
             //inserisco l'ordine con il numero di registrazione calcolato
-            db.query("UPDATE ordini set nreg = " + nregRes[0].nreg + " WHERE "
+            db.query("UPDATE portale.ordini set nreg = " + nregRes[0].nreg + " WHERE "
                 + (ccod && ccod !== '' ? 'ccod = ' + ccod : '1 <> 1')
                 , function (queryErr, queryRes) {
                     if (queryErr) {
