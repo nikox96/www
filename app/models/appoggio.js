@@ -28,7 +28,8 @@ Appoggio.find = function find(cage, idOrd, callback) {
                 callback("errore lettura appoggio", null);
             }
             else {
-                callback(null, 1);
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                callback(null, queryRes);
             }
         });
 };
