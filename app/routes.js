@@ -170,6 +170,7 @@ module.exports = function (app, passport) {
             if (queryErr) {
                 req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
             } else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 res.render('new-order-cond-pag.ejs', {
                     message: req.flash('orderMessage'),
                     idOrd: req.query.idOrd,
@@ -668,6 +669,7 @@ function getRighe(res, req, righe, cliente, cond) {
                         if (condErr) {
                             req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
                         } else {
+                            condRes = (condRes.rows && condRes.rows.length > 0 ? condRes.rows : condRes);
                             condpag = condRes[0];
                             res.render('new-order-sum.ejs', {
                                 message: req.flash('orderMessage'),
