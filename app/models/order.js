@@ -14,6 +14,7 @@ Ordine.find = function find(ccod, callback) {
                 console.log("error: " + queryErr);
             }
             else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
                     callback(null, queryRes[0]);
                     return;
@@ -34,6 +35,7 @@ Ordine.delOrder = function delOrder(ccod, callback) {
                 console.log("error: " + queryErr);
             }
             else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0 && queryRes[0].cstt !== 50) {
                     //ricerca ordine per codice
                     db.query("DELETE FROM portale.ordini WHERE ccod = "
@@ -44,6 +46,7 @@ Ordine.delOrder = function delOrder(ccod, callback) {
                                 console.log("error: " + delErr);
                             }
                             else {
+                                delRes = (delRes.rows && delRes.rows.length > 0 ? delRes.rows : queryRes);
                                 db.query("DELETE FROM portale.righe_ordini WHERE ccod = "
                                     + ccod
 //                                    , function (err2, res2) {
@@ -79,6 +82,7 @@ Ordine.findProduct = function find(ccod, callback) {
                 console.log("error: " + queryErr);
             }
             else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
                     callback(null, queryRes);
                     return;
@@ -129,6 +133,7 @@ Ordine.newOrder = function newOrder(ctiprec, ccli, cage, callback) {
         if (nregErr) {
             callback('Nessun numero di registrazione presente in archivio', null);
         } else {
+            nregRes = (nregRes.rows && nregRes.rows.length > 0 ? nregRes.rows : nregRes);
             //se non è presente nreg è il primo ordine nreg=0
             if (!(nregRes[0].nreg))
                 nregRes[0].nreg = 0;
@@ -148,7 +153,8 @@ Ordine.newOrder = function newOrder(ctiprec, ccli, cage, callback) {
                         callback('Errore inserimento ordine', null);
                     }
                     else {
-                        callback(null, queryRes.insertId);
+                        queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                        callback(null, queryRes[0].insertId);
                     }
                 });
         }
@@ -185,6 +191,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
                             });
                     }
                     else {
+                        queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                         db.query("UPDATE portale.righe_ordini SET iqta = " + iqta + ", iimp = " + iimp
                             + " WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod
 //                            , function (queryErr, queryRes) {
@@ -226,6 +233,7 @@ Ordine.getUserOrder = function (cage, cstt, xcli, callback) {
                 console.log("error: " + queryErr);
             }
             else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
                     callback(null, queryRes);
                     return;
@@ -244,6 +252,7 @@ Ordine.updateNreg = function updateNreg(ccod, callback) {
         if (nregErr) {
             callback('Nessun numero di registrazione presente in archivio', null);
         } else {
+            nregRes = (nregRes.rows && nregRes.rows.length > 0 ? nregRes.rows : nregRes);
             //se non è presente nreg è il primo ordine nreg=0
             if (!(nregRes[0].nreg))
                 nregRes[0].nreg = 0;
