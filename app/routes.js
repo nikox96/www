@@ -269,6 +269,8 @@ module.exports = function (app, passport) {
                                 return;
                             else {
                                 Order.findProduct(req.query.ccod, function (righeErr, righeRes) {
+                                    console.log('dreg: ' + ordRes.dreg);
+                                    console.log('dreg[0]: ' + ordRes[0].dreg);
                                     rec.tipRec = 'TES';
                                     tes.cDocAut = '000';
                                     tes.dreg = (ordRes.dreg && ordRes.dreg !== '' ? ordRes.dreg : '');
