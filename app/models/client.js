@@ -15,6 +15,7 @@ Client.find = function find(ccod, callback) {
                 console.log("error: " + queryErr);
             }
             else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 callback(null, queryRes[0]);
                 console.log("record: " + queryRes.length);
             }
@@ -36,6 +37,7 @@ Client.list = function list(ccod, xragsoc, callback) {
                 console.log("error: " + queryErr);
             }
             else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 callback(null, queryRes);
                 console.log("record: " + queryRes.length);
             }
