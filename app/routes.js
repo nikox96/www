@@ -164,7 +164,9 @@ module.exports = function (app, passport) {
     });
 
     app.get('/new-order-cond-pag', isLoggedIn, function (req, res) {
-        db.query("SELECT * FROM condizioni_pagamento", function (queryErr, queryRes) {
+        db.query("SELECT * FROM condizioni_pagamento"
+//                 , function (queryErr, queryRes) {
+                 , (queryErr, queryRes) => {
             if (queryErr) {
                 req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
             } else {
@@ -660,8 +662,9 @@ function getRighe(res, req, righe, cliente, cond) {
             products[i] = product;
             if (i === righe.length - 1) {
                 var condpag;
-                db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag,
-                    function (condErr, condRes) {
+                db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag
+//                    , function (condErr, condRes) {
+                    , (condErr, condRes) => {
                         if (condErr) {
                             req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
                         } else {
