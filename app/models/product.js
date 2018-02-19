@@ -7,7 +7,8 @@ Product.find = function find(cprod, callback) {
     var query = "SELECT * FROM portale.prodotti WHERE ccod = " + cprod;
     console.log(query);
     db.query(query
-        , function (queryErr, queryRes) {
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
             if (queryErr) {
                 callback(queryErr, null);
                 console.log("error: " + queryErr);
@@ -31,7 +32,8 @@ Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, callback) {
         + "%' AND sven LIKE '%" + (sven && sven !== '' ? sven : '') + "%'";
     console.log(query);
     db.query(query
-        , function (queryErr, queryRes) {
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
             if (queryErr) {
                 callback(queryErr, null);
                 console.log("error: " + queryErr);
@@ -48,7 +50,8 @@ Product.getSven = function (callback) {
     var query = "SELECT sven FROM portale.prodotti group by sven";
     console.log(query);
     db.query(query
-        , function (queryErr, queryRes) {
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
             if (queryErr)
                 callback(queryErr, null);
             else
@@ -61,7 +64,8 @@ Product.getXgrp = function (callback) {
     var query = "SELECT xgrp FROM portale.prodotti group by xgrp";
     console.log(query);
     db.query(query
-        , function (queryErr, queryRes) {
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
             if (queryErr)
                 callback(queryErr, null);
             else
