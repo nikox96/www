@@ -1661,7 +1661,8 @@ function sendFile(nreg, idOrd) {
     d = dateFormat(d, "isoDateTime");
 
     try {
-        if (!(fs.existsSync('../public/file/'))) {
+        console.log('dir name: ' + __dirname);
+        if (!(fs.existsSync(__dirname + '/public/file/'))) {
             console.log("filesystem de merda!");
             return;
         }
