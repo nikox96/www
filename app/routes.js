@@ -271,7 +271,7 @@ module.exports = function (app, passport) {
                             else {
                                 Order.findProduct(req.query.ccod, function (righeErr, righeRes) {
                                     console.log('ordRes.dreg pre: ' + ordRes.dreg);
-                                    ordRes.dreg = dateFormat(ordRes.dreg, "isoDateTime");
+                                    ordRes.dreg = dateFormat(ordRes.dreg, "dd/mm/yyyy");
                                     console.log('ordRes.dreg post: ' + ordRes.dreg);
                                     rec.tipRec = 'TES';
                                     tes.cDocAut = '000';
@@ -362,7 +362,7 @@ module.exports = function (app, passport) {
                                     tes.cauAggRegIva2 = '';
                                     tes.cauAggRegIva3 = '';
                                     tes.cauAggRegIva4 = '';
-                                    tes.annCompIva = (ordRes.dreg && ordRes.dreg !== '' ? ordRes.dreg.substr(0, 4) : '');
+                                    tes.annCompIva = (ordRes.dreg && ordRes.dreg !== '' ? ordRes.dreg.substr(6, 4) : '');
                                     tes.perCompIva = '';
                                     tes.dopr = '';
                                     tes.cessCliPriv = '';
