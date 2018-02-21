@@ -1543,7 +1543,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
             rig.sco2 = '';
             rig.sco3 = '';
             rig.scoUni = '';
-            rig.provvAge = (agente.percprovv ? agente.percprovv : '');
+            rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
             rig.impVal = product.iimp;
             rig.cimp = '1';
             rig.copeMag = '';

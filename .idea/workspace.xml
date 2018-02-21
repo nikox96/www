@@ -17,46 +17,9 @@
       <file leaf-file-name="routes.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="1545" column="69" lean-forward="false" selection-start-line="1545" selection-start-column="69" selection-end-line="1545" selection-end-column="69" />
+            <state relative-caret-position="760">
+              <caret line="1573" column="37" lean-forward="true" selection-start-line="1573" selection-start-column="37" selection-end-line="1573" selection-end-column="37" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="agent.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/agent.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="product.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/product.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
-              <folding>
-                <marker date="1519234312836" expanded="true" signature="117:751" ph="{...}" />
-                <marker date="1519234312836" expanded="true" signature="365:618" ph="{...}" />
-                <marker date="1519234312836" expanded="true" signature="393:501" ph="{...}" />
-                <marker date="1519234312836" expanded="true" signature="519:618" ph="{&quot;queryRes&quot;: queryRes...}" />
-                <marker date="1519234312836" expanded="true" signature="827:1911" ph="{...}" />
-                <marker date="1519234312836" expanded="true" signature="1528:1781" ph="{...}" />
-                <marker date="1519234312836" expanded="true" signature="1556:1664" ph="{...}" />
-                <marker date="1519234312836" expanded="true" signature="1682:1781" ph="{&quot;queryRes&quot;: queryRes...}" />
-                <marker date="1519234312836" expanded="true" signature="1959:2447" ph="{...}" />
-                <marker date="1519234312836" expanded="true" signature="2190:2377" ph="{...}" />
-                <marker date="1519234312836" expanded="true" signature="2217:2274" ph="{...}" />
-                <marker date="1519234312836" expanded="true" signature="2278:2377" ph="{&quot;queryRes&quot;: queryRes...}" />
-                <marker date="1519234312836" expanded="true" signature="2495:2989" ph="{...}" />
-                <marker date="1519234312836" expanded="true" signature="2732:2919" ph="{...}" />
-                <marker date="1519234312836" expanded="true" signature="2759:2816" ph="{...}" />
-                <marker date="1519234312836" expanded="true" signature="2820:2919" ph="{&quot;queryRes&quot;: queryRes...}" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -325,12 +288,12 @@
       <workItem from="1518768468001" duration="11343000" />
       <workItem from="1518858888250" duration="1202000" />
       <workItem from="1518975513712" duration="1604000" />
-      <workItem from="1519234495651" duration="1290000" />
+      <workItem from="1519234495651" duration="1505000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="184785000" />
+    <option name="totallyTimeSpent" value="185000000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -777,8 +740,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="1545" column="69" lean-forward="false" selection-start-line="1545" selection-start-column="69" selection-end-line="1545" selection-end-column="69" />
+        <state relative-caret-position="760">
+          <caret line="1573" column="37" lean-forward="true" selection-start-line="1573" selection-start-column="37" selection-end-line="1573" selection-end-column="37" />
           <folding />
         </state>
       </provider>
