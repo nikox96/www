@@ -252,12 +252,17 @@ Ordine.updateNreg = function updateNreg(ccod, callback) {
         if (nregErr) {
             callback('Nessun numero di registrazione presente in archivio', null);
         } else {
+            console.log('nreg length: ' + nregRes.rows.length);
+            console.log('nreg max: ' + nregRes.rows[0].nreg);
             nregRes = (nregRes.rows && nregRes.rows.length > 0 ? nregRes.rows : nregRes);
             //se non è presente nreg è il primo ordine nreg=0
             if (!(nregRes[0].nreg))
                 nregRes[0].nreg = 0;
 
+            console.log('nreg pre: ' + nregRes[0].nreg);
             nregRes[0].nreg = nregRes[0].nreg + 1;
+            console.log('nreg post: ' + nregRes[0].nreg);
+            console.log('ccod: ' + ccod);
 
             //inserisco l'ordine con il numero di registrazione calcolato
             db.query("UPDATE portale.ordini set nreg = " + nregRes[0].nreg + " WHERE "
@@ -265,6 +270,7 @@ Ordine.updateNreg = function updateNreg(ccod, callback) {
 //                , function (queryErr, queryRes) {
                 , (queryErr, queryRes) => {
                     if (queryErr) {
+                        console.log(queryErr);
                         callback('Errore aggiornamento numero di registrazione ordine', null);
                     }
                     else {
