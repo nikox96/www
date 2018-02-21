@@ -4,6 +4,7 @@ var Order = require("./models/order.js");
 var Product = require("./models/product.js");
 var Agent = require("./models/agent.js");
 var Appoggio = require("./models/appoggio.js");
+var dateFormat = require('dateformat');
 var i = 0, csvEl = 0;
 var rig, tes, rec, iva, par, csv;
 
@@ -269,6 +270,9 @@ module.exports = function (app, passport) {
                                 return;
                             else {
                                 Order.findProduct(req.query.ccod, function (righeErr, righeRes) {
+                                    console.log('ordRes.dreg pre: ' + ordRes.dreg);
+                                    ordRes.dreg = dateFormat(ordRes.dreg, "isoDateTime");
+                                    console.log('ordRes.dreg post: ' + ordRes.dreg);
                                     rec.tipRec = 'TES';
                                     tes.cDocAut = '000';
                                     tes.dreg = (ordRes.dreg && ordRes.dreg !== '' ? ordRes.dreg : '');
@@ -1651,7 +1655,6 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
 
 function sendFile(nreg, idOrd) {
     var fs = require('fs');
-    var dateFormat = require('dateformat');
     var fd;
     var d = new Date();
     var file = '';
