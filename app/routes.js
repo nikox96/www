@@ -77,7 +77,7 @@ module.exports = function (app, passport) {
             });
         } else {
             req.flash('orderMessage', 'Nessun cliente selezionato');
-            getClients(req,res);
+            getClients(req, res);
         }
     });
 
@@ -167,18 +167,18 @@ module.exports = function (app, passport) {
     app.get('/new-order-cond-pag', isLoggedIn, function (req, res) {
         db.query("SELECT * FROM condizioni_pagamento"
 //                 , function (queryErr, queryRes) {
-                 , (queryErr, queryRes) => {
-            if (queryErr) {
-                req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
-            } else {
-                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
-                res.render('new-order-cond-pag.ejs', {
-                    message: req.flash('orderMessage'),
-                    idOrd: req.query.idOrd,
-                    condpag: queryRes
-                });
-            }
-        });
+            , (queryErr, queryRes) => {
+                if (queryErr) {
+                    req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
+                } else {
+                    queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                    res.render('new-order-cond-pag.ejs', {
+                        message: req.flash('orderMessage'),
+                        idOrd: req.query.idOrd,
+                        condpag: queryRes
+                    });
+                }
+            });
     });
 
     app.post('/new-order-cond-pag', isLoggedIn, function (req, res) {
@@ -1543,7 +1543,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
             rig.sco2 = '';
             rig.sco3 = '';
             rig.scoUni = '';
-            rig.provvAge = agente.percProvv;
+            rig.provvAge = (agente.percprovv ? agente.percprovv : '');
             rig.impVal = product.iimp;
             rig.cimp = '1';
             rig.copeMag = '';
