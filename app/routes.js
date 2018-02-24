@@ -489,7 +489,7 @@ module.exports = function (app, passport) {
                                     rec.iva = iva;
                                     rec.par = par;
 
-                                    csvRig();
+                                    csvRig93();
                                     i = 0;
                                     getRigheCSV(res, req, ordRes.nreg, righeRes, cliRes, ageRes);
                                 });
@@ -1477,6 +1477,111 @@ function csvRig() {
     console.log(str);
 }
 
+function csvRig93() {
+    var str = '';
+
+    str += rec.tipRec + ';';
+    str += rec.tes.tipDocOrdVen + ';';
+    str += rec.tes.dreg + ';';
+    str += rec.tes.nreg + ';';
+    str += rec.tes.appDigReg + ';';
+    str += rec.tes.ddoc + ';';
+    str += rec.tes.ndoc + ';';
+    str += rec.tes.cPart + ';';
+    str += rec.tes.cValDoc + ';';
+    str += rec.tes.camb + ';';
+    str += rec.tes.cimp + ';';
+    str += rec.tes.civaNonImp + ';';
+    str += rec.tes.cas1 + ';';
+    str += rec.tes.cas2 + ';';
+    str += rec.tes.cas3 + ';';
+    str += rec.tes.ccondPag + ';';
+    str += rec.tes.scoCondPag + ';';
+    str += rec.tes.ddecor + ';';
+    str += rec.tes.cBancaNs + ';';
+    str += rec.tes.cabi + ';';
+    str += rec.tes.ccab + ';';
+    str += rec.tes.ccin + ';';
+    str += rec.tes.ccin2 + ';';
+    str += rec.tes.nconcor + ';';
+    str += rec.tes.cbic + ';';
+    str += rec.tes.cpae + ';';
+    str += rec.tes.rifBancaEstera + ';';
+    str += rec.tes.ciban + ';';
+    str += rec.tes.nRifInd + ';';
+    str += rec.tes.ragSoc1 + ';';
+    str += rec.tes.ragSoc2 + ';';
+    str += rec.tes.xind1 + ';';
+    str += rec.tes.ccap + ';';
+    str += rec.tes.xloc1 + ';';
+    str += rec.tes.cprv + ';';
+    str += rec.tes.ccauTrasp + ';';
+    str += rec.tes.xcauTrasp + ';';
+    str += rec.tes.cporto + ';';
+    str += rec.tes.xporto + ';';
+    str += rec.tes.aspBen + ';';
+    str += rec.tes.xAspBen + ';';
+    str += rec.tes.traspMez + ';';
+    str += rec.tes.xTraspMex + ';';
+    str += rec.tes.cvet + ';';
+    str += rec.tes.vetRagSoc1 + ';';
+    str += rec.tes.xvettInd1 + ';';
+    str += rec.tes.ccapVet + ';';
+    str += rec.tes.xvetLoc1 + ';';
+    str += rec.tes.cprvVet + ';';
+    str += rec.tes.cvet2 + ';';
+    str += rec.tes.vetRagSoc12 + ';';
+    str += rec.tes.xvettInd12 + ';';
+    str += rec.tes.ccapVet2 + ';';
+    str += rec.tes.xvetLoc12 + ';';
+    str += rec.tes.cprvVet2 + ';';
+    str += rec.rig.tipRig + ';';
+    str += rec.rig.carticolo + ';';
+    str += rec.rig.cconto + ';';
+    str += rec.rig.descrizione1 + ';';
+    str += rec.rig.clistino + ';';
+    str += rec.rig.dconsegna + ';';
+    str += rec.rig.calcVar1 + ';';
+    str += rec.rig.calcVar2 + ';';
+    str += rec.rig.calcVar3 + ';';
+    str += rec.rig.calcVar4 + ';';
+    str += rec.rig.pesoLordo + ';';
+    str += rec.rig.tara + ';';
+    str += rec.rig.uMis + ';';
+    str += rec.rig.qdoc + ';';
+    str += rec.rig.qdocScoMerce + ';';
+    str += rec.rig.qExpUmSec + ';';
+    str += rec.rig.iprz + ';';
+    str += rec.rig.sco1 + ';';
+    str += rec.rig.sco2 + ';';
+    str += rec.rig.sco3 + ';';
+    str += rec.rig.impVal + ';';
+    str += rec.rig.cimp + ';';
+    str += rec.rig.copeMag + ';';
+    str += rec.rig.cdep + ';';
+    str += rec.rig.cdep2 + ';';
+    str += rec.rig.rifLotCalf + ';';
+    str += rec.rig.rifLotData + ';';
+    str += rec.rig.rifLotNum + ';';
+    str += rec.rig.calcSpe + ';';
+    str += rec.rig.civa + ';';
+    str += rec.rig.ordApprovigionamento + ';';
+    str += rec.rig.cFornitoreAbituale + ';';
+    str += rec.tes.derivaSpesePie + ';';
+    str += rec.tes.iBollo + ';';
+    str += rec.tes.iInc + ';';
+    str += rec.tes.iSpesa1 + ';';
+    str += rec.tes.iSpesa2 + ';';
+    str += rec.tes.iBolloOprEse + ';';
+    str += rec.rig.rigaSaldata + ';';
+
+
+    csv[csvEl] = str;
+    csvEl++;
+
+    console.log(str);
+}
+
 function getRigheCSV(res, req, nreg, righe, cliente, agente) {
     var products = [];
     var product = {};
@@ -1628,7 +1733,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
             rig.cvoce = '';
             rig.cvocAltroSis = '';
             rec.rig = rig;
-            csvRig();
+            csvRig93();
 
 
             if (i === righe.length - 1) {
