@@ -516,7 +516,6 @@ module.exports = function (app, passport) {
         });
     });
 
-
     app.post('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
 
@@ -542,10 +541,6 @@ module.exports = function (app, passport) {
         });
     });
 
-    // =====================================
-    // LOGIN ===============================
-    // =====================================
-    // show the login form
     app.get('/new-order', isLoggedIn, function (req, res) {
         // search for clients
         getClients(req, res);

@@ -2,7 +2,7 @@ var db = require("../../config/database_psql.js");
 var Appoggio = {};
 
 Appoggio.insert = function insert(cage, idOrd, callback) {
-    if (cage === '' || !(cage) || !(idOrd) || idOrd === ''){
+    if (cage === '' || !(cage) || !(idOrd) || idOrd === '') {
         callback("parametri non valorizzati", null);
         return;
     }
@@ -28,7 +28,10 @@ Appoggio.find = function find(cage, idOrd, callback) {
                 callback("errore lettura appoggio", null);
             }
             else {
-                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
+                if (queryRes.length === 0) {
+                    queryRes[0].idOrd = '';
+                }
                 callback(null, queryRes);
             }
         });
