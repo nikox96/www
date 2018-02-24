@@ -274,7 +274,7 @@ Ordine.updateNreg = function updateNreg(ccod, callback) {
                         callback('Errore aggiornamento numero di registrazione ordine', null);
                     }
                     else {
-                        callback(null, nregRes[0].nreg);
+                        callback(null, nregRes[0].nreg--);
                     }
                 });
         }
