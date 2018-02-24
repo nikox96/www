@@ -6,7 +6,7 @@ Appoggio.insert = function insert(cage, idOrd, callback) {
         callback("parametri non valorizzati", null);
         return;
     }
-    db.query("INSERT INTO portale.appoggio cage, idord VALUES ("
+    db.query("INSERT INTO portale.appoggio cage, idOrd VALUES ("
         + cage + ", " + idOrd + ")"
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
