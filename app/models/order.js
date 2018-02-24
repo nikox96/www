@@ -147,7 +147,7 @@ Ordine.newOrder = function newOrder(ctiprec, ccli, cage, callback) {
         + mysql.escape(ctiprec) + ", 701, "
         + mysql.escape(new Date()) + ", "
         + mysql.escape(0) + ", 'EUR', 1, 10, "
-        + cage + ")"
+        + cage + ") RETURNING ccod"
 //                , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -155,7 +155,7 @@ Ordine.newOrder = function newOrder(ctiprec, ccli, cage, callback) {
             }
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
-                callback(null, queryRes[0].insertId);
+                callback(null, queryRes[0].ccod);
             }
         });
 };
