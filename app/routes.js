@@ -1557,7 +1557,6 @@ function csvRig93() {
     str += rec.rig.sco3 + ';';
     str += rec.rig.impVal + ';';
     str += rec.rig.cimp + ';';
-    str += rec.rig.copeMag + ';';
     str += rec.rig.cdep + ';';
     str += rec.rig.cdep2 + ';';
     str += rec.rig.rifLotCalf + ';';
