@@ -1672,7 +1672,7 @@ function sendFile(nreg, idOrd) {
         }
         return file;
     } catch (err) {
-        console.log('Errore creazione file!');
+        console.log('Errore creazione file: ' + err);
     } finally {
         if (fd !== undefined)
             fs.closeSync(fd);
