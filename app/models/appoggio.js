@@ -25,7 +25,7 @@ Appoggio.find = function find(cage, idOrd, callback) {
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
-                callback("errore lettura appoggio", null);
+                callback(queryErr, null);
             }
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
