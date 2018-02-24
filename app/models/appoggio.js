@@ -29,9 +29,6 @@ Appoggio.find = function find(cage, idOrd, callback) {
             }
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
-                if (queryRes.length === 0) {
-                    queryRes[0].idOrd = '';
-                }
                 callback(null, queryRes);
             }
         });
