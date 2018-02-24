@@ -1662,10 +1662,10 @@ function sendFile(nreg, idOrd) {
 
     try {
         console.log('dir name: ' + __dirname);
-        if (!(fs.existsSync('~/public/file'))) {
+        if (!(fs.existsSync(__dirname + '/public/file'))) {
             console.log("filesystem de merda!");
         }
-        file = '~/public/file/ord_' + idOrd + '_nreg_' + nreg + '_' + d.replace(/:/g, '.').substr(0, 19) + '.csv';
+        file = __dirname + '/public/file/ord_' + idOrd + '_nreg_' + nreg + '_' + d.replace(/:/g, '.').substr(0, 19) + '.csv';
         fd = fs.openSync(file, 'a');
         for (csvEl = 0; csvEl < csv.length; csvEl++) {
             fs.appendFileSync(fd, csv[csvEl].toString() + "\n", 'utf8');
