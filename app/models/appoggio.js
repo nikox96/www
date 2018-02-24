@@ -11,7 +11,7 @@ Appoggio.insert = function insert(cage, idOrd, callback) {
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
-                callback("errore inserimento appoggio", null);
+                callback(queryErr, null);
             }
             else {
                 callback(null, "record inserito correttamente");
