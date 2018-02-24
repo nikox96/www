@@ -154,6 +154,9 @@ Ordine.newOrder = function newOrder(ctiprec, ccli, cage, callback) {
                 callback('Errore inserimento ordine', null);
             }
             else {
+                console.log("queryRes.rows: " + queryRes.rows);
+                console.log("queryRes.rows.length: " + queryRes.rows.length);
+                console.log("queryRes.rows[0].ccod: " + queryRes.rows[0].ccod);
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 callback(null, queryRes[0].ccod);
             }

@@ -668,10 +668,11 @@ function getClients(req, res) {
                 });
             } else {
                 Order.newOrder('TES', '', req.user.cage, function (ordErr, ordRes) {
+                    console.log("ordRes: " + ordRes);
                     if (ordRes) {
                         Appoggio.insert(req.user.cage, ordRes, function (appErr, appRes) {
                             if (appErr) {
-                                console.log("Errore inserimento appoggio");
+                                console.log("Errore inserimento appoggio: " + appErr);
                             } else {
                                 Client.list(req.query.ccod, req.query.xragsoc, function (clientErr, clientRes) {
                                     if (clientErr) {
