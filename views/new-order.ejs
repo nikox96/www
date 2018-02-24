@@ -34,7 +34,7 @@
                     </ul>
                 </li>
             </ul>
-            <form action="/new-order" method="post" class="form-inline">
+            <form action="/new-order" method="get" class="form-inline">
                 <div class="form-row align-items-center">
                     <div class="col-auto">
                         <label class="sr-only" for="inlineFormCodCli">Codice cliente</label>
@@ -81,8 +81,10 @@
                     <td><%= clients.xcom %></td>
                     <td><%= clients.ccap %></td>
                     <td>
-                        <a href="/new-order-product?ccodcli=<%= clients.ccod %>"><i
-                                    class="material-icons">&#xe5c8</i></a>
+                        <form action="/new-order" method="post">
+                            <input type="hidden" name="ccod" value="<%= clients.ccod %>">
+                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe5c8</i></button>
+                        </form>
                     </td>
                 </tr>
                 <% }); %>

@@ -27,14 +27,14 @@
                     Azioni
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
-                    <li><a class="dropdown-item" href="/new-order-cond-pag?idOrd=<%= idOrd %>">Avanti</a></li>
+                    <li><a class="dropdown-item" href="/new-order-cond-pag">Avanti</a></li>
                     <li><a class="dropdown-item" href="/new-order">Indietro</a></li>
                     <div class="dropdown-divider"></div>
                     <li><a class="dropdown-item" href="/home">Annulla</a></li>
                 </ul>
             </li>
         </ul>
-        <form action="/new-order-product" method="post" class="form-inline">
+        <form action="/new-order-product" method="get" class="form-inline">
             <input type="hidden" name="idOrd" value="<%= idOrd %>">
             <div class="form-row align-items-center">
                 <div class="w-10 col">
@@ -98,22 +98,22 @@
                     <td><%= products[i].xdesc %></td>
                     <td><%= products[i].iprz %></td>
                     <td>
-                        <form action="/new-order-product-row" method="get" class="form-inline">
+                        <form action="/new-order-product" method="post" class="form-inline">
                             <input type="hidden" name="ccod" value="<%= idOrd %>">
                             <input type="hidden" name="ccodprod" value="<%= products[i].ccod %>">
                             <input type="number" name="iqta" class="form-control">
                             <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
                                 <i class="material-icons">&#xe854</i>
                             </button>
-                            </div>
-                        </form>
-                    </td>
-                </tr>
-                <% } %>
-                </tbody>
-            </table>
         </div>
+        </form>
+        </td>
+        </tr>
+        <% } %>
+        </tbody>
+        </table>
     </div>
+</div>
 </div>
 </body>
 </html>

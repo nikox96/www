@@ -21,7 +21,7 @@ Appoggio.insert = function insert(cage, idOrd, callback) {
 
 Appoggio.find = function find(cage, idOrd, callback) {
     db.query("SELECT * FROM portale.appoggio WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
-        + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "AND 1<>1")
+        + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "")
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {

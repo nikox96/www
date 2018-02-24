@@ -38,20 +38,71 @@ module.exports = function (app, passport) {
     // =====================================
     // show the login form
     app.get('/new-order-product', isLoggedIn, function (req, res) {
-        if (req.query.ccodcli && req.query.ccodcli !== '') {
-            Order.newOrder('TES', req.query.ccodcli, req.user.cage, function (err, qres) {
-                if (qres) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                Product.list(req.query.ccodda, req.query.ccoda, req.query.sven, req.query.xgrp, req.query.xprod, function (productErr, productRes) {
+                    if (productErr) {
+                        req.flash('orderMessage', 'Nessun cliente trovato');
+                    } else {
+                        console.log('clients: ' + productRes.length);
+                        req.flash('orderMessage', productRes.length + ' risultati');
+
+                        // render the page and pass in any flash data if it exists
+                        Product.getSven(function (venErr, venRes) {
+                            if (venErr) {
+                                console.log("errore sven");
+                            } else {
+                                console.log("sven trovate: " + venRes.length);
+                            }
+                            Product.getXgrp(function (grpErr, grpRes) {
+                                if (grpErr) {
+                                    console.log("errore xgrp");
+                                    grpRes = {};
+                                } else {
+                                    console.log("xgrp trovate" + grpRes);
+                                }
+                                res.render('new-order-product.ejs', {
+                                    message: req.flash('orderMessage'),
+                                    products: productRes,
+                                    lven: venRes,
+                                    xgrp: grpRes,
+                                    idOrd: appRes[0].idOrd
+                                });
+                            });
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    app.post('/new-order-product', isLoggedIn, function (req, res) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                var msg;
+                Order.newOrderProduct(req.body.ccod, req.body.ccodprod, req.body.iqta, function (orderErr, orderRes) {
+                    if (orderErr) {
+                        msg = 'errore inserimento prodotto ordine';
+                    } else {
+                        msg = 'prodotto ordine inserito correttamente';
+                    }
+                    console.log(msg);
+                    req.flash('orderMessage', msg);
                     Product.list(0, 999999, '', '', '', function (productErr, productRes) {
                         if (productErr) {
-                            req.flash('orderMessage', 'Nessun prodotto trovato');
-                        }
-                        if (productRes) {
-                            console.log('prodotti: ' + productRes.length);
+                            req.flash('orderMessage', 'Nessun cliente trovato');
+                        } else {
+                            console.log('clients: ' + productRes.length);
                             req.flash('orderMessage', productRes.length + ' risultati');
+
+                            // render the page and pass in any flash data if it exists
                             Product.getSven(function (venErr, venRes) {
                                 if (venErr) {
                                     console.log("errore sven");
-                                    venRes = {};
                                 } else {
                                     console.log("sven trovate: " + venRes.length);
                                 }
@@ -67,140 +118,66 @@ module.exports = function (app, passport) {
                                         products: productRes,
                                         lven: venRes,
                                         xgrp: grpRes,
-                                        idOrd: qres
+                                        idOrd: appRes[0].idOrd
                                     });
                                 });
                             });
                         }
                     });
-                }
-            });
-        } else {
-            req.flash('orderMessage', 'Nessun cliente selezionato');
-            getClients(req, res);
-        }
-    });
-
-    app.post('/new-order-product', isLoggedIn, function (req, res) {
-        Product.list(req.body.ccodda, req.body.ccoda, req.body.sven, req.body.xgrp, req.body.xprod, function (productErr, productRes) {
-            if (productErr) {
-                req.flash('orderMessage', 'Nessun cliente trovato');
-            } else {
-                console.log('clients: ' + productRes.length);
-                req.flash('orderMessage', productRes.length + ' risultati');
-
-                // render the page and pass in any flash data if it exists
-                Product.getSven(function (venErr, venRes) {
-                    if (venErr) {
-                        console.log("errore sven");
-                    } else {
-                        console.log("sven trovate: " + venRes.length);
-                    }
-                    Product.getXgrp(function (grpErr, grpRes) {
-                        if (grpErr) {
-                            console.log("errore xgrp");
-                            grpRes = {};
-                        } else {
-                            console.log("xgrp trovate" + grpRes);
-                        }
-                        res.render('new-order-product.ejs', {
-                            message: req.flash('orderMessage'),
-                            products: productRes,
-                            lven: venRes,
-                            xgrp: grpRes,
-                            idOrd: req.body.idOrd
-                        });
-                    });
                 });
             }
         });
     });
-    // =====================================
-    // LOGIN ===============================
-    // =====================================
-    // show the login form
-    app.get('/new-order-product-row', isLoggedIn, function (req, res) {
-        var msg;
-        Order.newOrderProduct(req.query.ccod, req.query.ccodprod, req.query.iqta, function (orderErr, orderRes) {
-            if (orderErr) {
-                msg = 'errore inserimento prodotto ordine';
-            } else {
-                msg = 'prodotto ordine inserito correttamente';
-            }
-            console.log(msg);
-            req.flash('orderMessage', msg);
-            Product.list(0, 999999, '', '', '', function (productErr, productRes) {
-                if (productErr) {
-                    req.flash('orderMessage', 'Nessun cliente trovato');
-                } else {
-                    console.log('clients: ' + productRes.length);
-                    req.flash('orderMessage', productRes.length + ' risultati');
 
-                    // render the page and pass in any flash data if it exists
-                    Product.getSven(function (venErr, venRes) {
-                        if (venErr) {
-                            console.log("errore sven");
+    app.get('/new-order-cond-pag', isLoggedIn, function (req, res) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                db.query("SELECT * FROM portale.condizioni_pagamento"
+//                 , function (queryErr, queryRes) {
+                    , (queryErr, queryRes) => {
+                        if (queryErr) {
+                            req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
                         } else {
-                            console.log("sven trovate: " + venRes.length);
-                        }
-                        Product.getXgrp(function (grpErr, grpRes) {
-                            if (grpErr) {
-                                console.log("errore xgrp");
-                                grpRes = {};
-                            } else {
-                                console.log("xgrp trovate" + grpRes);
-                            }
-                            res.render('new-order-product.ejs', {
+                            queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                            res.render('new-order-cond-pag.ejs', {
                                 message: req.flash('orderMessage'),
-                                products: productRes,
-                                lven: venRes,
-                                xgrp: grpRes,
-                                idOrd: req.query.ccod
+                                idOrd: appRes[0].idOrd,
+                                condpag: queryRes
                             });
-                        });
+                        }
                     });
-                }
-            });
+            }
         });
     });
 
-    app.get('/new-order-cond-pag', isLoggedIn, function (req, res) {
-        db.query("SELECT * FROM condizioni_pagamento"
-//                 , function (queryErr, queryRes) {
-            , (queryErr, queryRes) => {
-                if (queryErr) {
-                    req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
-                } else {
-                    queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
-                    res.render('new-order-cond-pag.ejs', {
-                        message: req.flash('orderMessage'),
-                        idOrd: req.query.idOrd,
-                        condpag: queryRes
-                    });
-                }
-            });
-    });
-
     app.post('/new-order-cond-pag', isLoggedIn, function (req, res) {
-        Order.updateCondPag(req.body.ccod, req.body.ccodpag, function (queryErr, queryRes) {
-            if (queryErr)
-                req.flash('orderMessage', queryErr);
-            else {
-                req.flash('orderMessage', queryRes);
-                Order.find(req.body.ccod, function (queryErr, queryRes) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                Order.updateCondPag(appRes[0].idOrd, req.body.ccodpag, function (queryErr, queryRes) {
                     if (queryErr)
                         req.flash('orderMessage', queryErr);
                     else {
-                        Client.find(queryRes.ccli, function (cliErr, cliRes) {
-                            if (cliErr)
-                                req.flash('orderMessage', cliErr);
+                        req.flash('orderMessage', queryRes);
+                        Order.find(appRes[0].idOrd, function (queryErr, queryRes) {
+                            if (queryErr)
+                                req.flash('orderMessage', queryErr);
                             else {
-                                Order.findProduct(req.body.ccod, function (righeErr, righeRes) {
-                                    if (righeErr) {
-                                        req.flash('orderMessage', righeErr);
-                                    } else {
-                                        i = 0;
-                                        getRighe(res, req, righeRes, cliRes, queryRes);
+                                Client.find(queryRes.ccli, function (cliErr, cliRes) {
+                                    if (cliErr)
+                                        req.flash('orderMessage', cliErr);
+                                    else {
+                                        Order.findProduct(appRes[0].idOrd, function (righeErr, righeRes) {
+                                            if (righeErr) {
+                                                req.flash('orderMessage', righeErr);
+                                            } else {
+                                                i = 0;
+                                                getRighe(res, req, righeRes, cliRes, queryRes, appRes[0].idOrd);
+                                            }
+                                        });
                                     }
                                 });
                             }
@@ -575,8 +552,51 @@ module.exports = function (app, passport) {
     });
 
     app.post('/new-order', isLoggedIn, function (req, res) {
-        // search for clients
-        getClients(req, res);
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                Order.updateCcli(appRes[0].idOrd, req.body.ccod, function (ordErr, ordRes) {
+                    if (ordErr) {
+                        console.log("errore aggiornamento codice cliente ordine");
+                    } else {
+                        Product.list(0, 999999, '', '', '', function (productErr, productRes) {
+                            if (productErr) {
+                                req.flash('orderMessage', 'Nessun prodotto trovato');
+                            }
+                            if (productRes) {
+                                console.log('prodotti: ' + productRes.length);
+                                req.flash('orderMessage', productRes.length + ' risultati');
+                                Product.getSven(function (venErr, venRes) {
+                                    if (venErr) {
+                                        console.log("errore sven");
+                                        venRes = {};
+                                    } else {
+                                        console.log("sven trovate: " + venRes.length);
+                                    }
+                                    Product.getXgrp(function (grpErr, grpRes) {
+                                        if (grpErr) {
+                                            console.log("errore xgrp");
+                                            grpRes = {};
+                                        } else {
+                                            console.log("xgrp trovate" + grpRes);
+                                        }
+                                        res.render('new-order-product.ejs', {
+                                            message: req.flash('orderMessage'),
+                                            products: productRes,
+                                            lven: venRes,
+                                            xgrp: grpRes,
+                                            idOrd: appRes[0].idOrd
+                                        });
+                                    });
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
     });
 
 // process the login form
@@ -628,26 +648,65 @@ function isLoggedIn(req, res, next) {
 }
 
 function getClients(req, res) {
-    Client.list(req.body.ccod, req.body.xragsoc, function (clientErr, clientRes) {
-        if (clientErr) {
-            req.flash('orderMessage', 'Nessun cliente trovato');
-        }
-        if (clientRes) {
-            console.log('clients: ' + clientRes.length);
-            req.flash('orderMessage', clientRes.length + ' risultati');
+    Appoggio.find(req.user.cage, '', function (appfinErr, appfinRes) {
+        if (appfinErr) {
+            console.log("errore lettura appoggio");
+        } else {
+            if (appfinRes[0].idOrd && appfinRes[0].idOrd !== '') {
+                Client.list(req.query.ccod, req.query.xragsoc, function (clientErr, clientRes) {
+                    if (clientErr) {
+                        req.flash('orderMessage', 'Nessun cliente trovato');
+                    }
+                    if (clientRes) {
+                        console.log('clients: ' + clientRes.length);
+                        req.flash('orderMessage', clientRes.length + ' risultati');
 
-            // render the page and pass in any flash data if it exists
-            res.render('new-order.ejs', {
-                message: req.flash('orderMessage'),
-                clients: clientRes,
-                xragsoc: req.body.xragsoc,
-                ccod: req.body.ccod
-            });
+                        // render the page and pass in any flash data if it exists
+                        res.render('new-order.ejs', {
+                            message: req.flash('orderMessage'),
+                            clients: clientRes,
+                            xragsoc: req.body.xragsoc,
+                            ccod: req.body.ccod,
+                            idOrd: appfinRes[0].idOrd
+                        });
+                    }
+                });
+            } else {
+                Order.newOrder('TES', '', req.user.cage, function (ordErr, ordRes) {
+                    if (ordRes) {
+                        Appoggio.insert(req.user.cage, ordRes, function (appErr, appRes) {
+                            if (appErr) {
+                                console.log("Errore inserimento appoggio");
+                            } else {
+                                Client.list(req.query.ccod, req.query.xragsoc, function (clientErr, clientRes) {
+                                    if (clientErr) {
+                                        req.flash('orderMessage', 'Nessun cliente trovato');
+                                    }
+                                    if (clientRes) {
+                                        console.log('clients: ' + clientRes.length);
+                                        req.flash('orderMessage', clientRes.length + ' risultati');
+
+                                        // render the page and pass in any flash data if it exists
+                                        res.render('new-order.ejs', {
+                                            message: req.flash('orderMessage'),
+                                            clients: clientRes,
+                                            xragsoc: req.query.xragsoc,
+                                            ccod: req.query.ccod,
+                                            idOrd: ordRes
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
         }
     });
+
 }
 
-function getRighe(res, req, righe, cliente, cond) {
+function getRighe(res, req, righe, cliente, cond, idOrd) {
     var products = [];
     var product = {};
     var riga = {};
@@ -677,7 +736,7 @@ function getRighe(res, req, righe, cliente, cond) {
                             condpag = condRes[0];
                             res.render('new-order-sum.ejs', {
                                 message: req.flash('orderMessage'),
-                                idOrd: req.body.ccod,
+                                idOrd: idOrd,
                                 client: cliente,
                                 products: products,
                                 condpag: condpag
@@ -686,7 +745,7 @@ function getRighe(res, req, righe, cliente, cond) {
                     });
             }
             i++;
-            getRighe(res, req, righe, cliente, cond);
+            getRighe(res, req, righe, cliente, cond, idOrd);
         }
     });
 }
