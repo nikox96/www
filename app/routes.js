@@ -18,7 +18,7 @@ module.exports = function (app, passport) {
     });
 
     app.get('/home', isLoggedIn, function (req, res) {
-        Appoggio.delApp(req.user.cage, function (errApp, resApp) {
+        Appoggio.delApp(req.user.cage, '', function (errApp, resApp) {
             if (errApp){
                 console.log(errApp);
             }        
@@ -630,7 +630,7 @@ module.exports = function (app, passport) {
 // LOGOUT ==============================
 // =====================================
     app.get('/logout', function (req, res) {
-        Appoggio.delApp(req.user.cage, function (errApp, resApp) {
+        Appoggio.delApp(req.user.cage, '', function (errApp, resApp) {
             if (errApp){
                 console.log(errApp);
             }
