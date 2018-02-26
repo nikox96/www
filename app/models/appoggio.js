@@ -40,10 +40,11 @@ Appoggio.delApp = function delApp(cage, idOrd, callback) {
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
+                console.log(queryErr);
                 callback("errore pulizia appoggio", null);
             }
             else {
-                callback(null, 1);
+                callback(null, queryRes);
             }
         });
 };
