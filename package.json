@@ -4,11 +4,11 @@
   "bugs": {
     "url": "https://github.com/nikox96/www/issues",
     "email": "nikox.96r@gmail.com"
-  }
-  "engines" : {
+  },
+  "engines": {
     "node": ">=8.9.4",
     "npm": ">=5.6.4"
-  }
+  },
   "dependencies": {
     "bcrypt-nodejs": "~0.0.3",
     "bcryptjs": "^2.4.3",
