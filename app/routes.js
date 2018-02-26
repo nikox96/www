@@ -18,9 +18,14 @@ module.exports = function (app, passport) {
     });
 
     app.get('/home', isLoggedIn, function (req, res) {
-        res.render('home.ejs', {
-            user: req.user // get the user out of session and pass to template
-        }); // load the index.ejs file
+        Appoggio.delApp(req.user.cage, function (errApp, resApp) {
+            if (errApp){
+                console.log(errApp);
+            }        
+            res.render('home.ejs', {
+                user: req.user // get the user out of session and pass to template
+            }); // load the index.ejs file
+        });
     });
 
     // =====================================
@@ -625,8 +630,13 @@ module.exports = function (app, passport) {
 // LOGOUT ==============================
 // =====================================
     app.get('/logout', function (req, res) {
-        req.logout();
-        res.redirect('/');
+        Appoggio.delApp(req.user.cage, function (errApp, resApp) {
+            if (errApp){
+                console.log(errApp);
+            }
+            req.logout();
+            res.redirect('/');
+        });
     });
 }
 ;
