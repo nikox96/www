@@ -36,7 +36,7 @@ Appoggio.find = function find(cage, idOrd, callback) {
 
 Appoggio.delApp = function delApp(cage, idOrd, callback) {
     db.query("DELETE FROM portale.appoggio WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
-        + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "AND 1<>1")
+        + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "")
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
