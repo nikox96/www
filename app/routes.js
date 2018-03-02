@@ -5,7 +5,7 @@ var Product = require("./models/product.js");
 var Agent = require("./models/agent.js");
 var Appoggio = require("./models/appoggio.js");
 var dateFormat = require('dateformat');
-var i = 0, csvEl = 0;
+var i = 0, k = 0, csvEl = 0;
 var rig, tes, rec, iva, par, csv;
 
 module.exports = function (app, passport) {
@@ -19,9 +19,9 @@ module.exports = function (app, passport) {
 
     app.get('/home', isLoggedIn, function (req, res) {
         Appoggio.delApp(req.user.cage, '', function (errApp, resApp) {
-            if (errApp){
+            if (errApp) {
                 console.log(errApp);
-            }        
+            }
             res.render('home.ejs', {
                 user: req.user // get the user out of session and pass to template
             }); // load the index.ejs file
@@ -83,13 +83,60 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.get('/new-order-promo', isLoggedIn, function (req, res) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                Product.listPromo('', function (promoErr, promoRes) {
+                    if (promoErr) {
+                        req.flash('orderMessage', 'Nessun cliente trovato');
+                    } else {
+                        console.log('clients: ' + promoRes.length);
+                        req.flash('orderMessage', promoRes.length + ' risultati');
+
+                        // render the page and pass in any flash data if it exists
+
+                        res.render('new-order-promo.ejs', {
+                            message: req.flash('orderMessage'),
+                            promo: promoRes,
+                            idOrd: appRes[0].idOrd
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    app.post('/new-order-promo', isLoggedIn, function (req, res) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                Product.listPromo(function (promoErr, promoRes) {
+                    if (promoErr) {
+                        req.flash('orderMessage', 'Nessun cliente trovato');
+                    } else {
+                        console.log('clients: ' + promoRes.length);
+                        req.flash('orderMessage', promoRes.length + ' risultati');
+
+                        // render the page and pass in any flash data if it exists
+
+                        k = 0;
+                        insertOrderPromo(promoRes, req, res, appRes[0].idOrd);
+                    }
+                });
+            }
+        });
+    });
+
     app.post('/new-order-product', isLoggedIn, function (req, res) {
         Appoggio.find(req.user.cage, '', function (appErr, appRes) {
             if (appErr) {
                 console.log("errore recupero codice ordine");
             } else {
                 var msg;
-                Order.newOrderProduct(req.body.ccod, req.body.ccodprod, req.body.iqta, function (orderErr, orderRes) {
+                Order.newOrderProduct(appRes[0].idOrd, req.body.ccodprod, req.body.iqta, function (orderErr, orderRes) {
                     if (orderErr) {
                         msg = 'errore inserimento prodotto ordine';
                     } else {
@@ -631,7 +678,7 @@ module.exports = function (app, passport) {
 // =====================================
     app.get('/logout', function (req, res) {
         Appoggio.delApp(req.user.cage, '', function (errApp, resApp) {
-            if (errApp){
+            if (errApp) {
                 console.log(errApp);
             }
             req.logout();
@@ -1637,7 +1684,7 @@ function csvRig93() {
     str += rec.tes.iSpesa1 + ';';
     str += rec.tes.iSpesa2 + ';';
     str += rec.tes.iBolloOprEse + ';';
-    str += rec.rig.rigaSaldata + ';';
+    str += rec.rig.rigaSaldata;     //l'ultimo campo non necessita del punto e virgola (;)
 
 
     csv[csvEl] = str;
@@ -1851,4 +1898,37 @@ function sendFile(nreg, idOrd) {
 function getIqta(ccod, task) {
 
     return obj.ccod === ccod;
+}
+
+function insertOrderPromo(promoRes, req, res, idOrd) {
+    if (k < promoRes.length) {
+        if (promoRes[k].ccod === req.body.ccodpromo) {
+            Order.newOrderProduct(idOrd, promoRes[k].ccodprod, promoRes[k].ipzz, function (ordErr, ordRes) {
+                if (ordErr)
+                    console.log(ordErr);
+                k++;
+                insertOrderPromo(promoRes, req, res, idOrd);
+            });
+        } else {
+            k++;
+            insertOrderPromo(promoRes, req, res, idOrd);
+        }
+    } else {
+        Product.listPromo('', function (promoErr, promoRes) {
+            if (promoErr) {
+                req.flash('orderMessage', 'Nessun cliente trovato');
+            } else {
+                console.log('clients: ' + promoRes.length);
+                req.flash('orderMessage', promoRes.length + ' risultati');
+
+                // render the page and pass in any flash data if it exists
+
+                res.render('new-order-promo.ejs', {
+                    message: req.flash('orderMessage'),
+                    promo: promoRes,
+                    idOrd: idOrd
+                });
+            }
+        });
+    }
 }

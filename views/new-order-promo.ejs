@@ -1,0 +1,118 @@
+<!-- views/new-order-promo.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Portale Innovazioni - Nuovo ordine</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <a class="navbar-brand" href="#">Nuovo Ordine <%= idOrd %></a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Azioni
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                    <li><a class="dropdown-item" href="/new-order-cond-pag">Avanti</a></li>
+                    <li><a class="dropdown-item" href="/new-order">Indietro</a></li>
+                    <li><a class="dropdown-item" href="/new-order-product">Prodotti</a></li>
+                    <div class="dropdown-divider"></div>
+                    <li><a class="dropdown-item" href="/home">Annulla</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
+        <div id="product">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Descrizione</th>
+                    <th scope="col">Quantità</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for(var i = 0; i < promo.length;i++) { %>
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal<%= i %>"
+                                data-target="#Modal<%= i %>">
+                            <%= promo[i].xdescPromo %>
+                        </button>
+                        <div class="modal fade" id="Modal<%= i %>" tabindex="-1" role="dialog"
+                             aria-labelledby="Modal<%= i %>Title" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="Modal<%= i %>Title"><%= promo[i].xdescPromo %></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Codice Prodotto</th>
+                                                <th scope="col">Descrizione</th>
+                                                <th scope="col">Prezzo</th>
+                                                <th scope="col">Quantità</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <% for(var j = 0; j < promo.length;j++) { %>
+                                            <tr>
+                                                <th scope="row"><%= promo[j].ccod %></th>
+                                                <td><%= promo[j].xdescProd %></td>
+                                                <td><%= promo[j].iprz %></td>
+                                                <td><%= promo[j].ipzz %></td>
+                                            </tr>
+                                            <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <form action="/new-order-promo" method="post" class="form-inline">
+                            <input type="hidden" name="ccod" value="<%= idOrd %>">
+                            <input type="hidden" name="ccodpromo" value="<%= promo[i].ccod %>">
+                            <input type="number" name="iqta" class="form-control">
+                            <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+                                <i class="material-icons">&#xe854</i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

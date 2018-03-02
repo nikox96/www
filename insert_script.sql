@@ -67,7 +67,7 @@ CREATE TABLE ana_promo (ccod INT(6) NOT NULL COMMENT 'Codice promozione',
 			INDEX descrizione (xdesc));
 
 -- create table prod_promo
-CREATE TABLE prod_promo(ccodpromo INT(6) NOT NULL COMMENT 'Codice promozione (non deve esistere in prodotti)',
+CREATE TABLE prod_promo (ccodpromo INT(6) NOT NULL COMMENT 'Codice promozione (non deve esistere in prodotti)',
 			ccodprod INT(6) NOT NULL COMMENT 'Codice prodotto',
 			ipzz INT(2) NOT NULL COMMENT 'Pezzi prodotto',
 			PRIMARY KEY(ccodpromo, ccodprod),

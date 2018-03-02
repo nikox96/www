@@ -79,4 +79,27 @@ Product.getXgrp = function getXgrp(callback) {
         })
 };
 
+Product.listPromo = function listPromo(ccod, callback) {
+    console.log("lista promo");
+    var query = "SELECT t1.ccod, t1.xdesc AS xdescPromo, t2.ccodprod, t2.ipzz, t3.xdesc AS xdescProd, t3.iprz " +
+        "FROM portale.ana_promo t1 INNER JOIN portale.prod_promo t2 " +
+        "ON t1.ccod = t2.ccodpromo INNER JOIN portale.prodotti t3 " +
+        "ON t2.ccodprod = t3.ccod " +
+        (ccod && ccod !== '' ? "WHERE t1.ccod = " + ccod : "");
+    console.log(query);
+    db.query(query
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
+            if (queryErr) {
+                callback(queryErr, null);
+                console.log("error: " + queryErr);
+            }
+            else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                callback(null, queryRes);
+                console.log("record: " + queryRes.length);
+            }
+        });
+};
+
 module.exports = Product;
