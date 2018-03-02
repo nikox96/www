@@ -13,54 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="103" column="46" lean-forward="true" selection-start-line="103" selection-start-column="46" selection-end-line="103" selection-end-column="46" />
-              <folding>
-                <element signature="e#6119#8601#0" expanded="false" />
-                <element signature="e#8672#9659#0" expanded="false" />
-                <element signature="e#9731#11448#0" expanded="false" />
-                <element signature="e#11515#11745#0" expanded="false" />
-                <element signature="e#13102#27052#0" expanded="false" />
-                <element signature="e#27115#27340#0" expanded="false" />
-                <element signature="e#27565#28326#0" expanded="false" />
-                <element signature="e#28390#29172#0" expanded="false" />
-                <element signature="e#29234#29301#0" expanded="false" />
-                <element signature="e#29364#31771#0" expanded="false" />
-                <element signature="e#32047#32195#0" expanded="false" />
-                <element signature="e#32288#32515#0" expanded="false" />
-                <element signature="e#32606#32832#0" expanded="false" />
-                <element signature="e#33003#33227#0" expanded="false" />
-                <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
-                <element signature="n#!!block;n#getClients#0" expanded="false" />
-                <element signature="n#!!block;n#getRighe#0" expanded="false" />
-                <element signature="n#!!block;n#initializeCSV#0" expanded="false" />
-                <element signature="n#!!block;n#csvRig#0" expanded="false" />
-                <element signature="n#!!block;n#csvRig93#0" expanded="false" />
-                <element signature="n#!!block;n#getRigheCSV#0" expanded="false" />
-                <element signature="n#!!block;n#sendFile#0" expanded="false" />
-                <element signature="n#!!block;n#getIqta#0" expanded="false" />
-                <element signature="n#!!block;n#getPromo#0" expanded="false" />
-                <element signature="n#!!block;n#insertOrderPromo#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="new-order-promo.ejs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/new-order-promo.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="752">
-              <caret line="105" column="69" lean-forward="true" selection-start-line="105" selection-start-column="69" selection-end-line="105" selection-end-column="69" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -144,8 +97,8 @@
         <option value="$PROJECT_DIR$/insert_script.sql" />
         <option value="$PROJECT_DIR$/views/new-order-product.ejs" />
         <option value="$PROJECT_DIR$/app/models/product.js" />
-        <option value="$PROJECT_DIR$/app/routes.js" />
         <option value="$PROJECT_DIR$/views/new-order-promo.ejs" />
+        <option value="$PROJECT_DIR$/app/routes.js" />
       </list>
     </option>
   </component>
@@ -164,7 +117,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="456" />
     <option name="y" value="-10" />
     <option name="width" value="974" />
@@ -335,12 +288,12 @@
       <workItem from="1519460226053" duration="8327000" />
       <workItem from="1519488939344" duration="3703000" />
       <workItem from="1519492851363" duration="2700000" />
-      <workItem from="1519976106151" duration="8418000" />
+      <workItem from="1519976106151" duration="9049000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="208950000" />
+    <option name="totallyTimeSpent" value="209581000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -352,10 +305,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11485775" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11485775" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.123655915" sideWeight="0.49789253" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -770,25 +722,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/new-order-promo.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="752">
+          <caret line="105" column="69" lean-forward="true" selection-start-line="105" selection-start-column="69" selection-end-line="105" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="103" column="46" lean-forward="true" selection-start-line="103" selection-start-column="46" selection-end-line="103" selection-end-column="46" />
+        <state relative-caret-position="204">
+          <caret line="93" column="28" lean-forward="true" selection-start-line="93" selection-start-column="28" selection-end-line="93" selection-end-column="28" />
           <folding>
-            <element signature="e#6119#8601#0" expanded="false" />
-            <element signature="e#8672#9659#0" expanded="false" />
-            <element signature="e#9731#11448#0" expanded="false" />
-            <element signature="e#11515#11745#0" expanded="false" />
-            <element signature="e#13102#27052#0" expanded="false" />
-            <element signature="e#27115#27340#0" expanded="false" />
-            <element signature="e#27565#28326#0" expanded="false" />
-            <element signature="e#28390#29172#0" expanded="false" />
-            <element signature="e#29234#29301#0" expanded="false" />
-            <element signature="e#29364#31771#0" expanded="false" />
-            <element signature="e#32047#32195#0" expanded="false" />
-            <element signature="e#32288#32515#0" expanded="false" />
-            <element signature="e#32606#32832#0" expanded="false" />
-            <element signature="e#33003#33227#0" expanded="false" />
+            <element signature="e#6118#8600#0" expanded="false" />
+            <element signature="e#8671#9658#0" expanded="false" />
+            <element signature="e#9730#11447#0" expanded="false" />
+            <element signature="e#11514#11744#0" expanded="false" />
+            <element signature="e#13101#27051#0" expanded="false" />
+            <element signature="e#27114#27339#0" expanded="false" />
+            <element signature="e#27564#28325#0" expanded="false" />
+            <element signature="e#28389#29171#0" expanded="false" />
+            <element signature="e#29233#29300#0" expanded="false" />
+            <element signature="e#29363#31770#0" expanded="false" />
+            <element signature="e#32046#32194#0" expanded="false" />
+            <element signature="e#32287#32514#0" expanded="false" />
+            <element signature="e#32605#32831#0" expanded="false" />
+            <element signature="e#33002#33226#0" expanded="false" />
             <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
             <element signature="n#!!block;n#getClients#0" expanded="false" />
             <element signature="n#!!block;n#getRighe#0" expanded="false" />
@@ -801,14 +761,6 @@
             <element signature="n#!!block;n#getPromo#0" expanded="false" />
             <element signature="n#!!block;n#insertOrderPromo#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-order-promo.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="752">
-          <caret line="105" column="69" lean-forward="true" selection-start-line="105" selection-start-column="69" selection-end-line="105" selection-end-column="69" />
-          <folding />
         </state>
       </provider>
     </entry>
