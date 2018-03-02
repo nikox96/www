@@ -169,6 +169,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
             //calcolo importo
             var iimp = res.iprz * iqta;
 
+            console.log('iimp: ' + iimp);
             //se il prodotto era già presente nel carrello per quest'ordine allora aggiorno quantità e importo
             db.query("SELECT 1 FROM portale.righe_ordini WHERE ccod = " + ccod + "AND ccodprod = " + ccodprod
 //                , function (queryErr, queryRes) {
@@ -182,7 +183,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
 //                            , function (queryErr, queryRes) {
                             , (queryErr, queryRes) => {
                                 if (queryErr) {
-                                    console.log(queryErr);
+                                    console.log('errore insert prod: ' + queryErr);
                                     callback('Errore inserimento prodotto', null);
                                 }
                                 else {

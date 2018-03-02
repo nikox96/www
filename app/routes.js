@@ -149,6 +149,7 @@ module.exports = function (app, passport) {
                 console.log("errore recupero codice ordine");
             } else {
                 var msg;
+                console.log('idOrd: ' + appRes[0].idOrd + 'cod prod: ' + req.body.ccodprod + 'qta :' + req.body.iqta,);
                 Order.newOrderProduct(appRes[0].idOrd, req.body.ccodprod, req.body.iqta, function (orderErr, orderRes) {
                     if (orderErr) {
                         msg = 'errore inserimento prodotto ordine';
