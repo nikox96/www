@@ -1919,6 +1919,7 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
         return;
     }
     console.log('idord: ' + idOrd + ' cod prod: ' + promoRes[k].ccodprod + ' pezzi: ' + promoRes[k].ipzz);
+    promoRes[k].ipzz = promoRes[k].ipzz * req.body.iqta;
     Order.newOrderProduct(idOrd, promoRes[k].ccodprod, promoRes[k].ipzz, function (ordErr, ordRes) {
         if (ordErr)
             console.log(ordErr);
