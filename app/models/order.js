@@ -182,6 +182,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
 //                            , function (queryErr, queryRes) {
                             , (queryErr, queryRes) => {
                                 if (queryErr) {
+                                    console.log(queryErr);
                                     callback('Errore inserimento prodotto', null);
                                 }
                                 else {
