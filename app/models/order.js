@@ -174,6 +174,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
             db.query("SELECT 1 FROM portale.righe_ordini WHERE ccod = " + ccod + "AND ccodprod = " + ccodprod
 //                , function (queryErr, queryRes) {
                 , (queryErr, queryRes) => {
+                    console.log('insert order prod');
                     queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                     if (queryErr || (queryRes.length && queryRes.length <= 0)) {
                         db.query("INSERT INTO portale.righe_ordini (ccod, ccodprod, iqta, iimp) VALUES("
@@ -194,6 +195,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
                             });
                     }
                     else {
+                        console.log('update order prod');
                         db.query("UPDATE portale.righe_ordini SET iqta = " + iqta + ", iimp = " + iimp
                             + " WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod
 //                            , function (queryErr, queryRes) {
