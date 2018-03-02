@@ -1913,37 +1913,43 @@ function getIqta(ccod, task) {
     return obj.ccod === ccod;
 }
 
-function getPromo(ccod, task) {
-
-    return obj.ccod === ccod;
-}
-
 function insertOrderPromo(promoRes, req, res, idOrd) {
-    if (k < promoRes.length) {
-        if (promoRes[k].ccod === req.body.ccodpromo) {
-            Order.newOrderProduct(idOrd, promoRes[k].ccodprod, promoRes[k].ipzz, function (ordErr, ordRes) {
-                if (ordErr)
-                    console.log(ordErr);
-                k++;
-                insertOrderPromo(promoRes, req, res, idOrd);
-            });
-        } else {
-            k++;
-            insertOrderPromo(promoRes, req, res, idOrd);
-        }
-    } else {
-        Product.listPromo('', function (promoErr, promoRes) {
+    if (k >= promoRes.length) {
+        return;
+    }
+    Order.newOrderProduct(idOrd, promoRes[k].ccodprod, promoRes[k].ipzz, function (ordErr, ordRes) {
+        if (ordErr)
+            console.log(ordErr);
+        k++;
+        insertOrderPromo(promoRes, req, res, idOrd);
+    });
+    if (k === promoRes.length - 1) {
+        Product.listPromo('', function (promoErr, promoRes1) {
             if (promoErr) {
                 req.flash('orderMessage', 'Nessun cliente trovato');
             } else {
-                console.log('clients: ' + promoRes.length);
-                req.flash('orderMessage', promoRes.length + ' risultati');
+                console.log('clients: ' + promoRes1.length);
+                req.flash('orderMessage', promoRes1.length + ' risultati');
 
-                // render the page and pass in any flash data if it exists
+                var anaPromo = [];
+                var b = true;
+                var xy = 0;
+                for (k = 0; k < promoRes1.length; k++) {
+                    for (i = 0; i < anaPromo.length; i++) {
+                        if (promoRes1[k].ccod === anaPromo[i].ccod)
+                            b = false;
+                    }
+                    if (b) {
+                        anaPromo[xy] = promoRes1[k];
+                        xy++;
+                    }
+                    b = true;
+                }
 
                 res.render('new-order-promo.ejs', {
                     message: req.flash('orderMessage'),
-                    promo: promoRes,
+                    anaPromo: anaPromo,
+                    promo: promoRes1,
                     idOrd: idOrd
                 });
             }

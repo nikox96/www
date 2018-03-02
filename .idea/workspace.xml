@@ -13,54 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="product.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/product.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/routes.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="128" column="52" lean-forward="false" selection-start-line="128" selection-start-column="52" selection-end-line="128" selection-end-column="52" />
-              <folding>
-                <element signature="e#6078#8560#0" expanded="false" />
-                <element signature="e#8631#9618#0" expanded="false" />
-                <element signature="e#9690#11407#0" expanded="false" />
-                <element signature="e#11474#11704#0" expanded="false" />
-                <element signature="e#11770#13001#0" expanded="false" />
-                <element signature="e#13061#27011#0" expanded="false" />
-                <element signature="e#27074#27299#0" expanded="false" />
-                <element signature="e#27524#28285#0" expanded="false" />
-                <element signature="e#28349#29131#0" expanded="false" />
-                <element signature="e#29193#29260#0" expanded="false" />
-                <element signature="e#29323#31730#0" expanded="false" />
-                <element signature="e#32006#32154#0" expanded="false" />
-                <element signature="e#32247#32474#0" expanded="false" />
-                <element signature="e#32565#32791#0" expanded="false" />
-                <element signature="e#32962#33186#0" expanded="false" />
-                <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
-                <element signature="n#!!block;n#getClients#0" expanded="false" />
-                <element signature="n#!!block;n#getRighe#0" expanded="false" />
-                <element signature="n#!!block;n#initializeCSV#0" expanded="false" />
-                <element signature="n#!!block;n#csvRig#0" expanded="false" />
-                <element signature="n#!!block;n#csvRig93#0" expanded="false" />
-                <element signature="n#!!block;n#getRigheCSV#0" expanded="false" />
-                <element signature="n#!!block;n#sendFile#0" expanded="false" />
-                <element signature="n#!!block;n#getIqta#0" expanded="false" />
-                <element signature="n#!!block;n#getPromo#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -335,12 +288,12 @@
       <workItem from="1519488939344" duration="3703000" />
       <workItem from="1519492851363" duration="2700000" />
       <workItem from="1519976106151" duration="9870000" />
-      <workItem from="1519998620989" duration="214000" />
+      <workItem from="1519998620989" duration="1773000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="210616000" />
+    <option name="totallyTimeSpent" value="212175000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -353,9 +306,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11485775" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11485775" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.123655915" sideWeight="0.49789253" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -405,13 +357,8 @@
           <line>115</line>
           <option name="timeStamp" value="132" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/routes.js</url>
-          <line>714</line>
-          <option name="timeStamp" value="138" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="143" />
+      <option name="time" value="145" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="ChromiumRemoteDebugType">
@@ -757,13 +704,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-order-promo.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="47" column="52" lean-forward="true" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/product.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
@@ -774,8 +714,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="128" column="52" lean-forward="false" selection-start-line="128" selection-start-column="52" selection-end-line="128" selection-end-column="52" />
+        <state relative-caret-position="474">
+          <caret line="1939" column="38" lean-forward="true" selection-start-line="1939" selection-start-column="38" selection-end-line="1939" selection-end-column="38" />
           <folding>
             <element signature="e#6078#8560#0" expanded="false" />
             <element signature="e#8631#9618#0" expanded="false" />
@@ -801,8 +741,15 @@
             <element signature="n#!!block;n#getRigheCSV#0" expanded="false" />
             <element signature="n#!!block;n#sendFile#0" expanded="false" />
             <element signature="n#!!block;n#getIqta#0" expanded="false" />
-            <element signature="n#!!block;n#getPromo#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/new-order-promo.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="105" column="93" lean-forward="false" selection-start-line="105" selection-start-column="89" selection-end-line="105" selection-end-column="93" />
+          <folding />
         </state>
       </provider>
     </entry>

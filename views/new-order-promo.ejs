@@ -62,7 +62,8 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="Modal<%= i %>Title"><%= anaPromo[i].xdescpromo %></h5>
+                                        <h5 class="modal-title"
+                                            id="Modal<%= i %>Title"><%= anaPromo[i].xdescpromo %></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -79,12 +80,14 @@
                                             </thead>
                                             <tbody>
                                             <% for(var j = 0; j < promo.length;j++) { %>
+                                            <% if (anaPromo[i].ccod == promo[j].ccod) { %>
                                             <tr>
-                                                <th scope="row"><%= promo[j].ccod %></th>
+                                                <th scope="row"><%= promo[j].ccodprod %></th>
                                                 <td><%= promo[j].xdescprod %></td>
                                                 <td><%= promo[j].iprz %></td>
                                                 <td><%= promo[j].ipzz %></td>
                                             </tr>
+                                            <% } %>
                                             <% } %>
                                             </tbody>
                                         </table>
