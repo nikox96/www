@@ -187,6 +187,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
                                     callback('Errore inserimento prodotto', null);
                                 }
                                 else {
+                                    console.log('insert prod res: ' + queryErr);
                                     callback(null, "Prodotto inserito corretamente");
                                 }
                             });

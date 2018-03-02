@@ -1918,9 +1918,12 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
     if (k >= promoRes.length) {
         return;
     }
+    console.log('idord: ' + idOrd + ' cod prod: ' + promoRes[k].ccodprod + ' pezzi: ' + promoRes[k].ipzz);
     Order.newOrderProduct(idOrd, promoRes[k].ccodprod, promoRes[k].ipzz, function (ordErr, ordRes) {
         if (ordErr)
             console.log(ordErr);
+        else
+            console.log(ordRes);
         k++;
         insertOrderPromo(promoRes, req, res, idOrd);
     });
