@@ -7,6 +7,9 @@ var Appoggio = require("./models/appoggio.js");
 var dateFormat = require('dateformat');
 var i = 0, k = 0, csvEl = 0;
 var rig, tes, rec, iva, par, csv;
+var products = [];
+var product = {};
+var riga = {};
 
 module.exports = function (app, passport) {
 
@@ -774,9 +777,7 @@ function getClients(req, res) {
 }
 
 function getRighe(res, req, righe, cliente, cond, idOrd) {
-    var products = [];
-    var product = {};
-    var riga = {};
+
     if (i >= righe.length)
         return;
 
