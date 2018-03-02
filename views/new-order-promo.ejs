@@ -50,19 +50,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% for(var i = 0; i < promo.length;i++) { %>
+                <% for(var i = 0; i < anaPromo.length;i++) { %>
                 <tr>
                     <td>
                         <button type="button" class="btn btn-primary" data-toggle="modal<%= i %>"
                                 data-target="#Modal<%= i %>">
-                            <%= promo[i].xdescPromo %>
+                            <%= anaPromo[i].xdescPromo %>
                         </button>
                         <div class="modal fade" id="Modal<%= i %>" tabindex="-1" role="dialog"
                              aria-labelledby="Modal<%= i %>Title" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="Modal<%= i %>Title"><%= promo[i].xdescPromo %></h5>
+                                        <h5 class="modal-title" id="Modal<%= i %>Title"><%= anaPromo[i].xdescPromo %></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -100,7 +100,7 @@
                     <td>
                         <form action="/new-order-promo" method="post" class="form-inline">
                             <input type="hidden" name="ccod" value="<%= idOrd %>">
-                            <input type="hidden" name="ccodpromo" value="<%= promo[i].ccod %>">
+                            <input type="hidden" name="ccodpromo" value="<%= anaPromo[i].ccod %>">
                             <input type="number" name="iqta" class="form-control">
                             <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
                                 <i class="material-icons">&#xe854</i>

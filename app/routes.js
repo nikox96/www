@@ -92,13 +92,27 @@ module.exports = function (app, passport) {
                     if (promoErr) {
                         req.flash('orderMessage', 'Nessun cliente trovato');
                     } else {
-                        console.log('clients: ' + promoRes.length);
+                        console.log('promo: %j' + promoRes);
                         req.flash('orderMessage', promoRes.length + ' risultati');
 
-                        // render the page and pass in any flash data if it exists
+                        var anaPromo = [];
+                        var b = true;
+                        var xy = 0;
+                        for (k = 0; k < promoRes.length; k++) {
+                            for (i = 0; i < anaPromo.length; i++) {
+                                if (promoRes[k].ccod === anaPromo[i].ccod)
+                                    b = false;
+                            }
+                            if (b) {
+                                anaPromo[xy] = promoRes[k];
+                                xy++;
+                            }
+                            b = true;
+                        }
 
                         res.render('new-order-promo.ejs', {
                             message: req.flash('orderMessage'),
+                            anaPromo: anaPromo,
                             promo: promoRes,
                             idOrd: appRes[0].idOrd
                         });
@@ -1896,6 +1910,11 @@ function sendFile(nreg, idOrd) {
 }
 
 function getIqta(ccod, task) {
+
+    return obj.ccod === ccod;
+}
+
+function getPromo(ccod, task) {
 
     return obj.ccod === ccod;
 }
