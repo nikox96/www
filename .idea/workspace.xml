@@ -17,9 +17,45 @@
       <file leaf-file-name="new-order-promo.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/new-order-promo.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="79" column="23" lean-forward="false" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
+            <state relative-caret-position="395">
+              <caret line="66" column="83" lean-forward="true" selection-start-line="66" selection-start-column="83" selection-end-line="66" selection-end-column="83" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/routes.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="81" column="1" lean-forward="true" selection-start-line="81" selection-start-column="1" selection-end-line="81" selection-end-column="1" />
+              <folding>
+                <element signature="e#6058#8540#0" expanded="false" />
+                <element signature="e#8611#9598#0" expanded="false" />
+                <element signature="e#9670#11387#0" expanded="false" />
+                <element signature="e#11454#11684#0" expanded="false" />
+                <element signature="e#13041#26991#0" expanded="false" />
+                <element signature="e#27054#27279#0" expanded="false" />
+                <element signature="e#27504#28265#0" expanded="false" />
+                <element signature="e#28329#29111#0" expanded="false" />
+                <element signature="e#29173#29240#0" expanded="false" />
+                <element signature="e#29303#31710#0" expanded="false" />
+                <element signature="e#31986#32134#0" expanded="false" />
+                <element signature="e#32227#32454#0" expanded="false" />
+                <element signature="e#32545#32771#0" expanded="false" />
+                <element signature="e#32942#33166#0" expanded="false" />
+                <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
+                <element signature="n#!!block;n#getClients#0" expanded="false" />
+                <element signature="n#!!block;n#getRighe#0" expanded="false" />
+                <element signature="n#!!block;n#initializeCSV#0" expanded="false" />
+                <element signature="n#!!block;n#csvRig#0" expanded="false" />
+                <element signature="n#!!block;n#csvRig93#0" expanded="false" />
+                <element signature="n#!!block;n#getRigheCSV#0" expanded="false" />
+                <element signature="n#!!block;n#sendFile#0" expanded="false" />
+                <element signature="n#!!block;n#getIqta#0" expanded="false" />
+                <element signature="n#!!block;n#getPromo#0" expanded="false" />
+                <element signature="n#!!block;n#insertOrderPromo#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -128,9 +164,8 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="456" />
-    <option name="y" value="-10" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="953" />
     <option name="width" value="974" />
     <option name="height" value="1057" />
   </component>
@@ -299,12 +334,12 @@
       <workItem from="1519460226053" duration="8327000" />
       <workItem from="1519488939344" duration="3703000" />
       <workItem from="1519492851363" duration="2700000" />
-      <workItem from="1519976106151" duration="9317000" />
+      <workItem from="1519976106151" duration="9811000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="209849000" />
+    <option name="totallyTimeSpent" value="210343000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -316,10 +351,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="953" y="0" width="974" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11485775" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23290598" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.123655915" sideWeight="0.49789253" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -351,17 +386,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/routes.js</url>
-          <line>776</line>
+          <line>775</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/routes.js</url>
-          <line>783</line>
+          <line>782</line>
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/routes.js</url>
-          <line>798</line>
+          <line>797</line>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -371,7 +406,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/routes.js</url>
-          <line>715</line>
+          <line>714</line>
           <option name="timeStamp" value="138" />
         </line-breakpoint>
       </breakpoints>
@@ -736,23 +771,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="93" column="28" lean-forward="true" selection-start-line="93" selection-start-column="28" selection-end-line="93" selection-end-column="28" />
+        <state relative-caret-position="0">
+          <caret line="81" column="1" lean-forward="true" selection-start-line="81" selection-start-column="1" selection-end-line="81" selection-end-column="1" />
           <folding>
-            <element signature="e#6118#8600#0" expanded="false" />
-            <element signature="e#8671#9658#0" expanded="false" />
-            <element signature="e#9730#11447#0" expanded="false" />
-            <element signature="e#11514#11744#0" expanded="false" />
-            <element signature="e#13101#27051#0" expanded="false" />
-            <element signature="e#27114#27339#0" expanded="false" />
-            <element signature="e#27564#28325#0" expanded="false" />
-            <element signature="e#28389#29171#0" expanded="false" />
-            <element signature="e#29233#29300#0" expanded="false" />
-            <element signature="e#29363#31770#0" expanded="false" />
-            <element signature="e#32046#32194#0" expanded="false" />
-            <element signature="e#32287#32514#0" expanded="false" />
-            <element signature="e#32605#32831#0" expanded="false" />
-            <element signature="e#33002#33226#0" expanded="false" />
+            <element signature="e#6058#8540#0" expanded="false" />
+            <element signature="e#8611#9598#0" expanded="false" />
+            <element signature="e#9670#11387#0" expanded="false" />
+            <element signature="e#11454#11684#0" expanded="false" />
+            <element signature="e#13041#26991#0" expanded="false" />
+            <element signature="e#27054#27279#0" expanded="false" />
+            <element signature="e#27504#28265#0" expanded="false" />
+            <element signature="e#28329#29111#0" expanded="false" />
+            <element signature="e#29173#29240#0" expanded="false" />
+            <element signature="e#29303#31710#0" expanded="false" />
+            <element signature="e#31986#32134#0" expanded="false" />
+            <element signature="e#32227#32454#0" expanded="false" />
+            <element signature="e#32545#32771#0" expanded="false" />
+            <element signature="e#32942#33166#0" expanded="false" />
             <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
             <element signature="n#!!block;n#getClients#0" expanded="false" />
             <element signature="n#!!block;n#getRighe#0" expanded="false" />
@@ -770,8 +805,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/new-order-promo.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="79" column="23" lean-forward="false" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
+        <state relative-caret-position="395">
+          <caret line="66" column="83" lean-forward="true" selection-start-line="66" selection-start-column="83" selection-end-line="66" selection-end-column="83" />
           <folding />
         </state>
       </provider>

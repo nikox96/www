@@ -92,7 +92,6 @@ module.exports = function (app, passport) {
                     if (promoErr) {
                         req.flash('orderMessage', 'Nessun cliente trovato');
                     } else {
-                        console.log('promo: %j', promoRes);
                         req.flash('orderMessage', promoRes.length + ' risultati');
 
                         var anaPromo = [];
