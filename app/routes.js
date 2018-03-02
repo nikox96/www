@@ -126,7 +126,7 @@ module.exports = function (app, passport) {
             if (appErr) {
                 console.log("errore recupero codice ordine");
             } else {
-                Product.listPromo(function (promoErr, promoRes) {
+                Product.listPromo(req.body.ccodpromo, function (promoErr, promoRes) {
                     if (promoErr) {
                         req.flash('orderMessage', 'Nessun cliente trovato');
                     } else {
