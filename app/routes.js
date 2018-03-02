@@ -73,7 +73,7 @@ module.exports = function (app, passport) {
                                     products: productRes,
                                     lven: venRes,
                                     xgrp: grpRes,
-                                    idOrd: appRes[0].idOrd
+                                    idOrd: appRes[0].idord
                                 });
                             });
                         });
@@ -113,7 +113,7 @@ module.exports = function (app, passport) {
                             message: req.flash('orderMessage'),
                             anaPromo: anaPromo,
                             promo: promoRes,
-                            idOrd: appRes[0].idOrd
+                            idOrd: appRes[0].idord
                         });
                     }
                 });
@@ -136,7 +136,7 @@ module.exports = function (app, passport) {
                         // render the page and pass in any flash data if it exists
 
                         k = 0;
-                        insertOrderPromo(promoRes, req, res, appRes[0].idOrd);
+                        insertOrderPromo(promoRes, req, res, appRes[0].idord);
                     }
                 });
             }
@@ -149,8 +149,8 @@ module.exports = function (app, passport) {
                 console.log("errore recupero codice ordine");
             } else {
                 var msg;
-                console.log('idOrd: ' + appRes[0].idOrd + 'cod prod: ' + req.body.ccodprod + 'qta :' + req.body.iqta,);
-                Order.newOrderProduct(appRes[0].idOrd, req.body.ccodprod, req.body.iqta, function (orderErr, orderRes) {
+                console.log('idOrd: ' + appRes[0].idord + 'cod prod: ' + req.body.ccodprod + 'qta :' + req.body.iqta,);
+                Order.newOrderProduct(appRes[0].idord, req.body.ccodprod, req.body.iqta, function (orderErr, orderRes) {
                     if (orderErr) {
                         msg = 'errore inserimento prodotto ordine';
                     } else {
@@ -184,7 +184,7 @@ module.exports = function (app, passport) {
                                         products: productRes,
                                         lven: venRes,
                                         xgrp: grpRes,
-                                        idOrd: appRes[0].idOrd
+                                        idOrd: appRes[0].idord
                                     });
                                 });
                             });
@@ -209,7 +209,7 @@ module.exports = function (app, passport) {
                             queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                             res.render('new-order-cond-pag.ejs', {
                                 message: req.flash('orderMessage'),
-                                idOrd: appRes[0].idOrd,
+                                idOrd: appRes[0].idord,
                                 condpag: queryRes
                             });
                         }
@@ -223,12 +223,12 @@ module.exports = function (app, passport) {
             if (appErr) {
                 console.log("errore recupero codice ordine");
             } else {
-                Order.updateCondPag(appRes[0].idOrd, req.body.ccodpag, function (queryErr, queryRes) {
+                Order.updateCondPag(appRes[0].idord, req.body.ccodpag, function (queryErr, queryRes) {
                     if (queryErr)
                         req.flash('orderMessage', queryErr);
                     else {
                         req.flash('orderMessage', queryRes);
-                        Order.find(appRes[0].idOrd, function (queryErr, queryRes) {
+                        Order.find(appRes[0].idord, function (queryErr, queryRes) {
                             if (queryErr)
                                 req.flash('orderMessage', queryErr);
                             else {
@@ -236,12 +236,12 @@ module.exports = function (app, passport) {
                                     if (cliErr)
                                         req.flash('orderMessage', cliErr);
                                     else {
-                                        Order.findProduct(appRes[0].idOrd, function (righeErr, righeRes) {
+                                        Order.findProduct(appRes[0].idord, function (righeErr, righeRes) {
                                             if (righeErr) {
                                                 req.flash('orderMessage', righeErr);
                                             } else {
                                                 i = 0;
-                                                getRighe(res, req, righeRes, cliRes, queryRes, appRes[0].idOrd);
+                                                getRighe(res, req, righeRes, cliRes, queryRes, appRes[0].idord);
                                             }
                                         });
                                     }
@@ -617,7 +617,7 @@ module.exports = function (app, passport) {
             if (appErr) {
                 console.log("errore recupero codice ordine");
             } else {
-                Order.updateCcli(appRes[0].idOrd, req.body.ccod, function (ordErr, ordRes) {
+                Order.updateCcli(appRes[0].idord, req.body.ccod, function (ordErr, ordRes) {
                     if (ordErr) {
                         console.log("errore aggiornamento codice cliente ordine");
                     } else {
@@ -647,7 +647,7 @@ module.exports = function (app, passport) {
                                             products: productRes,
                                             lven: venRes,
                                             xgrp: grpRes,
-                                            idOrd: appRes[0].idOrd
+                                            idOrd: appRes[0].idord
                                         });
                                     });
                                 });
