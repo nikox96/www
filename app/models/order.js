@@ -175,8 +175,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
 //                , function (queryErr, queryRes) {
                 , (queryErr, queryRes) => {
                     queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
-                    console.log('res find order prod: %j', queryRes);
-                    if (queryErr || (queryRes.length && queryRes.length <= 0)) {
+                    if (queryErr || queryRes.rowCount === 0 || (queryRes.length && queryRes.length <= 0)) {
                         console.log('insert order prod');
                         db.query("INSERT INTO portale.righe_ordini (ccod, ccodprod, iqta, iimp) VALUES("
                             + ccod + ", "
