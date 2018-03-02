@@ -55,14 +55,14 @@
                     <td>
                         <button type="button" class="btn btn-primary" data-toggle="modal<%= i %>"
                                 data-target="#Modal<%= i %>">
-                            <%= anaPromo[i].xdescPromo %>
+                            <%= anaPromo[i].xdescpromo %>
                         </button>
                         <div class="modal fade" id="Modal<%= i %>" tabindex="-1" role="dialog"
                              aria-labelledby="Modal<%= i %>Title" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="Modal<%= i %>Title"><%= anaPromo[i].xdescPromo %></h5>
+                                        <h5 class="modal-title" id="Modal<%= i %>Title"><%= anaPromo[i].xdescpromo %></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -81,7 +81,7 @@
                                             <% for(var j = 0; j < promo.length;j++) { %>
                                             <tr>
                                                 <th scope="row"><%= promo[j].ccod %></th>
-                                                <td><%= promo[j].xdescProd %></td>
+                                                <td><%= promo[j].xdescprod %></td>
                                                 <td><%= promo[j].iprz %></td>
                                                 <td><%= promo[j].ipzz %></td>
                                             </tr>
