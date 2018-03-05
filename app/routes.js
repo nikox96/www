@@ -258,12 +258,18 @@ module.exports = function (app, passport) {
     });
 
     app.post('/new-order-sum', isLoggedIn, function (req, res) {
-        Order.updateStatus(req.body.idOrd, 0, function (queryErr, queryRes) {
-            if (queryErr)
-                console.log('impossibile ma vero');
-            else
-                res.redirect('/home');
-        })
+        Appoggio.find(req.user.cage, req.body.idOrd, function (appErr, appRes) {
+            if (appErr) {
+                console.log("Errore lettura appogigo conferma inserimento ordine!");
+            } else {
+                Order.updateStatus(req.body.idOrd, 0, function (queryErr, queryRes) {
+                    if (queryErr)
+                        console.log('impossibile ma vero');
+                    else
+                        res.redirect('/home');
+                });
+            }
+        });
     });
 
     app.get('/edit-products', isLoggedIn, function (req, res) {

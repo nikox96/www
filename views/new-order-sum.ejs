@@ -88,7 +88,14 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><a class="btn btn-primary" href="/home" role="button">Chiudi</a></td>
+                    <td>
+                        <form method="post" action="/new-order-sum">
+                            <input type="hidden" name="idOrd" value="<%= idOrd %>">
+                            <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+                                <i class="material-icons">&#xe161</i> Conferma
+                            </button>
+                        </form>
+                    </td>
                 </tr>
                 </tfoot>
             </table>

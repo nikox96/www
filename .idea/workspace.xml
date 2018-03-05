@@ -26,14 +26,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>idgara</find>
       <find>sscoan</find>
       <find>cAppBanc</find>
       <find>rig.filler</find>
       <find>rig.qdoc</find>
       <find>rig.calcSp</find>
       <find>qExpUmSuppl</find>
-      <find>post</find>
       <find>get</find>
       <find>rig.impVal</find>
       <find>date</find>
@@ -56,6 +54,8 @@
       <find>appRes[0].idO</find>
       <find>cond-pag</find>
       <find>Appoggio</find>
+      <find>post</find>
+      <find>/new-order-sum</find>
     </findStrings>
     <dirStrings>
       <dir>D:\www\node_modules\express</dir>
@@ -90,15 +90,15 @@
         <option value="$PROJECT_DIR$/views/order-list.ejs" />
         <option value="$PROJECT_DIR$/views/new-order.ejs" />
         <option value="$PROJECT_DIR$/app/models/appoggio.js" />
-        <option value="$PROJECT_DIR$/views/home.ejs" />
         <option value="$PROJECT_DIR$/insert_script.sql" />
         <option value="$PROJECT_DIR$/app/models/product.js" />
         <option value="$PROJECT_DIR$/views/new-order-promo.ejs" />
         <option value="$PROJECT_DIR$/app/models/order.js" />
         <option value="$PROJECT_DIR$/views/new-order-product.ejs" />
-        <option value="$PROJECT_DIR$/app/routes.js" />
         <option value="$PROJECT_DIR$/views/new-order-cond-pag.ejs" />
         <option value="$PROJECT_DIR$/views/new-order-sum.ejs" />
+        <option value="$PROJECT_DIR$/app/routes.js" />
+        <option value="$PROJECT_DIR$/views/home.ejs" />
       </list>
     </option>
   </component>
@@ -117,7 +117,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="953" />
     <option name="width" value="974" />
     <option name="height" value="1057" />
@@ -289,12 +289,12 @@
       <workItem from="1519492851363" duration="2700000" />
       <workItem from="1519976106151" duration="9870000" />
       <workItem from="1519998620989" duration="9045000" />
-      <workItem from="1520261569966" duration="2155000" />
+      <workItem from="1520261569966" duration="3453000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221602000" />
+    <option name="totallyTimeSpent" value="222900000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -306,7 +306,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11485775" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.123655915" sideWeight="0.49789253" order="6" side_tool="false" content_ui="tabs" />
@@ -340,12 +340,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/routes.js</url>
-          <line>784</line>
+          <line>790</line>
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/routes.js</url>
-          <line>799</line>
+          <line>805</line>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -650,13 +650,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/home.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="695">
-          <caret line="51" column="12" lean-forward="true" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/insert_script.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -694,42 +687,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-order-cond-pag.ejs">
+    <entry file="file://$PROJECT_DIR$/views/new-order-product.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="599">
-          <caret line="61" column="37" lean-forward="true" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-order-sum.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="78" column="52" lean-forward="true" selection-start-line="78" selection-start-column="52" selection-end-line="78" selection-end-column="52" />
+        <state relative-caret-position="-782">
+          <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="778" column="58" lean-forward="true" selection-start-line="778" selection-start-column="58" selection-end-line="778" selection-end-column="58" />
+        <state relative-caret-position="-301">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
+            <element signature="e#643#710#0" expanded="false" />
+            <element signature="e#767#1097#0" expanded="false" />
+            <element signature="e#1305#1451#0" expanded="false" />
             <element signature="e#1683#3619#0" expanded="false" />
             <element signature="e#3687#5163#0" expanded="false" />
             <element signature="e#5232#6059#0" expanded="false" />
             <element signature="e#6130#8732#0" expanded="false" />
             <element signature="e#8803#9790#0" expanded="false" />
-            <element signature="e#11942#13173#0" expanded="false" />
-            <element signature="e#13233#27183#0" expanded="false" />
-            <element signature="e#27246#27471#0" expanded="false" />
-            <element signature="e#27696#28457#0" expanded="false" />
-            <element signature="e#28521#29303#0" expanded="false" />
-            <element signature="e#29495#31902#0" expanded="false" />
-            <element signature="e#32178#32326#0" expanded="false" />
-            <element signature="e#32419#32646#0" expanded="false" />
-            <element signature="e#32737#32963#0" expanded="false" />
-            <element signature="e#33134#33358#0" expanded="false" />
+            <element signature="e#9862#11579#0" expanded="false" />
+            <element signature="e#11646#12164#0" expanded="false" />
+            <element signature="e#12230#13461#0" expanded="false" />
+            <element signature="e#13521#27471#0" expanded="false" />
+            <element signature="e#27534#27759#0" expanded="false" />
+            <element signature="e#27984#28745#0" expanded="false" />
+            <element signature="e#28809#29591#0" expanded="false" />
+            <element signature="e#29653#29720#0" expanded="false" />
+            <element signature="e#29783#32190#0" expanded="false" />
+            <element signature="e#32466#32614#0" expanded="false" />
+            <element signature="e#32707#32934#0" expanded="false" />
+            <element signature="e#33025#33251#0" expanded="false" />
+            <element signature="e#33422#33646#0" expanded="false" />
             <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
             <element signature="n#!!block;n#initializeCSV#0" expanded="false" />
             <element signature="n#!!block;n#csvRig#0" expanded="false" />
@@ -742,10 +733,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-order-product.ejs">
+    <entry file="file://$PROJECT_DIR$/views/new-order-sum.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-782">
-          <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+        <state relative-caret-position="525">
+          <caret line="90" column="24" lean-forward="true" selection-start-line="90" selection-start-column="24" selection-end-line="90" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/new-order-cond-pag.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="62" column="31" lean-forward="true" selection-start-line="57" selection-start-column="24" selection-end-line="62" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/home.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="542">
+          <caret line="37" column="30" lean-forward="true" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
           <folding />
         </state>
       </provider>
