@@ -79,7 +79,7 @@
                     </td>
                     <td>
                         <% if (order.cstt == 10 || user.cage == 9999) { %>
-                        <form action="/edit-products" method="get">
+                        <form action="/new-order-sum" method="get">
                             <input type="hidden" name="ccod" value="<%= order.ccod %>">
                             <button type="submit" class="btn btn-link"><i class="material-icons">&#xe254</i></button>
                         </form>
@@ -89,7 +89,6 @@
                     <td>
                         <form action="/del-order" method="post">
                             <input type="hidden" name="ccod" value="<%= order.ccod %>">
-
                             <button type="submit" class="btn btn-link"><i class="material-icons">&#xe872</i></button>
                         </form>
                     </td>

@@ -257,6 +257,41 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.get('/new-order-sum', isLoggedIn, function (req, res) {
+        Appoggio.delApp(req.user.cage,'',function (appErr, appRes) {
+            if (appErr){
+                console.log("Errore pulizia appoggio");
+            } else{
+                Appoggio.insert(req.user.cage, req.query.ccod, function (appInsErr, appInsRes) {
+                    if (appInsErr) {
+                        console.log("Errore lettura appogigo conferma inserimento ordine!");
+                    } else {
+                        Order.find(req.query.ccod, function (queryErr, queryRes) {
+                            if (queryErr)
+                                req.flash('orderMessage', queryErr);
+                            else {
+                                Client.find(queryRes.ccli, function (cliErr, cliRes) {
+                                    if (cliErr)
+                                        req.flash('orderMessage', cliErr);
+                                    else {
+                                        Order.findProduct(req.query.ccod, function (righeErr, righeRes) {
+                                            if (righeErr) {
+                                                req.flash('orderMessage', righeErr);
+                                            } else {
+                                                i = 0;
+                                                getRighe(res, req, righeRes, cliRes, queryRes, req.query.ccod);
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+
     app.post('/new-order-sum', isLoggedIn, function (req, res) {
         Appoggio.find(req.user.cage, req.body.idOrd, function (appErr, appRes) {
             if (appErr) {
