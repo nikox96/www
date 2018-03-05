@@ -26,11 +26,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>order.up</find>
-      <find>nreg</find>
-      <find>cimp</find>
-      <find>agent</find>
-      <find>track</find>
       <find>idgara</find>
       <find>sscoan</find>
       <find>cAppBanc</find>
@@ -56,6 +51,11 @@
       <find>csvrig</find>
       <find>order.new</find>
       <find>listPromo</find>
+      <find>new-order-prod</find>
+      <find>appres[0].ido</find>
+      <find>appRes[0].idO</find>
+      <find>cond-pag</find>
+      <find>Appoggio</find>
     </findStrings>
     <dirStrings>
       <dir>D:\www\node_modules\express</dir>
@@ -77,7 +77,6 @@
         <option value="$PROJECT_DIR$/views/login.ejs" />
         <option value="$PROJECT_DIR$/views/signup.ejs" />
         <option value="$PROJECT_DIR$/ordini.sql" />
-        <option value="$PROJECT_DIR$/views/new-order-sum.ejs" />
         <option value="$PROJECT_DIR$/views/edit-products.ejs" />
         <option value="$PROJECT_DIR$/insert_ana_agenti.txt" />
         <option value="$PROJECT_DIR$/config/database.js" />
@@ -90,15 +89,16 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/views/order-list.ejs" />
         <option value="$PROJECT_DIR$/views/new-order.ejs" />
-        <option value="$PROJECT_DIR$/views/new-order-cond-pag.ejs" />
-        <option value="$PROJECT_DIR$/app/models/order.js" />
         <option value="$PROJECT_DIR$/app/models/appoggio.js" />
         <option value="$PROJECT_DIR$/views/home.ejs" />
         <option value="$PROJECT_DIR$/insert_script.sql" />
-        <option value="$PROJECT_DIR$/views/new-order-product.ejs" />
         <option value="$PROJECT_DIR$/app/models/product.js" />
         <option value="$PROJECT_DIR$/views/new-order-promo.ejs" />
+        <option value="$PROJECT_DIR$/app/models/order.js" />
+        <option value="$PROJECT_DIR$/views/new-order-product.ejs" />
         <option value="$PROJECT_DIR$/app/routes.js" />
+        <option value="$PROJECT_DIR$/views/new-order-cond-pag.ejs" />
+        <option value="$PROJECT_DIR$/views/new-order-sum.ejs" />
       </list>
     </option>
   </component>
@@ -117,7 +117,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="953" />
     <option name="width" value="974" />
     <option name="height" value="1057" />
@@ -138,6 +138,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -166,7 +167,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -288,12 +288,13 @@
       <workItem from="1519488939344" duration="3703000" />
       <workItem from="1519492851363" duration="2700000" />
       <workItem from="1519976106151" duration="9870000" />
-      <workItem from="1519998620989" duration="1773000" />
+      <workItem from="1519998620989" duration="9045000" />
+      <workItem from="1520261569966" duration="2155000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="212175000" />
+    <option name="totallyTimeSpent" value="221602000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -305,7 +306,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11485775" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.123655915" sideWeight="0.49789253" order="6" side_tool="false" content_ui="tabs" />
@@ -339,17 +340,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/routes.js</url>
-          <line>775</line>
-          <option name="timeStamp" value="99" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/routes.js</url>
-          <line>782</line>
+          <line>784</line>
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/routes.js</url>
-          <line>797</line>
+          <line>799</line>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -583,13 +579,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/database_psql.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -640,32 +629,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-order-cond-pag.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="97" column="25" lean-forward="true" selection-start-line="97" selection-start-column="25" selection-end-line="97" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-order-sum.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="848">
-          <caret line="83" column="89" lean-forward="true" selection-start-line="83" selection-start-column="89" selection-end-line="83" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/portale.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="35" column="43" lean-forward="false" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/order.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="155" column="18" lean-forward="false" selection-start-line="155" selection-start-column="18" selection-end-line="155" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -697,58 +664,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-order-product.ejs">
+    <entry file="file://$PROJECT_DIR$/app/models/client.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="99" column="20" lean-forward="true" selection-start-line="99" selection-start-column="20" selection-end-line="101" selection-end-column="52" />
+        <state relative-caret-position="340">
+          <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/order.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="176" column="102" lean-forward="false" selection-start-line="176" selection-start-column="102" selection-end-line="176" selection-end-column="102" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/product.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+        <state relative-caret-position="323">
+          <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/new-order-promo.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/new-order-cond-pag.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="599">
+          <caret line="61" column="37" lean-forward="true" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/new-order-sum.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="78" column="52" lean-forward="true" selection-start-line="78" selection-start-column="52" selection-end-line="78" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="1939" column="38" lean-forward="true" selection-start-line="1939" selection-start-column="38" selection-end-line="1939" selection-end-column="38" />
+        <state relative-caret-position="267">
+          <caret line="778" column="58" lean-forward="true" selection-start-line="778" selection-start-column="58" selection-end-line="778" selection-end-column="58" />
           <folding>
-            <element signature="e#6078#8560#0" expanded="false" />
-            <element signature="e#8631#9618#0" expanded="false" />
-            <element signature="e#9690#11407#0" expanded="false" />
-            <element signature="e#11474#11704#0" expanded="false" />
-            <element signature="e#11770#13001#0" expanded="false" />
-            <element signature="e#13061#27011#0" expanded="false" />
-            <element signature="e#27074#27299#0" expanded="false" />
-            <element signature="e#27524#28285#0" expanded="false" />
-            <element signature="e#28349#29131#0" expanded="false" />
-            <element signature="e#29193#29260#0" expanded="false" />
-            <element signature="e#29323#31730#0" expanded="false" />
-            <element signature="e#32006#32154#0" expanded="false" />
-            <element signature="e#32247#32474#0" expanded="false" />
-            <element signature="e#32565#32791#0" expanded="false" />
-            <element signature="e#32962#33186#0" expanded="false" />
+            <element signature="e#1683#3619#0" expanded="false" />
+            <element signature="e#3687#5163#0" expanded="false" />
+            <element signature="e#5232#6059#0" expanded="false" />
+            <element signature="e#6130#8732#0" expanded="false" />
+            <element signature="e#8803#9790#0" expanded="false" />
+            <element signature="e#11942#13173#0" expanded="false" />
+            <element signature="e#13233#27183#0" expanded="false" />
+            <element signature="e#27246#27471#0" expanded="false" />
+            <element signature="e#27696#28457#0" expanded="false" />
+            <element signature="e#28521#29303#0" expanded="false" />
+            <element signature="e#29495#31902#0" expanded="false" />
+            <element signature="e#32178#32326#0" expanded="false" />
+            <element signature="e#32419#32646#0" expanded="false" />
+            <element signature="e#32737#32963#0" expanded="false" />
+            <element signature="e#33134#33358#0" expanded="false" />
             <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
-            <element signature="n#!!block;n#getClients#0" expanded="false" />
-            <element signature="n#!!block;n#getRighe#0" expanded="false" />
             <element signature="n#!!block;n#initializeCSV#0" expanded="false" />
             <element signature="n#!!block;n#csvRig#0" expanded="false" />
             <element signature="n#!!block;n#csvRig93#0" expanded="false" />
             <element signature="n#!!block;n#getRigheCSV#0" expanded="false" />
             <element signature="n#!!block;n#sendFile#0" expanded="false" />
             <element signature="n#!!block;n#getIqta#0" expanded="false" />
+            <element signature="n#!!block;n#insertOrderPromo#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-order-promo.ejs">
+    <entry file="file://$PROJECT_DIR$/views/new-order-product.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="105" column="93" lean-forward="false" selection-start-line="105" selection-start-column="89" selection-end-line="105" selection-end-column="93" />
+        <state relative-caret-position="-782">
+          <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
           <folding />
         </state>
       </provider>

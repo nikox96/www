@@ -721,7 +721,7 @@ function getClients(req, res) {
         if (appfinErr) {
             console.log("errore lettura appoggio");
         } else {
-            if (appfinRes.length > 0 && appfinRes[0].idOrd && appfinRes[0].idOrd !== '') {
+            if (appfinRes.length > 0 && appfinRes[0].idord && appfinRes[0].idord !== '') {
                 Client.list(req.query.ccod, req.query.xragsoc, function (clientErr, clientRes) {
                     if (clientErr) {
                         req.flash('orderMessage', 'Nessun cliente trovato');
@@ -736,7 +736,7 @@ function getClients(req, res) {
                             clients: clientRes,
                             xragsoc: req.body.xragsoc,
                             ccod: req.body.ccod,
-                            idOrd: appfinRes[0].idOrd
+                            idOrd: appfinRes[0].idord
                         });
                     }
                 });

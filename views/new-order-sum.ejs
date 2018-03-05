@@ -3,37 +3,44 @@
 <html>
 <head>
     <title>Portale Innovazioni - Nuovo ordine</title>
-    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
           integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
-    <style>
-        body {
-            padding-top: 0%;
-            word-wrap: break-word;
-        }
-    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<nav id="navbar-ordine" class="navbar navbar-light bg-light"
-     style="position: fixed !important; width: 100% !important;">
-    <a class="navbar-brand" href="#">Nuovo Ordine
-        <%= idOrd %>
-    </a>
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a class="nav-link" href="/new-order">Cliente</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/new-order-product">Prodotti</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/new-order-cond-pag">Condizione di pagamento</a>
-        </li>
-    </ul>
+<nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <a class="navbar-brand" href="#">Nuovo Ordine <%= idOrd %></a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Azioni
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                    <li><a class="dropdown-item" href="/new-order">Cliente</a></li>
+                    <li><a class="dropdown-item" href="/new-order-product">Prodotti</a></li>
+                    <li><a class="dropdown-item" href="/new-order-promo">Promozioni</a></li>
+                    <li><a class="dropdown-item" href="/new-order-cond-pag">Condizioni di Pagamento</a></li>
+                    <div class="dropdown-divider"></div>
+                    <li><a class="dropdown-item" href="/home">Annulla</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </nav>
-<div class="container-fluid" data-target="#navbar-ordine" style="padding-top: 2%">
+<div class="container-fluid" data-target="#navbar-ordine">
     <div class="row">
         <div class="col">
             <h4>Cliente: <%= client.ccod %>
@@ -76,7 +83,7 @@
                 </tr>
                 <% } %>
                 </tbody>
-                <tfoot>
+                <tfoot class="footer fixed-bottom">
                 <tr>
                     <td></td>
                     <td></td>
