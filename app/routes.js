@@ -5,6 +5,7 @@ var Product = require("./models/product.js");
 var Agent = require("./models/agent.js");
 var Appoggio = require("./models/appoggio.js");
 var dateFormat = require('dateformat');
+var pdf = require('html-pdf');
 var i = 0, k = 0, csvEl = 0;
 var rig, tes, rec, iva, par, csv;
 var products = [];
@@ -849,6 +850,20 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                 client: cliente,
                                 products: products,
                                 condpag: condpag
+                            }, function(err, html) {
+                                    var options = { directory: "/tmp",
+                                                   border: { "top": "2cm",
+                                                             "right": "1cm",
+                                                             "bottom": "2cm",
+                                                             "left": "1.5cm"
+                                                            },
+                                                   type: "pdf",
+                                                   format: 'A4' };
+                                    pdf.create(html, options).toFile( __dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function(err, res) {
+                                        if (err) return console.log(err);
+                                        console.log(res); // { filename: '/app/businesscard.pdf' }
+                                    });
+                                    res.send(html);
                             });
                         }
                     });
