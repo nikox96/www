@@ -859,11 +859,13 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                                             },
                                                    type: "pdf",
                                                    format: 'A4' };
-                                    pdf.create(html, options).toFile( __dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function(err, res) {
-                                        if (err) return console.log(err);
-                                        console.log(res); // { filename: '/app/businesscard.pdf' }
+                                    pdf.create(html, options).toFile( __dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function(pdferr, pdfres) {
+                                        if (pdferr) return console.log(pdferr);
+                                        console.log(pdfres); // { filename: '/app/businesscard.pdf' }
+                                        
+                                        res.send(html);
+                                        res.download(pdfres.filename);
                                     });
-                                    res.send(html);
                             });
                         }
                     });
