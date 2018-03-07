@@ -862,9 +862,13 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                     pdf.create(html, options).toFile( __dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function(pdferr, pdfres) {
                                         if (pdferr) return console.log(pdferr);
                                         console.log(pdfres); // { filename: '/app/businesscard.pdf' }
+                                        console.log(html);
                                         
-                                        res.send(html);
-                                        res.download(pdfres.filename);
+                                        res.download(pdfres.filename, 'conferma_ricezione_ordine.pdf', function (downloadErr, downloadRes){
+                                            if (downloadErr) return console.log(downloadErr);
+                                            
+                                            res.send(html);
+                                        });
                                     });
                             });
                         }
