@@ -867,6 +867,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                         res.download(pdfres.filename, 'conferma_ricezione_ordine.pdf', function (downloadErr){
                                             if (downloadErr) return console.log(downloadErr);
                                             
+                                            res.end();
                                             res.send(html);
                                         });
                                     });
