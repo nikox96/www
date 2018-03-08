@@ -864,11 +864,10 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                         console.log(pdfres); // { filename: '/app/businesscard.pdf' }
                                         console.log(html);
                                         
+                                        
+                                        res.send(html);
                                         res.download(pdfres.filename, 'conferma_ricezione_ordine.pdf', function (downloadErr){
                                             if (downloadErr) return console.log(downloadErr);
-                                            
-                                            res.end();
-                                            res.send(html);
                                         });
                                     });
                             });
