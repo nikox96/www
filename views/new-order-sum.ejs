@@ -82,38 +82,25 @@
                     <td><%= products[i].iimp %></td>
                 </tr>
                 <% } %>
-                </tbody><!--
-                <tfoot class="footer fixed-bottom">
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <form method="post" action="/new-order-sum">
-                            <input type="hidden" name="idOrd" value="<%= idOrd %>">
-                            <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
-                                <i class="material-icons">&#xe161</i> Conferma
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                </tfoot>-->
+                </tbody>
             </table>
         </div>
     </div>
-    <footer class="fixed-bottom">
-        <form action="/req-pdf-order" method="get">
-            <input type="hidden" name="idOrd" value="<%= idOrd %>">
-            <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
-                <i class="material-icons">&#xe415</i> Salva
-            </button>
-        </form>
-        <form method="post" action="/new-order-sum">
-            <input type="hidden" name="idOrd" value="<%= idOrd %>">
-            <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
-                <i class="material-icons">&#xe161</i> Conferma
-            </button>
-        </form>
+    <footer class="footer">
+        <div class="container">
+            <form action="/req-pdf-order" method="get">
+                <input type="hidden" name="idOrd" value="<%= idOrd %>">
+                <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+                    <i class="material-icons">&#xe415</i> Salva
+                </button>
+            </form>
+            <form method="post" action="/new-order-sum">
+                <input type="hidden" name="idOrd" value="<%= idOrd %>">
+                <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+                    <i class="material-icons">&#xe161</i> Conferma
+                </button>
+            </form>
+        </div>
     </footer>
 </div>
 </body>
