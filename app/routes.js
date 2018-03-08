@@ -877,6 +877,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                 products: products,
                                 condpag: condpag
                             }, function (err, html) {
+                                console.log(html);
                                 Appoggio.update(req.user.cage, idOrd, html, function (appErr, appRes) {
                                     if (appErr) return console.log("errore aggiornamento html per pdf");
 
