@@ -49,4 +49,19 @@ Appoggio.delApp = function delApp(cage, idOrd, callback) {
         });
 };
 
+Appoggio.update = function update(cage, idOrd, xdata, callback) {
+    db.query("UPDATE portale.appoggio SET xdata = " + xdata + " WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
+        + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "AND 1<>1")
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
+            if (queryErr) {
+                console.log(queryErr);
+                callback("errore pulizia appoggio", null);
+            }
+            else {
+                callback(null, queryRes);
+            }
+        });
+};
+
 module.exports = Appoggio;

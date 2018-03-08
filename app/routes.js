@@ -259,10 +259,10 @@ module.exports = function (app, passport) {
     });
 
     app.get('/new-order-sum', isLoggedIn, function (req, res) {
-        Appoggio.delApp(req.user.cage,'',function (appErr, appRes) {
-            if (appErr){
+        Appoggio.delApp(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
                 console.log("Errore pulizia appoggio");
-            } else{
+            } else {
                 Appoggio.insert(req.user.cage, req.query.ccod, function (appInsErr, appInsRes) {
                     if (appInsErr) {
                         console.log("Errore lettura appogigo conferma inserimento ordine!");
@@ -657,6 +657,32 @@ module.exports = function (app, passport) {
         getClients(req, res);
     });
 
+    app.get('/req-pdf-order', isLoggedIn, function (req, res) {
+        Appoggio.find(req.user.cage, req.query.idOrd, function (appErr, appRes) {
+            if (appErr) return console.log("Errore generazione pdf!");
+
+            var options = {
+                directory: "/tmp",
+                border: {
+                    "top": "2cm",
+                    "right": "1cm",
+                    "bottom": "2cm",
+                    "left": "1.5cm"
+                },
+                type: "pdf",
+                format: "A4"
+            };
+            pdf.create(html, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
+                if (pdferr) return console.log(pdferr);
+                console.log(pdfres); // { filename: '/app/businesscard.pdf' }
+                console.log(appRes[0].xdata);
+
+                res.download(pdfres.filename, 'conferma_ricezione_ordine.pdf', function (downloadErr) {
+                    if (downloadErr) return console.log(downloadErr);
+                });
+            });
+        });
+    });
     app.post('/new-order', isLoggedIn, function (req, res) {
         Appoggio.find(req.user.cage, '', function (appErr, appRes) {
             if (appErr) {
@@ -850,26 +876,12 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                 client: cliente,
                                 products: products,
                                 condpag: condpag
-                            }, function(err, html) {
-                                    var options = { directory: "/tmp",
-                                                   border: { "top": "2cm",
-                                                             "right": "1cm",
-                                                             "bottom": "2cm",
-                                                             "left": "1.5cm"
-                                                            },
-                                                   type: "pdf",
-                                                   format: 'A4' };
-                                    pdf.create(html, options).toFile( __dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function(pdferr, pdfres) {
-                                        if (pdferr) return console.log(pdferr);
-                                        console.log(pdfres); // { filename: '/app/businesscard.pdf' }
-                                        console.log(html);
-                                        
-                                        
-                                        res.send(html);
-                                        res.download(pdfres.filename, 'conferma_ricezione_ordine.pdf', function (downloadErr){
-                                            if (downloadErr) return console.log(downloadErr);
-                                        });
-                                    });
+                            }, function (err, html) {
+                                Appoggio.update(req.user.cage, idOrd, html, function (appErr, appRes) {
+                                    if (appErr) return console.log("errore aggiornamento html per pdf");
+
+                                    res.send(html);
+                                });
                             });
                         }
                     });
