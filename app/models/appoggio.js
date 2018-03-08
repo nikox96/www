@@ -1,4 +1,5 @@
 var db = require("../../config/database_psql.js");
+var escape = require("pg-escape");
 var Appoggio = {};
 
 Appoggio.insert = function insert(cage, idOrd, callback) {
@@ -50,8 +51,8 @@ Appoggio.delApp = function delApp(cage, idOrd, callback) {
 };
 
 Appoggio.update = function update(cage, idOrd, xdata, callback) {
-    db.query("UPDATE portale.appoggio SET xdata = " + xdata + " WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
-        + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "AND 1<>1")
+    db.query(escape("UPDATE portale.appoggio SET xdata = %s WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
+        + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "AND 1<>1"), xdata)
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
