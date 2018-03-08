@@ -672,7 +672,7 @@ module.exports = function (app, passport) {
                 type: "pdf",
                 format: "A4"
             };
-            pdf.create(html, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
+            pdf.create(appRes[0].xdata, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
                 if (pdferr) return console.log(pdferr);
                 console.log(pdfres); // { filename: '/app/businesscard.pdf' }
                 console.log(appRes[0].xdata);
