@@ -51,8 +51,10 @@ Appoggio.delApp = function delApp(cage, idOrd, callback) {
 };
 
 Appoggio.update = function update(cage, idOrd, xdata, callback) {
-    db.query(escape("UPDATE portale.appoggio SET xdata = %s WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
-        + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "AND 1<>1"), xdata)
+    var escapeValue = escape("UPDATE portale.appoggio SET xdata = %s WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
+        + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "AND 1<>1"), xdata);
+    console.log(escapeValue);
+    db.query(escapeValue
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
