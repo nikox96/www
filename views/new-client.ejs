@@ -1,0 +1,101 @@
+<!-- views/new-client.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Portale Innovazioni - Nuovo cliente</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <a class="navbar-brand" href="#">Nuovo Cliente</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Azioni
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                        <li><a class="dropdown-item" href="/new-order">Annulla</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <form action="/new-client" method="post">
+        <div class="form-row">
+            <div class="form-group col">
+                <label>Codice cliente</label>
+                <input type="number" class="form-control" name="ccli" maxlength="5" required>
+            </div>
+            <div class="form-group col">
+                <label>Codice Fiscale/Partita I.V.A.</label>
+                <input type="text" class="form-control" name="cfis" maxlength="16" required>
+            </div>
+            <div class="form-group col">
+                <label>Nome</label>
+                <input type="text" class="form-control" name="xnome" maxlength="15" required>
+            </div>
+            <div class="form-group col">
+                <label>Cognome</label>
+                <input type="text" class="form-control" name="xcogn" maxlength="15" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label>Ragione sociale</label>
+                <input type="text" class="form-control" name="xragsoc" maxlength="60" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label>Comune</label>
+                <input type="text" class="form-control" name="xcom" maxlength="30" required>
+            </div>
+            <div class="form-group col">
+                <label>Provincia</label>
+                <input type="text" class="form-control" name="cprv" maxlength="2" required>
+            </div>
+            <div class="form-group col">
+                <label>C.A.P.</label>
+                <input type="number" class="form-control" name="ccap" maxlength="5" required>
+            </div>
+            <div class="form-group col">
+                <label>Nazione</label>
+                <input type="text" class="form-control" name="xnaz" maxlength="20" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label>Indirizzo</label>
+                <input type="text" class="form-control" name="xind" maxlength="40" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label>E-mail</label>
+                <input type="email" class="form-control" name="xmail" maxlength="60" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+            <i class="material-icons">&#xe161</i> Conferma
+        </button>
+    </form>
+</div>
+</body>
+</html>

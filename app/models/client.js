@@ -15,13 +15,35 @@ Client.find = function find(ccod, callback) {
                 console.log("error: " + queryErr);
             }
             else {
-                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
                 callback(null, queryRes[0]);
                 console.log("record: " + queryRes.length);
             }
         });
 };
 
+Client.insert = function insert(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, callback) {
+    Client.find(ccod, function (findErr, findRes) {
+        if (findErr || findRes.length === 0) {
+            db.query("INSERT INTO portale.clienti (ccod, cpiva, xragsoc, cfis, xcli, xind, xcom, cprv, ccap, xnaz, xmail)" +
+                " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)"
+                , [ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail]
+                , (queryErr, queryRes) => {
+                    if (queryErr) {
+                        callback(queryErr, null);
+                        console.log("error: " + queryErr);
+                    }
+                    else {
+                        queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
+                        callback(null, queryRes[0]);
+                    }
+                });
+        } else {
+            console.log("Cliente già censito");
+            callback("Cliente già censito!", null);
+        }
+    });
+};
 Client.list = function list(ccod, xragsoc, callback) {
     console.log("ricerca lista clienti");
     console.log("ccod " + ccod);
@@ -37,7 +59,7 @@ Client.list = function list(ccod, xragsoc, callback) {
                 console.log("error: " + queryErr);
             }
             else {
-                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
                 callback(null, queryRes);
                 console.log("record: " + queryRes.length);
             }

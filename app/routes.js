@@ -652,6 +652,58 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.get('/new-client', isLoggedIn, function (req, res) {
+        res.render('new-client.ejs');
+    });
+
+    app.post('/new-client', isLoggedIn, function (req, res) {
+        Client.insert(req.body.ccod,(req.body.cfis.length > 11 ? '' : req.body.cfis),req.body.xragsoc,(req.body.cfis.length < 16 && (req.body.cfis.length > 11 ? req.body.cfis : ''),req.body.ccod,req.body.ccod);
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                Order.updateCcli(appRes[0].idord, req.body.ccod, function (ordErr, ordRes) {
+                    if (ordErr) {
+                        console.log("errore aggiornamento codice cliente ordine");
+                    } else {
+                        Product.list(0, 999999, '', '', '', function (productErr, productRes) {
+                            if (productErr) {
+                                req.flash('orderMessage', 'Nessun prodotto trovato');
+                            }
+                            if (productRes) {
+                                console.log('prodotti: ' + productRes.length);
+                                req.flash('orderMessage', productRes.length + ' risultati');
+                                Product.getSven(function (venErr, venRes) {
+                                    if (venErr) {
+                                        console.log("errore sven");
+                                        venRes = {};
+                                    } else {
+                                        console.log("sven trovate: " + venRes.length);
+                                    }
+                                    Product.getXgrp(function (grpErr, grpRes) {
+                                        if (grpErr) {
+                                            console.log("errore xgrp");
+                                            grpRes = {};
+                                        } else {
+                                            console.log("xgrp trovate" + grpRes);
+                                        }
+                                        res.render('new-order-product.ejs', {
+                                            message: req.flash('orderMessage'),
+                                            products: productRes,
+                                            lven: venRes,
+                                            xgrp: grpRes,
+                                            idOrd: appRes[0].idord
+                                        });
+                                    });
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+
     app.get('/new-order', isLoggedIn, function (req, res) {
         // search for clients
         getClients(req, res);
@@ -711,7 +763,6 @@ module.exports = function (app, passport) {
                 });
             }
         });
-
     });
 
 // process the login form
