@@ -850,8 +850,17 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                         if (condErr) {
                             req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
                         } else {
-                            condRes = (condRes.rows && condRes.rows.length > 0 ? condRes.rows : condRes);
-                            condpag = condRes[0];
+                            if (condRes.rows.length === 0) {
+                                condpag = {
+                                    ccod: -1,
+                                    xcond: 'Condizione di pagamento non trovata',
+                                    psco: 0,
+                                    nsca: 0
+                                }
+                            } else {
+                                condRes = (condRes.rows && condRes.rows.length > 0 ? condRes.rows : condRes);
+                                condpag = condRes[0];
+                            }
                             res.render('new-order-sum.ejs', {
                                 message: req.flash('orderMessage'),
                                 idOrd: idOrd,
@@ -860,22 +869,23 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                 condpag: condpag
                             }, function (err, html) {
                                 if (err) return console.log(err);
-                                var options = { directory: "/tmp",
-                                                border: {
-                                                    "top": "2cm",
-                                                    "right": "1cm",
-                                                    "bottom": "2cm",
-                                                    "left": "1.5cm"
-                                                },
-                                                type: "pdf",
-                                                format: "A4"
-                                            };
+                                var options = {
+                                    directory: "/tmp",
+                                    border: {
+                                        "top": "2cm",
+                                        "right": "1cm",
+                                        "bottom": "2cm",
+                                        "left": "1.5cm"
+                                    },
+                                    type: "pdf",
+                                    format: "A4"
+                                };
                                 pdf.create(html, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
                                     if (pdferr) return console.log(pdferr);
-                                    
+
                                     console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
                                     console.log(html);
-                                    
+
                                     Appoggio.update(req.user.cage, idOrd, pdfres.filename, function (appErr, appRes) {
                                         if (appErr) return console.log("errore salvataggio path pdf");
 

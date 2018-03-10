@@ -1,5 +1,4 @@
 var db = require("../../config/database_psql.js");
-var escape = require("pg-escape");
 var Appoggio = {};
 
 Appoggio.insert = function insert(cage, idOrd, callback) {
