@@ -867,7 +867,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                 client: cliente,
                                 products: products,
                                 condpag: condpag
-                            }, function (err, html) {
+                            }, function (err, htmlGenesi) {
                                 if (err) return console.log(err);
                                 var options = {
                                     directory: "/tmp",
@@ -880,16 +880,30 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                     type: "pdf",
                                     format: "A4"
                                 };
-                                pdf.create(html, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
+
+                                var footerInit = htmlGenesi.indexOf("<footer");
+                                footerInit = (footerInit === -1 ? 0 : footerInit);
+                                var footerExit = htmlGenesi.indexOf("</footer>");
+                                footerExit = (footerExit === -1 ? htmlGenesi.length : footerExit);
+                                var htmlMod;
+
+                                if (!(footerExit === htmlGenesi.length || footerInit === 0)) {
+                                    htmlMod = htmlGenesi.substr(0, footerInit - 1);
+                                    htmlMod += htmlGenesi.substr(footerExit + 9, htmlGenesi.length);
+                                } else {
+                                    htmlMod = htmlGenesi;
+                                }
+
+                                pdf.create(htmlMod, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
                                     if (pdferr) return console.log(pdferr);
 
                                     console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
-                                    console.log(html);
+                                    console.log(htmlGenesi);
 
                                     Appoggio.update(req.user.cage, idOrd, pdfres.filename, function (appErr, appRes) {
                                         if (appErr) return console.log("errore salvataggio path pdf");
 
-                                        res.send(html);
+                                        res.send(htmlGenesi);
                                     });
                                 });
                             });
