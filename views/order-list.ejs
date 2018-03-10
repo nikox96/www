@@ -3,51 +3,60 @@
 <html>
 <head>
     <title>Portale Innovazioni - Lista ordini</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <style>
-        body {
-            padding-top: 0%;
-            word-wrap: break-word;
-        }
-    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<nav id="navbar-ordine" class="navbar navbar-light bg-light"
-     style="position: fixed !important; width: 100% !important;">
-    <a class="navbar-brand" href="#">Nuovo Ordine</a>
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a class="nav-link" href="/home">Home</a>
-        </li>
-    </ul>
-</nav>
-<div class="container" style="padding-top: 3%">
-    <form action="/order-list" method="post" style="position: fixed !important;">
-        <div class="form-row align-items-center">
-            <div class="col-auto">
-                <label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
-                <input type="text" name="xragsoc" class="form-control mb-2" id="inlineFormInputRagSoc"
-                       placeholder="Ragione sociale">
-            </div>
-            <% if (user.cage = 9999) { %>
-            <div class="col-auto">
-                <label class="sr-only" for="inlineFormCage">Codice agente</label>
-                <input type="text" name="cageric" class="form-control mb-2" id="inlineFormInputCage"
-                       placeholder="Codice agente">
-            </div>
-            <% } %>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-2">Cerca</button>
-            </div>
+<div class="sticky-top">
+    <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Lista Ordini</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Azioni
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                        <li><a class="dropdown-item" href="/home">Home</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form action="/order-list" method="post" class="form-inline">
+                <div class="form-row align-items-center">
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
+                        <input type="text" name="xragsoc" class="form-control mb-2" id="inlineFormInputRagSoc"
+                               placeholder="Ragione sociale">
+                    </div>
+                    <% if (user.cage == 9999) { %>
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormCage">Codice agente</label>
+                        <input type="text" name="cageric" class="form-control mb-2" id="inlineFormInputCage"
+                               placeholder="Codice agente">
+                    </div>
+                    <% } %>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-2">Cerca</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+    </nav>
 </div>
-<div class="container-fluid" style="padding-top: 2%">
-    <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0" style="width: 100%; height: 70%">
+<div class="container-fluid">
+    <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
         <div id="client">
             <table class="table table-hover">
                 <thead>
@@ -105,7 +114,6 @@
             </table>
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>
