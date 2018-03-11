@@ -93,7 +93,7 @@
         </div>
 
         <div class="form-row">
-            <% if (user.cage === 9999) { %>
+            <% if (user.cage == 9999) { %>
             <div class="form-group col">
                 <label>Agente</label>
                 <input type="number" class="form-control" name="cage" maxlength="5" required>
@@ -130,9 +130,9 @@
             </div>
             <div class="form-group col">
                 <label>Zona</label>
-                <% if (user.cage === 9) { %>
+                <% if (user.cage == 9) { %>
                 <input type="number" class="form-control" name="czona" maxlength="1" value="1" readonly required>
-                <% } else if (user.cage === 5 || user.cage === 1843) { %>
+                <% } else if (user.cage == 5 || user.cage == 1843) { %>
                 <input type="number" class="form-control" name="czona" maxlength="1" value="2" readonly required>
                 <% } %>
             </div>

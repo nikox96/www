@@ -668,7 +668,8 @@ module.exports = function (app, passport) {
             ccat: '',
             ctipcom: '',
             czona: '',
-            cage: ''
+            cage: '',
+            user: req.user
         });
     });
 
@@ -693,7 +694,8 @@ module.exports = function (app, passport) {
                     ccat: req.body.ccat,
                     ctipcom: req.body.ctipcom,
                     czona: req.body.czona,
-                    cage: req.body.cage
+                    cage: req.body.cage,
+                    user: req.user
                 });
             } else{
                 Appoggio.find(req.user.cage, '', function (appErr, appRes) {
