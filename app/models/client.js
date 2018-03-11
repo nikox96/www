@@ -16,15 +16,15 @@ Client.find = function find(ccod, callback) {
             }
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
-                callback(null, queryRes[0]);
                 console.log("record: " + queryRes.length);
+                callback(null, queryRes[0]);
             }
         });
 };
 
 Client.insert = function insert(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage, callback) {
     Client.find(ccod, function (findErr, findRes) {
-        if (findErr || findRes.length === 0) {
+        if (findErr || findRes.ccod === ccod) {
             db.query("INSERT INTO portale.clienti (ccod, cpiva, xragsoc, cfis, xcli, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage)" +
                 " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)"
                 , [ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage]
