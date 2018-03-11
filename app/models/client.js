@@ -29,7 +29,7 @@ Client.find = function find(ccod, callback) {
 Client.insert = function insert(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage, callback) {
     Client.find(ccod, function (findErr, findRes) {
         if (findErr) {
-            db.query("INSERT INTO portale.clienti (ccod, cpiva, xragsoc, cfis, xcli, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage)" +
+            db.query("INSERT INTO portale.clienti (ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage)" +
                 " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)"
                 , [ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage]
                 , (queryErr, queryRes) => {
