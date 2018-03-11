@@ -34,8 +34,8 @@ Client.insert = function insert(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, c
                 , [ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage]
                 , (queryErr, queryRes) => {
                     if (queryErr) {
-                        callback(queryErr, null);
                         console.log("error: " + queryErr);
+                        callback(queryErr, null);
                     }
                     else {
                         queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
