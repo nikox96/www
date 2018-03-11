@@ -653,48 +653,88 @@ module.exports = function (app, passport) {
     });
 
     app.get('/new-client', isLoggedIn, function (req, res) {
-        res.render('new-client.ejs');
+        res.render('new-client.ejs', {
+            ccod: '',
+            cfis: '',
+            xragsoc: '',
+            xnome: '',
+            xcogn: '',
+            xind: '',
+            xcom: '',
+            cprv: '',
+            ccap: '',
+            xnaz: '',
+            xmail: '',
+            ccat: '',
+            ctipcom: '',
+            czona: '',
+            cage: ''
+        });
     });
 
     app.post('/new-client', isLoggedIn, function (req, res) {
-        Client.insert(req.body.ccod,(req.body.cfis.length > 11 ? '' : req.body.cfis),req.body.xragsoc,(req.body.cfis.length < 16 && (req.body.cfis.length > 11 ? req.body.cfis : ''),req.body.ccod,req.body.ccod);
-        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
-            if (appErr) {
-                console.log("errore recupero codice ordine");
-            } else {
-                Order.updateCcli(appRes[0].idord, req.body.ccod, function (ordErr, ordRes) {
-                    if (ordErr) {
-                        console.log("errore aggiornamento codice cliente ordine");
+        var xcli1 = req.body.xnome + req.body.xcogn;
+        Client.insert(req.body.ccod,(req.body.cfis.length > 11 ? '' : req.body.cfis),req.body.xragsoc,(req.body.cfis.length <= 16 && req.body.cfis.length > 11 ? req.body.cfis : ''), xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, function (cliInsErr, cliInsRes) {
+            if (cliInsErr) {
+                console.log("Errore censimento cliente!");
+                res.render('new-client.ejs',{
+                    message: req.flash('insCliMessage'),
+                    ccod: req.body.ccod,
+                    cfis: req.body.cfis,
+                    xragsoc: req.body.xragsoc,
+                    xnome: req.body.xnome,
+                    xcogn: req.body.xcogn,
+                    xind: req.body.xind,
+                    xcom: req.body.xcom,
+                    cprv: req.body.cprv,
+                    ccap: req.body.ccap,
+                    xnaz: req.body.xnaz,
+                    xmail: req.body.xmail,
+                    ccat: req.body.ccat,
+                    ctipcom: req.body.ctipcom,
+                    czona: req.body.czona,
+                    cage: req.body.cage
+                });
+            } else{
+                Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+                    if (appErr) {
+                        console.log("errore recupero codice ordine");
                     } else {
-                        Product.list(0, 999999, '', '', '', function (productErr, productRes) {
-                            if (productErr) {
-                                req.flash('orderMessage', 'Nessun prodotto trovato');
-                            }
-                            if (productRes) {
-                                console.log('prodotti: ' + productRes.length);
-                                req.flash('orderMessage', productRes.length + ' risultati');
-                                Product.getSven(function (venErr, venRes) {
-                                    if (venErr) {
-                                        console.log("errore sven");
-                                        venRes = {};
-                                    } else {
-                                        console.log("sven trovate: " + venRes.length);
+                        Order.updateCcli(appRes[0].idord, req.body.ccod, function (ordErr, ordRes) {
+                            if (ordErr) {
+                                console.log("errore aggiornamento codice cliente ordine");
+                            } else {
+                                Product.list(0, 999999, '', '', '', function (productErr, productRes) {
+                                    if (productErr) {
+                                        req.flash('orderMessage', 'Nessun prodotto trovato');
                                     }
-                                    Product.getXgrp(function (grpErr, grpRes) {
-                                        if (grpErr) {
-                                            console.log("errore xgrp");
-                                            grpRes = {};
-                                        } else {
-                                            console.log("xgrp trovate" + grpRes);
-                                        }
-                                        res.render('new-order-product.ejs', {
-                                            message: req.flash('orderMessage'),
-                                            products: productRes,
-                                            lven: venRes,
-                                            xgrp: grpRes,
-                                            idOrd: appRes[0].idord
+                                    if (productRes) {
+                                        console.log('prodotti: ' + productRes.length);
+                                        req.flash('orderMessage', productRes.length + ' risultati');
+                                        Product.getSven(function (venErr, venRes) {
+                                            if (venErr) {
+                                                console.log("errore sven");
+                                                venRes = {};
+                                            } else {
+                                                console.log("sven trovate: " + venRes.length);
+                                            }
+                                            Product.getXgrp(function (grpErr, grpRes) {
+                                                if (grpErr) {
+                                                    console.log("errore xgrp");
+                                                    grpRes = {};
+                                                } else {
+                                                    console.log("xgrp trovate" + grpRes);
+                                                }
+                                                res.render('new-order-product.ejs', {
+                                                    message: req.flash('orderMessage'),
+                                                    products: productRes,
+                                                    lven: venRes,
+                                                    xgrp: grpRes,
+                                                    idOrd: appRes[0].idord
+                                                });
+                                            });
                                         });
-                                    });
+                                    }
                                 });
                             }
                         });

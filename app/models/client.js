@@ -22,12 +22,12 @@ Client.find = function find(ccod, callback) {
         });
 };
 
-Client.insert = function insert(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, callback) {
+Client.insert = function insert(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage, callback) {
     Client.find(ccod, function (findErr, findRes) {
         if (findErr || findRes.length === 0) {
-            db.query("INSERT INTO portale.clienti (ccod, cpiva, xragsoc, cfis, xcli, xind, xcom, cprv, ccap, xnaz, xmail)" +
-                " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)"
-                , [ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail]
+            db.query("INSERT INTO portale.clienti (ccod, cpiva, xragsoc, cfis, xcli, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage)" +
+                " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)"
+                , [ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage]
                 , (queryErr, queryRes) => {
                     if (queryErr) {
                         callback(queryErr, null);
