@@ -1,218 +1,218 @@
-203202	Hidractive Tonic	200 ml	11	Autocura
-203204	Hidractive Milk 	200 ml	11	Autocura
-203207	Hydroaction Cream F2	50 ml	17	Autocura
-203206	Hydroaction Cream F3	50 ml	17	Autocura
-203209	Colagenium Premium Cream + Hyaluronic Acid	50 ml	26	Autocura
-203210	Anti Ageing Premium Serum + Argan Stem Cells	30 ml	27	Autocura
-203211	Anti Ageing Premium Cream + Vit C	50 ml	25	Autocura
-203105	Hidractive Tonic	500 ml	15,5	Cabina
-203106	Hidractive Milk 	500 ml	15,5	Cabina
-203115	Hydroaction Cream	200 ml	29	Cabina
-203116	Regenerating Colagenium Premium	200 ml	45	Cabina
-203119	Hydroaction Mask	200 ml	26	Cabina
-203112	Hydroaction Collagen Complex	30ml (10x3 ml)	38	Cabina
-203117	Vitalizing Regenerating Cream	200 ml 	42	Cabina
-203120	Vitalizing Regenerating souffl� mask	200 ml 	34	Cabina
-203113	Vitalizing Regenerating Complex	30 ml (10x3 ml)	39	Cabina
-203203	Balance Tonic	200 ml	11	Autocura
-203205	Balance Mousse	200 ml	15	Autocura
-203208	Hyadroaction Gel F1	50 ml	17	Autocura
-203104	Balance Tonic	500 ml	15	Cabina
-203103	Balance Mousse	500 ml	23	Cabina
-203114	Balance Gel	200 ml	22	Cabina
-203118	Balance purifying clay mask	200 ml	21	Cabina
-203111	Balance Complex	30ml (10x3 ml)	33	Cabina
-203121	Balance Purifying Complex	30ml (10x3 ml)	37	Cabina
-203213	Gentle Miscellar Water	200 ml	14	Autocura
-203212	Tender Eye Cream Eye Contour Cream	15 ml	19	Autocura
-203201	Tender Eye Gel	15 ml	35	Autocura
-203107	Eye Lip make up remover	500 ml 	19	Cabina
-203109	Exfoliance Exfoliating Cream 	200 ml	27	Cabina
-203108	Glyco peeling intensive 	10x3 ml	35	Cabina
-203110	Scrub enzymatic peeling	200 ml 	27	Cabina
-203122	Post Depil Emulsion	500 ml	99	Cabina
-200615	Restoring & Whitening Hand Cream	16 uni	106	
-200554	Vital Factor Natural Skin Restoration (Body Milk)	8x400 ml	90	
-200804	Anti-Ageing Programm + Hyaluronic Acid Pack	5 treatm.	73	
-200805	3D Hydrating Pack	5 treatm.	59	
-202207	Selvert Protector Barrier SPF 50 ( facial )	50 ml	19,44	Autocura
-202208	Selvert Ultra Protector Barrier SPF 90+ (facial)	50 ml	24,48	Autocura
-202209	Selvert Protector Barrier SPF 30 	200 ml	21,65	Autocura
-202210	Selvert Protector Barrier SPF 50 	200 ml	23,6	Autocura
-202211	Selvert Protector Barrier Spray SPF 30 	200 ml	24,69	Autocura
-202212	Selvert Protector Barrier Spray SPF 50+ 	200 ml 	24,69	Autocura
-200309	24 H Hidration Comfort Moisturizing Balm	100 ml	24	
-200311	Eye total Therapy Eye Repair Serum	15 ml	22	
-201133	Massage Cream	1000ml	40	Cabina
-201134	Body Modelling Cream	500ml	44	Cabina
-201135	Firming Cream	500ml	43	Cabina
-201136	Anti-cellulite Cream	500ml	46	Cabina
-201137	Microcirculation Cream	500ml	42	Cabina
-201209	Skin Firming Cream Active Oxygen	200ml	25	Autocura
-201210	Revitalizing Gel for Tired Legs 	200ml	20	Autocura
-201207	Body Slimming Anti-Cellulite Cream Active Oxygen	200ml	25	Autocura
-200801	Hydrating Treatment Pack	4 treat	45	
-200802	Anti-Ageing Treatment Pack	4 treat	53	
-200803	Deep Skin Cleansing Treatment Pack	4 treat	45	
-200705	Lisser complex	10x3 ml		
-200332	Lisser Wrinkle Correcting Cream	50 ml		
-200316	Moisturising Cream Moisture Factor 10	50 ml		
-200542	AQUA21 Deep Moisturising Treatment (Facial Pack)	5 treatm.		
-204202	Aquawear Intensive Moisturising Cream Light	50 ml	31,5	Autocura
-204203	Aquawear Intensive Moisturising Cream Rich	50 ml	34	Autocura
-204204	Aquawear Night Cream Mask	50 ml	35,5	Autocura
-204205	Aquawear Extraordinary Illuminating Oil Dry/Normal Skin	30 ml	30	Autocura
-204206	Aquawear Extraordinary Illuminating Oil Combination/Oily Skin	30 ml	30	Autocura
-204207	Aquawear Ultra Moisturising Serum	30 ml	29	Autocura
-204301	Aquawear Spray & Ready	200ML	17	
-204602	Aquawear Spray & Ready 12 units	200 ml	204	
-204101	Aquawear Experience The Moisture Treatment Pack	5 treat	105	Cabina
-205202	Reactivating serum Pure Vitamin C	30ml	28	Autocura
-205201	Vitalizing cream Pure Vitamin C	50 ml	35	Autocura
-200343	Renewal Scrub	50 ml	25	
-205203	Vitalizing Eye Contour Cream	15ml	25	Autocura
-200344	Vitalizing Body Emulsion	200 ml	16	
-200628	Exhibitor 12 units Hydroflash Vit C	12 uni	115,5	
-205101	Pure Vitamin C treatment (Facial Pack)                     	5 treatm.	115,5	Cabina
-205000	PROMO PACK +PURE VITAMIN C		36	
-200322	Anti-ageing Cream	50 ml		
-200331	Anti-ageing Serum	50 ml		
-200333	BB Cream Perfection Daily Cream 01 (must order in multiple of 6)	50ml	13,6	
-200334	BB Cream Perfection Daily Cream 02 (must order in multiple of 6)	50ml	13,6	
-313104	Gentle Tonic Lotion	500 ml	23	Cabina
-313105	Re-Balancing Tonic Lotion	500 ml	18	Cabina
-313102	Cleansing Milk	500 ml	21	Cabina
-313103	Cleansing Foam                                            	500 ml	20	Cabina
-313106	Eye Make Up Remover	500 ml	19	Cabina
-313107	Exfoliating Gel 	200 ml	29,5	Cabina
-313119	Gentle Lactobionic Peel	200 ml	33	Cabina
-313101	Pore Refiner	100 ml 	20	Cabina
-313208	Re-Balancing Tonic Lotion	200 ml	16	Autocura
-313209	Gentle Tonic Lotion	200 ml	17	Autocura
-313206	Cleansing Milk	200 ml	15,5	Autocura
-313207	Cleansing Foam 	150 ml	17	Autocura
-313210	Instant Cleanser Sensitive Eyes (eye makeup remover)	200 ml	14	Autocura
-313603	PROMO LATTE & TONICO	200+200ML	17	
-313108	Harmonising Cream Factor 1	200 ml	20	Cabina
-313109	Harmonising Cream Factor 2	200 ml	24	Cabina
-313110	Harmonising Cream Factor 3	200 ml	25,5	Cabina
-313120	Harmonising Face Mask F1	200 ml	21,5	Cabina
-313121	Harmonising Face Mask F2	200 ml	24	Cabina
-301110	Moistening Veil	10 units	39	Cabina
-313125	Algins and Diatoms mask	400 g	55	Cabina
-313123	Restoring Facial Mud (Renovating Facial Mud)	200 ml	34	Cabina
-313122	Regenerating Peat (jar)	200 ml	64	Cabina
-313111	Moisturising and Desensitising Pure Active	50 ml	35	Cabina
-313112	Anti-Seborrhoea Pure Active	50 ml	27	Cabina
-313113	Oxygenating Pure Active	50 ml	36	Cabina
-313114	Revitalising Pure Active	50 ml	37	Cabina
-313115	Reaffirming Pure Active	50 ml	22	Cabina
-313118	Pure Phyto Active Aloe Vera	50 ml	31	Cabina
-313117	Draining Pure Phyto Active	50 ml	31	Cabina
-313116	Pure Phyto Active Revitalising Restructuring 	50 ml	28	Cabina
-301201	Thermal Mist soothes and desensitises	200 ml	18	Autocura
-313201	Light Thermal Cream	50 ml	27	Autocura
-313202	Progressive Thermal Cream	50 ml	32	Autocura
-313203	Highly Active Thermal Cream	50 ml		Autocura
-313205	Deep Treatment Cream	50 ml		Autocura
-313204	Revitalising Treatment Cream	50 ml		Autocura
-313211	Eye-Zone Balm 	15 ml	28	Autocura
-310201	Eyelash Activating Serum	8ml		Autocura
-301252	CC Cream Perfection Daily Cream SPF30/PA+++ (color 02)	50 ml	18	Autocura
-302201	Barri�re Cellulaire Anti-Rides SPF 25 (anti-wrinkle sun protection)	50 ml	39	Autocura
-302202	Barri�re Cellulaire Anti-Rides SPF 50 (anti-wrinkle sun protection)	50 ml		Autocura
-301704	Peeling plus AHA'S	30ml (10x3ml)		
-301140	Calming Mask 	200 ml	34	Cabina
-301141	Regenerating Cream	200 ml	61	Cabina
-301144	Anti-acne Cleansing Lotion	200 ml		Cabina
-301705	Anti-acne Active	40ml (10X4ml)		
-301146	Anti-acne Mask	500 ml		Cabina
-301701	Depigmenting Active	40ml (10X4ml)		
-301149	Depigmenting Mask 	200 ml		Cabina
-301702	Decongestive and Calming Active	40ml (10X4ml)	35	
-301703	Rose Musk Oil and Unsaponifiable Active	20ml (10x2ml)	37	
-301706	Regenerating Actif with snail protein extract 	40ml (10X4ml)		
-301247	Regenerating Cream	50 ml		Autocura
-301231	Anti acne Treatment Gel	50 ml		Autocura
-315101	Renewing Exfoliating Lotion	500 ml	39	Cabina
-315102	Body Scrub Peel 	500 ml	34	Cabina
-315103	Activating Concentrate	10x10ampoul	55	Cabina
-315104	Firming Toning Push Up Mask	800 gr	41	Cabina
-315105	Slimming Mask	1000 ml	63	Cabina
-315106	Regenerating Mask	1000 ml	64	Cabina
-315107	Mobilisant Mask (draining)	1000 ml	61	Cabina
-315108	Firming Regenerating Cream 	500 ml	50	Cabina
-315109	Slimming / Anti Cellulite Cream	500 ml	49	Cabina
-315110	Mobilisante Cream (draining)	500 ml	45	Cabina
-315111	Massage Cream	1 Kg	39	Cabina
-701120	Cellulite Reduction Cream   new!	500 ml	65,9	Cabina
-701121	Firming Cream   new!	500 ml	56	Cabina
-315112	Himalayan Salt Peel Scrub	500 gr	19	Cabina
-315117	Active Firming	50 ml	41	Cabina
-315118	Active Anti-Cellulite	50 ml	41	Cabina
-315115	Active Cryoactive Cold	50 ml	23	Cabina
-315116	Active Thermoactive Hot	50 ml	23,9	Cabina
-315113	Rosemary & Sage Aromatic Oil	500 ml	46,5	Cabina
-315114	Orange & Cinnamon Aromatic Oil	500 ml	48,9	Cabina
-315205	Ready & Go. 3 in 1- INCLUSO ESPOSITORE 12PZ	12x200 ml	290	Autocura
-315201	Renovating Exfoliating Serum	200 ml	22	Autocura
-315202	Cellulite Reduction Cream 	200 ml	24,5	Autocura
-315203	Firming Cream Push-up	200 ml	24,5	Autocura
-315204	Regenerating and Anti Stretch Marks Cream	200 ml	28	Autocura
-315501	CORPORELLE DUPLO PACK SLIMMING CREAM  **	200+200ML	27	
-315502	CORPORELLE DUPLO PACK FIRMING PUSH-UP  **	200+200ML	28	
-305101	Diamond Powder Crystalline Peeling	500ml	56	Cabina
-305102	After Peeling Delicate Gel	500ml	35	Cabina
-305103	Absolu Golden Wrapping (Gold Body Wrap)	1000ml	145	Cabina
-305105	Golden Concentrate	50ml	45	Cabina
-305106	Capricious Golden Oil	200ml	34	Cabina
-305107	Golden Cosmetic Leaves (Cosmetic Sheets of Gold)	12 un	44	Cabina
-305501	Caprices D'Or (24K Gold Soin D'Or Facial Treatment Pack)	5 treatments	290	
-305201	Pure Golden Cream	50 ml	260	Autocura
-305202	Pure Golden Serum	30 ml	295	Autocura
-308101	Anti-Aging Cellular Programme (Facial Treatment Pack)	5 Treat. 	169,89	Cabina
-308102	Moisturizing Cellular Programme (Facial Treatment Pack)	5 Treat. 	134	Cabina
-308103	Anti-Aging Cellular Programme Eye Contour (Eye Treatment Pack)	5 Treat. 	99,9	Cabina
-308108	Cellular Purifying Programme (Facial Treatment Pack)	5 Treat. 	140,8	Cabina
-308104	Cell Vitale Osmotic Peel Off Mask Antioxidant	5x25gr+5x100gr	33	Cabina
-308105	Cell Vitale Osmotic Peel Off Mask Firming Anti-Wrinkle	5x25gr+5x100gr	33	Cabina
-308106	Cell Vitale Osmotic Peel Off Mask Hydrating	5x25gr+5x100gr	33	Cabina
-308107	Cell Vitale Osmotic Peel Off Mask Soothing	5x25gr+5x100gr	33	Cabina
-308201	Reversive Anti Aging Cream 	50 ml	50,6	Autocura
-308202	Reversive Anti Aging Eyes and Lips cream 	15 ml	39,16	Autocura
-308205	Reversive Anti Aging Serum	30ml	52,25	Autocura
-308203	Moisturizing Cream Medium 	50 ml		Autocura
-308204	Moisturizing Cream Forte	50 ml	40,5	Autocura
-308206	Anti-Shine Hydrating and Mattifying Cream	50 ml	32,95	Autocura
-308207	Purifying Gel / Acne-Prone Skins	50 ml	15,25	Autocura
-308208	Anti-Shine Balancing Mask 	50 ml	14,15	Autocura
-308209	Cleansing Gel / Acne-Prone skins	100 ml	17,2	Autocura
-309101	Whitening Skin Programme (Facial Treatment Pack)	5 Treat. 		Cabina
-309201	Technical Clarifying Cream	50 ml		Autocura
-309203	Technical Clarifying serum	15 ml		Autocura
-311101	Anti Ageing Replenisher Programme (Facial Treatment Pack)	5 Treat. 	190	Cabina
-311201	24-Hour Intense Hydration Cream	50 ml	43	Autocura
-311202	Intensive Wrinkle Replenisher Cream	50 ml	54	Autocura
-311203	Intensive Wrinkle Replenisher Serum	30 ml	55	Autocura
-311601	Flash Hyaluronic	24 units x 2x 1,5ml	120	
-312201	Moisturising Cream	50 ml	20	Autocura
-312202	Anti- Ageing Regenerating Cream	50 ml	34	Autocura
-312203	Gentle Gel Cleanser 	50 ml	19,5	Autocura
-314101	Ultra Lifting Peptide Treatment Pack	5 Treat. 	180	Cabina
-314201	Redensifying Lifting Cream	50 ml	59	Autocura
-314202	Redensifying Lifting Serum 	30 ml	59,8	Autocura
-314203	Supreme Ultra Redensifying Lifting Serum	30 ml	79	Autocura
-314000	PEPTIDE LIFT Box		56	
-316101	Regeneration Absolue Treatment Pack	5 treat	133	Cabina
-316102	Regenerating Cream 	200ml	60,5	Cabina
-316104	Regenerating Active Snail Extract 	10*4ml	42,5	Cabina
-316103	SOS Cream	200ml	58	Cabina
-316106	Peeling S2% M8% for Acne	100 ml		Cabina
-316105	Peeling M5% L5% for Spots	100 ml		Cabina
-316107	Peeling M4% G6% for Wrinkles	100 ml		Cabina
-316201	Regenerating Cream	50ml	38	Autocura
-316202	Regenerating Gel-Cream	50 ml	42	Autocura
-316203	Regenerating Eye Contour Gel Cream	15 ml	28	Autocura
-316601	Regenerating Active 24 count exhibitor	24*5ml	135	
-316205	Revival Energizer Medium 	50 ml		Autocura
-316206	Revival Energizer Forte	50 ml		Autocura
+203202	Hidractive Tonic	200 ml	11	Normal to dry skin	Autocura
+203204	Hidractive Milk 	200 ml	11	Normal to dry skin	Autocura
+203207	Hydroaction Cream F2	50 ml	17	Normal to dry skin	Autocura
+203206	Hydroaction Cream F3	50 ml	17	Normal to dry skin	Autocura
+203209	Colagenium Premium Cream + Hyaluronic Acid	50 ml	26	Normal to dry skin	Autocura
+203210	Anti Ageing Premium Serum + Argan Stem Cells	30 ml	27	Normal to dry skin	Autocura
+203211	Anti Ageing Premium Cream + Vit C	50 ml	25	Normal to dry skin	Autocura
+203105	Hidractive Tonic	500 ml	15,5	Normal to dry skin	Cabina
+203106	Hidractive Milk 	500 ml	15,5	Normal to dry skin	Cabina
+203115	Hydroaction Cream	200 ml	29	Normal to dry skin	Cabina
+203116	Regenerating Colagenium Premium	200 ml	45	Normal to dry skin	Cabina
+203119	Hydroaction Mask	200 ml	26	Normal to dry skin	Cabina
+203112	Hydroaction Collagen Complex	30ml (10x3 ml)	38	Normal to dry skin	Cabina
+203117	Vitalizing Regenerating Cream	200 ml 	42	Mature skin	Cabina
+203120	Vitalizing Regenerating soufflé mask	200 ml 	34	Mature skin	Cabina
+203113	Vitalizing Regenerating Complex	30 ml (10x3 ml)	39	Mature skin	Cabina
+203203	Balance Tonic	200 ml	11	Oily skin	Autocura
+203205	Balance Mousse	200 ml	15	Oily skin	Autocura
+203208	Hyadroaction Gel F1	50 ml	17	Oily skin	Autocura
+203104	Balance Tonic	500 ml	15	Oily skin	Cabina
+203103	Balance Mousse	500 ml	23	Oily skin	Cabina
+203114	Balance Gel	200 ml	22	Oily skin	Cabina
+203118	Balance purifying clay mask	200 ml	21	Oily skin	Cabina
+203111	Balance Complex	30ml (10x3 ml)	33	Oily skin	Cabina
+203121	Balance Purifying Complex	30ml (10x3 ml)	37	Oily skin	Cabina
+203213	Gentle Miscellar Water	200 ml	14	Eye area	Autocura
+203212	Tender Eye Cream Eye Contour Cream	15 ml	19	Eye area	Autocura
+203201	Tender Eye Gel	15 ml	35	Eye area	Autocura
+203107	Eye Lip make up remover	500 ml 	19	Eye area	Cabina
+203109	Exfoliance Exfoliating Cream 	200 ml	27	SPECIALS	Cabina
+203108	Glyco peeling intensive 	10x3 ml	35	SPECIALS	Cabina
+203110	Scrub enzymatic peeling	200 ml 	27	SPECIALS	Cabina
+203122	Post Depil Emulsion	500 ml	99	SPECIALS	Cabina
+200615	Restoring & Whitening Hand Cream	16 uni	106	SPECIALS	
+200554	Vital Factor Natural Skin Restoration (Body Milk)	8x400 ml	90	SPECIALS	
+200804	Anti-Ageing Programm + Hyaluronic Acid Pack	5 treatm.	73	Packs	
+200805	3D Hydrating Pack	5 treatm.	59	Packs	
+202207	Selvert Protector Barrier SPF 50 ( facial )	50 ml	19,44	SELVERT - SOLAR PROTECTOR BARRIER 2009	Autocura
+202208	Selvert Ultra Protector Barrier SPF 90+ (facial)	50 ml	24,48	SELVERT - SOLAR PROTECTOR BARRIER 2010	Autocura
+202209	Selvert Protector Barrier SPF 30 	200 ml	21,65	SELVERT - SOLAR PROTECTOR BARRIER 2011	Autocura
+202210	Selvert Protector Barrier SPF 50 	200 ml	23,6	SELVERT - SOLAR PROTECTOR BARRIER 2012	Autocura
+202211	Selvert Protector Barrier Spray SPF 30 	200 ml	24,69	SELVERT - SOLAR PROTECTOR BARRIER 2013	Autocura
+202212	Selvert Protector Barrier Spray SPF 50+ 	200 ml 	24,69	SELVERT - SOLAR PROTECTOR BARRIER 2014	Autocura
+200309	24 H Hidration Comfort Moisturizing Balm	100 ml	24	SELVERT MEN	
+200311	Eye total Therapy Eye Repair Serum	15 ml	22	SELVERT MEN	
+201133	Massage Cream	1000ml	40	SVELT BODY 	Cabina
+201134	Body Modelling Cream	500ml	44	SVELT BODY 	Cabina
+201135	Firming Cream	500ml	43	SVELT BODY 	Cabina
+201136	Anti-cellulite Cream	500ml	46	SVELT BODY 	Cabina
+201137	Microcirculation Cream	500ml	42	SVELT BODY 	Cabina
+201209	Skin Firming Cream Active Oxygen	200ml	25	SVELT BODY 	Autocura
+201210	Revitalizing Gel for Tired Legs 	200ml	20	SVELT BODY 	Autocura
+201207	Body Slimming Anti-Cellulite Cream Active Oxygen	200ml	25	SVELT BODY 	Autocura
+200801	Hydrating Treatment Pack	4 treat	45	COMPLETE & FAST	
+200802	Anti-Ageing Treatment Pack	4 treat	53	COMPLETE & FAST	
+200803	Deep Skin Cleansing Treatment Pack	4 treat	45	COMPLETE & FAST	
+200705	Lisser complex	10x3 ml		LISSER -facial expression lines	
+200332	Lisser Wrinkle Correcting Cream	50 ml		LISSER -facial expression lines	
+200316	Moisturising Cream Moisture Factor 10	50 ml		AQUA21	
+200542	AQUA21 Deep Moisturising Treatment (Facial Pack)	5 treatm.		AQUA21	
+204202	Aquawear Intensive Moisturising Cream Light	50 ml	31,5	AQUAWEAR	Autocura
+204203	Aquawear Intensive Moisturising Cream Rich	50 ml	34	AQUAWEAR	Autocura
+204204	Aquawear Night Cream Mask	50 ml	35,5	AQUAWEAR	Autocura
+204205	Aquawear Extraordinary Illuminating Oil Dry/Normal Skin	30 ml	30	AQUAWEAR	Autocura
+204206	Aquawear Extraordinary Illuminating Oil Combination/Oily Skin	30 ml	30	AQUAWEAR	Autocura
+204207	Aquawear Ultra Moisturising Serum	30 ml	29	AQUAWEAR	Autocura
+204301	Aquawear Spray & Ready	200ML	17	AQUAWEAR	
+204602	Aquawear Spray & Ready 12 units	200 ml	204	AQUAWEAR	
+204101	Aquawear Experience The Moisture Treatment Pack	5 treat	105	AQUAWEAR	Cabina
+205202	Reactivating serum Pure Vitamin C	30ml	28	VITASPHERES C/+PURE VITAMIN C	Autocura
+205201	Vitalizing cream Pure Vitamin C	50 ml	35	VITASPHERES C/+PURE VITAMIN C	Autocura
+200343	Renewal Scrub	50 ml	25	VITASPHERES C/+PURE VITAMIN C	
+205203	Vitalizing Eye Contour Cream	15ml	25	VITASPHERES C/+PURE VITAMIN C	Autocura
+200344	Vitalizing Body Emulsion	200 ml	16	VITASPHERES C/+PURE VITAMIN C	
+200628	Exhibitor 12 units Hydroflash Vit C	12 uni	115,5	VITASPHERES C/+PURE VITAMIN C	
+205101	Pure Vitamin C treatment (Facial Pack)                     	5 treatm.	115,5	VITASPHERES C/+PURE VITAMIN C	Cabina
+205000	PROMO PACK +PURE VITAMIN C		36	VITASPHERES C/+PURE VITAMIN C	
+200322	Anti-ageing Cream	50 ml		OPTIMALE ADN/DNA	
+200331	Anti-ageing Serum	50 ml		OPTIMALE ADN/DNA	
+200333	BB Cream Perfection Daily Cream 01 (must order in multiple of 6)	50ml	13,6	SELVERT BB CREAM (SPF15)	
+200334	BB Cream Perfection Daily Cream 02 (must order in multiple of 6)	50ml	13,6	SELVERT BB CREAM (SPF15)	
+313104	Gentle Tonic Lotion	500 ml	23	CLEANSING PRODUCTS	Cabina
+313105	Re-Balancing Tonic Lotion	500 ml	18	CLEANSING PRODUCTS	Cabina
+313102	Cleansing Milk	500 ml	21	CLEANSING PRODUCTS	Cabina
+313103	Cleansing Foam                                            	500 ml	20	CLEANSING PRODUCTS	Cabina
+313106	Eye Make Up Remover	500 ml	19	CLEANSING PRODUCTS	Cabina
+313107	Exfoliating Gel 	200 ml	29,5	CLEANSING PRODUCTS	Cabina
+313119	Gentle Lactobionic Peel	200 ml	33	CLEANSING PRODUCTS	Cabina
+313101	Pore Refiner	100 ml 	20	CLEANSING PRODUCTS	Cabina
+313208	Re-Balancing Tonic Lotion	200 ml	16	CLEANSING PRODUCTS	Autocura
+313209	Gentle Tonic Lotion	200 ml	17	CLEANSING PRODUCTS	Autocura
+313206	Cleansing Milk	200 ml	15,5	CLEANSING PRODUCTS	Autocura
+313207	Cleansing Foam 	150 ml	17	CLEANSING PRODUCTS	Autocura
+313210	Instant Cleanser Sensitive Eyes (eye makeup remover)	200 ml	14	CLEANSING PRODUCTS	Autocura
+313603	PROMO LATTE & TONICO	200+200ML	17	CLEANSING PRODUCTS	
+313108	Harmonising Cream Factor 1	200 ml	20	BASES	Cabina
+313109	Harmonising Cream Factor 2	200 ml	24	BASES	Cabina
+313110	Harmonising Cream Factor 3	200 ml	25,5	BASES	Cabina
+313120	Harmonising Face Mask F1	200 ml	21,5	BASES	Cabina
+313121	Harmonising Face Mask F2	200 ml	24	BASES	Cabina
+301110	Moistening Veil	10 units	39	BASES	Cabina
+313125	Algins and Diatoms mask	400 g	55	MUDS	Cabina
+313123	Restoring Facial Mud (Renovating Facial Mud)	200 ml	34	MUDS	Cabina
+313122	Regenerating Peat (jar)	200 ml	64	MUDS	Cabina
+313111	Moisturising and Desensitising Pure Active	50 ml	35	PURE ACTIVES	Cabina
+313112	Anti-Seborrhoea Pure Active	50 ml	27	PURE ACTIVES	Cabina
+313113	Oxygenating Pure Active	50 ml	36	PURE ACTIVES	Cabina
+313114	Revitalising Pure Active	50 ml	37	PURE ACTIVES	Cabina
+313115	Reaffirming Pure Active	50 ml	22	PURE ACTIVES	Cabina
+313118	Pure Phyto Active Aloe Vera	50 ml	31	PURE ACTIVES	Cabina
+313117	Draining Pure Phyto Active	50 ml	31	PURE ACTIVES	Cabina
+313116	Pure Phyto Active Revitalising Restructuring 	50 ml	28	PURE ACTIVES	Cabina
+301201	Thermal Mist soothes and desensitises	200 ml	18	COMPLEMENTS	Autocura
+313201	Light Thermal Cream	50 ml	27	MOISTURISING CREAMS	Autocura
+313202	Progressive Thermal Cream	50 ml	32	MOISTURISING CREAMS	Autocura
+313203	Highly Active Thermal Cream	50 ml		MOISTURISING CREAMS	Autocura
+313205	Deep Treatment Cream	50 ml		NOURISHING CREAMS	Autocura
+313204	Revitalising Treatment Cream	50 ml		NOURISHING CREAMS	Autocura
+313211	Eye-Zone Balm 	15 ml	28	SPECIFICS	Autocura
+310201	Eyelash Activating Serum	8ml		SPECIFICS	Autocura
+301252	CC Cream Perfection Daily Cream SPF30/PA+++ (color 02)	50 ml	18	SPECIFICS	Autocura
+302201	Barrière Cellulaire Anti-Rides SPF 25 (anti-wrinkle sun protection)	50 ml	39	SELVERT THERMAL SOLAIRE	Autocura
+302202	Barrière Cellulaire Anti-Rides SPF 50 (anti-wrinkle sun protection)	50 ml		SELVERT THERMAL SOLAIRE	Autocura
+301704	Peeling plus AHA'S	30ml (10x3ml)		L'ESPRIT DERMATOLOGIQUE	
+301140	Calming Mask 	200 ml	34	L'ESPRIT DERMATOLOGIQUE	Cabina
+301141	Regenerating Cream	200 ml	61	L'ESPRIT DERMATOLOGIQUE	Cabina
+301144	Anti-acne Cleansing Lotion	200 ml		L'ESPRIT DERMATOLOGIQUE	Cabina
+301705	Anti-acne Active	40ml (10X4ml)		L'ESPRIT DERMATOLOGIQUE	
+301146	Anti-acne Mask	500 ml		L'ESPRIT DERMATOLOGIQUE	Cabina
+301701	Depigmenting Active	40ml (10X4ml)		L'ESPRIT DERMATOLOGIQUE	
+301149	Depigmenting Mask 	200 ml		L'ESPRIT DERMATOLOGIQUE	Cabina
+301702	Decongestive and Calming Active	40ml (10X4ml)	35	L'ESPRIT DERMATOLOGIQUE	
+301703	Rose Musk Oil and Unsaponifiable Active	20ml (10x2ml)	37	L'ESPRIT DERMATOLOGIQUE	
+301706	Regenerating Actif with snail protein extract 	40ml (10X4ml)		L'ESPRIT DERMATOLOGIQUE	
+301247	Regenerating Cream	50 ml		L'ESPRIT DERMATOLOGIQUE	Autocura
+301231	Anti acne Treatment Gel	50 ml		L'ESPRIT DERMATOLOGIQUE	Autocura
+315101	Renewing Exfoliating Lotion	500 ml	39	CORPORELLE	Cabina
+315102	Body Scrub Peel 	500 ml	34	CORPORELLE	Cabina
+315103	Activating Concentrate	10x10ampoul	55	CORPORELLE	Cabina
+315104	Firming Toning Push Up Mask	800 gr	41	CORPORELLE	Cabina
+315105	Slimming Mask	1000 ml	63	CORPORELLE	Cabina
+315106	Regenerating Mask	1000 ml	64	CORPORELLE	Cabina
+315107	Mobilisant Mask (draining)	1000 ml	61	CORPORELLE	Cabina
+315108	Firming Regenerating Cream 	500 ml	50	CORPORELLE	Cabina
+315109	Slimming / Anti Cellulite Cream	500 ml	49	CORPORELLE	Cabina
+315110	Mobilisante Cream (draining)	500 ml	45	CORPORELLE	Cabina
+315111	Massage Cream	1 Kg	39	CORPORELLE	Cabina
+701120	Cellulite Reduction Cream   new!	500 ml	65,9	INTEGRAZIONE NUOVE REF. CORPO	Cabina
+701121	Firming Cream   new!	500 ml	56	INTEGRAZIONE NUOVE REF. CORPO	Cabina
+315112	Himalayan Salt Peel Scrub	500 gr	19	INTEGRAZIONE NUOVE REF. CORPO	Cabina
+315117	Active Firming	50 ml	41	INTEGRAZIONE NUOVE REF. CORPO	Cabina
+315118	Active Anti-Cellulite	50 ml	41	INTEGRAZIONE NUOVE REF. CORPO	Cabina
+315115	Active Cryoactive Cold	50 ml	23	INTEGRAZIONE NUOVE REF. CORPO	Cabina
+315116	Active Thermoactive Hot	50 ml	23,9	INTEGRAZIONE NUOVE REF. CORPO	Cabina
+315113	Rosemary & Sage Aromatic Oil	500 ml	46,5	INTEGRAZIONE NUOVE REF. CORPO	Cabina
+315114	Orange & Cinnamon Aromatic Oil	500 ml	48,9	INTEGRAZIONE NUOVE REF. CORPO	Cabina
+315205	Ready & Go. 3 in 1- INCLUSO ESPOSITORE 12PZ	12x200 ml	290	INTEGRAZIONE NUOVE REF. CORPO	Autocura
+315201	Renovating Exfoliating Serum	200 ml	22	INTEGRAZIONE NUOVE REF. CORPO	Autocura
+315202	Cellulite Reduction Cream 	200 ml	24,5	INTEGRAZIONE NUOVE REF. CORPO	Autocura
+315203	Firming Cream Push-up	200 ml	24,5	INTEGRAZIONE NUOVE REF. CORPO	Autocura
+315204	Regenerating and Anti Stretch Marks Cream	200 ml	28	INTEGRAZIONE NUOVE REF. CORPO	Autocura
+315501	CORPORELLE DUPLO PACK SLIMMING CREAM  **	200+200ML	27	INTEGRAZIONE NUOVE REF. CORPO	
+315502	CORPORELLE DUPLO PACK FIRMING PUSH-UP  **	200+200ML	28	INTEGRAZIONE NUOVE REF. CORPO	
+305101	Diamond Powder Crystalline Peeling	500ml	56	24K SOIN D´OR- GOLD TREATMENT	Cabina
+305102	After Peeling Delicate Gel	500ml	35	24K SOIN D´OR- GOLD TREATMENT	Cabina
+305103	Absolu Golden Wrapping (Gold Body Wrap)	1000ml	145	24K SOIN D´OR- GOLD TREATMENT	Cabina
+305105	Golden Concentrate	50ml	45	24K SOIN D´OR- GOLD TREATMENT	Cabina
+305106	Capricious Golden Oil	200ml	34	24K SOIN D´OR- GOLD TREATMENT	Cabina
+305107	Golden Cosmetic Leaves (Cosmetic Sheets of Gold)	12 un	44	24K SOIN D´OR- GOLD TREATMENT	Cabina
+305501	Caprices D'Or (24K Gold Soin D'Or Facial Treatment Pack)	5 treatments	290	24K SOIN D´OR- GOLD TREATMENT	
+305201	Pure Golden Cream	50 ml	260	24K SOIN D´OR- GOLD TREATMENT	Autocura
+305202	Pure Golden Serum	30 ml	295	24K SOIN D´OR- GOLD TREATMENT	Autocura
+308101	Anti-Aging Cellular Programme (Facial Treatment Pack)	5 Treat. 	169,89	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Cabina
+308102	Moisturizing Cellular Programme (Facial Treatment Pack)	5 Treat. 	134	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Cabina
+308103	Anti-Aging Cellular Programme Eye Contour (Eye Treatment Pack)	5 Treat. 	99,9	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Cabina
+308108	Cellular Purifying Programme (Facial Treatment Pack)	5 Treat. 	140,8	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Cabina
+308104	Cell Vitale Osmotic Peel Off Mask Antioxidant	5x25gr+5x100gr	33	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Cabina
+308105	Cell Vitale Osmotic Peel Off Mask Firming Anti-Wrinkle	5x25gr+5x100gr	33	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Cabina
+308106	Cell Vitale Osmotic Peel Off Mask Hydrating	5x25gr+5x100gr	33	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Cabina
+308107	Cell Vitale Osmotic Peel Off Mask Soothing	5x25gr+5x100gr	33	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Cabina
+308201	Reversive Anti Aging Cream 	50 ml	50,6	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Autocura
+308202	Reversive Anti Aging Eyes and Lips cream 	15 ml	39,16	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Autocura
+308205	Reversive Anti Aging Serum	30ml	52,25	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Autocura
+308203	Moisturizing Cream Medium 	50 ml		CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Autocura
+308204	Moisturizing Cream Forte	50 ml	40,5	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Autocura
+308206	Anti-Shine Hydrating and Mattifying Cream	50 ml	32,95	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Autocura
+308207	Purifying Gel / Acne-Prone Skins	50 ml	15,25	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Autocura
+308208	Anti-Shine Balancing Mask 	50 ml	14,15	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Autocura
+308209	Cleansing Gel / Acne-Prone skins	100 ml	17,2	CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Autocura
+309101	Whitening Skin Programme (Facial Treatment Pack)	5 Treat. 		WHITE PERFECTION -WHITENING/DEPIGMENTING 	Cabina
+309201	Technical Clarifying Cream	50 ml		WHITE PERFECTION -WHITENING/DEPIGMENTING 	Autocura
+309203	Technical Clarifying serum	15 ml		WHITE PERFECTION -WHITENING/DEPIGMENTING 	Autocura
+311101	Anti Ageing Replenisher Programme (Facial Treatment Pack)	5 Treat. 	190	HYALURONIQUE LIGNE - WRINKLE REPLENISHER	Cabina
+311201	24-Hour Intense Hydration Cream	50 ml	43	HYALURONIQUE LIGNE - WRINKLE REPLENISHER	Autocura
+311202	Intensive Wrinkle Replenisher Cream	50 ml	54	HYALURONIQUE LIGNE - WRINKLE REPLENISHER	Autocura
+311203	Intensive Wrinkle Replenisher Serum	30 ml	55	HYALURONIQUE LIGNE - WRINKLE REPLENISHER	Autocura
+311601	Flash Hyaluronic	24 units x 2x 1,5ml	120	HYALURONIQUE LIGNE - WRINKLE REPLENISHER	
+312201	Moisturising Cream	50 ml	20	ALLERGENIUM- HYPERSENSITIVE SKIN	Autocura
+312202	Anti- Ageing Regenerating Cream	50 ml	34	ALLERGENIUM- HYPERSENSITIVE SKIN	Autocura
+312203	Gentle Gel Cleanser 	50 ml	19,5	ALLERGENIUM- HYPERSENSITIVE SKIN	Autocura
+314101	Ultra Lifting Peptide Treatment Pack	5 Treat. 	180	PEPTIDE LIFT	Cabina
+314201	Redensifying Lifting Cream	50 ml	59	PEPTIDE LIFT	Autocura
+314202	Redensifying Lifting Serum 	30 ml	59,8	PEPTIDE LIFT	Autocura
+314203	Supreme Ultra Redensifying Lifting Serum	30 ml	79	PEPTIDE LIFT	Autocura
+314000	PEPTIDE LIFT Box		56	PEPTIDE LIFT	
+316101	Regeneration Absolue Treatment Pack	5 treat	133	REGENERATION ABSOLUE  	Cabina
+316102	Regenerating Cream 	200ml	60,5	REGENERATION ABSOLUE  	Cabina
+316104	Regenerating Active Snail Extract 	10*4ml	42,5	REGENERATION ABSOLUE  	Cabina
+316103	SOS Cream	200ml	58	REGENERATION ABSOLUE  	Cabina
+316106	Peeling S2% M8% for Acne	100 ml		REGENERATION ABSOLUE  	Cabina
+316105	Peeling M5% L5% for Spots	100 ml		REGENERATION ABSOLUE  	Cabina
+316107	Peeling M4% G6% for Wrinkles	100 ml		REGENERATION ABSOLUE  	Cabina
+316201	Regenerating Cream	50ml	38	REGENERATION ABSOLUE  	Autocura
+316202	Regenerating Gel-Cream	50 ml	42	REGENERATION ABSOLUE  	Autocura
+316203	Regenerating Eye Contour Gel Cream	15 ml	28	REGENERATION ABSOLUE  	Autocura
+316601	Regenerating Active 24 count exhibitor	24*5ml	135	REGENERATION ABSOLUE  	
+316205	Revival Energizer Medium 	50 ml		REGENERATION ABSOLUE  	Autocura
+316206	Revival Energizer Forte	50 ml		REGENERATION ABSOLUE  	Autocura
