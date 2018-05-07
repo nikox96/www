@@ -26,7 +26,7 @@ Ordine.find = function find(ccod, callback) {
         });
 };
 
-Ordine.delOrder = function delOrder(ccod, callback) {
+Ordine.delOrder = function delOrder(ccod, cstt, callback) {
     db.query("SELECT cstt FROM ordini WHERE ccod = "
         + ccod
 //        , function (queryErr, queryRes) {
@@ -36,7 +36,7 @@ Ordine.delOrder = function delOrder(ccod, callback) {
             }
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
-                if (queryRes.length > 0 && queryRes[0].cstt !== 50) {
+                if (queryRes.length > 0 && queryRes[0].cstt !== cstt) {
                     //ricerca ordine per codice
                     db.query("DELETE FROM portale.ordini WHERE ccod = "
                         + ccod
@@ -68,7 +68,7 @@ Ordine.delOrder = function delOrder(ccod, callback) {
                     console.log("non ghe mia");
                 }
             }
-            callback("Nessun ordine trovato", null);
+            callback("Ordine non revocabile", null);
         });
 };
 
