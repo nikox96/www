@@ -71,7 +71,7 @@
                 </thead>
                 <tbody>
                 <% clients.forEach(function(clients) { %>
-                <% if(user.cage === clients.cage ){%>
+                <% if(user.cage === clients.cage || user.cage === 9999){ %>
                 <tr>
                     <th scope="row">
                         <% if (clients.cpiva = '') { %>
