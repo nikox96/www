@@ -111,9 +111,9 @@ Ordine.updateCondPag = function updateCondPag(ccod, cond_pag, callback) {
         });
 };
 
-Ordine.updateStatus = function updateStatus(ccod, cstt, callback) {
+Ordine.updateStatus = function updateStatus(ccod, cstt, xnote, callback) {
     //aggiorno lo status dell'ordine
-    db.query("UPDATE portale.ordini SET cstt = " + cstt + " WHERE ccod = "
+    db.query("UPDATE portale.ordini SET cstt = " + cstt + ", xnote = \"" + xnote + "\" WHERE ccod = "
         + ccod
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {

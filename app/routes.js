@@ -296,9 +296,9 @@ module.exports = function (app, passport) {
     app.post('/new-order-sum', isLoggedIn, function (req, res) {
         Appoggio.find(req.user.cage, req.body.idOrd, function (appErr, appRes) {
             if (appErr) {
-                console.log("Errore lettura appogigo conferma inserimento ordine!");
+                console.log("Errore lettura appoggio conferma inserimento ordine!");
             } else {
-                Order.updateStatus(req.body.idOrd, 0, function (queryErr, queryRes) {
+                Order.updateStatus(req.body.idOrd, 0, req.body.xnote, function (queryErr, queryRes) {
                     if (queryErr)
                         console.log('impossibile ma vero');
                     else
@@ -2059,7 +2059,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
                     if (nregErr) {
                         console.log(nregErr);
                     } else {
-                        Order.updateStatus(righe[0].ccod, 50, function (sttErr, sttRes) {
+                        Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
                             if (sttErr) {
                                 console.log(sttErr);
                             } else {

@@ -73,7 +73,9 @@
                 </tr>
                 </thead>
                 <tbody>
+                <%= var itot = 0 %>
                 <% for(var i = 0; i < products.length;i++) { %>
+                <%= itot += products[i].iimp %>
                 <tr>
                     <th scope="row"><%= products[i].ccod %></th>
                     <td><%= products[i].xdesc %></td>
@@ -83,6 +85,15 @@
                 </tr>
                 <% } %>
                 </tbody>
+                <tfoot>
+                <tr>
+                    <th scope="col">Totale</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th scope="col"><%= itot %></thsc>
+                </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -98,6 +109,7 @@
                 </button>
             </form>
             <form method="post" action="/new-order-sum">
+                <input type="text" name="xnote" value="" maxlength="1000" spellcheck="false">
                 <input type="hidden" name="idOrd" value="<%= idOrd %>">
                 <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
                     <i class="material-icons">&#xe161</i> Conferma
