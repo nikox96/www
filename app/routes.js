@@ -877,6 +877,7 @@ function getClients(req, res) {
                         // render the page and pass in any flash data if it exists
                         res.render('new-order.ejs', {
                             message: req.flash('orderMessage'),
+                            user: req.user,
                             clients: clientRes,
                             xragsoc: req.body.xragsoc,
                             ccod: req.body.ccod,
