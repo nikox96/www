@@ -38,12 +38,14 @@ Ordine.delOrder = function delOrder(ccod, cstt, callback) {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0 && queryRes[0].cstt !== cstt) {
                     //ricerca ordine per codice
-                    db.query("DELETE FROM portale.ordini WHERE ccod = "
-                        + ccod
+                    var qryStrTmp = "DELETE FROM portale.ordini WHERE ccod = "
+                        + ccod;
+                    console.log("query del order: " + qryStrTmp);
+                    db.query(qryStrTmp
 //                        , function (delErr, delRes) {
                         , (delErr, delRes) => {
                             if (delErr) {
-                                console.log("error: " + delErr);
+                                console.log(delErr);
                             }
                             else {
                                 delRes = (delRes.rows && delRes.rows.length > 0 ? delRes.rows : delRes);
