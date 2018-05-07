@@ -71,6 +71,7 @@
                 </thead>
                 <tbody>
                 <% clients.forEach(function(clients) { %>
+                <% if(req.user.cage === clients.cage ){%>
                 <tr>
                     <th scope="row">
                         <% if (clients.cpiva = '') { %>
@@ -89,7 +90,7 @@
                         </form>
                     </td>
                 </tr>
-                <% }); %>
+                <% }}); %>
                 </tbody>
             </table>
         </div>

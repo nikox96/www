@@ -26,8 +26,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>delOr</find>
-      <find>updateStatus</find>
       <find>req.quer</find>
       <find>req.user.cage</find>
       <find>media/</find>
@@ -56,6 +54,8 @@
       <find>cond.,</find>
       <find>insert</find>
       <find>delorder</find>
+      <find>req.user.ca</find>
+      <find>get('/new-order'</find>
     </findStrings>
     <dirStrings>
       <dir>D:\www\node_modules\express</dir>
@@ -86,7 +86,6 @@
         <option value="$PROJECT_DIR$/app/models/user.js" />
         <option value="$PROJECT_DIR$/app/models/client.js" />
         <option value="$PROJECT_DIR$/config/database_psql.js" />
-        <option value="$PROJECT_DIR$/views/new-order.ejs" />
         <option value="$PROJECT_DIR$/insert_script.sql" />
         <option value="$PROJECT_DIR$/app/models/product.js" />
         <option value="$PROJECT_DIR$/views/new-order-promo.ejs" />
@@ -99,6 +98,7 @@
         <option value="$PROJECT_DIR$/app/routes.js" />
         <option value="$PROJECT_DIR$/views/new-order-sum.ejs" />
         <option value="$PROJECT_DIR$/app/models/order.js" />
+        <option value="$PROJECT_DIR$/views/new-order.ejs" />
       </list>
     </option>
   </component>
@@ -117,7 +117,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1057" />
@@ -294,12 +294,12 @@
       <workItem from="1520534395046" duration="36000" />
       <workItem from="1524070980973" duration="211000" />
       <workItem from="1525715606024" duration="1345000" />
-      <workItem from="1525717478559" duration="693000" />
+      <workItem from="1525717478559" duration="1062000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="231890000" />
+    <option name="totallyTimeSpent" value="232259000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -311,7 +311,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.123655915" sideWeight="0.49789253" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -387,13 +387,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/mysql/lib/Connection.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="193" column="0" lean-forward="false" selection-start-line="193" selection-start-column="0" selection-end-line="193" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa32.5767/app.js" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa32.41393/bootstrap-treeview.js" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa32.7631/Gruntfile.js" />
@@ -581,13 +574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-order.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="633">
-          <caret line="86" column="31" lean-forward="true" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/portale.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
@@ -644,13 +630,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/edit-products.ejs" />
     <entry file="file://$PROJECT_DIR$/webstorm/pgloader-master/pgloader-master/build/quicklisp/dists/quicklisp/software/bordeaux-threads-v0.8.5/site/style.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -697,18 +676,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="961" column="51" lean-forward="true" selection-start-line="961" selection-start-column="51" selection-end-line="961" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/order.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="498">
           <caret line="55" column="37" lean-forward="true" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/new-order.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="73" column="30" lean-forward="false" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="55" column="96" lean-forward="false" selection-start-line="55" selection-start-column="92" selection-end-line="55" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="868" column="61" lean-forward="false" selection-start-line="868" selection-start-column="54" selection-end-line="868" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/new-client.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1243">
+          <caret line="27" column="39" lean-forward="true" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
           <folding />
         </state>
       </provider>
