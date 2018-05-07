@@ -14,11 +14,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="new-order-sum.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="new-order-sum.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/new-order-sum.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
               <caret line="77" column="45" lean-forward="false" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/routes.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="29">
+              <caret line="868" column="61" lean-forward="false" selection-start-line="868" selection-start-column="54" selection-end-line="868" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -108,8 +118,8 @@
         <option value="$PROJECT_DIR$/app/models/appoggio.js" />
         <option value="$PROJECT_DIR$/app/routes.js" />
         <option value="$PROJECT_DIR$/views/new-order.ejs" />
-        <option value="$PROJECT_DIR$/app/models/order.js" />
         <option value="$PROJECT_DIR$/views/new-order-sum.ejs" />
+        <option value="$PROJECT_DIR$/app/models/order.js" />
       </list>
     </option>
   </component>
@@ -305,12 +315,12 @@
       <workItem from="1520534395046" duration="36000" />
       <workItem from="1524070980973" duration="211000" />
       <workItem from="1525715606024" duration="1345000" />
-      <workItem from="1525717478559" duration="2133000" />
+      <workItem from="1525717478559" duration="2194000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="233330000" />
+    <option name="totallyTimeSpent" value="233391000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -681,14 +691,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="868" column="61" lean-forward="false" selection-start-line="868" selection-start-column="54" selection-end-line="868" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/new-client.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1243">
@@ -713,18 +715,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/order.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="42" column="54" lean-forward="false" selection-start-line="42" selection-start-column="54" selection-end-line="42" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/new-order-sum.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="77" column="45" lean-forward="false" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/order.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="29" column="39" lean-forward="false" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="868" column="61" lean-forward="false" selection-start-line="868" selection-start-column="54" selection-end-line="868" selection-end-column="61" />
           <folding />
         </state>
       </provider>

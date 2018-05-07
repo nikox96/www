@@ -27,7 +27,7 @@ Ordine.find = function find(ccod, callback) {
 };
 
 Ordine.delOrder = function delOrder(ccod, cstt, callback) {
-    db.query("SELECT cstt FROM ordini WHERE ccod = "
+    db.query("SELECT cstt FROM portale.ordini WHERE ccod = "
         + ccod
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
