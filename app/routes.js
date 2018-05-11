@@ -300,7 +300,7 @@ module.exports = function (app, passport) {
             } else {
                 Order.updateStatus(req.body.idOrd, 0, req.body.xnote, function (queryErr, queryRes) {
                     if (queryErr)
-                        console.log('impossibile ma vero');
+                        console.log('errore aggiornamento stato/nota dell\'ordine' + queryErr);
                     else
                         res.redirect('/home');
                 });
