@@ -95,12 +95,12 @@
         <option value="$PROJECT_DIR$/views/order-list.ejs" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/app/models/appoggio.js" />
-        <option value="$PROJECT_DIR$/views/new-order.ejs" />
         <option value="$PROJECT_DIR$/views/new-order-sum.ejs" />
         <option value="$PROJECT_DIR$/app/models/client.js" />
         <option value="$PROJECT_DIR$/views/new-client.ejs" />
         <option value="$PROJECT_DIR$/app/routes.js" />
         <option value="$PROJECT_DIR$/app/models/order.js" />
+        <option value="$PROJECT_DIR$/views/new-order.ejs" />
       </list>
     </option>
   </component>
@@ -299,12 +299,12 @@
       <workItem from="1525717478559" duration="4356000" />
       <workItem from="1525975636528" duration="1325000" />
       <workItem from="1526059752957" duration="2201000" />
-      <workItem from="1526066327983" duration="1172000" />
+      <workItem from="1526066327983" duration="1236000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="240251000" />
+    <option name="totallyTimeSpent" value="240315000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -664,13 +664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-order.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="73" column="70" lean-forward="true" selection-start-line="73" selection-start-column="70" selection-end-line="73" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/new-order-sum.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2">
@@ -720,6 +713,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="607" column="24" lean-forward="false" selection-start-line="607" selection-start-column="24" selection-end-line="607" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/new-order.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="73" column="89" lean-forward="false" selection-start-line="73" selection-start-column="89" selection-end-line="73" selection-end-column="89" />
           <folding />
         </state>
       </provider>
