@@ -130,13 +130,36 @@
             </div>
             <div class="form-group col">
                 <label>Zona</label>
-                <% if (user.cage == 9) { %>
+                <!--<% if (user.cage == 9) { %>
                 <input type="number" class="form-control" name="czona" maxlength="1" value="1" readonly required>
                 <% } else if (user.cage == 5 || user.cage == 1843) { %>
                 <input type="number" class="form-control" name="czona" maxlength="1" value="2" readonly required>
-                <% } %>
+                <% } %>-->
+                <div class="form-group col">
+                    <label>Zona</label>
+                    <input type="number" class="form-control" name="czona" maxlength="1" required>
+                </div>
             </div>
             <% } %>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label>Abi</label>
+                <input type="number" class="form-control" name="cabi" maxlength="5" value="<%= cabi %>" required>
+            </div>
+            <div class="form-group col">
+                <label>Cab</label>
+                <input type="number" class="form-control" name="ccab" maxlength="5" value="<%= ccab %>" required>
+            </div>
+            <div class="form-group col">
+                <label>N° conto</label>
+                <input type="number" class="form-control" name="ncont" maxlength="12" value="<%= ncont %>" required>
+            </div>
+
+            <div class="form-group col">
+                <label>N° telefono</label>
+                <input type="number" class="form-control" name="ntel" maxlength="13" value="<%= ntel %>" required>
+            </div>
         </div>
         <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
             <i class="material-icons">&#xe161</i> Conferma

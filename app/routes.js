@@ -669,13 +669,17 @@ module.exports = function (app, passport) {
             ctipcom: '',
             czona: '',
             cage: '',
+            cabi: '',
+            ccab: '',
+            ncont: '',
+            ntel: '',
             user: req.user
         });
     });
 
     app.post('/new-client', isLoggedIn, function (req, res) {
         var xcli1 = req.body.xnome + req.body.xcogn;
-        Client.insert(req.body.ccod, (req.body.cfis.length > 11 ? '' : req.body.cfis), req.body.xragsoc, (req.body.cfis.length <= 16 && req.body.cfis.length > 11 ? req.body.cfis : ''), xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, function (cliInsErr, cliInsRes) {
+        Client.insert(req.body.ccod, (req.body.cfis.length > 11 ? '' : req.body.cfis), req.body.xragsoc, (req.body.cfis.length <= 16 && req.body.cfis.length > 11 ? req.body.cfis : ''), xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, req.body.cabi, req.body.ccab, req.body.ncont, req.body.ntel, function (cliInsErr, cliInsRes) {
             if (cliInsErr) {
                 console.log("Errore censimento cliente!");
                 res.render('new-client.ejs', {
@@ -695,6 +699,10 @@ module.exports = function (app, passport) {
                     ctipcom: req.body.ctipcom,
                     czona: req.body.czona,
                     cage: req.body.cage,
+                    cabi: req.body.cabi,
+                    ccab: req.body.ccab,
+                    ncont: req.body.ncont,
+                    ntel: req.body.ntel,
                     user: req.user
                 });
             } else {
