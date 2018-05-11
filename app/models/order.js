@@ -239,7 +239,7 @@ Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, callback) {
                 console.log("error: " + queryErr);
             }
             else {
-                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
                     callback(null, queryRes);
                     return;
