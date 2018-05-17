@@ -287,4 +287,25 @@ Ordine.updateNreg = function updateNreg(ccod, callback) {
         });
 };
 
+Ordine.getNota = function getNota(ccod, callback) {
+    //ricerca ordine per codice
+    db.query("SELECT xnote FROM portale.ordini WHERE ccod = "
+        + ccod
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
+            if (queryErr) {
+                console.log("error: " + queryErr);
+            }
+            else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                if (queryRes.length > 0) {
+                    callback(null, queryRes[0]);
+                    return;
+                } else {
+                    console.log("non ghe mia");
+                }
+            }
+            callback("Nessun ordine trovato", null);
+        });
+};
 module.exports = Ordine;
