@@ -299,6 +299,7 @@ Ordine.getNota = function getNota(ccod, callback) {
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
+                    console.log('xnote: \n %j', queryRes);
                     callback(null, queryRes[0]);
                     return;
                 } else {

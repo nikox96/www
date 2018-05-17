@@ -75,7 +75,7 @@
                 <tbody>
                 <% var itot = 0; %>
                 <% for(var i = 0; i < products.length;i++) { %>
-                <%= itot += parseInt(products[i].iimp); %>
+                <% itot += parseInt(products[i].iimp); %>
                 <tr>
                     <th scope="row"><%= products[i].ccod %></th>
                     <td><%= products[i].xdesc %></td>
@@ -102,19 +102,23 @@
 <footer class="footer sticky-bottom">
     <div class="container">
         <div class="row">
-            <form action="/req-pdf-order" method="get">
-                <input type="hidden" name="idOrd" value="<%= idOrd %>">
-                <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
-                    <i class="material-icons">&#xe415</i> Salva
-                </button>
-            </form>
-            <form method="post" action="/new-order-sum">
-                <input type="text" name="xnote" value="" maxlength="1000" spellcheck="false" value="<%= xnota%>">
-                <input type="hidden" name="idOrd" value="<%= idOrd %>">
-                <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
-                    <i class="material-icons">&#xe161</i> Conferma
-                </button>
-            </form>
+            <div class="col">
+                <form action="/req-pdf-order" method="get">
+                    <input type="hidden" name="idOrd" value="<%= idOrd %>">
+                    <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+                        <i class="material-icons">&#xe415</i> Salva
+                    </button>
+                </form>
+            </div>
+            <div class="col-md-auto">
+                <form method="post" action="/new-order-sum">
+                    <input type="text" name="xnote" value="" maxlength="1000" spellcheck="false" value="<%= xnota %>">
+                    <input type="hidden" name="idOrd" value="<%= idOrd %>">
+                    <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+                        <i class="material-icons">&#xe161</i> Conferma
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </footer>
