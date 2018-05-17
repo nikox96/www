@@ -115,8 +115,8 @@ Ordine.updateCondPag = function updateCondPag(ccod, cond_pag, callback) {
 
 Ordine.updateStatus = function updateStatus(ccod, cstt, xnote, callback) {
     //aggiorno lo status dell'ordine
-    db.query("UPDATE portale.ordini SET cstt = " + cstt + ", xnote = \"" + xnote + "\" WHERE ccod = "
-        + ccod
+    db.query("UPDATE portale.ordini SET cstt = ($1), xnote = ($2) WHERE ccod = ($3)"
+        , [cstt, xnote, ccod]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
