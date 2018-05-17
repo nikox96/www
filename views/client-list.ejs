@@ -1,8 +1,8 @@
-<!-- views/order-list.ejs -->
+<!-- views/client-list.ejs -->
 <!doctype html>
 <html>
 <head>
-    <title>Portale Innovazioni - Lista ordini</title>
+    <title>Portale Innovazioni - Lista clienti</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
@@ -19,7 +19,7 @@
 <body>
 <div class="sticky-top">
     <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Lista Ordini</a>
+        <a class="navbar-brand" href="#">Lista Clienti</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
@@ -33,20 +33,18 @@
                     </ul>
                 </li>
             </ul>
-            <form action="/order-list" method="post" class="form-inline">
+            <form action="/client-list" method="post" class="form-inline">
                 <div class="form-row align-items-center">
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormCodCli">Codice cliente</label>
+                        <input type="text" name="ccod" class="form-control mb-2" id="inlineFormInputCodCli"
+                               placeholder="Codice cliente">
+                    </div>
                     <div class="col-auto">
                         <label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
                         <input type="text" name="xragsoc" class="form-control mb-2" id="inlineFormInputRagSoc"
                                placeholder="Ragione sociale">
                     </div>
-                    <% if (user.cage == 9999) { %>
-                    <div class="col-auto">
-                        <label class="sr-only" for="inlineFormCage">Codice agente</label>
-                        <input type="text" name="cageric" class="form-control mb-2" id="inlineFormInputCage"
-                               placeholder="Codice agente">
-                    </div>
-                    <% } %>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary mb-2">Cerca</button>
                     </div>
@@ -61,49 +59,35 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Codice Ordine</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Importo</th>
-                    <th scope="col">Data</th>
-                    <th></th>
+                    <th scope="col">Codice Cliente</th>
+                    <th scope="col">Ragione sociale</th>
+                    <th scope="col">Indirizzo</th>
+                    <th scope="col">N° Telefono</th>
+                    <th scope="col">Agente</th>
                     <th></th>
                     <% if (user.cage == 9999 || user.cage == 0) { %>
-                    <th></th>
                     <th></th>
                     <% } %>
                 </tr>
                 </thead>
                 <tbody>
-                <% orders.forEach(function(order) { %>
+                <% clients.forEach(function(client) { %>
                 <tr>
-                    <th scope="row"><%= order.ccod %></th>
-                    <td><%= order.xragsoc %></td>
-                    <td><%= order.iimp %></td>
-                    <td><%= order.data %></td>
+                    <th scope="row"><%= client.ccod %></th>
+                    <td><%= client.xragsoc %></td>
+                    <td><%= client.xind %></td>
+                    <td><%= client.ntel %></td>
+                    <td><%= client.cage %></td>
                     <td>
-                        <form action="/detail-order" method="get">
-                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
+                        <form action="/detail-client" method="get">
+                            <input type="hidden" name="ccod" value="<%= client.ccod %>">
                             <button type="submit" class="btn btn-link"><i class="material-icons">&#xe88f</i></button>
                         </form>
                     </td>
+                    <% if (user.cage == 9999) { %>
                     <td>
-                        <% if (order.cstt == 10 || user.cage == 9999 || user.cage == 0) { %>
-                        <form action="/new-order-sum" method="get">
-                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
-                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe254</i></button>
-                        </form>
-                        <% } %>
-                    </td>
-                    <% if (user.cage == 9999 || user.cage == 0) { %>
-                    <td>
-                        <form action="/del-order" method="post">
-                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
-                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe872</i></button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/get-csv" method="get">
-                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
+                        <form action="/get-csv-client" method="get">
+                            <input type="hidden" name="ccod" value="<%= client.ccod %>">
                             <button type="submit" class="btn btn-link"><i class="material-icons">&#xe2c4</i></button>
                         </form>
                     </td>

@@ -42,6 +42,19 @@
             </div>
         </div>
     </div>
+    <% if (user && user.cage && (user.cage === 9999 || user.cage === 0)) { %>
+    <div class="row">
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <h4 class="display-6">Lista Clienti</h4>
+                <hr class="my-6">
+                <p class="lead">Visualizza lista clienti!</p>
+                <a href="/client-list" class="btn btn-primary btn-lg" role="button">Visualizza</a>
+            </div>
+        </div>
+    </div>
+    <% } %>
 </div>
 </body>
 </html>

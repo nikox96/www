@@ -627,6 +627,35 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.get('/client-list', isLoggedIn, function (req, res) {
+        var orders = [];
+
+        Client.list(null, null, function (clieErr, cliRes) {
+            if (cliErr) {
+                req.flash('list-client-message', cliErr);
+            } else {
+                var clients = {};
+                for (i = 0; i < cliRes.length; i++) {
+                    client = {};
+                    client.ccod = cliRes[i].ccod;
+                    client.xragsoc = cliRes[i].xragsoc;
+                    client.piva = cliRes[i].piva;
+                    client.cfis = cliRes[i].cfis;
+                    client.xind = cliRes[i].xind;
+                    client.cprv = cliRes[i].cprv;
+                    client.cage = cliRes[i].cage;
+                    client.ntel = cliRes[i].ntel;
+                    clients[i] = client;
+                }
+
+                res.render('client-list.ejs', {
+                    clients: clients,
+                    user: req.user
+                });
+            }
+        });
+    });
+
     app.post('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
 
