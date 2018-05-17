@@ -960,12 +960,13 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                     xcond: 'Condizione di pagamento non trovata',
                                     psco: 0,
                                     nsca: 0
-                                }
+                                };
                             } else {
                                 condRes = (condRes.rows && condRes.rows.length > 0 ? condRes.rows : condRes);
                                 condpag = condRes[0];
                             }
-                            res.render('new-order-sum.ejs', {
+                            Order.getNota(idOrd,function (notaErr,notaRes){
+                                res.render('new-order-sum.ejs', {
                                 message: req.flash('orderMessage'),
                                 idOrd: idOrd,
                                 client: cliente,
@@ -1011,8 +1012,9 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                     });
                                 });
                             });
+                            });
                         }
-                    });
+               });
             }
             i++;
             getRighe(res, req, righe, cliente, cond, idOrd);
