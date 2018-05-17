@@ -971,7 +971,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                 idOrd: idOrd,
                                 client: cliente,
                                 products: products,
-                                xnota: notaRes[0].xnote,
+                                xnota: notaRes.xnote,
                                 condpag: condpag
                             }, function (err, htmlGenesi) {
                                 if (err) return console.log(err);
