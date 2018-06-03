@@ -628,9 +628,9 @@ module.exports = function (app, passport) {
     });
 
     app.get('/client-list', isLoggedIn, function (req, res) {
-        var orders = [];
+        var clients = [];
 
-        Client.list(null, null, function (clieErr, cliRes) {
+        Client.list(null, null, function (cliErr, cliRes) {
             if (cliErr) {
                 req.flash('list-client-message', cliErr);
             } else {
