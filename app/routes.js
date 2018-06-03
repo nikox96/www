@@ -657,6 +657,33 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.get('/get-csv-client', isLoggedIn, function (req, res) {
+        var xrig = "";
+        Client.list(req.query.ccod, null, function (cliErr, cliRes) {
+            if (cliErr) {
+                req.flash('list-client-message', cliErr);
+            } else {
+                xrig += cliRes[0].xragsoc + ';';
+                xrig += cliRes[0].xind + ';';
+                xrig += cliRes[0].ccap + ';';
+                xrig += cliRes[0].xcom + ';';
+                xrig += cliRes[0].cprv + ';;';
+                xrig += cliRes[0].cpiva + ';;';
+                xrig += cliRes[0].cfis + ';;';
+                xrig += cliRes[0].cabi + ';';
+                xrig += cliRes[0].ccab + ';';
+                xrig += cliRes[0].ntel + ';;';
+                xrig += cliRes[0].xmail + ';';
+                xrig += cliRes[0].ccat + ';';
+                xrig += cliRes[0].czona + ';';
+                xrig += cliRes[0].xcli1 + ';';
+                xrig += cliRes[0].xcli2 + ';;';
+                xrig += '01;;';
+                res.download(sendCliFile(cliRes[0].ccod, xrig));
+            }
+        });
+    });
+
     app.get('/client-list', isLoggedIn, function (req, res) {
         var clients = [];
 
@@ -2197,6 +2224,30 @@ function sendFile(nreg, idOrd) {
         for (csvEl = 0; csvEl < csv.length; csvEl++) {
             fs.appendFileSync(fd, csv[csvEl].toString() + "\n", 'utf8');
         }
+        return file;
+    } catch (err) {
+        console.log('Errore creazione file: ' + err);
+    } finally {
+        if (fd !== undefined)
+            fs.closeSync(fd);
+    }
+}
+
+function sendCliFile(ccod, xrig) {
+    var fs = require('fs');
+    var fd;
+    var d = new Date();
+    var file = '';
+    d = dateFormat(d, "isoDateTime");
+
+    try {
+        console.log('dir name: ' + __dirname);
+        if (!(fs.existsSync(__dirname + '/../public/file'))) {
+            console.log("filesystem de merda!");
+        }
+        file = __dirname + '/../public/file/cli_' + ccod + '_' + d.replace(/:/g, '.').substr(0, 19) + '.csv';
+        fd = fs.openSync(file, 'a');
+        fs.appendFileSync(fd, xrig + "\n", 'utf8');
         return file;
     } catch (err) {
         console.log('Errore creazione file: ' + err);
