@@ -634,7 +634,7 @@ module.exports = function (app, passport) {
             if (cliErr) {
                 req.flash('list-client-message', cliErr);
             } else {
-                var clients = {};
+                var client = {};
                 for (i = 0; i < cliRes.length; i++) {
                     client = {};
                     client.ccod = cliRes[i].ccod;
