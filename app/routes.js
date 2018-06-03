@@ -627,6 +627,36 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.post('/client-list', isLoggedIn, function (req, res) {
+        var clients = [];
+
+        Client.list(req.query.ccod, req.query.xragsoc, function (cliErr, cliRes) {
+            if (cliErr) {
+                req.flash('clientListMessage', 'Nessun cliente trovato');
+            }
+            else if (cliRes) {
+                var client = {};
+                for (i = 0; i < cliRes.length; i++) {
+                    client = {};
+                    client.ccod = cliRes[i].ccod;
+                    client.xragsoc = cliRes[i].xragsoc;
+                    client.piva = cliRes[i].piva;
+                    client.cfis = cliRes[i].cfis;
+                    client.xind = cliRes[i].xind;
+                    client.cprv = cliRes[i].cprv;
+                    client.cage = cliRes[i].cage;
+                    client.ntel = cliRes[i].ntel;
+                    clients[i] = client;
+                }
+
+                res.render('client-list.ejs', {
+                    clients: clients,
+                    user: req.user
+                });
+            }
+        });
+    });
+
     app.get('/client-list', isLoggedIn, function (req, res) {
         var clients = [];
 
