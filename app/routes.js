@@ -630,7 +630,7 @@ module.exports = function (app, passport) {
     app.post('/client-list', isLoggedIn, function (req, res) {
         var clients = [];
 
-        Client.list(req.query.ccod, req.query.xragsoc, function (cliErr, cliRes) {
+        Client.list(req.body.ccod, req.body.xragsoc, function (cliErr, cliRes) {
             if (cliErr) {
                 req.flash('clientListMessage', 'Nessun cliente trovato');
             }
