@@ -686,6 +686,36 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.get('/detail-client', isLoggedIn, function (req, res) {
+        Client.list(req.query.ccod, null, function (cliErr, cliRes) {
+            if (cliErr) {
+                req.flash('list-client-message', cliErr);
+            } else {
+                res.render('detail-client.ejs', {
+                    ccod: cliRes[0].ccod,
+                    cfis: (cliRes[0].cpiva !== '' ? cliRes[0].cpiva : cliRes[0].cfis),
+                    xragsoc: cliRes[0].xragsoc,
+                    xcli: cliRes[0].xcli1,
+                    xind: cliRes[0].xind,
+                    xcom: cliRes[0].xcom,
+                    cprv: cliRes[0].cprv,
+                    ccap: cliRes[0].ccap,
+                    xnaz: cliRes[0].xnaz,
+                    xmail: cliRes[0].xmail,
+                    ccat: cliRes[0].ccat,
+                    ctipcom: cliRes[0].ctipcom,
+                    czona: cliRes[0].czona,
+                    cage: cliRes[0].cage,
+                    cabi: cliRes[0].cabi,
+                    ccab: cliRes[0].ccab,
+                    ncont: cliRes[0].ncont,
+                    ntel: cliRes[0].ntel,
+                    user: req.user
+                });
+            }
+        });
+    });
+
     app.post('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
 
