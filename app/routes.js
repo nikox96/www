@@ -1082,13 +1082,12 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                 condpag = condRes[0];
                             }
                             Order.getNota(idOrd, function (notaErr, notaRes) {
-                                if (notaRes && notaRes.xnote) {
                                     res.render('new-order-sum.ejs', {
                                         message: req.flash('orderMessage'),
                                         idOrd: idOrd,
                                         client: cliente,
                                         products: products,
-                                        xnota: notaRes.xnote,
+                                        xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
                                         condpag: condpag
                                     }, function (err, htmlGenesi) {
                                         if (err) return console.log(err);
@@ -1130,7 +1129,6 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                             });
                                         });
                                     });
-                                }
                             });
                         }
                     });
