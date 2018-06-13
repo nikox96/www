@@ -4,9 +4,10 @@ var Product = {};
 
 Product.find = function find(cprod, callback) {
     console.log("ricerca codice prodotto " + cprod);
-    var query = "SELECT * FROM portale.prodotti WHERE ccod = " + cprod;
+    var query = "SELECT * FROM portale.prodotti WHERE ccod = $1";
     console.log(query);
     db.query(query
+        , cprod
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -23,16 +24,15 @@ Product.find = function find(cprod, callback) {
 
 Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, callback) {
     console.log("ricerca lista prodotti");
-    console.log("ccodda " + ccodda);
-    console.log("ccoda " + ccoda);
-    console.log("sven " + sven);
-    console.log("xgrp " + xgrp);
-    console.log("xprod" + xprod);
-    var query = "SELECT * FROM portale.prodotti WHERE ccod >= " + (ccodda && ccodda !== '' ? ccodda : 0) + " AND ccod <= " + (ccoda && ccoda !== '' ? ccoda : 999999)
-        + " AND xgrp LIKE '%" + (xgrp && xgrp !== '' ? xgrp : '') + "%' AND xdesc LIKE '%" + (xprod && xprod ? xprod : '')
-        + "%' AND sven LIKE '%" + (sven && sven !== '' ? sven : '') + "%'";
-    console.log(query);
+    sven = '%' + (sven && sven !== '' ? sven : '') + '%';
+    xgrp = '%' + (xgrp && xgrp !== '' ? xgrp : '') + '%';
+    xprod = '%' + (xprod && xprod !== '' ? xprod : '') + '%';
+    ccodda = (ccodda && ccodda !== '' ? ccodda : 0);
+    ccoda = (ccoda && ccoda !== '' ? ccoda : 999999);
+    var query = "SELECT * FROM portale.prodotti WHERE ccod >= $1 AND ccod <= $2 AND xgrp LIKE $3 AND xdesc LIKE $4 AND sven LIKE $5";
+    
     db.query(query
+        , [ccodda, ccoda, xgrp, xprod, sven]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -50,7 +50,7 @@ Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, callback) {
 Product.getSven = function getSven(callback) {
     console.log("ricerca tipo vendita");
     var query = "SELECT sven FROM portale.prodotti group by sven";
-    console.log(query);
+    
     db.query(query
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
@@ -66,7 +66,7 @@ Product.getSven = function getSven(callback) {
 Product.getXgrp = function getXgrp(callback) {
     console.log("ricerca categoria prodotto");
     var query = "SELECT xgrp FROM portale.prodotti group by xgrp";
-    console.log(query);
+    
     db.query(query
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
@@ -85,9 +85,10 @@ Product.listPromo = function listPromo(ccod, callback) {
         "FROM portale.ana_promo t1 INNER JOIN portale.prod_promo t2 " +
         "ON t1.ccod = t2.ccodpromo INNER JOIN portale.prodotti t3 " +
         "ON t2.ccodprod = t3.ccod " +
-        (ccod && ccod !== '' ? "WHERE t1.ccod = " + ccod : "");
-    console.log(query);
+        (ccod && ccod !== '' ? "WHERE t1.ccod = $1" : "");
+    
     db.query(query
+        , [ccod]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
