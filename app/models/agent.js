@@ -3,7 +3,7 @@ var Agente = {};
 
 Agente.find = function find(cage, callback) {
     console.log("ricerca agente");
-    db.query("SELECT * FROM portale.agenti WHERE cage = ($1)"
+    db.query("SELECT * FROM portale.agenti WHERE cage = $1"
         , [cage]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
