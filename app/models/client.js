@@ -55,7 +55,7 @@ Client.list = function list(ccod, xragsoc, callback) {
     console.log("xragsoc " + xragsoc);
     xragsoc = "%" + (xragsoc && xragsoc !== '' ? xragsoc : "") + "%";
     var query = "SELECT * FROM portale.clienti WHERE " + (ccod && ccod !== '' ? "ccod = $1 AND " : "") + "xragsoc ILIKE $2";
-    
+
     db.query(query
         , [ccod, xragsoc]
 //        , function (queryErr, queryRes) {
@@ -70,6 +70,28 @@ Client.list = function list(ccod, xragsoc, callback) {
                 console.log("record: " + queryRes.length);
             }
         });
+};
+
+Client.getNewCod = function getNewCod(callback) {
+    var query = "SELECT MAX(ccod) as newCod FROM portale.clienti";
+    //Per i clienti Selvert censiti da piattaforma portale sono dedicati gli ID da 3000 a 3999
+    var newCod = 3000;
+
+    db.query(query, (queryErr, queryRes) => {
+        if (queryErr) {
+            callback(queryErr, null);
+            console.log("error: " + queryErr);
+        }
+        else {
+            if (queryRes.rows[0].newCod >= 3000 && queryRes.rows[0].newCod < 3999) {
+                newCod = queryRes.rows[0].newCod++;
+            } else if (queryRes.rows[0].newCod >= 3999){
+                callback("ID clienti Selvert terminati, aumentare il range di ID dedicati!", null);
+                return;
+            }
+            callback(null, newCod);
+        }
+    });
 };
 
 module.exports = Client;

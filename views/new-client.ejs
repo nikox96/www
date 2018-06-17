@@ -40,7 +40,8 @@
         <div class="form-row">
             <div class="form-group col">
                 <label>Codice cliente</label>
-                <input type="number" class="form-control" name="ccod" maxlength="5"  value="<%= ccod %>" required>
+                <input type="number" class="form-control" name="ccod" maxlength="5" value="<%= ccod %>" min="3000"
+                       max="3999" disabled readonly required>
             </div>
             <div class="form-group col">
                 <label>Codice Fiscale/Partita I.V.A.</label>

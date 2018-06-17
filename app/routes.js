@@ -663,6 +663,7 @@ module.exports = function (app, passport) {
             if (cliErr) {
                 req.flash('list-client-message', cliErr);
             } else {
+                xrig += cliRes[0].ccod + ';';
                 xrig += cliRes[0].xragsoc + ';';
                 xrig += cliRes[0].xind + ';';
                 xrig += cliRes[0].ccap + ';';
@@ -769,27 +770,33 @@ module.exports = function (app, passport) {
     });
 
     app.get('/new-client', isLoggedIn, function (req, res) {
-        res.render('new-client.ejs', {
-            ccod: '',
-            cfis: '',
-            xragsoc: '',
-            xnome: '',
-            xcogn: '',
-            xind: '',
-            xcom: '',
-            cprv: '',
-            ccap: '',
-            xnaz: '',
-            xmail: '',
-            ccat: '',
-            ctipcom: '',
-            czona: '',
-            cage: '',
-            cabi: '',
-            ccab: '',
-            ncont: '',
-            ntel: '',
-            user: req.user
+        Client.getNewCod(function (newCodErr, newCodRes) {
+            if (newCodErr) {
+                req.flash('newClientMessage', newCodErr);
+            } else {
+                res.render('new-client.ejs', {
+                    ccod: newCodRes,
+                    cfis: '',
+                    xragsoc: '',
+                    xnome: '',
+                    xcogn: '',
+                    xind: '',
+                    xcom: '',
+                    cprv: '',
+                    ccap: '',
+                    xnaz: '',
+                    xmail: '',
+                    ccat: '',
+                    ctipcom: '',
+                    czona: '',
+                    cage: '',
+                    cabi: '',
+                    ccab: '',
+                    ncont: '',
+                    ntel: '',
+                    user: req.user
+                });
+            }
         });
     });
 
@@ -1082,53 +1089,53 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                 condpag = condRes[0];
                             }
                             Order.getNota(idOrd, function (notaErr, notaRes) {
-                                    res.render('new-order-sum.ejs', {
-                                        message: req.flash('orderMessage'),
-                                        idOrd: idOrd,
-                                        client: cliente,
-                                        products: products,
-                                        xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
-                                        condpag: condpag
-                                    }, function (err, htmlGenesi) {
-                                        if (err) return console.log(err);
-                                        var options = {
-                                            directory: "/tmp",
-                                            border: {
-                                                "top": "2cm",
-                                                "right": "1cm",
-                                                "bottom": "2cm",
-                                                "left": "1.5cm"
-                                            },
-                                            type: "pdf",
-                                            format: "A4"
-                                        };
+                                res.render('new-order-sum.ejs', {
+                                    message: req.flash('orderMessage'),
+                                    idOrd: idOrd,
+                                    client: cliente,
+                                    products: products,
+                                    xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
+                                    condpag: condpag
+                                }, function (err, htmlGenesi) {
+                                    if (err) return console.log(err);
+                                    var options = {
+                                        directory: "/tmp",
+                                        border: {
+                                            "top": "2cm",
+                                            "right": "1cm",
+                                            "bottom": "2cm",
+                                            "left": "1.5cm"
+                                        },
+                                        type: "pdf",
+                                        format: "A4"
+                                    };
 
-                                        var footerInit = htmlGenesi.indexOf("<footer");
-                                        footerInit = (footerInit === -1 ? 0 : footerInit);
-                                        var footerExit = htmlGenesi.indexOf("</footer>");
-                                        footerExit = (footerExit === -1 ? htmlGenesi.length : footerExit);
-                                        var htmlMod;
+                                    var footerInit = htmlGenesi.indexOf("<footer");
+                                    footerInit = (footerInit === -1 ? 0 : footerInit);
+                                    var footerExit = htmlGenesi.indexOf("</footer>");
+                                    footerExit = (footerExit === -1 ? htmlGenesi.length : footerExit);
+                                    var htmlMod;
 
-                                        if (!(footerExit === htmlGenesi.length || footerInit === 0)) {
-                                            htmlMod = htmlGenesi.substr(0, footerInit - 1);
-                                            htmlMod += htmlGenesi.substr(footerExit + 9, htmlGenesi.length);
-                                        } else {
-                                            htmlMod = htmlGenesi;
-                                        }
+                                    if (!(footerExit === htmlGenesi.length || footerInit === 0)) {
+                                        htmlMod = htmlGenesi.substr(0, footerInit - 1);
+                                        htmlMod += htmlGenesi.substr(footerExit + 9, htmlGenesi.length);
+                                    } else {
+                                        htmlMod = htmlGenesi;
+                                    }
 
-                                        pdf.create(htmlMod, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
-                                            if (pdferr) return console.log(pdferr);
+                                    pdf.create(htmlMod, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
+                                        if (pdferr) return console.log(pdferr);
 
-                                            console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
-                                            console.log(htmlGenesi);
+                                        console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
+                                        console.log(htmlGenesi);
 
-                                            Appoggio.update(req.user.cage, idOrd, pdfres.filename, function (appErr, appRes) {
-                                                if (appErr) return console.log("errore salvataggio path pdf");
+                                        Appoggio.update(req.user.cage, idOrd, pdfres.filename, function (appErr, appRes) {
+                                            if (appErr) return console.log("errore salvataggio path pdf");
 
-                                                res.send(htmlGenesi);
-                                            });
+                                            res.send(htmlGenesi);
                                         });
                                     });
+                                });
                             });
                         }
                     });
