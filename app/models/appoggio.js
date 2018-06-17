@@ -36,9 +36,9 @@ Appoggio.find = function find(cage, idOrd, callback) {
 };
 
 Appoggio.delApp = function delApp(cage, idOrd, callback) {
-    db.query("DELETE FROM portale.appoggio WHERE " + (cage && cage !== '' ? "cage = $1" : "1<>1 ")
-        + (idOrd && idOrd !== '' ? "AND idOrd = $2" : "")
-        , [cage, idOrd]
+    db.query("DELETE FROM portale.appoggio WHERE " + (cage != null ? "cage = $1" : "1<>1 ")
+        + (idOrd != null ? "AND idOrd = $2" : "$2")
+        , [cage , (idOrd != null ? idOrd : '')]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -53,9 +53,9 @@ Appoggio.delApp = function delApp(cage, idOrd, callback) {
 
 Appoggio.update = function update(cage, idOrd, xdata, callback) {
 
-    db.query("UPDATE portale.appoggio SET xdata = $1 WHERE " + (cage && cage !== '' ? "cage = $2" : "1<>1 ")
-        + (idOrd && idOrd !== '' ? "AND idOrd = $3" : "AND 1<>1")
-        , [xdata, cage, idOrd]
+    db.query("UPDATE portale.appoggio SET xdata = $1 WHERE " + (cage != null ? "cage = $2 " : "$2 ")
+        + (idOrd != null ? "AND idOrd = $3" : "AND $3")
+        , [xdata, (cage != null ? cage : '1<>1'), (idOrd != null ? idOrd : '1<>1')]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {

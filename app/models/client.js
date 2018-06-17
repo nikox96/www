@@ -54,10 +54,10 @@ Client.list = function list(ccod, xragsoc, callback) {
     console.log("ccod " + (ccod != null ? ccod : 'nullio'));
     console.log("xragsoc " + xragsoc);
     xragsoc = "%" + (xragsoc && xragsoc !== '' ? xragsoc : "") + "%";
-    var query = "SELECT * FROM portale.clienti WHERE " + (ccod != null ? "ccod = $1 AND " : "") + "xragsoc ILIKE $2";
+    var query = "SELECT * FROM portale.clienti WHERE " + (ccod != null ? "ccod = $1 AND " : "$1 AND ") + "xragsoc ILIKE $2";
     console.log(query);
     db.query(query
-        , [(ccod != null ? ccod : '0'), (xragsoc != null ? xragsoc : '')]
+        , [(ccod != null ? ccod : '1=1'), (xragsoc != null ? xragsoc : '')]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
