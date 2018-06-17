@@ -225,7 +225,7 @@ Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, callback) {
         + (cage && cage !== '' ? "AND a.cage = $1": "AND 1 <> 1")
         + (cstt && cstt !== '' ? " AND a.cstt = $2"  : "")
         + (xcli && xcli !== '' ? " AND c.xragsoc like $3" : "");
-    //console.log(query);
+    console.log(query);
     db.query(query
         , [cage, cstt, "%" + xcli + "%"]
 //        , function (queryErr, queryRes) {
