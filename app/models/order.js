@@ -222,12 +222,12 @@ Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, callback) {
         "(SELECT ccod, xragsoc " +
         "FROM portale.clienti) AS c " +
         "WHERE a.ccod = b.ccod AND a.ccli = c.ccod "
-        + (cage && cage !== '' ? "AND a.cage = $1": "AND 1 <> 1")
-        + (cstt && cstt !== '' ? " AND a.cstt = $2"  : "")
-        + (xcli && xcli !== '' ? " AND c.xragsoc like $3" : "");
+        + (cage != null ? "AND a.cage = $1" : "AND 1 <> 1")
+        + (cstt != null ? " AND a.cstt = $2" : "")
+        + (xcli != null ? " AND c.xragsoc like $3" : "");
     console.log(query);
     db.query(query
-        , [cage, cstt, "%" + xcli + "%"]
+        , [(cage != null ? cage : 0), (cstt != null ? cstt : 0), "%" + (xcli != null ? xcli : '') + "%"]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {

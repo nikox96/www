@@ -51,13 +51,13 @@ Client.insert = function insert(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, c
 };
 Client.list = function list(ccod, xragsoc, callback) {
     console.log("ricerca lista clienti");
-    console.log("ccod " + ccod);
+    console.log("ccod " + (ccod ? ccod : 'nullio'));
     console.log("xragsoc " + xragsoc);
     xragsoc = "%" + (xragsoc && xragsoc !== '' ? xragsoc : "") + "%";
-    var query = "SELECT * FROM portale.clienti WHERE " + (ccod && ccod !== '' ? "ccod = $1 AND " : "") + "xragsoc ILIKE $2";
-
+    var query = "SELECT * FROM portale.clienti WHERE " + (ccod != null ? "ccod = $1 AND " : "") + "xragsoc ILIKE $2";
+    console.log(query);
     db.query(query
-        , [(ccod ? ccod : 0), (xragsoc ? xragsoc : '')]
+        , [(ccod != null ? ccod : 0), (xragsoc != null ? xragsoc : '')]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -85,7 +85,7 @@ Client.getNewCod = function getNewCod(callback) {
         else {
             if (queryRes.rows[0].newCod >= 3000 && queryRes.rows[0].newCod < 3999) {
                 newCod = queryRes.rows[0].newCod++;
-            } else if (queryRes.rows[0].newCod >= 3999){
+            } else if (queryRes.rows[0].newCod >= 3999) {
                 callback("ID clienti Selvert terminati, aumentare il range di ID dedicati!", null);
                 return;
             }
