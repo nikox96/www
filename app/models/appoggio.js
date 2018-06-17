@@ -6,8 +6,8 @@ Appoggio.insert = function insert(cage, idOrd, callback) {
         callback("parametri non valorizzati", null);
         return;
     }
-    db.query("INSERT INTO portale.appoggio (cage, idOrd) VALUES (($1), ($2))"
-        , [cage, idOrd]
+    db.query("INSERT INTO portale.appoggio (cage, idOrd) VALUES ("
+        + cage + ", " + idOrd + ")"
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -20,9 +20,8 @@ Appoggio.insert = function insert(cage, idOrd, callback) {
 };
 
 Appoggio.find = function find(cage, idOrd, callback) {
-    db.query("SELECT * FROM portale.appoggio WHERE " + (cage && cage !== '' ? "cage = ($1)" : "1<>1 ")
-        + (idOrd && idOrd !== '' ? "AND idOrd = ($2)" : "")
-        , [cage, idOrd]
+    db.query("SELECT * FROM portale.appoggio WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
+        + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "")
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -36,9 +35,8 @@ Appoggio.find = function find(cage, idOrd, callback) {
 };
 
 Appoggio.delApp = function delApp(cage, idOrd, callback) {
-    db.query("DELETE FROM portale.appoggio WHERE " + (cage && cage !== '' ? "cage = ($1)" : "1<>1 ")
-        + (idOrd && idOrd !== '' ? "AND idOrd = ($2)" : "")
-        , [cage, idOrd]
+    db.query("DELETE FROM portale.appoggio WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
+        + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "")
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -53,9 +51,8 @@ Appoggio.delApp = function delApp(cage, idOrd, callback) {
 
 Appoggio.update = function update(cage, idOrd, xdata, callback) {
 
-    db.query("UPDATE portale.appoggio SET xdata = $1 WHERE " + (cage && cage !== '' ? "cage = ($2)" : "1<>1 ")
-        + (idOrd && idOrd !== '' ? "AND idOrd = ($3)" : "AND 1<>1")
-        , [xdata, cage, idOrd]
+    db.query("UPDATE portale.appoggio SET xdata = $1 WHERE " + (cage && cage !== '' ? "cage = " + cage + " " : "1<>1 ")
+        + (idOrd && idOrd !== '' ? "AND idOrd = " + idOrd + " " : "AND 1<>1"), [xdata]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
