@@ -51,7 +51,7 @@ Client.insert = function insert(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, c
 };
 Client.list = function list(ccod, xragsoc, callback) {
     console.log("ricerca lista clienti");
-    console.log("ccod " + (ccod != null ? ccod : 'nullio'));
+    console.log("ccod " + (ccod ? ccod : 'nullio'));
     console.log("xragsoc " + xragsoc);
     xragsoc = "%" + (xragsoc && xragsoc !== '' ? xragsoc : "") + "%";
     var query = "SELECT * FROM portale.clienti WHERE " + (ccod != null ? "ccod = $1 AND " : "") + "xragsoc ILIKE $2";
