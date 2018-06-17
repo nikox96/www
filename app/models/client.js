@@ -57,7 +57,7 @@ Client.list = function list(ccod, xragsoc, callback) {
     var query = "SELECT * FROM portale.clienti WHERE " + (ccod != null ? "ccod = $1 AND " : "") + "xragsoc ILIKE $2";
     console.log(query);
     db.query(query
-        , [(ccod != null ? ccod : 0), (xragsoc != null ? xragsoc : '')]
+        , [(ccod != null ? ccod : '0'), (xragsoc != null ? xragsoc : '')]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
