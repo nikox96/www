@@ -5,10 +5,9 @@ var Client = {};
 
 Client.find = function find(ccod, callback) {
     console.log("ricerca cliente codice " + ccod);
-    var query = "SELECT * FROM portale.clienti WHERE ccod = $1";
+    var query = "SELECT * FROM portale.clienti WHERE ccod = " + ccod;
     console.log(query);
     db.query(query
-        , [ccod]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -54,11 +53,9 @@ Client.list = function list(ccod, xragsoc, callback) {
     console.log("ccod " + ccod);
     console.log("xragsoc " + xragsoc);
     xragsoc = "%" + (xragsoc && xragsoc !== '' ? xragsoc : "") + "%";
-    var query = "SELECT * FROM portale.clienti WHERE " + (ccod && ccod !== '' ? "ccod = $1 AND " : "") + "xragsoc ILIKE $2";
-
+    var query = "SELECT * FROM portale.clienti WHERE " + (ccod && ccod !== '' ? "ccod = " + ccod + " AND " : "") + "xragsoc ILIKE " + mysql.escape(xragsoc);
+    console.log(query);
     db.query(query
-        , [ccod, xragsoc]
-
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
