@@ -5,7 +5,7 @@
     <title>Portale Innovazioni - Nuovo ordine</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
           integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <link rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
@@ -111,14 +111,16 @@
                 </form>
             </div>
             <div class="col-md-auto">
+                <button class="btn-primary bg-transparent text-primary border-0 align-bottom"
+                        data-toggle="modal"
+                        data-target="#noteModal">
+                    <i class="material-icons">&#xe85d</i> Aggiungi Note
+                </button>
+            </div>
+            <div class="col-md-auto">
                 <form method="post" action="/new-order-sum">
-                    <button class="btn-primary bg-transparent text-primary border-0 align-bottom"
-                            data-toggle="modal"
-                            data-target="#noteModal">
-                        <i class="material-icons">&#e85d</i> Aggiungi Note
-                    </button>
                     <div class="modal fade" id="noteModal" tabindex="-1" role="dialog"
-                         aria-labelledby="Aggiungi note all'ordine" aria-hidden="true">
+                         aria-labelledby="noteModal" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
