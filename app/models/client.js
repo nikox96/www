@@ -54,17 +54,11 @@ Client.list = function list(ccod, xragsoc, callback) {
     console.log("ccod " + ccod);
     console.log("xragsoc " + xragsoc);
     xragsoc = "%" + (xragsoc && xragsoc !== '' ? xragsoc : "") + "%";
-<<<<<<< HEAD
     var query = "SELECT * FROM portale.clienti WHERE " + (ccod && ccod !== '' ? "ccod = $1 AND " : "") + "xragsoc ILIKE $2";
 
     db.query(query
         , [ccod, xragsoc]
-=======
-    var query = "SELECT * FROM portale.clienti WHERE " + (ccod != null ? "ccod = $1 AND " : "") + "xragsoc ILIKE $2";
-    console.log(query);
-    db.query(query
-        , [(ccod != null ? ccod : '0'), (xragsoc != null ? xragsoc : '')]
->>>>>>> parent of ac243a1... bug fix
+
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
