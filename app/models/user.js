@@ -9,10 +9,14 @@ User.createUser = function createUser(newUser, callback) {
         bcrypt.hash(newUser.xpwd, salt, function (err, hash) {
             console.log(hash);
             newUser.xpwd = hash;
-            var query = "INSERT INTO portale.users (cage, cuser, xnome, xcogn, xpwd) VALUES ($1, $2, $3, $4, $5)";
-            
+            var query = "INSERT INTO portale.users (cage, cuser, xnome, xcogn, xpwd) VALUES ("
+                + newUser.cage + ", "
+                + mysql.escape(newUser.cuser) + ", "
+                + mysql.escape(newUser.xnome) + ", "
+                + mysql.escape(newUser.xcogn) + ", "
+                + mysql.escape(newUser.xpwd) + ")";
+            console.log(query);
             db.query(query
-                , [newUser.cage, newUser.cuser, newUser.xnome, newUser.xcogn, newUser.xpwd]
 //                , function (queryErr, queryRes) {
                 , (queryErr, queryRes) => {
                     if (queryErr) {
@@ -33,10 +37,10 @@ User.login = function login(cage, xpwd, callback) {
         callback('Codice agente non numerico o maggiore di 9999', null);
         return;
     }
-    var query = "SELECT * FROM portale.users WHERE cage = $1";
-    
+    var query = "SELECT * FROM portale.users WHERE cage = "
+        + cage;
+    console.log("se non bestemmio guarda: "+ query);
     db.query(query
-        , [cage]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -46,14 +50,26 @@ User.login = function login(cage, xpwd, callback) {
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
+                    console.log('sql password: ' + queryRes[0].xpwd);
+                    console.log('html passord: ' + xpwd);
                     bcrypt.compare(xpwd.toString(), mysql.escape(queryRes[0].xpwd), function (bcryptErr, bcryptRes) {
+                        console.log('compare result: ' + bcryptRes);
+                        console.log('compare error: ' + bcryptErr);
                         if (bcryptErr) {
+                            console.log("Username and/or password are wrong!" + bcryptErr);
                             callback("Username and/or password are wrong", null);
                         } else {
+                            console.log("Welcome " + queryRes[0].xnome + " " + queryRes[0].xcogn);
                             callback(null, queryRes[0]);
                         }
                     });
                 } else {
+                    console.log("length: " + queryRes.length);
+                    for(const j = 0; j< queryRes.length;j++){
+                        console.log("cage: " + queryRes[j].cage);
+                        console.log("cuser: " + queryRes[j].cuser);
+                    }
+                    console.log("Username and/or password are wrong!");
                     callback("Username and/or password are wrong", null);
                 }
             }
@@ -61,8 +77,8 @@ User.login = function login(cage, xpwd, callback) {
 };
 
 User.findOne = function findOne(cage, callback) {
-    db.query("SELECT 1 FROM portale.users WHERE cage = $1"
-        , [cage]
+    db.query("SELECT 1 FROM portale.users WHERE cage = "
+        + cage
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -71,6 +87,7 @@ User.findOne = function findOne(cage, callback) {
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
+                    console.log("catà");
                     callback(queryErr, queryRes[0]);
                     return;
                 } else {
