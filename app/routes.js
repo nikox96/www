@@ -1,11 +1,16 @@
-var db = require("../config/database_mysql.js");
+var db = require("../config/database_psql.js");
 var Client = require("./models/client.js");
 var Order = require("./models/order.js");
 var Product = require("./models/product.js");
 var Agent = require("./models/agent.js");
 var Appoggio = require("./models/appoggio.js");
-var i = 0, csvEl = 0;
+var dateFormat = require('dateformat');
+var pdf = require('html-pdf');
+var i = 0, k = 0, csvEl = 0;
 var rig, tes, rec, iva, par, csv;
+var products = [];
+var product = {};
+var riga = {};
 
 module.exports = function (app, passport) {
 
@@ -17,9 +22,14 @@ module.exports = function (app, passport) {
     });
 
     app.get('/home', isLoggedIn, function (req, res) {
-        res.render('home.ejs', {
-            user: req.user // get the user out of session and pass to template
-        }); // load the index.ejs file
+        Appoggio.delApp(req.user.cage, '', function (errApp, resApp) {
+            if (errApp) {
+                console.log(errApp);
+            }
+            res.render('home.ejs', {
+                user: req.user // get the user out of session and pass to template
+            }); // load the index.ejs file
+        });
     });
 
     // =====================================
@@ -37,20 +47,132 @@ module.exports = function (app, passport) {
     // =====================================
     // show the login form
     app.get('/new-order-product', isLoggedIn, function (req, res) {
-        if (req.query.ccodcli && req.query.ccodcli !== '') {
-            Order.newOrder('TES', req.query.ccodcli, req.user.cage, function (err, qres) {
-                if (qres) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                Product.list(req.query.ccodda, req.query.ccoda, req.query.sven, req.query.xgrp, req.query.xprod, function (productErr, productRes) {
+                    if (productErr) {
+                        req.flash('orderMessage', 'Nessun cliente trovato');
+                    } else {
+                        console.log('clients: ' + productRes.length);
+                        req.flash('orderMessage', productRes.length + ' risultati');
+
+                        // render the page and pass in any flash data if it exists
+                        Product.getSven(function (venErr, venRes) {
+                            if (venErr) {
+                                console.log("errore sven");
+                            } else {
+                                console.log("sven trovate: " + venRes.length);
+                            }
+                            Product.getXgrp(function (grpErr, grpRes) {
+                                if (grpErr) {
+                                    console.log("errore xgrp");
+                                    grpRes = {};
+                                } else {
+                                    console.log("xgrp trovate" + grpRes);
+                                }
+                                res.render('new-order-product.ejs', {
+                                    message: req.flash('orderMessage'),
+                                    products: productRes,
+                                    lven: venRes,
+                                    xgrp: grpRes,
+                                    idOrd: appRes[0].idord
+                                });
+                            });
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    app.get('/new-order-promo', isLoggedIn, function (req, res) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                Product.listPromo('', function (promoErr, promoRes) {
+                    if (promoErr) {
+                        req.flash('orderMessage', 'Nessun cliente trovato');
+                    } else {
+                        req.flash('orderMessage', promoRes.length + ' risultati');
+
+                        var anaPromo = [];
+                        var b = true;
+                        var xy = 0;
+                        for (k = 0; k < promoRes.length; k++) {
+                            for (i = 0; i < anaPromo.length; i++) {
+                                if (promoRes[k].ccod === anaPromo[i].ccod)
+                                    b = false;
+                            }
+                            if (b) {
+                                anaPromo[xy] = promoRes[k];
+                                xy++;
+                            }
+                            b = true;
+                        }
+
+                        res.render('new-order-promo.ejs', {
+                            message: req.flash('orderMessage'),
+                            anaPromo: anaPromo,
+                            promo: promoRes,
+                            idOrd: appRes[0].idord
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    app.post('/new-order-promo', isLoggedIn, function (req, res) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                Product.listPromo(req.body.ccodpromo, function (promoErr, promoRes) {
+                    if (promoErr) {
+                        req.flash('orderMessage', 'Nessun cliente trovato');
+                    } else {
+                        console.log('clients: ' + promoRes.length);
+                        req.flash('orderMessage', promoRes.length + ' risultati');
+
+                        // render the page and pass in any flash data if it exists
+
+                        k = 0;
+                        insertOrderPromo(promoRes, req, res, appRes[0].idord);
+                    }
+                });
+            }
+        });
+    });
+
+    app.post('/new-order-product', isLoggedIn, function (req, res) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                var msg;
+                console.log('idOrd: ' + appRes[0].idord + 'cod prod: ' + req.body.ccodprod + 'qta :' + req.body.iqta,);
+                Order.newOrderProduct(appRes[0].idord, req.body.ccodprod, req.body.iqta, function (orderErr, orderRes) {
+                    if (orderErr) {
+                        msg = 'errore inserimento prodotto ordine';
+                    } else {
+                        msg = 'prodotto ordine inserito correttamente';
+                    }
+                    console.log(msg);
+                    req.flash('orderMessage', msg);
                     Product.list(0, 999999, '', '', '', function (productErr, productRes) {
                         if (productErr) {
-                            req.flash('orderMessage', 'Nessun prodotto trovato');
-                        }
-                        if (productRes) {
-                            console.log('prodotti: ' + productRes.length);
+                            req.flash('orderMessage', 'Nessun cliente trovato');
+                        } else {
+                            console.log('clients: ' + productRes.length);
                             req.flash('orderMessage', productRes.length + ' risultati');
+
+                            // render the page and pass in any flash data if it exists
                             Product.getSven(function (venErr, venRes) {
                                 if (venErr) {
                                     console.log("errore sven");
-                                    venRes = {};
                                 } else {
                                     console.log("sven trovate: " + venRes.length);
                                 }
@@ -66,137 +188,101 @@ module.exports = function (app, passport) {
                                         products: productRes,
                                         lven: venRes,
                                         xgrp: grpRes,
-                                        idOrd: qres
+                                        idOrd: appRes[0].idord
                                     });
                                 });
                             });
                         }
                     });
-                }
-            });
-        } else {
-            req.flash('orderMessage', 'Nessun cliente selezionato');
-            getClients(req,res);
-        }
-    });
-
-    app.post('/new-order-product', isLoggedIn, function (req, res) {
-        Product.list(req.body.ccodda, req.body.ccoda, req.body.sven, req.body.xgrp, req.body.xprod, function (productErr, productRes) {
-            if (productErr) {
-                req.flash('orderMessage', 'Nessun cliente trovato');
-            } else {
-                console.log('clients: ' + productRes.length);
-                req.flash('orderMessage', productRes.length + ' risultati');
-
-                // render the page and pass in any flash data if it exists
-                Product.getSven(function (venErr, venRes) {
-                    if (venErr) {
-                        console.log("errore sven");
-                    } else {
-                        console.log("sven trovate: " + venRes.length);
-                    }
-                    Product.getXgrp(function (grpErr, grpRes) {
-                        if (grpErr) {
-                            console.log("errore xgrp");
-                            grpRes = {};
-                        } else {
-                            console.log("xgrp trovate" + grpRes);
-                        }
-                        res.render('new-order-product.ejs', {
-                            message: req.flash('orderMessage'),
-                            products: productRes,
-                            lven: venRes,
-                            xgrp: grpRes,
-                            idOrd: req.body.idOrd
-                        });
-                    });
                 });
             }
-        });
-    });
-    // =====================================
-    // LOGIN ===============================
-    // =====================================
-    // show the login form
-    app.get('/new-order-product-row', isLoggedIn, function (req, res) {
-        var msg;
-        Order.newOrderProduct(req.query.ccod, req.query.ccodprod, req.query.iqta, function (orderErr, orderRes) {
-            if (orderErr) {
-                msg = 'errore inserimento prodotto ordine';
-            } else {
-                msg = 'prodotto ordine inserito correttamente';
-            }
-            console.log(msg);
-            req.flash('orderMessage', msg);
-            Product.list(0, 999999, '', '', '', function (productErr, productRes) {
-                if (productErr) {
-                    req.flash('orderMessage', 'Nessun cliente trovato');
-                } else {
-                    console.log('clients: ' + productRes.length);
-                    req.flash('orderMessage', productRes.length + ' risultati');
-
-                    // render the page and pass in any flash data if it exists
-                    Product.getSven(function (venErr, venRes) {
-                        if (venErr) {
-                            console.log("errore sven");
-                        } else {
-                            console.log("sven trovate: " + venRes.length);
-                        }
-                        Product.getXgrp(function (grpErr, grpRes) {
-                            if (grpErr) {
-                                console.log("errore xgrp");
-                                grpRes = {};
-                            } else {
-                                console.log("xgrp trovate" + grpRes);
-                            }
-                            res.render('new-order-product.ejs', {
-                                message: req.flash('orderMessage'),
-                                products: productRes,
-                                lven: venRes,
-                                xgrp: grpRes,
-                                idOrd: req.query.ccod
-                            });
-                        });
-                    });
-                }
-            });
         });
     });
 
     app.get('/new-order-cond-pag', isLoggedIn, function (req, res) {
-        db.query("SELECT * FROM condizioni_pagamento", function (queryErr, queryRes) {
-            if (queryErr) {
-                req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
             } else {
-                res.render('new-order-cond-pag.ejs', {
-                    message: req.flash('orderMessage'),
-                    idOrd: req.query.idOrd,
-                    condpag: queryRes
-                });
+                db.query("SELECT * FROM portale.condizioni_pagamento"
+//                 , function (queryErr, queryRes) {
+                    , (queryErr, queryRes) => {
+                        if (queryErr) {
+                            req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
+                        } else {
+                            queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                            res.render('new-order-cond-pag.ejs', {
+                                message: req.flash('orderMessage'),
+                                idOrd: appRes[0].idord,
+                                condpag: queryRes
+                            });
+                        }
+                    });
             }
         });
     });
 
     app.post('/new-order-cond-pag', isLoggedIn, function (req, res) {
-        Order.updateCondPag(req.body.ccod, req.body.ccodpag, function (queryErr, queryRes) {
-            if (queryErr)
-                req.flash('orderMessage', queryErr);
-            else {
-                req.flash('orderMessage', queryRes);
-                Order.find(req.body.ccod, function (queryErr, queryRes) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                Order.updateCondPag(appRes[0].idord, req.body.ccodpag, function (queryErr, queryRes) {
                     if (queryErr)
                         req.flash('orderMessage', queryErr);
                     else {
-                        Client.find(queryRes.ccli, function (cliErr, cliRes) {
-                            if (cliErr)
-                                req.flash('orderMessage', cliErr);
+                        req.flash('orderMessage', queryRes);
+                        Order.find(appRes[0].idord, function (queryErr, queryRes) {
+                            if (queryErr)
+                                req.flash('orderMessage', queryErr);
                             else {
-                                Order.findProduct(req.body.ccod, function (righeErr, righeRes) {
-                                    if (righeErr) {
-                                        req.flash('orderMessage', righeErr);
-                                    } else {
-                                        i = 0;
-                                        getRighe(res, req, righeRes, cliRes, queryRes);
+                                Client.find(queryRes.ccli, function (cliErr, cliRes) {
+                                    if (cliErr)
+                                        req.flash('orderMessage', cliErr);
+                                    else {
+                                        Order.findProduct(appRes[0].idord, function (righeErr, righeRes) {
+                                            if (righeErr) {
+                                                req.flash('orderMessage', righeErr);
+                                            } else {
+                                                i = 0;
+                                                getRighe(res, req, righeRes, cliRes, queryRes, appRes[0].idord);
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    app.get('/new-order-sum', isLoggedIn, function (req, res) {
+        Appoggio.delApp(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("Errore pulizia appoggio");
+            } else {
+                Appoggio.insert(req.user.cage, req.query.ccod, function (appInsErr, appInsRes) {
+                    if (appInsErr) {
+                        console.log("Errore lettura appogigo conferma inserimento ordine!");
+                    } else {
+                        Order.find(req.query.ccod, function (queryErr, queryRes) {
+                            if (queryErr)
+                                req.flash('orderMessage', queryErr);
+                            else {
+                                Client.find(queryRes.ccli, function (cliErr, cliRes) {
+                                    if (cliErr)
+                                        req.flash('orderMessage', cliErr);
+                                    else {
+                                        Order.findProduct(req.query.ccod, function (righeErr, righeRes) {
+                                            if (righeErr) {
+                                                req.flash('orderMessage', righeErr);
+                                            } else {
+                                                i = 0;
+                                                getRighe(res, req, righeRes, cliRes, queryRes, req.query.ccod);
+                                            }
+                                        });
                                     }
                                 });
                             }
@@ -208,12 +294,18 @@ module.exports = function (app, passport) {
     });
 
     app.post('/new-order-sum', isLoggedIn, function (req, res) {
-        Order.updateStatus(req.body.idOrd, 0, function (queryErr, queryRes) {
-            if (queryErr)
-                console.log('impossibile ma vero');
-            else
-                res.redirect('/home');
-        })
+        Appoggio.find(req.user.cage, req.body.idOrd, function (appErr, appRes) {
+            if (appErr) {
+                console.log("Errore lettura appoggio conferma inserimento ordine!");
+            } else {
+                Order.updateStatus(req.body.idOrd, 0, req.body.xnote, function (queryErr, queryRes) {
+                    if (queryErr)
+                        console.log('errore aggiornamento stato/nota dell\'ordine' + queryErr);
+                    else
+                        res.redirect('/home');
+                });
+            }
+        });
     });
 
     app.get('/edit-products', isLoggedIn, function (req, res) {
@@ -266,6 +358,9 @@ module.exports = function (app, passport) {
                                 return;
                             else {
                                 Order.findProduct(req.query.ccod, function (righeErr, righeRes) {
+                                    console.log('ordRes.dreg pre: ' + ordRes.dreg);
+                                    ordRes.dreg = dateFormat(ordRes.dreg, "dd/mm/yyyy");
+                                    console.log('ordRes.dreg post: ' + ordRes.dreg);
                                     rec.tipRec = 'TES';
                                     tes.cDocAut = '000';
                                     tes.dreg = (ordRes.dreg && ordRes.dreg !== '' ? ordRes.dreg : '');
@@ -355,7 +450,7 @@ module.exports = function (app, passport) {
                                     tes.cauAggRegIva2 = '';
                                     tes.cauAggRegIva3 = '';
                                     tes.cauAggRegIva4 = '';
-                                    tes.annCompIva = (ordRes.dreg && ordRes.dreg !== '' ? ordRes.dreg.substr(0, 4) : '');
+                                    tes.annCompIva = (ordRes.dreg && ordRes.dreg !== '' ? ordRes.dreg.substr(6, 4) : '');
                                     tes.perCompIva = '';
                                     tes.dopr = '';
                                     tes.cessCliPriv = '';
@@ -482,7 +577,7 @@ module.exports = function (app, passport) {
                                     rec.iva = iva;
                                     rec.par = par;
 
-                                    csvRig();
+                                    csvRig93();
                                     i = 0;
                                     getRigheCSV(res, req, ordRes.nreg, righeRes, cliRes, ageRes);
                                 });
@@ -532,11 +627,127 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.post('/client-list', isLoggedIn, function (req, res) {
+        var clients = [];
+
+        Client.list(req.body.ccod, req.body.xragsoc, function (cliErr, cliRes) {
+            if (cliErr) {
+                req.flash('clientListMessage', 'Nessun cliente trovato');
+            }
+            else if (cliRes) {
+                var client = {};
+                for (i = 0; i < cliRes.length; i++) {
+                    client = {};
+                    client.ccod = cliRes[i].ccod;
+                    client.xragsoc = cliRes[i].xragsoc;
+                    client.piva = cliRes[i].piva;
+                    client.cfis = cliRes[i].cfis;
+                    client.xind = cliRes[i].xind;
+                    client.cprv = cliRes[i].cprv;
+                    client.cage = cliRes[i].cage;
+                    client.ntel = cliRes[i].ntel;
+                    clients[i] = client;
+                }
+
+                res.render('client-list.ejs', {
+                    clients: clients,
+                    user: req.user
+                });
+            }
+        });
+    });
+
+    app.get('/get-csv-client', isLoggedIn, function (req, res) {
+        var xrig = "";
+        Client.list(req.query.ccod, null, function (cliErr, cliRes) {
+            if (cliErr) {
+                req.flash('list-client-message', cliErr);
+            } else {
+                xrig += cliRes[0].ccod + ';';
+                xrig += cliRes[0].xragsoc + ';';
+                xrig += cliRes[0].xind + ';';
+                xrig += cliRes[0].ccap + ';';
+                xrig += cliRes[0].xcom + ';';
+                xrig += cliRes[0].cprv + ';;';
+                xrig += cliRes[0].cpiva + ';;';
+                xrig += cliRes[0].cfis + ';;';
+                xrig += cliRes[0].cabi + ';';
+                xrig += cliRes[0].ccab + ';';
+                xrig += cliRes[0].ntel + ';;';
+                xrig += cliRes[0].xmail + ';';
+                xrig += cliRes[0].ccat + ';';
+                xrig += cliRes[0].czona + ';';
+                xrig += cliRes[0].xcli1 + ';';
+                xrig += cliRes[0].xcli2 + ';;';
+                xrig += '01;;';
+                res.download(sendCliFile(cliRes[0].ccod, xrig));
+            }
+        });
+    });
+
+    app.get('/client-list', isLoggedIn, function (req, res) {
+        var clients = [];
+
+        Client.list(null, null, function (cliErr, cliRes) {
+            if (cliErr) {
+                req.flash('list-client-message', cliErr);
+            } else {
+                var client = {};
+                for (i = 0; i < cliRes.length; i++) {
+                    client = {};
+                    client.ccod = cliRes[i].ccod;
+                    client.xragsoc = cliRes[i].xragsoc;
+                    client.piva = cliRes[i].piva;
+                    client.cfis = cliRes[i].cfis;
+                    client.xind = cliRes[i].xind;
+                    client.cprv = cliRes[i].cprv;
+                    client.cage = cliRes[i].cage;
+                    client.ntel = cliRes[i].ntel;
+                    clients[i] = client;
+                }
+
+                res.render('client-list.ejs', {
+                    clients: clients,
+                    user: req.user
+                });
+            }
+        });
+    });
+
+    app.get('/detail-client', isLoggedIn, function (req, res) {
+        Client.list(req.query.ccod, null, function (cliErr, cliRes) {
+            if (cliErr) {
+                req.flash('list-client-message', cliErr);
+            } else {
+                res.render('detail-client.ejs', {
+                    ccod: cliRes[0].ccod,
+                    cfis: (cliRes[0].cpiva !== '' ? cliRes[0].cpiva : cliRes[0].cfis),
+                    xragsoc: cliRes[0].xragsoc,
+                    xcli: cliRes[0].xcli1,
+                    xind: cliRes[0].xind,
+                    xcom: cliRes[0].xcom,
+                    cprv: cliRes[0].cprv,
+                    ccap: cliRes[0].ccap,
+                    xnaz: cliRes[0].xnaz,
+                    xmail: cliRes[0].xmail,
+                    ccat: cliRes[0].ccat,
+                    ctipcom: cliRes[0].ctipcom,
+                    czona: cliRes[0].czona,
+                    cage: cliRes[0].cage,
+                    cabi: cliRes[0].cabi,
+                    ccab: cliRes[0].ccab,
+                    ncont: cliRes[0].ncont,
+                    ntel: cliRes[0].ntel,
+                    user: req.user
+                });
+            }
+        });
+    });
 
     app.post('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
 
-        Order.getUserOrder(req.user.cage, req.body.cstt, req.body.xragsoc, function (ordErr, ordRes) {
+        Order.getUserOrder((req.body.cageric && req.user.cage === 9999 ? req.body.cageric : req.user.cage), req.body.cstt, req.body.xragsoc, function (ordErr, ordRes) {
             if (ordErr) {
                 req.flash('list-order-message', ordErr);
             } else {
@@ -558,18 +769,173 @@ module.exports = function (app, passport) {
         });
     });
 
-    // =====================================
-    // LOGIN ===============================
-    // =====================================
-    // show the login form
+    app.get('/new-client', isLoggedIn, function (req, res) {
+        Client.getNewCod(function (newCodErr, newCodRes) {
+            if (newCodErr) {
+                req.flash('newClientMessage', newCodErr);
+            } else {
+                res.render('new-client.ejs', {
+                    ccod: newCodRes,
+                    cfis: '',
+                    xragsoc: '',
+                    xnome: '',
+                    xcogn: '',
+                    xind: '',
+                    xcom: '',
+                    cprv: '',
+                    ccap: '',
+                    xnaz: '',
+                    xmail: '',
+                    ccat: '',
+                    ctipcom: '',
+                    czona: '',
+                    cage: '',
+                    cabi: '',
+                    ccab: '',
+                    ncont: '',
+                    ntel: '',
+                    user: req.user
+                });
+            }
+        });
+    });
+
+    app.post('/new-client', isLoggedIn, function (req, res) {
+        var xcli1 = req.body.xnome + req.body.xcogn;
+        Client.insert(req.body.ccod, (req.body.cfis.length > 11 ? '' : req.body.cfis), req.body.xragsoc, (req.body.cfis.length <= 16 && req.body.cfis.length > 11 ? req.body.cfis : ''), xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, req.body.cabi, req.body.ccab, req.body.ncont, req.body.ntel, function (cliInsErr, cliInsRes) {
+            if (cliInsErr) {
+                console.log("Errore censimento cliente!");
+                res.render('new-client.ejs', {
+                    message: req.flash('insCliMessage'),
+                    ccod: req.body.ccod,
+                    cfis: req.body.cfis,
+                    xragsoc: req.body.xragsoc,
+                    xnome: req.body.xnome,
+                    xcogn: req.body.xcogn,
+                    xind: req.body.xind,
+                    xcom: req.body.xcom,
+                    cprv: req.body.cprv,
+                    ccap: req.body.ccap,
+                    xnaz: req.body.xnaz,
+                    xmail: req.body.xmail,
+                    ccat: req.body.ccat,
+                    ctipcom: req.body.ctipcom,
+                    czona: req.body.czona,
+                    cage: req.body.cage,
+                    cabi: req.body.cabi,
+                    ccab: req.body.ccab,
+                    ncont: req.body.ncont,
+                    ntel: req.body.ntel,
+                    user: req.user
+                });
+            } else {
+                Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+                    if (appErr) {
+                        console.log("errore recupero codice ordine");
+                    } else {
+                        Order.updateCcli(appRes[0].idord, req.body.ccod, function (ordErr, ordRes) {
+                            if (ordErr) {
+                                console.log("errore aggiornamento codice cliente ordine");
+                            } else {
+                                Product.list(0, 999999, '', '', '', function (productErr, productRes) {
+                                    if (productErr) {
+                                        req.flash('orderMessage', 'Nessun prodotto trovato');
+                                    }
+                                    if (productRes) {
+                                        console.log('prodotti: ' + productRes.length);
+                                        req.flash('orderMessage', productRes.length + ' risultati');
+                                        Product.getSven(function (venErr, venRes) {
+                                            if (venErr) {
+                                                console.log("errore sven");
+                                                venRes = {};
+                                            } else {
+                                                console.log("sven trovate: " + venRes.length);
+                                            }
+                                            Product.getXgrp(function (grpErr, grpRes) {
+                                                if (grpErr) {
+                                                    console.log("errore xgrp");
+                                                    grpRes = {};
+                                                } else {
+                                                    console.log("xgrp trovate" + grpRes);
+                                                }
+                                                res.render('new-order-product.ejs', {
+                                                    message: req.flash('orderMessage'),
+                                                    products: productRes,
+                                                    lven: venRes,
+                                                    xgrp: grpRes,
+                                                    idOrd: appRes[0].idord
+                                                });
+                                            });
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+
     app.get('/new-order', isLoggedIn, function (req, res) {
         // search for clients
         getClients(req, res);
     });
 
+    app.get('/req-pdf-order', isLoggedIn, function (req, res) {
+        Appoggio.find(req.user.cage, req.query.idOrd, function (appErr, appRes) {
+            if (appErr) return console.log("Errore recupero pdf!");
+            res.download(appRes[0].xdata, 'conferma_ricezione_ordine.pdf', function (downloadErr) {
+                if (downloadErr) return console.log(downloadErr);
+            });
+        });
+    });
+
     app.post('/new-order', isLoggedIn, function (req, res) {
-        // search for clients
-        getClients(req, res);
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                Order.updateCcli(appRes[0].idord, req.body.ccod, function (ordErr, ordRes) {
+                    if (ordErr) {
+                        console.log("errore aggiornamento codice cliente ordine");
+                    } else {
+                        Product.list(0, 999999, '', '', '', function (productErr, productRes) {
+                            if (productErr) {
+                                req.flash('orderMessage', 'Nessun prodotto trovato');
+                            }
+                            if (productRes) {
+                                console.log('prodotti: ' + productRes.length);
+                                req.flash('orderMessage', productRes.length + ' risultati');
+                                Product.getSven(function (venErr, venRes) {
+                                    if (venErr) {
+                                        console.log("errore sven");
+                                        venRes = {};
+                                    } else {
+                                        console.log("sven trovate: " + venRes.length);
+                                    }
+                                    Product.getXgrp(function (grpErr, grpRes) {
+                                        if (grpErr) {
+                                            console.log("errore xgrp");
+                                            grpRes = {};
+                                        } else {
+                                            console.log("xgrp trovate" + grpRes);
+                                        }
+                                        res.render('new-order-product.ejs', {
+                                            message: req.flash('orderMessage'),
+                                            products: productRes,
+                                            lven: venRes,
+                                            xgrp: grpRes,
+                                            idOrd: appRes[0].idord
+                                        });
+                                    });
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
     });
 
 // process the login form
@@ -603,8 +969,13 @@ module.exports = function (app, passport) {
 // LOGOUT ==============================
 // =====================================
     app.get('/logout', function (req, res) {
-        req.logout();
-        res.redirect('/');
+        Appoggio.delApp(req.user.cage, '', function (errApp, resApp) {
+            if (errApp) {
+                console.log(errApp);
+            }
+            req.logout();
+            res.redirect('/');
+        });
     });
 }
 ;
@@ -621,29 +992,69 @@ function isLoggedIn(req, res, next) {
 }
 
 function getClients(req, res) {
-    Client.list(req.body.ccod, req.body.xragsoc, function (clientErr, clientRes) {
-        if (clientErr) {
-            req.flash('orderMessage', 'Nessun cliente trovato');
-        }
-        if (clientRes) {
-            console.log('clients: ' + clientRes.length);
-            req.flash('orderMessage', clientRes.length + ' risultati');
+    Appoggio.find(req.user.cage, '', function (appfinErr, appfinRes) {
+        if (appfinErr) {
+            console.log("errore lettura appoggio");
+        } else {
+            if (appfinRes.length > 0 && appfinRes[0].idord && appfinRes[0].idord !== '') {
+                Client.list(req.query.ccod, req.query.xragsoc, function (clientErr, clientRes) {
+                    if (clientErr) {
+                        req.flash('orderMessage', 'Nessun cliente trovato');
+                    }
+                    if (clientRes) {
+                        console.log('clients: ' + clientRes.length);
+                        req.flash('orderMessage', clientRes.length + ' risultati');
 
-            // render the page and pass in any flash data if it exists
-            res.render('new-order.ejs', {
-                message: req.flash('orderMessage'),
-                clients: clientRes,
-                xragsoc: req.body.xragsoc,
-                ccod: req.body.ccod
-            });
+                        // render the page and pass in any flash data if it exists
+                        res.render('new-order.ejs', {
+                            message: req.flash('orderMessage'),
+                            user: req.user,
+                            clients: clientRes,
+                            xragsoc: req.body.xragsoc,
+                            ccod: req.body.ccod,
+                            idOrd: appfinRes[0].idord
+                        });
+                    }
+                });
+            } else {
+                Order.newOrder('TES', '', req.user.cage, function (ordErr, ordRes) {
+                    console.log("ordRes: " + ordRes);
+                    if (ordRes) {
+                        Appoggio.insert(req.user.cage, ordRes, function (appErr, appRes) {
+                            if (appErr) {
+                                console.log("Errore inserimento appoggio: " + appErr);
+                            } else {
+                                Client.list(req.query.ccod, req.query.xragsoc, function (clientErr, clientRes) {
+                                    if (clientErr) {
+                                        req.flash('orderMessage', 'Nessun cliente trovato');
+                                    }
+                                    if (clientRes) {
+                                        console.log('clients: ' + clientRes.length);
+                                        req.flash('orderMessage', clientRes.length + ' risultati');
+
+                                        // render the page and pass in any flash data if it exists
+                                        res.render('new-order.ejs', {
+                                            message: req.flash('orderMessage'),
+                                            user: req.user,
+                                            clients: clientRes,
+                                            xragsoc: req.query.xragsoc,
+                                            ccod: req.query.ccod,
+                                            idOrd: ordRes
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
         }
     });
+
 }
 
-function getRighe(res, req, righe, cliente, cond) {
-    var products = [];
-    var product = {};
-    var riga = {};
+function getRighe(res, req, righe, cliente, cond, idOrd) {
+
     if (i >= righe.length)
         return;
 
@@ -660,24 +1071,77 @@ function getRighe(res, req, righe, cliente, cond) {
             products[i] = product;
             if (i === righe.length - 1) {
                 var condpag;
-                db.query("SELECT * FROM condizioni_pagamento WHERE ccod = " + cond.ccondpag,
-                    function (condErr, condRes) {
+                db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag
+//                    , function (condErr, condRes) {
+                    , (condErr, condRes) => {
                         if (condErr) {
                             req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
                         } else {
-                            condpag = condRes[0];
-                            res.render('new-order-sum.ejs', {
-                                message: req.flash('orderMessage'),
-                                idOrd: req.body.ccod,
-                                client: cliente,
-                                products: products,
-                                condpag: condpag
+                            if (condRes.rows.length === 0) {
+                                condpag = {
+                                    ccod: -1,
+                                    xcond: 'Condizione di pagamento non trovata',
+                                    psco: 0,
+                                    nsca: 0
+                                };
+                            } else {
+                                condRes = (condRes.rows && condRes.rows.length > 0 ? condRes.rows : condRes);
+                                condpag = condRes[0];
+                            }
+                            Order.getNota(idOrd, function (notaErr, notaRes) {
+                                res.render('new-order-sum.ejs', {
+                                    message: req.flash('orderMessage'),
+                                    idOrd: idOrd,
+                                    client: cliente,
+                                    products: products,
+                                    xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
+                                    condpag: condpag
+                                }, function (err, htmlGenesi) {
+                                    if (err) return console.log(err);
+                                    var options = {
+                                        directory: "/tmp",
+                                        border: {
+                                            "top": "2cm",
+                                            "right": "1cm",
+                                            "bottom": "2cm",
+                                            "left": "1.5cm"
+                                        },
+                                        type: "pdf",
+                                        format: "A4"
+                                    };
+
+                                    var footerInit = htmlGenesi.indexOf("<footer");
+                                    footerInit = (footerInit === -1 ? 0 : footerInit);
+                                    var footerExit = htmlGenesi.indexOf("</footer>");
+                                    footerExit = (footerExit === -1 ? htmlGenesi.length : footerExit);
+                                    var htmlMod;
+
+                                    if (!(footerExit === htmlGenesi.length || footerInit === 0)) {
+                                        htmlMod = htmlGenesi.substr(0, footerInit - 1);
+                                        htmlMod += htmlGenesi.substr(footerExit + 9, htmlGenesi.length);
+                                    } else {
+                                        htmlMod = htmlGenesi;
+                                    }
+
+                                    pdf.create(htmlMod, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
+                                        if (pdferr) return console.log(pdferr);
+
+                                        console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
+                                        console.log(htmlGenesi);
+
+                                        Appoggio.update(req.user.cage, idOrd, pdfres.filename, function (appErr, appRes) {
+                                            if (appErr) return console.log("errore salvataggio path pdf");
+
+                                            res.send(htmlGenesi);
+                                        });
+                                    });
+                                });
                             });
                         }
                     });
             }
             i++;
-            getRighe(res, req, righe, cliente, cond);
+            getRighe(res, req, righe, cliente, cond, idOrd);
         }
     });
 }
@@ -1468,6 +1932,110 @@ function csvRig() {
     console.log(str);
 }
 
+function csvRig93() {
+    var str = '';
+
+    str += rec.tipRec + ';';
+    str += rec.tes.tipDocOrdVen + ';';
+    str += rec.tes.dreg + ';';
+    str += rec.tes.nreg + ';';
+    str += rec.tes.appDigReg + ';';
+    str += rec.tes.ddoc + ';';
+    str += rec.tes.ndoc + ';';
+    str += rec.tes.cPart + ';';
+    str += rec.tes.cValDoc + ';';
+    str += rec.tes.camb + ';';
+    str += rec.tes.cimp + ';';
+    str += rec.tes.civaNonImp + ';';
+    str += rec.tes.cas1 + ';';
+    str += rec.tes.cas2 + ';';
+    str += rec.tes.cas3 + ';';
+    str += rec.tes.ccondPag + ';';
+    str += rec.tes.scoCondPag + ';';
+    str += rec.tes.ddecor + ';';
+    str += rec.tes.cBancaNs + ';';
+    str += rec.tes.cabi + ';';
+    str += rec.tes.ccab + ';';
+    str += rec.tes.ccin + ';';
+    str += rec.tes.ccin2 + ';';
+    str += rec.tes.nconcor + ';';
+    str += rec.tes.cbic + ';';
+    str += rec.tes.cpae + ';';
+    str += rec.tes.rifBancaEstera + ';';
+    str += rec.tes.ciban + ';';
+    str += rec.tes.nRifInd + ';';
+    str += rec.tes.ragSoc1 + ';';
+    str += rec.tes.ragSoc2 + ';';
+    str += rec.tes.xind1 + ';';
+    str += rec.tes.ccap + ';';
+    str += rec.tes.xloc1 + ';';
+    str += rec.tes.cprv + ';';
+    str += rec.tes.ccauTrasp + ';';
+    str += rec.tes.xcauTrasp + ';';
+    str += rec.tes.cporto + ';';
+    str += rec.tes.xporto + ';';
+    str += rec.tes.aspBen + ';';
+    str += rec.tes.xAspBen + ';';
+    str += rec.tes.traspMez + ';';
+    str += rec.tes.xTraspMex + ';';
+    str += rec.tes.cvet + ';';
+    str += rec.tes.vetRagSoc1 + ';';
+    str += rec.tes.xvettInd1 + ';';
+    str += rec.tes.ccapVet + ';';
+    str += rec.tes.xvetLoc1 + ';';
+    str += rec.tes.cprvVet + ';';
+    str += rec.tes.cvet2 + ';';
+    str += rec.tes.vetRagSoc12 + ';';
+    str += rec.tes.xvettInd12 + ';';
+    str += rec.tes.ccapVet2 + ';';
+    str += rec.tes.xvetLoc12 + ';';
+    str += rec.tes.cprvVet2 + ';';
+    str += rec.rig.tipRig + ';';
+    str += rec.rig.carticolo + ';';
+    str += rec.rig.cconto + ';';
+    str += rec.rig.descrizione1 + ';';
+    str += rec.rig.clistino + ';';
+    str += rec.rig.dconsegna + ';';
+    str += rec.rig.calcVar1 + ';';
+    str += rec.rig.calcVar2 + ';';
+    str += rec.rig.calcVar3 + ';';
+    str += rec.rig.calcVar4 + ';';
+    str += rec.rig.pesoLordo + ';';
+    str += rec.rig.tara + ';';
+    str += rec.rig.uMis + ';';
+    str += rec.rig.qdoc + ';';
+    str += rec.rig.qdocScoMerce + ';';
+    str += rec.rig.qExpUmSec + ';';
+    str += rec.rig.iprz + ';';
+    str += rec.rig.sco1 + ';';
+    str += rec.rig.sco2 + ';';
+    str += rec.rig.sco3 + ';';
+    str += rec.rig.impVal + ';';
+    str += rec.rig.cimp + ';';
+    str += rec.rig.cdep + ';';
+    str += rec.rig.cdep2 + ';';
+    str += rec.rig.rifLotCalf + ';';
+    str += rec.rig.rifLotData + ';';
+    str += rec.rig.rifLotNum + ';';
+    str += rec.rig.calcSpe + ';';
+    str += rec.rig.civa + ';';
+    str += rec.rig.ordApprovigionamento + ';';
+    str += rec.rig.cFornitoreAbituale + ';';
+    str += rec.tes.derivaSpesePie + ';';
+    str += rec.tes.iBollo + ';';
+    str += rec.tes.iInc + ';';
+    str += rec.tes.iSpesa1 + ';';
+    str += rec.tes.iSpesa2 + ';';
+    str += rec.tes.iBolloOprEse + ';';
+    str += rec.rig.rigaSaldata;     //l'ultimo campo non necessita del punto e virgola (;)
+
+
+    csv[csvEl] = str;
+    csvEl++;
+
+    console.log(str);
+}
+
 function getRigheCSV(res, req, nreg, righe, cliente, agente) {
     var products = [];
     var product = {};
@@ -1534,7 +2102,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
             rig.sco2 = '';
             rig.sco3 = '';
             rig.scoUni = '';
-            rig.provvAge = agente.percProvv;
+            rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
             rig.impVal = product.iimp;
             rig.cimp = '1';
             rig.copeMag = '';
@@ -1619,7 +2187,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
             rig.cvoce = '';
             rig.cvocAltroSis = '';
             rec.rig = rig;
-            csvRig();
+            csvRig93();
 
 
             if (i === righe.length - 1) {
@@ -1627,7 +2195,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
                     if (nregErr) {
                         console.log(nregErr);
                     } else {
-                        Order.updateStatus(righe[0].ccod, 50, function (sttErr, sttRes) {
+                        Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
                             if (sttErr) {
                                 console.log(sttErr);
                             } else {
@@ -1646,25 +2214,48 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
 
 function sendFile(nreg, idOrd) {
     var fs = require('fs');
-    var dateFormat = require('dateformat');
     var fd;
     var d = new Date();
     var file = '';
     d = dateFormat(d, "isoDateTime");
 
     try {
-        if (!(fs.existsSync('../public/file/'))) {
+        console.log('dir name: ' + __dirname);
+        if (!(fs.existsSync(__dirname + '/../public/file'))) {
             console.log("filesystem de merda!");
-            return;
         }
-        file = '../public/file/ord_' + idOrd + '_nreg_' + nreg + '_' + d.replace(/:/g, '.').substr(0, 19) + '.csv';
+        file = __dirname + '/../public/file/ord_' + idOrd + '_nreg_' + nreg + '_' + d.replace(/:/g, '.').substr(0, 19) + '.csv';
         fd = fs.openSync(file, 'a');
         for (csvEl = 0; csvEl < csv.length; csvEl++) {
             fs.appendFileSync(fd, csv[csvEl].toString() + "\n", 'utf8');
         }
         return file;
     } catch (err) {
-        console.log('Errore creazione file!');
+        console.log('Errore creazione file: ' + err);
+    } finally {
+        if (fd !== undefined)
+            fs.closeSync(fd);
+    }
+}
+
+function sendCliFile(ccod, xrig) {
+    var fs = require('fs');
+    var fd;
+    var d = new Date();
+    var file = '';
+    d = dateFormat(d, "isoDateTime");
+
+    try {
+        console.log('dir name: ' + __dirname);
+        if (!(fs.existsSync(__dirname + '/../public/file'))) {
+            console.log("filesystem de merda!");
+        }
+        file = __dirname + '/../public/file/cli_' + ccod + '_' + d.replace(/:/g, '.').substr(0, 19) + '.csv';
+        fd = fs.openSync(file, 'a');
+        fs.appendFileSync(fd, xrig + "\n", 'utf8');
+        return file;
+    } catch (err) {
+        console.log('Errore creazione file: ' + err);
     } finally {
         if (fd !== undefined)
             fs.closeSync(fd);
@@ -1674,4 +2265,52 @@ function sendFile(nreg, idOrd) {
 function getIqta(ccod, task) {
 
     return obj.ccod === ccod;
+}
+
+function insertOrderPromo(promoRes, req, res, idOrd) {
+    if (k >= promoRes.length) {
+        return;
+    }
+    console.log('idord: ' + idOrd + ' cod prod: ' + promoRes[k].ccodprod + ' pezzi: ' + promoRes[k].ipzz);
+    promoRes[k].ipzz = promoRes[k].ipzz * req.body.iqta;
+    Order.newOrderProduct(idOrd, promoRes[k].ccodprod, promoRes[k].ipzz, function (ordErr, ordRes) {
+        if (ordErr)
+            console.log(ordErr);
+        else
+            console.log(ordRes);
+        k++;
+        insertOrderPromo(promoRes, req, res, idOrd);
+    });
+    if (k === promoRes.length - 1) {
+        Product.listPromo('', function (promoErr, promoRes1) {
+            if (promoErr) {
+                req.flash('orderMessage', 'Nessun cliente trovato');
+            } else {
+                console.log('clients: ' + promoRes1.length);
+                req.flash('orderMessage', promoRes1.length + ' risultati');
+
+                var anaPromo = [];
+                var b = true;
+                var xy = 0;
+                for (k = 0; k < promoRes1.length; k++) {
+                    for (i = 0; i < anaPromo.length; i++) {
+                        if (promoRes1[k].ccod === anaPromo[i].ccod)
+                            b = false;
+                    }
+                    if (b) {
+                        anaPromo[xy] = promoRes1[k];
+                        xy++;
+                    }
+                    b = true;
+                }
+
+                res.render('new-order-promo.ejs', {
+                    message: req.flash('orderMessage'),
+                    anaPromo: anaPromo,
+                    promo: promoRes1,
+                    idOrd: idOrd
+                });
+            }
+        });
+    }
 }

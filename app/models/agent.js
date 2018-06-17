@@ -1,15 +1,17 @@
-var db = require("../../config/database_mysql.js");
+var db = require("../../config/database_psql.js");
 var Agente = {};
 
 Agente.find = function find(cage, callback) {
     console.log("ricerca agente");
-    db.query("SELECT * FROM agenti WHERE cage = "
-        + cage
-        , function (queryErr, queryRes) {
+    db.query("SELECT * FROM portale.agenti WHERE cage = $1"
+        , [cage]
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("error: " + queryErr);
             }
             else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
                     console.log("catà");
                     callback(queryErr, queryRes[0]);

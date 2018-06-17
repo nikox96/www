@@ -3,49 +3,58 @@
 <html>
 <head>
     <title>Portale Innovazioni</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        body {
-            padding-top: 80px;
-            word-wrap: break-word;
-        }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container">
     <div class="page-header text-center">
         <h1><span class="fa fa-anchor"></span> HOME</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Esci</a>
+        <a href="/logout" class="btn btn-primary btn-lg" role="button">Esci</a>
     </div>
     <div class="row">
         <!-- LOCAL INFORMATION -->
-        <a href="/new-order">
-            <div class="col-sm-6">
-                <div class="well">
-                    <h3><span class="fa fa-user"></span> Nuovo Ordine</h3>
-
-                    <p>
-                        Inserisci un nuovo ordine!
-                    </p>
-
-                </div>
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <h4 class="display-6">Nuovo Ordine</h4>
+                <hr class="my-6">
+                <p class="lead">Inserisci un nuovo ordine!</p>
+                <a href="/new-order" class="btn btn-primary btn-lg" role="button">Nuovo</a>
             </div>
-        </a>
+        </div>
         <!-- LOCAL INFORMATION -->
-        <a href="/order-list">
-            <div class="col-sm-6">
-                <div class="well">
-                    <h3><span class="fa fa-user"></span> Lista ordini</h3>
-
-                    <p>
-                        Visualizza la lista dei tuoi ordini!
-                    </p>
-
-                </div>
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <h4 class="display-6">Lista Ordini</h4>
+                <hr class="my-6">
+                <p class="lead">Visualizza la lista dei tuoi ordini!</p>
+                <a href="/order-list" class="btn btn-primary btn-lg" role="button">Visualizza</a>
             </div>
-        </a>
+        </div>
     </div>
+    <% if (user && user.cage && (user.cage === 9999 || user.cage === 0)) { %>
+    <div class="row">
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <h4 class="display-6">Lista Clienti</h4>
+                <hr class="my-6">
+                <p class="lead">Visualizza lista clienti!</p>
+                <a href="/client-list" class="btn btn-primary btn-lg" role="button">Visualizza</a>
+            </div>
+        </div>
+    </div>
+    <% } %>
 </div>
 </body>
 </html>

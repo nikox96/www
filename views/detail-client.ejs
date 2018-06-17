@@ -1,0 +1,135 @@
+<!-- views/detail-client.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Portale Innovazioni - Info cliente</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <a class="navbar-brand" href="#">Info Cliente</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Azioni
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                        <li><a class="dropdown-item" href="/client-list">Lista Clienti</a></li>
+                        <li><a class="dropdown-item" href="/home">Home</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="form-row">
+        <div class="form-group col">
+            <label>Codice cliente</label>
+            <input type="number" class="form-control" name="ccod" maxlength="5" value="<%= ccod %>" required disabled>
+        </div>
+        <div class="form-group col">
+            <label>Codice Fiscale/Partita I.V.A.</label>
+            <input type="text" class="form-control" name="cfis" maxlength="16" value="<%= cfis %>" required disabled>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label>Nome e Cognome</label>
+            <input type="text" class="form-control" name="xcli" maxlength="60" value="<%= xcli %>" required disabled>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label>Ragione sociale</label>
+            <input type="text" class="form-control" name="xragsoc" maxlength="60" value="<%= xragsoc %>" required
+                   disabled>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label>Comune</label>
+            <input type="text" class="form-control" name="xcom" maxlength="30" value="<%= xcom %>" required disabled>
+        </div>
+        <div class="form-group col">
+            <label>Provincia</label>
+            <input type="text" class="form-control" name="cprv" maxlength="2" value="<%= cprv %>" required disabled>
+        </div>
+        <div class="form-group col">
+            <label>C.A.P.</label>
+            <input type="number" class="form-control" name="ccap" maxlength="5" value="<%= ccap %>" required disabled>
+        </div>
+        <div class="form-group col">
+            <label>Nazione</label>
+            <input type="text" class="form-control" name="xnaz" maxlength="20" value="<%= xnaz %>" required disabled>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label>Indirizzo</label>
+            <input type="text" class="form-control" name="xind" maxlength="40" value="<%= xind %>" required disabled>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label>E-mail</label>
+            <input type="email" class="form-control" name="xmail" maxlength="60" value="<%= xmail %>" required disabled>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col">
+            <label>Agente</label>
+            <input type="number" class="form-control" name="cage" maxlength="5" value="<%= cage %>" required disabled>
+        </div>
+        <div class="form-group col">
+            <label>Tipo commerciale</label>
+            <input type="number" class="form-control" name="ctipcom" maxlength="2" value="<%= ctipcom %>" required disabled>
+        </div>
+        <div class="form-group col">
+            <label>Categoria</label>
+            <input type="text" class="form-control" name="ccat" maxlength="10" value="<% ccat %>" required disabled>
+        </div>
+        <div class="form-group col">
+            <label>Zona</label>
+            <input type="number" class="form-control" name="czona" maxlength="1" value="<%= czona %>" required disabled>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label>Abi</label>
+            <input type="number" class="form-control" name="cabi" maxlength="5" value="<%= cabi %>" required disabled>
+        </div>
+        <div class="form-group col">
+            <label>Cab</label>
+            <input type="number" class="form-control" name="ccab" maxlength="5" value="<%= ccab %>" required disabled>
+        </div>
+        <div class="form-group col">
+            <label>N° conto</label>
+            <input type="number" class="form-control" name="ncont" maxlength="12" value="<%= ncont %>" required
+                   disabled>
+        </div>
+
+        <div class="form-group col">
+            <label>N° telefono</label>
+            <input type="number" class="form-control" name="ntel" maxlength="13" value="<%= ntel %>" required disabled>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+203202	Hidractive Tonic	200 ml	11	Normal to dry skin	Autocura
+200705	Lisser complex	10x3 ml		LISSER -facial expression lines	
+200332	Lisser Wrinkle Correcting Cream	50 ml		LISSER -facial expression lines	
+200316	Moisturising Cream Moisture Factor 10	50 ml		AQUA21	
+200542	AQUA21 Deep Moisturising Treatment (Facial Pack)	5 treatm.		AQUA21	
+200322	Anti-ageing Cream	50 ml		OPTIMALE ADN/DNA	
+200331	Anti-ageing Serum	50 ml		OPTIMALE ADN/DNA	
+313203	Highly Active Thermal Cream	50 ml		MOISTURISING CREAMS	Autocura
+313205	Deep Treatment Cream	50 ml		NOURISHING CREAMS	Autocura
+313204	Revitalising Treatment Cream	50 ml		NOURISHING CREAMS	Autocura
+310201	Eyelash Activating Serum	8ml		SPECIFICS	Autocura
+302202	Barrière Cellulaire Anti-Rides SPF 50 (anti-wrinkle sun protection)	50 ml		SELVERT THERMAL SOLAIRE	Autocura
+301704	Peeling plus AHA'S	30ml (10x3ml)		L'ESPRIT DERMATOLOGIQUE	
+301144	Anti-acne Cleansing Lotion	200 ml		L'ESPRIT DERMATOLOGIQUE	Cabina
+301705	Anti-acne Active	40ml (10X4ml)		L'ESPRIT DERMATOLOGIQUE	
+301146	Anti-acne Mask	500 ml		L'ESPRIT DERMATOLOGIQUE	Cabina
+301701	Depigmenting Active	40ml (10X4ml)		L'ESPRIT DERMATOLOGIQUE	
+301149	Depigmenting Mask 	200 ml		L'ESPRIT DERMATOLOGIQUE	Cabina
+301706	Regenerating Actif with snail protein extract 	40ml (10X4ml)		L'ESPRIT DERMATOLOGIQUE	
+301247	Regenerating Cream	50 ml		L'ESPRIT DERMATOLOGIQUE	Autocura
+301231	Anti acne Treatment Gel	50 ml		L'ESPRIT DERMATOLOGIQUE	Autocura
+308203	Moisturizing Cream Medium 	50 ml		CELL VITALE ANTI AGE & HYDRATANT & PURIFIANT	Autocura
+309101	Whitening Skin Programme (Facial Treatment Pack)	5 Treat. 		WHITE PERFECTION -WHITENING/DEPIGMENTING 	Cabina
+309201	Technical Clarifying Cream	50 ml		WHITE PERFECTION -WHITENING/DEPIGMENTING 	Autocura
+309203	Technical Clarifying serum	15 ml		WHITE PERFECTION -WHITENING/DEPIGMENTING 	Autocura
+316106	Peeling S2% M8% for Acne	100 ml		REGENERATION ABSOLUE  	Cabina
+316105	Peeling M5% L5% for Spots	100 ml		REGENERATION ABSOLUE  	Cabina
+316107	Peeling M4% G6% for Wrinkles	100 ml		REGENERATION ABSOLUE  	Cabina
+316205	Revival Energizer Medium 	50 ml		REGENERATION ABSOLUE  	Autocura
+316206	Revival Energizer Forte	50 ml		REGENERATION ABSOLUE  	Autocura

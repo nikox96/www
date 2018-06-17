@@ -1,4 +1,4 @@
-<!-- views/new-order-product.ejs -->
+<!-- views/new-order-promo.ejs -->
 <!doctype html>
 <html>
 <head>
@@ -31,55 +31,12 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
                     <li><a class="dropdown-item" href="/new-order-cond-pag">Avanti</a></li>
                     <li><a class="dropdown-item" href="/new-order">Indietro</a></li>
-                    <li><a class="dropdown-item" href="/new-order-promo">Promozioni</a></li>
+                    <li><a class="dropdown-item" href="/new-order-product">Prodotti</a></li>
                     <div class="dropdown-divider"></div>
                     <li><a class="dropdown-item" href="/home">Annulla</a></li>
                 </ul>
             </li>
         </ul>
-        <form action="/new-order-product" method="get" class="form-inline">
-            <input type="hidden" name="idOrd" value="<%= idOrd %>">
-            <div class="form-row align-items-center">
-                <div class="w-10 col">
-                    <label class="sr-only" for="inlineFormCodDa">Codice prodotto da</label>
-                    <input type="number" name="ccodda" class="form-control mb-2" id="inlineFormInputCodDa"
-                           placeholder="Codice prodotto da">
-                </div>
-                <div class="w-10 col">
-                    <label class="sr-only" for="inlineFormCodA">A</label>
-                    <input type="number" name="ccoda" class="form-control mb-2" id="inlineFormInputCodA"
-                           placeholder="Codice prodotto a">
-                </div>
-                <div class="w-10 col">
-                    <label class="sr-only" for="inlineFormXprod">A</label>
-                    <input type="text" name="xprod" class="form-control mb-2" id="inlineFormInputXprod"
-                           placeholder="Descrizione prodotto">
-                </div>
-                <div class="w-10 col">
-                    <select class=" form-control custom-select mb-2" name="sven">
-                        <option value="" selected>Tipo vendita</option>
-                        <% lven.forEach(function(lven){ %>
-                        <option value="<%= lven.sven %>">
-                            <%= lven.sven %>
-                        </option>
-                        <% }); %>
-                    </select>
-                </div>
-                <div class="w-10 col">
-                    <select class="form-control custom-select mb-2" name="xgrp">
-                        <option value="" selected>Categoria prodotto</option>
-                        <% xgrp.forEach(function(xgrp){ %>
-                        <option value="<%= xgrp.xgrp %>">
-                            <%= xgrp.xgrp %>
-                        </option>
-                        <% }); %>
-                    </select>
-                </div>
-                <div class="w-5 col">
-                    <button type="submit" class="btn btn-primary mb-2">Cerca</button>
-                </div>
-            </div>
-        </form>
     </div>
 </nav>
 <div class="container-fluid">
@@ -88,24 +45,17 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Codice Prodotto</th>
                     <th scope="col">Descrizione</th>
-                    <th scope="col">Prezzo</th>
-                    <th scope="col">Anteprima</th>
                     <th scope="col">Quantità</th>
                 </tr>
                 </thead>
                 <tbody>
-                <% for(var i = 0; i < products.length;i++) { %>
+                <% for(var i = 0; i < anaPromo.length;i++) { %>
                 <tr>
-                    <th scope="row"><%= products[i].ccod %></th>
-                    <td><%= products[i].xdesc %></td>
-                    <td><%= products[i].iprz %></td>
                     <td>
-                        <button class="btn-primary bg-transparent text-primary border-0 align-bottom"
-                                data-toggle="modal"
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#Modal<%= i %>">
-                            <i class="material-icons">&#xe410</i>
+                            <%= anaPromo[i].xdescpromo %>
                         </button>
                         <div class="modal fade" id="Modal<%= i %>" tabindex="-1" role="dialog"
                              aria-labelledby="Modal<%= i %>Title" aria-hidden="true">
@@ -113,13 +63,34 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title"
-                                            id="Modal<%= i %>Title">Anteprima prodotto</h5>
+                                            id="Modal<%= i %>Title"><%= anaPromo[i].xdescpromo %></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="http://www.selvertshopping.com/images/products/big/P<%= products[i].ccod %>.jpg">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Codice Prodotto</th>
+                                                <th scope="col">Descrizione</th>
+                                                <th scope="col">Prezzo</th>
+                                                <th scope="col">Quantità</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <% for(var j = 0; j < promo.length;j++) { %>
+                                            <% if (anaPromo[i].ccod == promo[j].ccod) { %>
+                                            <tr>
+                                                <th scope="row"><%= promo[j].ccodprod %></th>
+                                                <td><%= promo[j].xdescprod %></td>
+                                                <td><%= promo[j].iprz %></td>
+                                                <td><%= promo[j].ipzz %></td>
+                                            </tr>
+                                            <% } %>
+                                            <% } %>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
@@ -130,9 +101,9 @@
                         </div>
                     </td>
                     <td>
-                        <form action="/new-order-product" method="post" class="form-inline">
+                        <form action="/new-order-promo" method="post" class="form-inline">
                             <input type="hidden" name="ccod" value="<%= idOrd %>">
-                            <input type="hidden" name="ccodprod" value="<%= products[i].ccod %>">
+                            <input type="hidden" name="ccodpromo" value="<%= anaPromo[i].ccod %>">
                             <input type="number" name="iqta" class="form-control">
                             <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
                                 <i class="material-icons">&#xe854</i>

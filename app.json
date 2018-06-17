@@ -1,8 +1,9 @@
 {
   "name": "portale",
   "description": "Portale Innovazioni",
+  "main": "portale.js",
   "scripts": {
-    "start": "portale.js"
+    "start": "node portale.js"
   },
   "env": {
   },

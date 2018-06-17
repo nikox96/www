@@ -3,14 +3,14 @@
 <html>
 <head>
     <title>Portale Innovazioni - Nuovo ordine</title>
-    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
-          integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
-    <script
-            src="http://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
@@ -34,7 +34,7 @@
                     </ul>
                 </li>
             </ul>
-            <form action="/new-order" method="post" class="form-inline">
+            <form action="/new-order" method="get" class="form-inline">
                 <div class="form-row align-items-center">
                     <div class="col-auto">
                         <label class="sr-only" for="inlineFormCodCli">Codice cliente</label>
@@ -60,7 +60,9 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Partia IVA</th>
+                    <th scope="col">Partia IVA <a href="/new-client" role="button"
+                                                  class="btn-primary bg-transparent mr-auto mb-2 text-primary border-0 align-bottom"><i
+                                    class="material-icons">&#xe05e</i></a></th>
                     <th scope="col">Ragione sociale</th>
                     <th scope="col">Comune</th>
                     <th scope="col">C.A.P.</th>
@@ -69,6 +71,7 @@
                 </thead>
                 <tbody>
                 <% clients.forEach(function(clients) { %>
+                <% if(user.cage === clients.cage || user.cage === 9999 || user.cage === 0){ %>
                 <tr>
                     <th scope="row">
                         <% if (clients.cpiva = '') { %>
@@ -81,11 +84,13 @@
                     <td><%= clients.xcom %></td>
                     <td><%= clients.ccap %></td>
                     <td>
-                        <a href="/new-order-product?ccodcli=<%= clients.ccod %>"><i
-                                    class="material-icons">&#xe5c8</i></a>
+                        <form action="/new-order" method="post">
+                            <input type="hidden" name="ccod" value="<%= clients.ccod %>">
+                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe5c8</i></button>
+                        </form>
                     </td>
                 </tr>
-                <% }); %>
+                <% }}); %>
                 </tbody>
             </table>
         </div>
