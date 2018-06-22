@@ -118,8 +118,13 @@
                 </button>
             </div>
             <div class="col-md-auto">
-                <form method="post" action="/new-order-sum">
-                    <div class="modal fade" id="noteModal" tabindex="-1" role="dialog"
+                <form id="updateOrderNote" method="post" action="/new-order-sum">
+                    <input type="hidden" name="idOrd" value="<%= idOrd %>">
+                    <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+                        <i class="material-icons">&#xe161</i> Conferma
+                    </button>
+                </form>
+                <div class="modal fade" id="noteModal" tabindex="-1" role="dialog"
                          aria-labelledby="noteModal" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -131,8 +136,8 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <input type="text" name="xnote" value="<%= xnota %>" maxlength="1000"
-                                           spellcheck="false">
+                                    <textarea class="form-control" name="xnote" maxlength="1000"
+                                           spellcheck="false" form="updateOrderNote"><%= xnota %></textarea>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
@@ -141,11 +146,6 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="idOrd" value="<%= idOrd %>">
-                    <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
-                        <i class="material-icons">&#xe161</i> Conferma
-                    </button>
-                </form>
             </div>
         </div>
     </div>
