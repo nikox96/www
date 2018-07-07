@@ -2204,7 +2204,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
                     if (sttErr) {
                         console.log(sttErr);
                     } else {
-                        res.download(sendFile(nregRes, righe[0].ccod));
+                        res.download(sendFile(nreg, righe[0].ccod));
                     }
                 });
                 return;
