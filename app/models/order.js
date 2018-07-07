@@ -261,9 +261,9 @@ Ordine.updateNreg = function updateNreg(ccod, callback) {
                 console.log('nreg length: ' + nregRes.rows.length);
                 console.log('nreg max: ' + nregRes.rows[0].nreg);
                 nregRes = (nregRes.rows && nregRes.rows.length > 0 ? nregRes.rows : nregRes);
-                //se non è presente nreg è il primo ordine nreg=0
-                if (!(nregRes[0].nreg))
-                    nregRes[0].nreg = 0;
+                //se non è presente nreg è il primo ordine nreg=1000
+                if (!(nregRes[0].nreg) || nregRes[0].nreg < 1000)
+                    nregRes[0].nreg = 1000;
 
                 console.log('nreg pre: ' + nregRes[0].nreg);
                 nregRes[0].nreg = nregRes[0].nreg + 1;
