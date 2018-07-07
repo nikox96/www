@@ -361,7 +361,7 @@ module.exports = function (app, passport) {
                                     console.log('ordRes.dreg pre: ' + ordRes.dreg);
                                     ordRes.dreg = dateFormat(ordRes.dreg, "dd/mm/yyyy");
                                     console.log('ordRes.dreg post: ' + ordRes.dreg);
-                                    Order.updateNreg(righe[0].ccod, function (nregErr, nregRes) {
+                                    Order.updateNreg(ordRes.ccod, function (nregErr, nregRes) {
                                         // @todo: cosa fare in caso di errore?!
                                         if (nregErr) {
                                             console.log(nregErr);
