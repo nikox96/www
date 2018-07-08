@@ -789,6 +789,41 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.post('/edit-client', isLoggedIn(, function (req, res) {
+        var xcli1 = req.body.xnome + req.body.xcogn;
+        Client.insert(req.body.ccod, (req.body.cfis.length > 11 ? '' : req.body.cfis), req.body.xragsoc, (req.body.cfis.length <= 16 && req.body.cfis.length > 11 ? req.body.cfis : ''), xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, req.body.cabi, req.body.ccab, req.body.ncont, req.body.ntel, req.body.psco, function (cliInsErr, cliInsRes) {
+            if (cliInsErr) {
+                console.log("Errore censimento cliente!");
+                res.render('detail-client.ejs', {
+                    message: req.flash('insCliMessage'),
+                    ccod: req.body.ccod,
+                    cfis: req.body.cfis,
+                    xragsoc: req.body.xragsoc,
+                    xnome: req.body.xnome,
+                    xcogn: req.body.xcogn,
+                    xind: req.body.xind,
+                    xcom: req.body.xcom,
+                    cprv: req.body.cprv,
+                    ccap: req.body.ccap,
+                    xnaz: req.body.xnaz,
+                    xmail: req.body.xmail,
+                    ccat: req.body.ccat,
+                    ctipcom: req.body.ctipcom,
+                    czona: req.body.czona,
+                    cage: req.body.cage,
+                    cabi: req.body.cabi,
+                    ccab: req.body.ccab,
+                    ncont: req.body.ncont,
+                    ntel: req.body.ntel,
+                    psco: req.body.psco,
+                    user: req.user
+                });
+            } else {
+                res.redirect('/client-list');
+            }
+        });
+    }));
+
     app.post('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
 
