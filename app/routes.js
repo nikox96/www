@@ -822,7 +822,7 @@ module.exports = function (app, passport) {
                 res.redirect('/client-list');
             }
         });
-    }));
+    });
 
     app.post('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
