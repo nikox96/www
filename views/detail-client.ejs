@@ -103,7 +103,7 @@
             </div>
             <div class="form-group col">
                 <label>Sconto cliente</label>
-                <input type="number" step="0.01" class="form-control" name="psco"
+                <input type="number" step="0.01" class="form-control" name="psco" max="100.00"
                        value="<%= psco %>" <%- (cazi && cazi === 'var') ? '' : 'readonly' %>>
             </div>
         </div>
@@ -131,8 +131,13 @@
             </div>
             <div class="form-group col">
                 <label>Zona</label>
-                <input type="number" class="form-control" name="czona" maxlength="1" value="<%= czona %>"
-                       required <%- (cazi && cazi === 'var') ? '' : 'readonly' %>>
+                <select class="custom-select" name="czona" form="formDettCli"
+                        id="inputGroupSelect01" <%- (cazi && cazi === 'var') ? '' : 'readonly' %>>
+                    <option <%- (czona && czona != '') ? '' : 'selected' %>>Selezionare una voce</option>
+                    <option value="1" <%- (czona && czona === '1') ? 'selected' : '' %>>Veneto</option>
+                    <option value="2" <%- (czona && czona === '2') ? 'selected' : '' %>>Lombardia</option>
+                    <option value="3" <%- (czona && czona === '3') ? 'selected' : '' %>>Piemonte</option>
+                </select>
             </div>
         </div>
         <div class="form-row">

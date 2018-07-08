@@ -93,7 +93,7 @@
             </div>
             <div class="form-group col">
                 <label>Sconto cliente</label>
-                <input type="number" step="0.01" class="form-control" name="psco" value="<%= psco %>">
+                <input type="number" step="0.01" class="form-control" name="psco" max="100.00" value="<%= psco %>">
             </div>
         </div>
 
@@ -118,7 +118,13 @@
             </div>
             <div class="form-group col">
                 <label>Zona</label>
-                <input type="number" class="form-control" name="czona" maxlength="1" required>
+                <select class="custom-select" name="czona" form="formNewCli"
+                        id="inputGroupSelect01">
+                    <option selected>Selezionare una voce</option>
+                    <option value="1">Veneto</option>
+                    <option value="2">Lombardia</option>
+                    <option value="3">Piemonte</option>
+                </select>
             </div>
             <% } else { %>
             <div class="form-group col">
@@ -144,16 +150,19 @@
                 <input type="number" class="form-control" name="ccat" maxlength="2" value="30" required>
             </div>
             <div class="form-group col">
-                <label>Zona</label>
                 <!--<% if (user.cage == 9) { %>
                 <input type="number" class="form-control" name="czona" maxlength="1" value="1" readonly required>
                 <% } else if (user.cage == 5 || user.cage == 1843) { %>
                 <input type="number" class="form-control" name="czona" maxlength="1" value="2" readonly required>
                 <% } %>-->
-                <div class="form-group col">
                     <label>Zona</label>
-                    <input type="number" class="form-control" name="czona" maxlength="1" required>
-                </div>
+                    <select class="custom-select" name="czona" form="formNewCli"
+                            id="inputGroupSelect01">
+                        <option selected>Selezionare una voce</option>
+                        <option value="1">Veneto</option>
+                        <option value="2">Lombardia</option>
+                        <option value="3">Piemonte</option>
+                    </select>
             </div>
             <% } %>
         </div>

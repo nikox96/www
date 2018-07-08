@@ -48,6 +48,29 @@ Client.insert = function insert(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, c
         }
     });
 };
+
+Client.update = function update(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage, cabi, ccab, ncont, ntel, psco, callback) {
+    Client.find(ccod, function (findErr, findRes) {
+        if (findErr) {
+            console.log("Cliente non censito");
+            callback("Cliente non censito!", null);
+        } else {
+            db.query("UPDATE portale.clienti set cpiva = $1, xragsoc=$2, cfis=$3, xcli1=$4, xind=$5, xcom=$6, cprv=$7, ccap=$8, xnaz=$9, xmail=$10, ccat=$11, ctipcomm=$12, czona=$13, cage=$14, cabi=$15, ccab=$16, ncont=$17, ntel=$18, psco=$19 where ccod = $20"
+                , [cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage, cabi, ccab, ncont, ntel, psco, ccod]
+                , (queryErr, queryRes) => {
+                    if (queryErr) {
+                        console.log("error: " + queryErr);
+                        callback(queryErr, null);
+                    }
+                    else {
+                        queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
+                        callback(null, queryRes[0]);
+                    }
+                });
+        }
+    });
+};
+
 Client.list = function list(ccod, xragsoc, callback) {
     console.log("ricerca lista clienti");
     console.log("ccod " + ccod);
