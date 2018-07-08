@@ -48,7 +48,6 @@ Ordine.delOrder = function delOrder(ccod, cstt, callback) {
                                 console.log(delErr);
                             }
                             else {
-                                delRes = (delRes.rows && delRes.rows.length > 0 ? delRes.rows : delRes);
                                 db.query("DELETE FROM portale.righe_ordini WHERE ccod = "
                                     + ccod
 //                                    , function (err2, res2) {

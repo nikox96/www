@@ -393,6 +393,7 @@ module.exports = function (app, passport) {
                                             tes.cConContAltroSis = '';
                                             tes.cPartAltroSis = '';
                                             tes.cPart = (ordRes.ccli && ordRes.ccli !== '' ? ordRes.ccli : '');
+                                            tes.psco = (cliRes.psco ? cliRes.psco : '0.00');
                                             tes.cfisPart = (cliRes.cfis && cliRes.cfis !== '' ? cliRes.cfis : '');
                                             tes.pivaPart = (cliRes.piva && cliRes.piva !== '' ? cliRes.piva : '');
                                             tes.addAut = '';
@@ -601,9 +602,9 @@ module.exports = function (app, passport) {
     app.post('/del-order', isLoggedIn, function (req, res) {
         Order.delOrder(req.body.ccod, 0, function (queryErr, queryRes) {
             if (queryErr)
-                console.log('impossibile ma vero');
+                console.log(queryErr);
             else
-                res.redirect('/home');
+                res.redirect('/order-list');
         })
     });
 
@@ -673,7 +674,7 @@ module.exports = function (app, passport) {
                 req.flash('list-client-message', cliErr);
             } else {
                 xrig += cliRes[0].ccod + ';';
-                xrig += cliRes[0].xragsoc + ';';
+                xrig += cliRes[0].xragsoc + ';;';
                 xrig += cliRes[0].xind + ';';
                 xrig += cliRes[0].ccap + ';';
                 xrig += cliRes[0].xcom + ';';
@@ -687,8 +688,9 @@ module.exports = function (app, passport) {
                 xrig += cliRes[0].ccat + ';';
                 xrig += cliRes[0].czona + ';';
                 xrig += cliRes[0].xcli1 + ';';
-                xrig += cliRes[0].xcli2 + ';;';
-                xrig += '01;;';
+                xrig += cliRes[0].xcli2 + ';importato da portale;';
+                xrig += '01;';
+                xrig += cliRes[0].psco + ';;';
                 res.download(sendCliFile(cliRes[0].ccod, xrig));
             }
         });
@@ -729,6 +731,7 @@ module.exports = function (app, passport) {
                 req.flash('list-client-message', cliErr);
             } else {
                 res.render('detail-client.ejs', {
+                    cazi: 'inq',
                     ccod: cliRes[0].ccod,
                     cfis: (cliRes[0].cpiva !== '' ? cliRes[0].cpiva : cliRes[0].cfis),
                     xragsoc: cliRes[0].xragsoc,
@@ -747,6 +750,39 @@ module.exports = function (app, passport) {
                     ccab: cliRes[0].ccab,
                     ncont: cliRes[0].ncont,
                     ntel: cliRes[0].ntel,
+                    psco: cliRes[0].psco,
+                    user: req.user
+                });
+            }
+        });
+    });
+
+    app.get('/edit-client', isLoggedIn, function (req, res) {
+        Client.list(req.query.ccod, null, function (cliErr, cliRes) {
+            if (cliErr) {
+                req.flash('list-client-message', cliErr);
+            } else {
+                res.render('detail-client.ejs', {
+                    cazi: 'var',
+                    ccod: cliRes[0].ccod,
+                    cfis: (cliRes[0].cpiva !== '' ? cliRes[0].cpiva : cliRes[0].cfis),
+                    xragsoc: cliRes[0].xragsoc,
+                    xcli: cliRes[0].xcli1,
+                    xind: cliRes[0].xind,
+                    xcom: cliRes[0].xcom,
+                    cprv: cliRes[0].cprv,
+                    ccap: cliRes[0].ccap,
+                    xnaz: cliRes[0].xnaz,
+                    xmail: cliRes[0].xmail,
+                    ccat: cliRes[0].ccat,
+                    ctipcom: cliRes[0].ctipcom,
+                    czona: cliRes[0].czona,
+                    cage: cliRes[0].cage,
+                    cabi: cliRes[0].cabi,
+                    ccab: cliRes[0].ccab,
+                    ncont: cliRes[0].ncont,
+                    ntel: cliRes[0].ntel,
+                    psco: cliRes[0].psco,
                     user: req.user
                 });
             }
@@ -803,6 +839,7 @@ module.exports = function (app, passport) {
                     ccab: '',
                     ncont: '',
                     ntel: '',
+                    psco: 0.00,
                     user: req.user
                 });
             }
@@ -811,7 +848,7 @@ module.exports = function (app, passport) {
 
     app.post('/new-client', isLoggedIn, function (req, res) {
         var xcli1 = req.body.xnome + req.body.xcogn;
-        Client.insert(req.body.ccod, (req.body.cfis.length > 11 ? '' : req.body.cfis), req.body.xragsoc, (req.body.cfis.length <= 16 && req.body.cfis.length > 11 ? req.body.cfis : ''), xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, req.body.cabi, req.body.ccab, req.body.ncont, req.body.ntel, function (cliInsErr, cliInsRes) {
+        Client.insert(req.body.ccod, (req.body.cfis.length > 11 ? '' : req.body.cfis), req.body.xragsoc, (req.body.cfis.length <= 16 && req.body.cfis.length > 11 ? req.body.cfis : ''), xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, req.body.cabi, req.body.ccab, req.body.ncont, req.body.ntel, req.body.psco, function (cliInsErr, cliInsRes) {
             if (cliInsErr) {
                 console.log("Errore censimento cliente!");
                 res.render('new-client.ejs', {
@@ -835,6 +872,7 @@ module.exports = function (app, passport) {
                     ccab: req.body.ccab,
                     ncont: req.body.ncont,
                     ntel: req.body.ntel,
+                    psco: req.body.psco,
                     user: req.user
                 });
             } else {
@@ -1188,6 +1226,7 @@ function initializeCSV() {
     tes.cConContAltroSis = '';
     tes.cPartAltroSis = '';
     tes.cPart = '';
+    tes.psco = '';
     tes.cfisPart = '';
     tes.pivaPart = '';
     tes.addAut = '';
@@ -1577,6 +1616,7 @@ function csvRig() {
     str += rec.tes.cConContAltroSis + ';';
     str += rec.tes.cPartAltroSis + ';';
     str += rec.tes.cPart + ';';
+    str += rec.tes.psco + ';';
     str += rec.tes.cfisPart + ';';
     str += rec.tes.pivaPart + ';';
     str += rec.tes.addAut + ';';
@@ -1952,6 +1992,7 @@ function csvRig93() {
     str += rec.tes.ddoc + ';';
     str += rec.tes.ndoc + ';';
     str += rec.tes.cPart + ';';
+    str += rec.tes.psco + ';';
     str += rec.tes.cValDoc + ';';
     str += rec.tes.camb + ';';
     str += rec.tes.cimp + ';';

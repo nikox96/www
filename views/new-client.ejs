@@ -91,6 +91,10 @@
                 <label>E-mail</label>
                 <input type="email" class="form-control" name="xmail" maxlength="60" value="<%= xmail %>" required>
             </div>
+            <div class="form-group col">
+                <label>Sconto cliente</label>
+                <input type="number" step="0.01" class="form-control" name="psco" value="<%= psco %>">
+            </div>
         </div>
 
         <div class="form-row">
@@ -159,7 +163,7 @@
 
             <div class="form-group col">
                 <label>N° telefono</label>
-                <input type="number" class="form-control" name="ntel" maxlength="13" value="<%= ntel %>" required>
+                <input type="tel" pattern="^[0-9-+s()]*$" class="form-control" name="ntel" maxlength="13" value="<%= ntel %>" required>
             </div>
         </div>
         <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">

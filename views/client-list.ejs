@@ -68,6 +68,7 @@
                     <th scope="col">N° Telefono</th>
                     <th scope="col">Agente</th>
                     <th></th>
+                    <th></th>
                     <% if (user.cage == 9999 || user.cage == 0) { %>
                     <th></th>
                     <% } %>
@@ -85,6 +86,12 @@
                         <form action="/detail-client" method="get">
                             <input type="hidden" name="ccod" value="<%= client.ccod %>">
                             <button type="submit" class="btn btn-link"><i class="material-icons">&#xe88f</i></button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/edit-client" method="get">
+                            <input type="hidden" name="ccod" value="<%= client.ccod %>">
+                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe254</i></button>
                         </form>
                     </td>
                     <% if (user.cage == 9999) { %>
