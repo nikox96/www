@@ -123,10 +123,10 @@
                 <label>Categoria</label>
                 <select class="custom-select" name="ccat" form="formDettCli"
                         id="inputGroupSelect01" <%- (cazi && cazi === 'var') ? '' : 'readonly' %>>
-                    <option selected>Selezionare una voce</option>
-                    <option value="PRIVAT">Privato</option>
-                    <option value="PROF">Professionale</option>
-                    <option value="RIVEN">Rivendita</option>
+                    <option  <%- (ccat && ccat != 'PRIVAT') ? '' : 'selected' %>>Selezionare una voce</option>
+                    <option value="PRIVAT" <%- (ccat && ccat === 'PRIVAT') ? 'selected' : '' %>>Privato</option>
+                    <option value="PROF" <%- (ccat && ccat === 'PROF') ? 'selected' : '' %>>Professionale</option>
+                    <option value="RIVEN" <%- (ccat && ccat === 'RIVEN') ? 'selected' : '' %>>Rivendita</option>
                 </select>
             </div>
             <div class="form-group col">
