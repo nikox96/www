@@ -791,11 +791,12 @@ module.exports = function (app, passport) {
 
     app.post('/edit-client', isLoggedIn, function (req, res) {
         var xcli1 = req.body.xnome + req.body.xcogn;
-        Client.update(req.body.ccod, (req.body.cfis.length > 11 ? '' : req.body.cfis), req.body.xragsoc, (req.body.cfis.length <= 16 && req.body.cfis.length > 11 ? req.body.cfis : ''), xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, req.body.cabi, req.body.ccab, req.body.ncont, req.body.ntel, req.body.psco, function (cliInsErr, cliInsRes) {
-            if (cliInsErr) {
+        Client.update(req.body.ccod, (req.body.cfis.length > 11 ? '' : req.body.cfis), req.body.xragsoc, (req.body.cfis.length <= 16 && req.body.cfis.length > 11 ? req.body.cfis : ''), xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, req.body.cabi, req.body.ccab, req.body.ncont, req.body.ntel, req.body.psco, function (cliUpdErr, cliUpdRes) {
+            if (cliUpdErr) {
                 console.log("Errore censimento cliente!");
                 res.render('detail-client.ejs', {
                     message: req.flash('insCliMessage'),
+                    cazi: 'var',
                     ccod: req.body.ccod,
                     cfis: req.body.cfis,
                     xragsoc: req.body.xragsoc,
