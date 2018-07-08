@@ -690,7 +690,7 @@ module.exports = function (app, passport) {
                 xrig += cliRes[0].xcli1 + ';';
                 xrig += cliRes[0].xcli2 + ';importato da portale;';
                 xrig += '01;';
-                xrig += cliRes[0].psco + ';;';
+                xrig += cliRes[0].psco + ';';
                 res.download(sendCliFile(cliRes[0].ccod, xrig));
             }
         });
