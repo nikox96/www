@@ -914,7 +914,7 @@ module.exports = function (app, passport) {
                 Appoggio.find(req.user.cage, '', function (appErr, appRes) {
                     if (appErr) {
                         console.log("errore recupero codice ordine");
-                    } else {
+                    } else if (appRes.length > 0) {
                         Order.updateCcli(appRes[0].idord, req.body.ccod, function (ordErr, ordRes) {
                             if (ordErr) {
                                 console.log("errore aggiornamento codice cliente ordine");
