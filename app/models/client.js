@@ -94,7 +94,7 @@ Client.list = function list(ccod, xragsoc, callback) {
 };
 
 Client.getNewCod = function getNewCod(callback) {
-    var query = "SELECT MAX(ccod) as newCod FROM portale.clienti";
+    var query = "SELECT MAX(ccod) as newcod FROM portale.clienti";
     //Per i clienti Selvert censiti da piattaforma portale sono dedicati gli ID da 3000 a 3999
     var newCod = 3000;
 
@@ -105,10 +105,9 @@ Client.getNewCod = function getNewCod(callback) {
         }
         else {
             console.log('newcod: ' + queryRes.rows[0].newcod);
-            console.log('res row 0: %j', queryRes.rows[0]);
             queryRes.rows[0].newcod = parseInt(queryRes.rows[0].newcod);
             if (queryRes.rows[0].newcod >= 3000 && queryRes.rows[0].newcod < 3999) {
-                newCod = parseInt(queryRes.rows[0].newcod)++;
+                newCod = queryRes.rows[0].newcod++;
             } else if (queryRes.rows[0].newcod >= 3999){
                 callback("ID clienti Selvert terminati, aumentare il range di ID dedicati!", null);
                 return;
