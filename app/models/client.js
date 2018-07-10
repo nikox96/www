@@ -11,8 +11,8 @@ Client.find = function find(ccod, callback) {
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
-                callback(queryErr, null);
                 console.log("error: " + queryErr);
+                callback(queryErr, null);
             }
             else {
                 if (queryRes.rows.length === 0) {
