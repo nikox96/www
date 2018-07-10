@@ -30,7 +30,13 @@
                         Azioni
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                        <% if (newOrder == 's'){ %>
                         <li><a class="dropdown-item" href="/new-order">Annulla</a></li>
+                        <% } else if (newOrder == 'n'){ %>
+                        <li><a class="dropdown-item" href="/client-list">Annulla</a></li>
+                        <% } else { %>
+                        <li><a class="dropdown-item" href="/home">Annulla</a></li>
+                        <% } %>
                     </ul>
                 </li>
             </ul>
