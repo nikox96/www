@@ -107,7 +107,8 @@ Client.getNewCod = function getNewCod(callback) {
             console.log('newcod: ' + queryRes.rows[0].newcod);
             queryRes.rows[0].newcod = parseInt(queryRes.rows[0].newcod);
             if (queryRes.rows[0].newcod >= 3000 && queryRes.rows[0].newcod < 3999) {
-                newCod = queryRes.rows[0].newcod++;
+                newCod = queryRes.rows[0].newcod + 1;
+                console.log('newCod: ' + newCod);
             } else if (queryRes.rows[0].newcod >= 3999){
                 callback("ID clienti Selvert terminati, aumentare il range di ID dedicati!", null);
                 return;
