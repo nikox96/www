@@ -51,9 +51,20 @@
                        max="3999" readonly required>
             </div>
             <div class="form-group col">
-                <label>Codice Fiscale/Partita I.V.A.</label>
+                <label>Sconto cliente</label>
+                <input type="number" step="0.01" class="form-control" name="psco" max="100.00" value="<%= psco %>">
+            </div>
+            <div class="form-group col">
+                <label>Codice Fiscale</label>
                 <input type="text" class="form-control" name="cfis" maxlength="16" value="<%= cfis %>" required>
             </div>
+            <div class="form-group col">
+                <label>Partita I.V.A.</label>
+                <input type="text" pattern="^[0-9]" class="form-control" name="cpiva" maxlength="11" value="<%= cpiva %>"
+                       required>
+            </div>
+        </div>
+        <div class="form-row">
             <div class="form-group col">
                 <label>Nome</label>
                 <input type="text" class="form-control" name="xnome" maxlength="15" value="<%= xnome %>" required>
@@ -97,10 +108,6 @@
             <div class="form-group col">
                 <label>E-mail</label>
                 <input type="email" class="form-control" name="xmail" maxlength="60" value="<%= xmail %>" required>
-            </div>
-            <div class="form-group col">
-                <label>Sconto cliente</label>
-                <input type="number" step="0.01" class="form-control" name="psco" max="100.00" value="<%= psco %>">
             </div>
         </div>
 
@@ -162,14 +169,14 @@
                 <% } else if (user.cage == 5 || user.cage == 1843) { %>
                 <input type="number" class="form-control" name="czona" maxlength="1" value="2" readonly required>
                 <% } %>-->
-                    <label>Zona</label>
-                    <select class="custom-select" name="czona" form="formNewCli"
-                            id="inputGroupSelect01">
-                        <option selected>Selezionare una voce</option>
-                        <option value="1">Veneto</option>
-                        <option value="2">Lombardia</option>
-                        <option value="3">Piemonte</option>
-                    </select>
+                <label>Zona</label>
+                <select class="custom-select" name="czona" form="formNewCli"
+                        id="inputGroupSelect01">
+                    <option selected>Selezionare una voce</option>
+                    <option value="1">Veneto</option>
+                    <option value="2">Lombardia</option>
+                    <option value="3">Piemonte</option>
+                </select>
             </div>
             <% } %>
         </div>
@@ -189,7 +196,8 @@
 
             <div class="form-group col">
                 <label>N° telefono</label>
-                <input type="tel" pattern="^[0-9-+s()]*$" class="form-control" name="ntel" maxlength="13" value="<%= ntel %>" required>
+                <input type="tel" pattern="^[0-9-+s()]*$" class="form-control" name="ntel" maxlength="13"
+                       value="<%= ntel %>" required>
             </div>
         </div>
         <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
