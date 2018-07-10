@@ -876,6 +876,7 @@ module.exports = function (app, passport) {
                     ncont: '',
                     ntel: '',
                     psco: 0.00,
+                    newOrder: req.query.newOrder,
                     user: req.user
                 });
             }
@@ -909,6 +910,7 @@ module.exports = function (app, passport) {
                     ncont: req.body.ncont,
                     ntel: req.body.ntel,
                     psco: req.body.psco,
+                    newOrder: req.body.newOrder,
                     user: req.user
                 });
             } else {
