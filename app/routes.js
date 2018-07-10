@@ -792,7 +792,7 @@ module.exports = function (app, passport) {
     });
 
     app.post('/edit-client', isLoggedIn, function (req, res) {
-        Client.update(req.body.ccod, req.body.cpiva, req.body.xragsoc, req.body.cfis, xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, req.body.cabi, req.body.ccab, req.body.ncont, req.body.ntel, req.body.psco, function (cliUpdErr, cliUpdRes) {
+        Client.update(req.body.ccod, req.body.cpiva, req.body.xragsoc, req.body.cfis, req.body.xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, req.body.cabi, req.body.ccab, req.body.ncont, req.body.ntel, req.body.psco, function (cliUpdErr, cliUpdRes) {
             if (cliUpdErr) {
                 console.log("Errore censimento cliente!");
                 res.render('detail-client.ejs', {
