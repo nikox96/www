@@ -919,6 +919,7 @@ module.exports = function (app, passport) {
             } else {
                 Appoggio.find(req.user.cage, '', function (appErr, appRes) {
                     if (appErr) {
+                        res.redirect('/home');
                         console.log("errore recupero codice ordine");
                     } else if (appRes.length > 0) {
                         Order.updateCcli(appRes[0].idord, req.body.ccod, function (ordErr, ordRes) {
@@ -959,6 +960,8 @@ module.exports = function (app, passport) {
                                 });
                             }
                         });
+                    } else {
+                        res.redirect('/client-list');
                     }
                 });
             }
