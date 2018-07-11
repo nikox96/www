@@ -1084,6 +1084,7 @@ function isLoggedIn(req, res, next) {
 }
 
 function getClients(req, res) {
+    console.log('getclients: '  + req.user.cage);
     Appoggio.find(req.user.cage, '', function (appfinErr, appfinRes) {
         if (appfinErr) {
             console.log("errore lettura appoggio");
