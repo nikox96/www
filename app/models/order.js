@@ -243,7 +243,7 @@ Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, callback) {
                     callback(null, queryRes);
                     return;
                 } else {
-                    console.log("non ghe mia");
+                    console.log("Nessun ordine trovato");
                 }
             }
             callback("Nessun ordine trovato", null);

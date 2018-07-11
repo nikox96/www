@@ -614,12 +614,12 @@ module.exports = function (app, passport) {
     // show the login form
     app.get('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
+        var order = {};
 
         Order.getUserOrder(req.user.cage, null, null, function (ordErr, ordRes) {
             if (ordErr) {
                 req.flash('list-order-message', ordErr);
             } else {
-                var order = {};
                 for (i = 0; i < ordRes.length; i++) {
                     order = {};
                     order.ccod = ordRes[i].ccod;
@@ -628,12 +628,13 @@ module.exports = function (app, passport) {
                     order.data = ordRes[i].dreg;
                     orders[i] = order;
                 }
-
-                res.render('order-list.ejs', {
-                    orders: orders,
-                    user: req.user
-                });
             }
+
+            res.render('order-list.ejs', {
+                orders: orders,
+                message: req.flash('list-order-message'),
+                user: req.user
+            });
         });
     });
 
