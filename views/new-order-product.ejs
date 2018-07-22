@@ -18,68 +18,78 @@
 </head>
 <body>
 <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <a class="navbar-brand" href="#">Nuovo Ordine <%= idOrd %></a>
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <a class="navbar-brand" href="#">Nuovo Ordine <%= idOrd %></a>
+        </div>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
-                   data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Azioni
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
-                    <li><a class="dropdown-item" href="/new-order-cond-pag">Avanti</a></li>
-                    <li><a class="dropdown-item" href="/new-order">Indietro</a></li>
-                    <li><a class="dropdown-item" href="/new-order-promo">Promozioni</a></li>
-                    <div class="dropdown-divider"></div>
-                    <li><a class="dropdown-item" href="/home">Annulla</a></li>
-                </ul>
-            </li>
-        </ul>
-        <form action="/new-order-product" method="get" class="form-inline">
-            <input type="hidden" name="idOrd" value="<%= idOrd %>">
-            <div class="form-row align-items-center">
-                <div class="w-10 col">
-                    <label class="sr-only" for="inlineFormCodDa">Codice prodotto da</label>
-                    <input type="number" name="ccodda" class="form-control mb-2" id="inlineFormInputCodDa"
-                           placeholder="Codice prodotto da">
+        <div class="col-md-auto">
+            <div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
+                <div class="col-md-auto">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                Azioni
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                                <li><a class="dropdown-item" href="/new-order-cond-pag">Avanti</a></li>
+                                <li><a class="dropdown-item" href="/new-order">Indietro</a></li>
+                                <li><a class="dropdown-item" href="/new-order-promo">Promozioni</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li><a class="dropdown-item" href="/home">Annulla</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-                <div class="w-10 col">
-                    <label class="sr-only" for="inlineFormCodA">A</label>
-                    <input type="number" name="ccoda" class="form-control mb-2" id="inlineFormInputCodA"
-                           placeholder="Codice prodotto a">
-                </div>
-                <div class="w-10 col">
-                    <label class="sr-only" for="inlineFormXprod">A</label>
-                    <input type="text" name="xprod" class="form-control mb-2" id="inlineFormInputXprod"
-                           placeholder="Descrizione prodotto">
-                </div>
-                <div class="w-10 col">
-                    <select class=" form-control custom-select mb-2" name="sven">
-                        <option value="" selected>Tipo vendita</option>
-                        <% lven.forEach(function(lven){ %>
-                        <option value="<%= lven.sven %>">
-                            <%= lven.sven %>
-                        </option>
-                        <% }); %>
-                    </select>
-                </div>
-                <div class="w-10 col">
-                    <select class="form-control custom-select mb-2" name="xgrp">
-                        <option value="" selected>Categoria prodotto</option>
-                        <% xgrp.forEach(function(xgrp){ %>
-                        <option value="<%= xgrp.xgrp %>">
-                            <%= xgrp.xgrp %>
-                        </option>
-                        <% }); %>
-                    </select>
-                </div>
-                <div class="w-5 col">
-                    <button type="submit" class="btn btn-primary mb-2">Cerca</button>
+                <div class="col-md-auto">
+                    <form action="/new-order-product" method="get" class="form-inline">
+                        <input type="hidden" name="idOrd" value="<%= idOrd %>">
+                        <div class="form-row align-items-center">
+                            <div class="w-10 col">
+                                <label class="sr-only" for="inlineFormCodDa">Codice prodotto da</label>
+                                <input type="number" name="ccodda" class="form-control mb-2" id="inlineFormInputCodDa"
+                                       placeholder="Codice prodotto da">
+                            </div>
+                            <div class="w-10 col">
+                                <label class="sr-only" for="inlineFormCodA">A</label>
+                                <input type="number" name="ccoda" class="form-control mb-2" id="inlineFormInputCodA"
+                                       placeholder="Codice prodotto a">
+                            </div>
+                            <div class="w-10 col">
+                                <label class="sr-only" for="inlineFormXprod">A</label>
+                                <input type="text" name="xprod" class="form-control mb-2" id="inlineFormInputXprod"
+                                       placeholder="Descrizione prodotto">
+                            </div>
+                            <div class="w-10 col">
+                                <select class=" form-control custom-select mb-2" name="sven">
+                                    <option value="" selected>Tipo vendita</option>
+                                    <% lven.forEach(function(lven){ %>
+                                    <option value="<%= lven.sven %>">
+                                        <%= lven.sven %>
+                                    </option>
+                                    <% }); %>
+                                </select>
+                            </div>
+                            <div class="w-10 col">
+                                <select class="form-control custom-select mb-2" name="xgrp">
+                                    <option value="" selected>Categoria prodotto</option>
+                                    <% xgrp.forEach(function(xgrp){ %>
+                                    <option value="<%= xgrp.xgrp %>">
+                                        <%= xgrp.xgrp %>
+                                    </option>
+                                    <% }); %>
+                                </select>
+                            </div>
+                            <div class="w-5 col">
+                                <button type="submit" class="btn btn-primary mb-2">Cerca</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </nav>
 <div class="container-fluid">

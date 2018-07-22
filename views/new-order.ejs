@@ -19,38 +19,50 @@
 <body>
 <div class="sticky-top">
     <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Nuovo Ordine</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Azioni
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
-                        <li><a class="dropdown-item" href="/new-order-product">Avanti</a></li>
-                        <li><a class="dropdown-item" href="/home">Annulla</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form action="/new-order" method="get" class="form-inline">
-                <div class="form-row align-items-center">
-                    <div class="col-auto">
-                        <label class="sr-only" for="inlineFormCodCli">Codice cliente</label>
-                        <input type="text" name="ccod" class="form-control mb-2" id="inlineFormInputCodCli"
-                               placeholder="Codice cliente">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <a class="navbar-brand" href="#">Nuovo Ordine</a>
+            </div>
+
+            <div class="col-md-auto">
+                <div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
+                    <div class="col-md-auto">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    Azioni
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                                    <li><a class="dropdown-item" href="/new-order-product">Avanti</a></li>
+                                    <li><a class="dropdown-item" href="/home">Annulla</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="col-auto">
-                        <label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
-                        <input type="text" name="xragsoc" class="form-control mb-2" id="inlineFormInputRagSoc"
-                               placeholder="Ragione sociale">
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-primary mb-2">Cerca</button>
+                    <div class="col-md-auto">
+                        <form action="/new-order" method="get" class="form-inline">
+                            <div class="form-row align-items-center">
+                                <div class="col-md-auto">
+                                    <label class="sr-only" for="inlineFormCodCli">Codice cliente</label>
+                                    <input type="text" name="ccod" class="form-control mb-2" id="inlineFormInputCodCli"
+                                           placeholder="Codice cliente">
+                                </div>
+                                <div class="col-md-auto">
+                                    <label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
+                                    <input type="text" name="xragsoc" class="form-control mb-2"
+                                           id="inlineFormInputRagSoc"
+                                           placeholder="Ragione sociale">
+                                </div>
+                                <div class="col-md-auto">
+                                    <button type="submit" class="btn btn-primary mb-2">Cerca</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </nav>
 </div>
