@@ -20,6 +20,10 @@ module.exports = function (app, passport) {
     app.get('/', function (req, res) {
         res.render('index.ejs'); // load the index.ejs file
     });
+	
+	app.get('/pwa.htm', function (req, res) {
+        res.redirect('/');
+    });
 
     app.get('/home', isLoggedIn, function (req, res) {
         Appoggio.delApp(req.user.cage, '', function (errApp, resApp) {
