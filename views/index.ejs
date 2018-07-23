@@ -16,6 +16,13 @@
     <meta name="msapplication-TileColor" content="#2F3BA2">
 </head>
 <body>
+<script>
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker
+           .register('/service-workerw.js')
+           .then(function() { console.log("Service Worker Registered"); });
+}
+</script>
 <div class="container">
     <div class="jumbotron text-center">
         <h1><span class="fa fa-lock"></span> Portale Innovazioni</h1>
