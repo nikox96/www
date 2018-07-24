@@ -1,6 +1,6 @@
 self.addEventListener('install', function(e) {
  e.waitUntil(
-   caches.open('airhorner').then(function(cache) {
+   caches.open('portaleInnovazioni').then(function(cache) {
      return cache.addAll([
        '/offline',
        '/client-list',
