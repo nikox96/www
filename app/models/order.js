@@ -197,6 +197,18 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
                     }
                     else {
                         console.log('update order prod');
+                        if  (iqta == 0){
+                         db.query("DELETE portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod
+//                            , function (queryErr, queryRes) {
+                            , (queryErr, queryRes) => {
+                                if (queryErr) {
+                                    callback("Errore aggiornamento prodotto", null);
+                                }
+                                else {
+                                    callback(null, "Prodotto aggiornato");
+                                }
+                            });
+                        }else{
                         db.query("UPDATE portale.righe_ordini SET iqta = " + iqta + ", iimp = " + iimp
                             + " WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod
 //                            , function (queryErr, queryRes) {
@@ -208,6 +220,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
                                     callback(null, "Prodotto aggiornato");
                                 }
                             });
+                        }
                     }
                 });
 
