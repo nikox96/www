@@ -198,7 +198,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
                     else {
                         console.log('update order prod');
                         if  (iqta == 0){
-                         db.query("DELETE portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod
+                         db.query("DELETE FROM portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod
 //                            , function (queryErr, queryRes) {
                             , (queryErr, queryRes) => {
                                 if (queryErr) {
