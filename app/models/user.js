@@ -50,14 +50,7 @@ User.login = function login(cage, xpwd, callback) {
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
-                    console.log('sql password: ' + queryRes[0].xpwd);
-                    console.log('html password: ' + xpwd);
-                    console.log('html password (tostring): ' + xpwd.toString());
-                    bcrypt.compare(xpwd.toString(), mysql.escape(queryRes[0].xpwd), function (bcryptErr, bcryptRes) {
-                        console.log('escaped: ' + mysql.escape(queryRes[0].xpwd));
-                        console.log('not escaped: ' + queryRes[0].xpwd);
-                        console.log('compare result: ' + bcryptRes);
-                        console.log('compare error: ' + bcryptErr);
+                    bcrypt.compare(xpwd.toString(), queryRes[0].xpwd, function (bcryptErr, bcryptRes) {
                         if (bcryptErr || !(bcryptRes)) {
                             console.log("Username and/or password are wrong!" + bcryptErr);
                             callback("Username and/or password are wrong", null);
