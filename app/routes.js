@@ -847,12 +847,12 @@ module.exports = function (app, passport) {
                     order.data = ordRes[i].dreg;
                     orders[i] = order;
                 }
-
-                res.render('order-list.ejs', {
+            }
+			res.render('order-list.ejs', {
+					message: req.flash('list-order-message'),
                     orders: orders,
                     user: req.user
-                });
-            }
+            });
         });
     });
 
