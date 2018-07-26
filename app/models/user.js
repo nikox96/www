@@ -50,7 +50,7 @@ User.login = function login(cage, xpwd, callback) {
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
-                    bcrypt.compare(xpwd.toString(), queryRes[0].xpwd, function (bcryptErr, bcryptRes) {
+                    bcrypt.compare(xpwd.toString(), queryRes[0].xpwd.toString(), function (bcryptErr, bcryptRes) {
                         if (bcryptErr || !(bcryptRes)) {
                             console.log("Username and/or password are wrong!" + bcryptErr);
                             callback("Username and/or password are wrong", null);
