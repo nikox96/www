@@ -607,8 +607,7 @@ module.exports = function (app, passport) {
         Order.delOrder(req.body.ccod, 0, function (queryErr, queryRes) {
             if (queryErr)
                 console.log(queryErr);
-            else
-                res.redirect('/order-list');
+            res.redirect('/order-list');
         })
     });
 
