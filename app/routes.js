@@ -834,7 +834,7 @@ module.exports = function (app, passport) {
     app.post('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
 
-        Order.getUserOrder((req.body.cageric && req.user.cage === 9999 ? req.body.cageric : req.user.cage), req.body.cstt, req.body.xragsoc, function (ordErr, ordRes) {
+        Order.getUserOrder((req.body.cageric && req.user.cage === 9999 ? req.body.cageric : req.user.cage), false, req.body.xragsoc, function (ordErr, ordRes) {
             if (ordErr) {
                 req.flash('list-order-message', ordErr);
             } else {
