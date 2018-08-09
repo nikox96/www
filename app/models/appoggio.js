@@ -2,7 +2,8 @@ var db = require("../../config/database_psql.js");
 var Appoggio = {};
 
 Appoggio.insert = function insert(cage, idOrd, callback) {
-    if (cage === '' || !(cage) || !(idOrd) || idOrd === '') {
+    console.log('parametri inserimento appoggio: cage ' + cage + ' idOrd ' + idOrd);
+    if (cage === '' || (!(cage) && cage !== 0) || !(idOrd) || idOrd === '') {
         callback("parametri non valorizzati", null);
         return;
     }
