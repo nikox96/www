@@ -964,6 +964,9 @@ module.exports = function (app, passport) {
                                                 res.render('new-order-product.ejs', {
                                                     message: req.flash('orderMessage'),
                                                     products: productRes,
+                                                    sven: '',
+                                                    sgrp: '',
+                                                    xprod: '',
                                                     lven: venRes,
                                                     lgrp: grpRes,
                                                     idOrd: appRes[0].idord
@@ -1029,6 +1032,9 @@ module.exports = function (app, passport) {
                                         res.render('new-order-product.ejs', {
                                             message: req.flash('orderMessage'),
                                             products: productRes,
+                                            sven: '',
+                                            sgrp: '',
+                                            xprod: '',
                                             lven: venRes,
                                             lgrp: grpRes,
                                             idOrd: appRes[0].idord
