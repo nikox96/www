@@ -52,7 +52,7 @@
                                            id="inlineFormInputRagSoc"
                                            placeholder="Ragione sociale">
                                 </div>
-                                <% if (user.cage === 9999) { %>
+                                <% if (user.cage === 9999 || user.cage === 0) { %>
                                 <div class="col-auto">
                                     <label class="sr-only" for="inlineFormCage">Codice agente</label>
                                     <input type="text" name="cageric" class="form-control mb-2" id="inlineFormInputCage"
