@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>
-    <% if (user && user.cage && (user.cage === 9999 || user.cage === 0)) { %>
+    <% if (user && (user.cage ||  user.cage === 0) && (user.cage === 9999 || user.cage === 0)) { %>
     <div class="row">
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6">
