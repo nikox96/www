@@ -67,20 +67,20 @@
                             </div>
                             <div class="w-10 col">
                                 <select class=" form-control custom-select mb-2" name="sven">
-                                    <option value="" selected>Tipo vendita</option>
+                                    <option value="" <%- (!(sven) || sven === '') ? 'selected' : '' %>>Tipo vendita</option>
                                     <% lven.forEach(function(lven){ %>
-                                    <option value="<%= lven.sven %>">
+                                    <option value="<%= lven.sven %>" <%- (sven && sven === lven.sven) ? 'selected' : '' %>>
                                         <%= lven.sven %>
                                     </option>
                                     <% }); %>
                                 </select>
                             </div>
                             <div class="w-10 col">
-                                <select class="form-control custom-select mb-2" name="xgrp">
-                                    <option value="" selected>Categoria prodotto</option>
-                                    <% xgrp.forEach(function(xgrp){ %>
-                                    <option value="<%= xgrp.xgrp %>">
-                                        <%= xgrp.xgrp %>
+                                <select class="form-control custom-select mb-2" name="sgrp">
+                                    <option value="" <%- (!(sgrp) || sgrp === '') ? 'selected' : '' %>>Categoria prodotto</option>
+                                    <% lgrp.forEach(function(xgrpl){ %>
+                                    <option value="<%= xgrpl.xgrp %>" <%- (sgrp && sgrp === xgrpl.xgrp) ? 'selected' : '' %>>
+                                        <%= xgrpl.xgrp %>
                                     </option>
                                     <% }); %>
                                 </select>

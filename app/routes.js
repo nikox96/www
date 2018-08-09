@@ -55,7 +55,7 @@ module.exports = function (app, passport) {
             if (appErr) {
                 console.log("errore recupero codice ordine");
             } else {
-                Product.list(req.query.ccodda, req.query.ccoda, req.query.sven, req.query.xgrp, req.query.xprod, function (productErr, productRes) {
+                Product.list(req.query.ccodda, req.query.ccoda, req.query.sven, req.query.sgrp, req.query.xprod, function (productErr, productRes) {
                     if (productErr) {
                         req.flash('orderMessage', 'Nessun cliente trovato');
                     } else {
@@ -78,9 +78,14 @@ module.exports = function (app, passport) {
                                 }
                                 res.render('new-order-product.ejs', {
                                     message: req.flash('orderMessage'),
+                                    ccodda: req.query.ccodda,
+                                    ccoda: req.query.ccoda,
+                                    sven: req.query.sven,
+                                    sgrp: req.query.sgrp,
+                                    xprod: req.query.xprod,
                                     products: productRes,
                                     lven: venRes,
-                                    xgrp: grpRes,
+                                    lgrp: grpRes,
                                     idOrd: appRes[0].idord
                                 });
                             });
@@ -166,7 +171,7 @@ module.exports = function (app, passport) {
                     }
                     console.log(msg);
                     req.flash('orderMessage', msg);
-                    Product.list(0, 999999, '', '', '', function (productErr, productRes) {
+                    Product.list((req.body.ccodda && req.body.ccodda > 0 ? req.body.ccodda : 0), (req.body.ccoda && req.body.ccoda > 0 ? req.body.ccoda : 999999), (req.body.sven && req.body.sven !== '' ? req.body.sven : ''), (req.body.sgrp && req.body.sgrp !== '' ? req.body.sgrp : ''), (req.body.xprod && req.body.xprod !== '' ? req.body.xprod : ''), function (productErr, productRes) {
                         if (productErr) {
                             req.flash('orderMessage', 'Nessun cliente trovato');
                         } else {
@@ -190,8 +195,13 @@ module.exports = function (app, passport) {
                                     res.render('new-order-product.ejs', {
                                         message: req.flash('orderMessage'),
                                         products: productRes,
+                                        ccodda: req.body.ccodda,
+                                        ccoda: req.body.ccoda,
+                                        sven: req.body.sven,
+                                        sgrp: req.body.sgrp,
+                                        xprod: req.body.xprod,
                                         lven: venRes,
-                                        xgrp: grpRes,
+                                        lgrp: grpRes,
                                         idOrd: appRes[0].idord
                                     });
                                 });
@@ -955,7 +965,7 @@ module.exports = function (app, passport) {
                                                     message: req.flash('orderMessage'),
                                                     products: productRes,
                                                     lven: venRes,
-                                                    xgrp: grpRes,
+                                                    lgrp: grpRes,
                                                     idOrd: appRes[0].idord
                                                 });
                                             });
@@ -1020,7 +1030,7 @@ module.exports = function (app, passport) {
                                             message: req.flash('orderMessage'),
                                             products: productRes,
                                             lven: venRes,
-                                            xgrp: grpRes,
+                                            lgrp: grpRes,
                                             idOrd: appRes[0].idord
                                         });
                                     });
