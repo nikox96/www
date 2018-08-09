@@ -966,6 +966,8 @@ module.exports = function (app, passport) {
                                                 res.render('new-order-product.ejs', {
                                                     message: req.flash('orderMessage'),
                                                     products: productRes,
+                                                    ccodda: '',
+                                                    ccoda: '',
                                                     sven: '',
                                                     sgrp: '',
                                                     xprod: '',
@@ -1034,6 +1036,8 @@ module.exports = function (app, passport) {
                                         res.render('new-order-product.ejs', {
                                             message: req.flash('orderMessage'),
                                             products: productRes,
+                                            ccodda: '',
+                                            ccoda: '',
                                             sven: '',
                                             sgrp: '',
                                             xprod: '',
