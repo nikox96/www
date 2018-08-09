@@ -437,7 +437,7 @@ module.exports = function (app, passport) {
                                             tes.ddtFttSosp = '0';
                                             tes.ddtDaFttTipFtt = '000';
                                             tes.ragrFtt = '';
-                                            tes.cage = (ordRes.cage && ordRes.cage !== '' ? ordRes.cage : '');
+                                            tes.cage = ((ordRes.cage || ordRes.cage === 0) && ordRes.cage !== '' ? ordRes.cage : '');
                                             tes.cageAltroSis = '';
                                             tes.provvAge = (ageRes.provv && ageRes.provv !== '' ? ageRes.provv : '');
                                             tes.provCapoArea = '0.00';
@@ -845,7 +845,7 @@ module.exports = function (app, passport) {
     app.post('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
 
-        Order.getUserOrder((req.body.cageric && req.user.cage === 9999 ? req.body.cageric : req.user.cage), false, req.body.xragsoc, function (ordErr, ordRes) {
+        Order.getUserOrder(((req.body.cageric || req.body.cageric === 0) && req.user.cage === 9999 ? req.body.cageric : req.user.cage), false, req.body.xragsoc, function (ordErr, ordRes) {
             if (ordErr) {
                 req.flash('list-order-message', ordErr);
             } else {
