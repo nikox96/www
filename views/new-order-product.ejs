@@ -145,6 +145,11 @@
                     <td>
                         <form action="/new-order-product" method="post" class="form-inline">
                             <input type="hidden" name="ccod" value="<%= idOrd %>">
+                            <input type="hidden" name="ccoddap" value="<%= ccodda %>">
+                            <input type="hidden" name="ccodap" value="<%= ccoda %>">
+                            <input type="hidden" name="svenp" value="<%= sven %>">
+                            <input type="hidden" name="sgrpp" value="<%= sgrp %>">
+                            <input type="hidden" name="xprodp" value="<%= xprod %>">
                             <input type="hidden" name="ccodprod" value="<%= products[i].ccod %>">
                             <input type="number" name="iqta" class="form-control">
                             <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">

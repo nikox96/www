@@ -171,7 +171,9 @@ module.exports = function (app, passport) {
                     }
                     console.log(msg);
                     req.flash('orderMessage', msg);
-                    Product.list((req.body.ccodda && req.body.ccodda > 0 ? req.body.ccodda : 0), (req.body.ccoda && req.body.ccoda > 0 ? req.body.ccoda : 999999), (req.body.sven && req.body.sven !== '' ? req.body.sven : ''), (req.body.sgrp && req.body.sgrp !== '' ? req.body.sgrp : ''), (req.body.xprod && req.body.xprod !== '' ? req.body.xprod : ''), function (productErr, productRes) {
+                    console.log('sven >' + req.body.svenp);
+                    console.log('sgrp >' + req.body.sgrpp);
+                    Product.list((req.body.ccoddap && req.body.ccoddap > 0 ? req.body.ccoddap : 0), (req.body.ccodap && req.body.ccodap > 0 ? req.body.ccodap : 999999), (req.body.svenp && req.body.svenp !== '' ? req.body.svenp : ''), (req.body.sgrpp && req.body.sgrpp !== '' ? req.body.sgrpp : ''), (req.body.xprodp && req.body.xprodp !== '' ? req.body.xprodp : ''), function (productErr, productRes) {
                         if (productErr) {
                             req.flash('orderMessage', 'Nessun cliente trovato');
                         } else {
@@ -195,11 +197,11 @@ module.exports = function (app, passport) {
                                     res.render('new-order-product.ejs', {
                                         message: req.flash('orderMessage'),
                                         products: productRes,
-                                        ccodda: req.body.ccodda,
-                                        ccoda: req.body.ccoda,
-                                        sven: req.body.sven,
-                                        sgrp: req.body.sgrp,
-                                        xprod: req.body.xprod,
+                                        ccodda: req.body.ccoddap,
+                                        ccoda: req.body.ccodap,
+                                        sven: req.body.svenp,
+                                        sgrp: req.body.sgrpp,
+                                        xprod: req.body.xprodp,
                                         lven: venRes,
                                         lgrp: grpRes,
                                         idOrd: appRes[0].idord
