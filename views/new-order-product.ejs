@@ -67,7 +67,8 @@
                             </div>
                             <div class="w-10 col">
                                 <select class=" form-control custom-select mb-2" name="sven">
-                                    <option value="" <%- (!(sven) || sven === '') ? 'selected' : '' %>>Tipo vendita</option>
+                                    <option value="" <%- (!(sven) || sven === '') ? 'selected' : '' %>>Tipo vendita
+                                    </option>
                                     <% lven.forEach(function(lven){ %>
                                     <option value="<%= lven.sven %>" <%- (sven && sven === lven.sven) ? 'selected' : '' %>>
                                         <%= lven.sven %>
@@ -77,7 +78,9 @@
                             </div>
                             <div class="w-10 col">
                                 <select class="form-control custom-select mb-2" name="sgrp">
-                                    <option value="" <%- (!(sgrp) || sgrp === '') ? 'selected' : '' %>>Categoria prodotto</option>
+                                    <option value="" <%- (!(sgrp) || sgrp === '') ? 'selected' : '' %>>Categoria
+                                        prodotto
+                                    </option>
                                     <% lgrp.forEach(function(xgrpl){ %>
                                     <option value="<%= xgrpl.xgrp %>" <%- (sgrp && sgrp === xgrpl.xgrp) ? 'selected' : '' %>>
                                         <%= xgrpl.xgrp %>
@@ -151,8 +154,18 @@
                             <input type="hidden" name="sgrpp" value="<%= sgrp %>">
                             <input type="hidden" name="xprodp" value="<%= xprod %>">
                             <input type="hidden" name="ccodprod" value="<%= products[i].ccod %>">
-                            <input type="number" name="iqta" class="form-control">
-                            <input type="number" name="psco" class="form-control" value="0">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Q.ta</span>
+                                </div>
+                                <input type="number" name="iqta" class="form-control">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Sconto</span>
+                                </div>
+                                <input type="number" name="psco" class="form-control" value="0">
+                            </div>
                             <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
                                 <i class="material-icons">&#xe854</i>
                             </button>
