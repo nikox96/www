@@ -161,7 +161,7 @@ Ordine.newOrder = function newOrder(ctiprec, ccli, cage, callback) {
         });
 };
 
-Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback) {
+Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, callback) {
     //ricerco il prodotto da inserire
     Prodotto.find(ccodprod, function (err, res) {
         if (err) {
@@ -172,17 +172,18 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
 
             console.log('iimp: ' + iimp);
             //se il prodotto era già presente nel carrello per quest'ordine allora aggiorno quantità e importo
-            db.query("SELECT 1 FROM portale.righe_ordini WHERE ccod = " + ccod + "AND ccodprod = " + ccodprod
+            db.query("SELECT 1 FROM portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0)
 //                , function (queryErr, queryRes) {
                 , (queryErr, queryRes) => {
                     queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                     if (queryErr || queryRes.rowCount === 0 || (queryRes.length && queryRes.length <= 0)) {
                         console.log('insert order prod');
-                        db.query("INSERT INTO portale.righe_ordini (ccod, ccodprod, iqta, iimp) VALUES("
+                        db.query("INSERT INTO portale.righe_ordini (ccod, ccodprod, iqta, iimp, psco) VALUES("
                             + ccod + ", "
                             + ccodprod + ", "
                             + iqta + ", "
-                            + iimp + ")"
+                            + iimp + ","
+                            + psco + ")"
 //                            , function (queryErr, queryRes) {
                             , (queryErr, queryRes) => {
                                 if (queryErr) {
@@ -198,7 +199,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
                     else {
                         console.log('update order prod');
                         if  (iqta == 0){
-                         db.query("DELETE FROM portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod
+                         db.query("DELETE FROM portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0)
 //                            , function (queryErr, queryRes) {
                             , (queryErr, queryRes) => {
                                 if (queryErr) {
@@ -210,7 +211,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, callback
                             });
                         }else{
                         db.query("UPDATE portale.righe_ordini SET iqta = " + iqta + ", iimp = " + iimp
-                            + " WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod
+                            + " WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0)
 //                            , function (queryErr, queryRes) {
                             , (queryErr, queryRes) => {
                                 if (queryErr) {

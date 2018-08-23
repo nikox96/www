@@ -81,18 +81,20 @@
                     <th scope="col">Prezzo</th>
                     <th scope="col">Quantità</th>
                     <th scope="col">Importo</th>
+                    <th scope="col">Sconto</th>
                 </tr>
                 </thead>
                 <tbody>
-                <% var itot = 0; %>
+                <% var itot = 0.00; %>
                 <% for(var i = 0; i < products.length;i++) { %>
-                <% itot += parseInt(products[i].iimp); %>
+                <% itot += parseFloat(products[i].iimp); %>
                 <tr>
                     <th scope="row"><%= products[i].ccod %></th>
                     <td><%= products[i].xdesc %></td>
                     <td><%= products[i].iprz %></td>
                     <td><%= products[i].iqta %></td>
                     <td><%= products[i].iimp %></td>
+                    <td><%= products[i].psco %></td>
                 </tr>
                 <% } %>
                 </tbody>

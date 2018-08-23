@@ -162,8 +162,8 @@ module.exports = function (app, passport) {
                 console.log("errore recupero codice ordine");
             } else {
                 var msg;
-                console.log('idOrd: ' + appRes[0].idord + 'cod prod: ' + req.body.ccodprod + 'qta :' + req.body.iqta,);
-                Order.newOrderProduct(appRes[0].idord, req.body.ccodprod, req.body.iqta, function (orderErr, orderRes) {
+                console.log('idOrd: ' + appRes[0].idord + 'cod prod: ' + req.body.ccodprod + 'qta :' + req.body.iqta + 'psco :' + req.body.psco);
+                Order.newOrderProduct(appRes[0].idord, req.body.ccodprod, req.body.iqta, req.body.psco, function (orderErr, orderRes) {
                     if (orderErr) {
                         msg = 'errore inserimento prodotto ordine';
                     } else {
@@ -1185,6 +1185,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
             product.ccod = prodRes.ccod;
             product.xdesc = prodRes.xdesc;
             product.iqta = riga.iqta;
+            product.psco = riga.psco;
             product.iimp = riga.iimp;
             products[i] = product;
             if (i === righe.length - 1) {
@@ -2174,6 +2175,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
             product.xdesc = prodRes.xdesc;
             product.iqta = riga.iqta;
             product.iimp = riga.iimp;
+            product.psco = riga.psco;
             products[i] = product;
             initializeCSV();
             rec.tipRec = 'RIG';
@@ -2218,7 +2220,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
             rig.qExpUmSec = '';
             rig.qExpUmMag = '';
             rig.iprz = prodRes.iprz;
-            rig.sco1 = '';
+            rig.sco1 = product.psco;
             rig.fscoAna = '';
             rig.sco2 = '';
             rig.sco3 = '';
