@@ -86,7 +86,7 @@
                     <th scope="col">Data</th>
                     <th></th>
                     <th></th>
-                    <% if (user.cage === 9999 || user.cage === 0) { %>
+                    <% if (user.cage == 9999 || user.cage == 0) { %>
                     <th></th>
                     <th></th>
                     <% } %>
@@ -106,14 +106,14 @@
                         </form>
                     </td>
                     <td>
-                        <% if (order.cstt == 10 || user.cage === 9999 || user.cage === 0) { %>
+                        <% if (order.cstt == 10 || user.cage == 9999 || user.cage == 0) { %>
                         <form action="/new-order-sum" method="get">
                             <input type="hidden" name="ccod" value="<%= order.ccod %>">
                             <button type="submit" class="btn btn-link"><i class="material-icons">&#xe254</i></button>
                         </form>
                         <% } %>
                     </td>
-                    <% if (user.cage === 9999 || user.cage === 0) { %>
+                    <% if (user.cage == 9999 || user.cage == 0) { %>
                     <td>
                         <form action="/del-order" method="post">
                             <input type="hidden" name="ccod" value="<%= order.ccod %>">
