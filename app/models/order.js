@@ -161,13 +161,16 @@ Ordine.newOrder = function newOrder(ctiprec, ccli, cage, callback) {
         });
 };
 
-Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, callback) {
+Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, promo, callback) {
     //ricerco il prodotto da inserire
     Prodotto.find(ccodprod, function (err, res) {
-        if (err) {
+        if (err && !(promo)) {
             callback('Prodotto inesistente', null);
         } else {
             //calcolo importo
+            if (promo)
+                res.iprz = 0;
+
             var iimp = res.iprz * iqta;
 
             console.log('iimp: ' + iimp);
@@ -178,12 +181,13 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, ca
                     queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                     if (queryErr || queryRes.rowCount === 0 || (queryRes.length && queryRes.length <= 0)) {
                         console.log('insert order prod');
-                        db.query("INSERT INTO portale.righe_ordini (ccod, ccodprod, iqta, iimp, psco) VALUES("
+                        db.query("INSERT INTO portale.righe_ordini (ccod, ccodprod, iqta, iimp, psco, descrpromo) VALUES("
                             + ccod + ", "
                             + ccodprod + ", "
                             + iqta + ", "
                             + iimp + ","
-                            + psco + ")"
+                            + psco + ","
+                            + promo + ")"
 //                            , function (queryErr, queryRes) {
                             , (queryErr, queryRes) => {
                                 if (queryErr) {
@@ -198,29 +202,29 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, ca
                     }
                     else {
                         console.log('update order prod');
-                        if  (iqta == 0){
-                         db.query("DELETE FROM portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0)
+                        if (iqta == 0) {
+                            db.query("DELETE FROM portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0)
 //                            , function (queryErr, queryRes) {
-                            , (queryErr, queryRes) => {
-                                if (queryErr) {
-                                    callback("Errore aggiornamento prodotto", null);
-                                }
-                                else {
-                                    callback(null, "Prodotto aggiornato");
-                                }
-                            });
-                        }else{
-                        db.query("UPDATE portale.righe_ordini SET iqta = " + iqta + ", iimp = " + iimp
-                            + " WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0)
+                                , (queryErr, queryRes) => {
+                                    if (queryErr) {
+                                        callback("Errore aggiornamento prodotto", null);
+                                    }
+                                    else {
+                                        callback(null, "Prodotto aggiornato");
+                                    }
+                                });
+                        } else {
+                            db.query("UPDATE portale.righe_ordini SET iqta = " + iqta + ", iimp = " + iimp
+                                + " WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0)
 //                            , function (queryErr, queryRes) {
-                            , (queryErr, queryRes) => {
-                                if (queryErr) {
-                                    callback("Errore aggiornamento prodotto", null);
-                                }
-                                else {
-                                    callback(null, "Prodotto aggiornato");
-                                }
-                            });
+                                , (queryErr, queryRes) => {
+                                    if (queryErr) {
+                                        callback("Errore aggiornamento prodotto", null);
+                                    }
+                                    else {
+                                        callback(null, "Prodotto aggiornato");
+                                    }
+                                });
                         }
                     }
                 });

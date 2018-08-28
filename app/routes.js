@@ -20,8 +20,8 @@ module.exports = function (app, passport) {
     app.get('/', function (req, res) {
         res.render('index.ejs'); // load the index.ejs file
     });
-	
-	app.get('/pwa.htm', function (req, res) {
+
+    app.get('/pwa.htm', function (req, res) {
         res.redirect('/');
     });
 
@@ -112,7 +112,7 @@ module.exports = function (app, passport) {
                         var xy = 0;
                         for (k = 0; k < promoRes.length; k++) {
                             for (i = 0; i < anaPromo.length; i++) {
-                                if (promoRes[k].ccod === anaPromo[i].ccod)
+                                if (promoRes[k].ccod === anaPromo[i].ccod && promoRes[k].psco == anaPromo[i].psco)
                                     b = false;
                             }
                             if (b) {
@@ -149,7 +149,14 @@ module.exports = function (app, passport) {
                         // render the page and pass in any flash data if it exists
 
                         k = 0;
-                        insertOrderPromo(promoRes, req, res, appRes[0].idord);
+                        Order.newOrderProduct(idOrd, promoRes[0].ccod, req.body.iqta, 0, promoRes[0].xdescpromo, function (ordErr, ordRes) {
+                            if (ordErr) {
+                                console.log(ordErr);
+                            } else {
+                                console.log(ordRes);
+                                insertOrderPromo(promoRes, req, res, appRes[0].idord);
+                            }
+                        });
                     }
                 });
             }
@@ -163,7 +170,7 @@ module.exports = function (app, passport) {
             } else {
                 var msg;
                 console.log('idOrd: ' + appRes[0].idord + 'cod prod: ' + req.body.ccodprod + 'qta :' + req.body.iqta + 'psco :' + req.body.psco);
-                Order.newOrderProduct(appRes[0].idord, req.body.ccodprod, req.body.iqta, req.body.psco, function (orderErr, orderRes) {
+                Order.newOrderProduct(appRes[0].idord, req.body.ccodprod, req.body.iqta, req.body.psco, false, function (orderErr, orderRes) {
                     if (orderErr) {
                         msg = 'errore inserimento prodotto ordine';
                     } else {
@@ -859,10 +866,10 @@ module.exports = function (app, passport) {
                     orders[i] = order;
                 }
             }
-			res.render('order-list.ejs', {
-					message: req.flash('list-order-message'),
-                    orders: orders,
-                    user: req.user
+            res.render('order-list.ejs', {
+                message: req.flash('list-order-message'),
+                orders: orders,
+                user: req.user
             });
         });
     });
@@ -1109,7 +1116,7 @@ function isLoggedIn(req, res, next) {
 }
 
 function getClients(req, res) {
-    console.log('getclients: '  + req.user.cage);
+    console.log('getclients: ' + req.user.cage);
     Appoggio.find(req.user.cage, '', function (appfinErr, appfinRes) {
         if (appfinErr) {
             console.log("errore lettura appoggio");
@@ -2165,6 +2172,156 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
     if (i >= righe.length)
         return;
 
+    if (righe[i].descrpromo){
+        initializeCSV();
+        rec.tipRec = 'RIG';
+        rig.tipRig = '1';
+        rig.carticolo = '//';
+        rig.carticoloAltroSis = '';
+        rig.cbarre = '';
+        rig.carticoloTerzi = '';
+        rig.cconto = '';
+        rig.ccontoAltroSis = '';
+        rig.cpartitarioAltroSis = '';
+        rig.cpartitarioAna = cliente.ccod;
+        rig.cbanca = '';
+        rig.cbancaAltroSis = '';
+        rig.ccatCespite = '';
+        rig.ccatCespiteAltroSis = '';
+        rig.cpartitarioAltriConti = '';
+        rig.cpartitarioAltriContiAltroSis = '';
+        rig.descPartAltriConti = '';
+        rig.opzComposto = '';
+        rig.descrizione1 = righe[i].descrpromo;
+        rig.descrizione2 = '';
+        rig.descrizione3 = '';
+        rig.descrizione4 = '';
+        rig.descrizione5 = '';
+        rig.descrizioneInterna = rig.descrizione1;
+        rig.tipGesListino = '';
+        rig.clistino = '01';
+        rig.dconsegna = '';
+        rig.calcVar1 = '';
+        rig.calcVar2 = '';
+        rig.calcVar3 = '';
+        rig.calcVar4 = '';
+        rig.pesoLordo = '';
+        rig.tara = '';
+        rig.vol = '';
+        rig.ncolli = '';
+        rig.uMis = 'pz';
+        rig.uMisAltroSis = '';
+        rig.qdoc = righe[i].iqta;
+        rig.qdocScoMerce = '';
+        rig.qExpUmSec = '';
+        rig.qExpUmMag = '';
+        rig.iprz = 0;
+        rig.sco1 = 0;
+        rig.fscoAna = '';
+        rig.sco2 = '';
+        rig.sco3 = '';
+        rig.scoUni = '';
+        rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
+        rig.impVal = 0;
+        rig.cimp = '1';
+        rig.copeMag = '';
+        rig.cdep = '';
+        rig.classeStat = '';
+        rig.cdep2 = '';
+        rig.datiAggFttEle = '';
+        rig.datiAggDdtPepp = '';
+        rig.rifLotCalf = '';
+        rig.rifLotData = '';
+        rig.rifLotNum = '';
+        rig.qdocLtc = '';
+        rig.qExpUmSecLtc = '';
+        rig.qExpUmMagLtc = '';
+        rig.calcSpe = '';
+        rig.oggRilev = '';
+        rig.filler1 = '';
+        rig.rilevCalcRit = '';
+        rig.tracFlussiFinAltroSis = '';
+        rig.cig = '';
+        rig.cup = '';
+        rig.descTraccFlussiFin = '';
+        rig.civa = '22';
+        rig.civaAltroSis = '';
+        rig.civaVentilazione = '';
+        rig.civaVentilazioneAltroSis = '';
+        rig.regIvaSpec = '';
+        rig.cindetraibilita = '';
+        rig.percIndetra = '';
+        rig.percIndetraProRata = '';
+        rig.eseComp = '';
+        rig.eseCompDa = '';
+        rig.eseCompA = '';
+        rig.cauCont = '';
+        rig.omaggio = '';
+        rig.clsOmaggio = '';
+        rig.daNonIntegrare = '';
+        rig.rifRigOrd = '';
+        rig.saldaRigEvasa = '';
+        rig.naturaTran = '';
+        rig.cmodTran = '';
+        rig.cCondConsegna = '';
+        rig.cpaeDest = '';
+        rig.cprvOrig = '';
+        rig.cpaeOrig = '';
+        rig.cnomenComb = '';
+        rig.iudc = '';
+        rig.impValIntra = '';
+        rig.massaNetta = '';
+        rig.qExpUmSuppl = '';
+        rig.valStatNettoMag = '';
+        rig.percMag = '';
+        rig.modErogSrv = '';
+        rig.modInc = '';
+        rig.cpaePag = '';
+        rig.nFtt = '';
+        rig.dFtt = '';
+        rig.rettMese = '';
+        rig.rettAnno = '';
+        rig.rettSegno = '';
+        rig.tope = '';
+        rig.filler2 = '';
+        rig.beniMtdPag = '';
+        rig.beniSettForfait = '';
+        rig.beniTope = '';
+        rig.beniCostoAcq = '';
+        rig.beniMargineLordo = '';
+        rig.beniFttCollegata = '';
+        rig.ordApprovigionamento = '';
+        rig.cFornitoreAbituale = '';
+        rig.cFornitoreAbitualeAltroSis = '';
+        rig.rigaSaldata = '';
+        rig.annotazione = '';
+        rig.opposizione = '';
+        rig.assistenzaDiretta = '';
+        rig.cCentroAnalisi = '';
+        rig.ccentroAnalisiAltroSis = '';
+        rig.ccommessa = '';
+        rig.ccommessaAltroSis = '';
+        rig.diniComp = '';
+        rig.dfineComp = '';
+        rig.cvoce = '';
+        rig.cvocAltroSis = '';
+        rec.rig = rig;
+        csvRig93();
+
+
+        if (i === righe.length - 1) {
+            Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
+                if (sttErr) {
+                    console.log(sttErr);
+                } else {
+                    res.download(sendFile(nreg, righe[0].ccod));
+                }
+            });
+            return;
+        }
+        i++;
+        getRigheCSV(res, req, nreg, righe, cliente);
+    } else {
     Product.find(righe[i].ccodprod, function (prodErr, prodRes) {
         if (prodErr) {
             req.flash('orderMessage', prodErr);
@@ -2326,7 +2483,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
             i++;
             getRigheCSV(res, req, nreg, righe, cliente);
         }
-    });
+    });}
 }
 
 function sendFile(nreg, idOrd) {
@@ -2390,7 +2547,7 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
     }
     console.log('idord: ' + idOrd + ' cod prod: ' + promoRes[k].ccodprod + ' pezzi: ' + promoRes[k].ipzz);
     promoRes[k].ipzz = promoRes[k].ipzz * req.body.iqta;
-    Order.newOrderProduct(idOrd, promoRes[k].ccodprod, promoRes[k].ipzz, function (ordErr, ordRes) {
+    Order.newOrderProduct(idOrd, promoRes[k].ccodprod, promoRes[k].ipzz, promoRes[k].psco, false, function (ordErr, ordRes) {
         if (ordErr)
             console.log(ordErr);
         else
@@ -2398,6 +2555,7 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
         k++;
         insertOrderPromo(promoRes, req, res, idOrd);
     });
+
     if (k === promoRes.length - 1) {
         Product.listPromo('', function (promoErr, promoRes1) {
             if (promoErr) {
@@ -2411,7 +2569,7 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
                 var xy = 0;
                 for (k = 0; k < promoRes1.length; k++) {
                     for (i = 0; i < anaPromo.length; i++) {
-                        if (promoRes1[k].ccod === anaPromo[i].ccod)
+                        if (promoRes1[k].ccod === anaPromo[i].ccod && promoRes1[k].psco == anaPromo[i].psco)
                             b = false;
                     }
                     if (b) {
