@@ -60,6 +60,15 @@ CREATE TABLE prodotti (	ccod INT(6) NOT NULL COMMENT 'Codice prodotto',
 			INDEX descrizione (xdesc),
 			INDEX gruppo (xdesc, xgrp));
 
+-- create table campioncini (10% del ctv dell'ordine
+CREATE TABLE campioncini (	ccod CHAR(6) NOT NULL COMMENT 'Codice campioncino',
+			xdesc VARCHAR(70) NOT NULL COMMENT 'Descrizione',
+			iprz DECIMAL(5,2) NOT NULL COMMENT 'Prezzo prodotto',
+			xgrp VARCHAR(45) COMMENT 'Gruppo/Categoria',
+			PRIMARY KEY(ccod),
+			INDEX descrizione (xdesc),
+			INDEX gruppo (xdesc, xgrp));
+
 -- create table ana_promo
 CREATE TABLE ana_promo (ccod INT(6) NOT NULL COMMENT 'Codice promozione',
 			xdesc VARCHAR(30) NOT NULL COMMENT 'Descrizione promozione',

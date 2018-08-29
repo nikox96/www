@@ -1,3 +1,4 @@
+999999	riga per descrizione promozioni	0	0		
 200333	BB 01 Cream Perfect.Daily Cr. 50ml	50 ml	13.6	SELVERT BB CREAM	Vendita
 200334	BB 02 Cream Perfect.Daily Cr. 50ml	50 ml	13.6	SELVERT BB CREAM	Vendita
 203211	Anti Ageing Premium Cream + Vit C   50ML	50 ml	24.5	DAILY BEAUTY CARE	Vendita
@@ -36,16 +37,16 @@
 308106	OSMOTIC PEEL OFF MASK HYDRATANT 5TR	5 tratt	33	CELL VITALE A.G.	Cabina
 308107	Osmotic Peel-Off Mask Soothing.5 tr.	5 tratt	33	CELL VITALE A.G.	Cabina
 308108	PACK CELL VITALE PURIFIANT 5 TRAT.	5 tratt	140.8	CELL VITALE A.G.	Cabina
-308201	Reversive Anti Aging Cream 50 ML	50 ml	50.6		Vari
+308201	Reversive Anti Aging Cream 50 ML	50 ml	50.6	CELL VITALE A.G.	Vari
 308204	CRÈME CELL VIT.HYDR.FORTE 50ML	50 ml	35	CELL VITALE A.G.	Vendita
 308206	Anti-Shine Hydrating and Matt.50ML	50 ml	32.95	CELL VITALE A.G.	Vendita
 308207	CELL VITALE GEL PURIFIANT 50 ML	50 ml	15.25	CELL VITALE A.G.	Vendita
 308208	CELL VITALE MASQUE ÉQUILIBR.50 ML	50 ml	14.15	CELL VITALE A.G.	Vendita
 308209	Cleansing Gel / Acne-Pr.skins 100ML	100 ml	17.2	CELL VITALE A.G.	Vendita
-311000	HYALURONIQUE Box	box	46	LIGNE REGEN. ABSOLUE	Vari
+311000	HYALURONIQUE Box	box	46	HYALURONIQUE	Vari
 311201	24-HOUR INTENSE HYDRATION CREAM 50M	50 ml	43	HYALURONIQUE	Vendita
 311202	Intensive Wrinkle Repleni Cr. 50ML	50 ml	54	HYALURONIQUE	Vendita
-311203	Intensive Wrinkle Repl.Serum 50ML	50 ml	55		Vari
+311203	Intensive Wrinkle Repl.Serum 50ML	50 ml	55	HYALURONIQUE	Vari
 311601	HYDROFLASH HYALURONIQUE 24x20ml	20 ml	120	HYALURONIQUE	Vendita
 313101	PORE REFINER 100 ML.	100 ml	20	LINEA VISAGE	Cabina
 313102	CLEANSING MILK 500 ML	500 ml	21	LINEA VISAGE	Cabina
@@ -83,8 +84,8 @@
 313211	VISAGE BAUME CONTOUR DES YEUX 15 ML	15 ml	28	LINEA VISAGE	Vendita
 313602	Visage Beauty Pack 50ML+15ML+50ML	50 ml	36	LINEA VISAGE	Vendita
 313603	PROMO DUO LATTE+TONICO VISAGE		17	LINEA VISAGE	Cabina
-314000	PEPTIDE LIFT Box	box	56	LIGNE REGEN. ABSOLUE	Vari
-314101	Ultra Lifting Peptide Treatment Pac	box	180	LINEA PEPTIDI	Vari
+314000	PEPTIDE LIFT Box	box	56	LINEA PEPTIDI	vendita
+314101	Ultra Lifting Peptide Treatment Pac	box	180	LINEA PEPTIDI	Cabina
 315101	Renewing Exfoliating Lotion 500ML	500 ml	39	CORPO	Cabina
 315102	Body Scrub Peel 500ML	500 ml	34	CORPO	Cabina
 315103	Activating Concentrate 10x10-ampoul	10x10ampoul	55	CORPO	Cabina
@@ -115,6 +116,9 @@
 316102	Regenerating Cream  200ml	200 ml	60.5	LIGNE REGEN. ABSOLUE	Cabina
 316103	SOS Cream  200ml	200 ml	58	LIGNE REGEN. ABSOLUE	Cabina
 316104	Regenerating Act.Snail Extr.10*4ML	4 ml	42.5	LIGNE REGEN. ABSOLUE	Cabina
+316105	Peeling M5% L5% for Spots	100 ml	34	LIGNE REGEN. ABSOLUE	Cabina
+316106	Peeling S2% M8% for Acne	100 ml	34	LIGNE REGEN. ABSOLUE	Cabina
+316107	Peeling M4% G6% for Wrinkles	100 ml	40	LIGNE REGEN. ABSOLUE	Cabina
 316201	Regenerating Cream  50ML	50 ml	36.96	LIGNE REGEN. ABSOLUE	Vendita
 316202	Regenerating Gel-Cream  50ML	50 ml	40.27	LIGNE REGEN. ABSOLUE	Vendita
 316203	Regenerating Eye Cont.Gel Cr. 15ML	15 ml	26.56	LIGNE REGEN. ABSOLUE	Vendita
@@ -125,35 +129,36 @@
 317202	UR ABSOLUTE RENEWAL CREAM 50 ML	50 ml	47.7	URBAN RESPONSE	Vendita
 317203	UR ABSOLUTE CLEANSER 200 ML	200 ml	19.75	URBAN RESPONSE	Vendita
 317204	UR ABSOLUTE DEFENCE CREAM 50 ML	50 ml	41.7	URBAN RESPONSE	Vendita
-319101	Acne Prone Skin Program- 2 phases    5TR.	5 tratt	43	ESPRIT DERMATOLOGIQUE	Vendita
-319102	White Perfection Clarity Program- 2 phases   5TR.	5 tratt	46	ESPRIT DERMATOLOGIQUE	Vendita
-319103	Anti Ageing Program - 2 phases   5TR.	5 tratt	54	ESPRIT DERMATOLOGIQUE	Vendita
-319104	Booster Mask   200ML	200 ml	26	ESPRIT DERMATOLOGIQUE	Vendita
-319202	Acne Prone Skin- The Cleansing Solution   200ML	200 ml	16.5	ESPRIT DERMATOLOGIQUE	Vendita
-319203	Acne Prone Skin- The Gel   50ML	50 ml	16.5	ESPRIT DERMATOLOGIQUE	Vendita
-319204	White Perfection Clarity- The Cream   50ML.	50 ml	28.5	DERMIULAB	Cabina
-319205	White Perfection Clarity- The Serum   30ML	30 ml	30	DERMIULAB	Cabina
-319206	Anti Ageing- The Cream    50ML	50 ml	24	DERMIULAB	Cabina
-319207	Anti Ageing- The Serum   30ML	30 ml	24.5	DERMIULAB	Cabina
-319208	Anti-Ageing Concentrate-4 unit pack	box	88	DERMIULAB	Cabina
-319209	Regeneration Concent- 4 unit pack	box	88	DERMIULAB	Cabina
-319210	Oxygen.Pollution Protec.Conce 4unit	box	88	DERMIULAB	Cabina
-319211	DayNight DNA Rep.Concent.4unit pak	box	88	DERMIULAB	Cabina
-319603	EXPO DERMAT. 16 unit pack- 4 types	box	352	DERMIULAB	Cabina
-701106	30% Mandelic acid - gel*  100ML	100 ml	47.5	DERMIULAB	Vendita
-701108	Dermium Lab SOS cream 200 ML	200 ml	66.5	DERMIULAB	Vendita
-701111	Acne Prone 15% Salic. acid 15% 100M	100 ml	47.6	DERMIULAB	Vendita
-701114	Depigmentant 20% Lactic ac. 100ml	100 ml	54.5	DERMIULAB	Vendita
-701115	Anti-ageing 20% Mand.Acid 30% 100ML	100 ml	29.9	DERMIULAB	Vendita
+319101	Acne Prone Skin Program- 2 phases    5TR.	5 tratt	45.7	ESPRIT DERMATOLOGIQUE	Vendita
+319102	White Perfection Clarity Program- 2 phases   5TR.	5 tratt	48.7	ESPRIT DERMATOLOGIQUE	Vendita
+319103	Anti Ageing Program - 2 phases   5TR.	5 tratt	55.9	ESPRIT DERMATOLOGIQUE	Vendita
+319104	Booster Mask   200ML	200 ml	27	ESPRIT DERMATOLOGIQUE	Vendita
+319202	Acne Prone Skin- The Cleansing Solution   200ML	200 ml	17.2	ESPRIT DERMATOLOGIQUE	Vendita
+319203	Acne Prone Skin- The Gel   50ML	50 ml	16.8	ESPRIT DERMATOLOGIQUE	Vendita
+319204	White Perfection Clarity- The Cream   50ML.	50 ml	29.9	ESPRIT DERMATOLOGIQUE	Cabina
+319205	White Perfection Clarity- The Serum   30ML	30 ml	31	ESPRIT DERMATOLOGIQUE	Cabina
+319206	Anti Ageing- The Cream    50ML	50 ml	25	ESPRIT DERMATOLOGIQUE	Cabina
+319207	Anti Ageing- The Serum   30ML	30 ml	25.5	ESPRIT DERMATOLOGIQUE	Cabina
+319208	Anti-Ageing Concentrate-4 unit pack	box	88	ESPRIT DERMATOLOGIQUE	Cabina
+319209	Regeneration Concent- 4 unit pack	box	88	ESPRIT DERMATOLOGIQUE	Cabina
+319210	Oxygen.Pollution Protec.Conce 4unit	box	88	ESPRIT DERMATOLOGIQUE	Cabina
+319211	DayNight DNA Rep.Concent.4unit pak	box	88	ESPRIT DERMATOLOGIQUE	Cabina
+319603	EXPO DERMAT. 16 unit pack- 4 types	box	352	ESPRIT DERMATOLOGIQUE	Cabina
+330501	CALENDARIO AVVENTO PROMO 15 NOVEMRE	box	42		vendita
+701106	30% Mandelic acid - gel*  100ML	100 ml	47.5	DERMIULAB	Cabina
+701108	Dermium Lab SOS cream 200 ML	200 ml	66.5	DERMIULAB	Cabina
+701111	Acne Prone 15% Salic. acid 15% 100M	100 ml	47.6	DERMIULAB	Cabina
+701114	Depigmentant 20% Lactic ac. 100ml	100 ml	54.5	DERMIULAB	Cabina
+701115	Anti-ageing 20% Mand.Acid 30% 100ML	100 ml	29.9	DERMIULAB	Cabina
 701116	10% Salicylic acid - solution*		21.5	DERMIULAB	Cabina
-701118	Hydrating Skin Protector   15ml	15 ml	9	DERMIULAB	Vendita
-701120	Derm.CELLULITE REDUCTION CR.500ml	500 ml	65.9		Non spec.
-701121	DERMIUM FIRMING CREAM 500ML	500 ml	56		Non spec.
-701204	Depigmenting Gel		23.5		Non spec.
-701208	Pre/Post Peeling Maintenance Serum		31		Non spec.
-701210	DERMIUM SMOOTH.CONTOUR EYE CR.15ML	15 ml	20.9		Non spec.
-701211	DERMIUM SELF TANNING CREAM 200 ML	200 ml	24.6		Non spec.
-701216	DERMIUM SMOOTH.CR. FOR FINE&WR 50ML	50 ml	29.9		Non spec.
-701217	DERMIUM SMOOTH.SER.FOR FINE&WR 30ML	30 ml	29.9		Non spec.
-701501	Post Peeling Regenerating Skin		21.5		Non spec.
-701602	DERMIUM TENSOR FLASH EXHIBITOR 12X2	12x200 ml	106.2		Non spec.
+701118	Hydrating Skin Protector   15ml	15 ml	9	DERMIULAB	Cabina
+701120	Derm.CELLULITE REDUCTION CR.500ml	500 ml	65.9	DERMIULAB	Cabina
+701121	DERMIUM FIRMING CREAM 500ML	500 ml	56	DERMIULAB	Cabina
+701204	Depigmenting Gel		23.5	DERMIULAB	Vendita
+701208	Pre/Post Peeling Maintenance Serum		31	DERMIULAB	Vendita
+701210	DERMIUM SMOOTH.CONTOUR EYE CR.15ML	15 ml	20.9	DERMIULAB	Vendita
+701211	DERMIUM SELF TANNING CREAM 200 ML	200 ml	24.6	DERMIULAB	Vendita
+701216	DERMIUM SMOOTH.CR. FOR FINE&WR 50ML	50 ml	29.9	DERMIULAB	Vendita
+701217	DERMIUM SMOOTH.SER.FOR FINE&WR 30ML	30 ml	29.9	DERMIULAB	Vendita
+701501	Post Peeling Regenerating Skin		21.5	DERMIULAB	Vendita
+701602	DERMIUM TENSOR FLASH EXHIBITOR 12X2	12x200 ml	106.2	DERMIULAB	Vendita
