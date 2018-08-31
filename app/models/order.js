@@ -172,7 +172,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
             if (promo.length > 6)
                 iimp = 0;
             else
-                iimp = res.iprz * iqta;
+                iimp = (res.iprz - (res.iprz / 100 * psco)) * iqta;
 
             console.log('iimp: ' + iimp);
             //se il prodotto era già presente nel carrello per quest'ordine allora aggiorno quantità e importo
