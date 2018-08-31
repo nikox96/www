@@ -168,10 +168,11 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
             callback('Prodotto inesistente', null);
         } else {
             //calcolo importo
+            var iimp;
             if (promo.length > 6)
-                res.iprz = 0;
-
-            var iimp = res.iprz * iqta;
+                iimp = 0;
+            else
+                iimp = res.iprz * iqta;
 
             console.log('iimp: ' + iimp);
             //se il prodotto era già presente nel carrello per quest'ordine allora aggiorno quantità e importo
