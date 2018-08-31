@@ -1197,7 +1197,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
             product = {};
             riga = righe[i];
             product.ccod = prodRes.ccod;
-            product.xdesc = prodRes.xdesc;
+            product.xdesc = (prodRes.ccod == 999999 ? riga.descrpromo : prodRes.xdesc);
             product.iqta = riga.iqta;
             product.psco = riga.psco;
             product.iimp = riga.iimp;
