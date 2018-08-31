@@ -154,8 +154,8 @@ module.exports = function (app, passport) {
                                 console.log(ordErr);
                                 req.flash('orderMessage', ordErr);
                                 res.render('new-order-promo.ejs', {
-                                    message: req.flash('orderMessage'),
-                                    idOrd: idOrd
+                                    messageErr: req.flash('orderMessage'),
+                                    idOrd: appRes[0].idOrd
                                 });
                             } else {
                                 console.log(ordRes);
@@ -2588,7 +2588,7 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
                 }
 
                 res.render('new-order-promo.ejs', {
-                    message: req.flash('orderMessage'),
+                    messageRes: req.flash('orderMessage'),
                     anaPromo: anaPromo,
                     promo: promoRes1,
                     idOrd: idOrd
