@@ -84,6 +84,7 @@ Ordine.findProduct = function findProduct(ccod, callback) {
             }
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                console.log('findProduct: ' + queryRes.length);
                 if (queryRes.length > 0) {
                     callback(null, queryRes);
                     return;

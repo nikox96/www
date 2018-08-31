@@ -277,6 +277,7 @@ module.exports = function (app, passport) {
                                     if (cliErr)
                                         req.flash('orderMessage', cliErr);
                                     else {
+                                        righeRes = null;
                                         Order.findProduct(appRes[0].idord, function (righeErr, righeRes) {
                                             if (righeErr) {
                                                 req.flash('orderMessage', righeErr);
