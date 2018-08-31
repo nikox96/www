@@ -1,4 +1,2 @@
-315001	Corpo 1 (OMAGGI: BROCHURES + DISPLAY + EXPO Ready & Go)
-315002	Corpo 2 (OMAGGI: BROCHURES + DISPLAY + EXPO Ready & Go)
-313000	Visage
-319603	Exhibitor Contains 16 unit pack- 4 different types
+319000	Promo Cosmeceutical Peel Off
+319001	Promo Cosmeceutical 3+1
