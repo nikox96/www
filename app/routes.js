@@ -149,9 +149,14 @@ module.exports = function (app, passport) {
                         // render the page and pass in any flash data if it exists
 
                         k = 0;
-                        Order.newOrderProduct(appRes[0].idord, promoRes[0].ccod, req.body.iqta, 0, promoRes[0].xdescpromo, function (ordErr, ordRes) {
+                        Order.newOrderProduct(appRes[0].idord, 999999, req.body.iqta, 0, promoRes[0].ccod + " - " + promoRes[0].xdescpromo, function (ordErr, ordRes) {
                             if (ordErr) {
                                 console.log(ordErr);
+                                req.flash('orderMessage', ordErr);
+                                res.render('new-order-promo.ejs', {
+                                    message: req.flash('orderMessage'),
+                                    idOrd: idOrd
+                                });
                             } else {
                                 console.log(ordRes);
                                 insertOrderPromo(promoRes, req, res, appRes[0].idord);

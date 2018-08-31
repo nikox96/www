@@ -176,7 +176,8 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
 
             console.log('iimp: ' + iimp);
             //se il prodotto era già presente nel carrello per quest'ordine allora aggiorno quantità e importo
-            db.query("SELECT 1 FROM portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0)
+            db.query("SELECT 1 FROM portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0) + " AND descrpromo = $1"
+                , [promo]
 //                , function (queryErr, queryRes) {
                 , (queryErr, queryRes) => {
                     queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
@@ -186,9 +187,9 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
                             + ccod + ", "
                             + ccodprod + ", "
                             + iqta + ", "
-                            + iimp + ","
-                            + psco + ","
-                            + "$1)"
+                            + iimp + ", "
+                            + psco + ", "
+                            + "$1 )"
                             , [promo]
 //                            , function (queryErr, queryRes) {
                             , (queryErr, queryRes) => {

@@ -51,6 +51,11 @@
     </div>
 </nav>
 <div class="container-fluid">
+    <!-- show any messages that come back with authentication -->
+    <% if (message.length > 0) { %>
+    <div class="alert alert-danger"><%= message %></div>
+    <div class="alert alert-warning">Ricaricare la pagina!</div>
+    <% } %>
     <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
         <div id="product">
             <table class="table table-hover">
