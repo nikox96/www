@@ -254,7 +254,7 @@ Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, callback) {
     //ricerca ordine per codice agente/status/cliente
     var query = "SELECT a.*, b.iimp, c.xragsoc " +
         "FROM " +
-        "(SELECT ccod, dreg, cstt, cage, ccli " +
+        "(SELECT ccod, dreg, cstt, cage, ccli, xnote" +
         "FROM portale.ordini)  AS a, " +
         "(SELECT ccod, SUM(iimp) AS iimp " +
         "FROM portale.righe_ordini " +
