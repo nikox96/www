@@ -164,11 +164,11 @@ Ordine.newOrder = function newOrder(ctiprec, ccli, cage, callback) {
 Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, promo, callback) {
     //ricerco il prodotto da inserire
     Prodotto.find(ccodprod, function (err, res) {
-        if (err && !(promo)) {
+        if (err && promo.length <= 6) {
             callback('Prodotto inesistente', null);
         } else {
             //calcolo importo
-            if (promo)
+            if (promo.length > 6)
                 res.iprz = 0;
 
             var iimp = res.iprz * iqta;
@@ -203,19 +203,35 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
                     else {
                         console.log('update order prod');
                         if (iqta == 0) {
-                            db.query("DELETE FROM portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0)
-//                            , function (queryErr, queryRes) {
-                                , (queryErr, queryRes) => {
-                                    if (queryErr) {
-                                        callback("Errore aggiornamento prodotto", null);
-                                    }
-                                    else {
-                                        callback(null, "Prodotto aggiornato");
-                                    }
-                                });
+                            if (promo.length > 6){
+                                db.query("DELETE FROM portale.righe_ordini WHERE descrpromo = $1"
+                                    , [promo]
+//                                  , function (queryErr, queryRes) {
+                                    , (queryErr, queryRes) => {
+                                        if (queryErr) {
+                                            callback("Errore aggiornamento prodotto", null);
+                                        }
+                                        else {
+                                            callback(null, "Prodotto aggiornato");
+                                        }
+                                    });
+                            } else {
+                                db.query("DELETE FROM portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0) + "AND descrpromo = $1"
+                                    , [promo]
+//                                  , function (queryErr, queryRes) {
+                                    , (queryErr, queryRes) => {
+                                        if (queryErr) {
+                                            callback("Errore aggiornamento prodotto", null);
+                                        }
+                                        else {
+                                            callback(null, "Prodotto aggiornato");
+                                        }
+                                    });
+                            }
                         } else {
                             db.query("UPDATE portale.righe_ordini SET iqta = " + iqta + ", iimp = " + iimp
-                                + " WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0)
+                                + " WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0) + "AND descrpromo = $1"
+                                , [promo]
 //                            , function (queryErr, queryRes) {
                                 , (queryErr, queryRes) => {
                                     if (queryErr) {

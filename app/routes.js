@@ -170,7 +170,7 @@ module.exports = function (app, passport) {
             } else {
                 var msg;
                 console.log('idOrd: ' + appRes[0].idord + 'cod prod: ' + req.body.ccodprod + 'qta :' + req.body.iqta + 'psco :' + req.body.psco);
-                Order.newOrderProduct(appRes[0].idord, req.body.ccodprod, req.body.iqta, req.body.psco, false, function (orderErr, orderRes) {
+                Order.newOrderProduct(appRes[0].idord, req.body.ccodprod, req.body.iqta, req.body.psco, '', function (orderErr, orderRes) {
                     if (orderErr) {
                         msg = 'errore inserimento prodotto ordine';
                     } else {
@@ -2192,7 +2192,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
         rig.cpartitarioAltriContiAltroSis = '';
         rig.descPartAltriConti = '';
         rig.opzComposto = '';
-        rig.descrizione1 = righe[i].descrpromo;
+        rig.descrizione1 = (righe[i].descrpromo.length > 6 ? righe[i].descrpromo : '');
         rig.descrizione2 = '';
         rig.descrizione3 = '';
         rig.descrizione4 = '';
@@ -2547,7 +2547,7 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
     }
     console.log('idord: ' + idOrd + ' cod prod: ' + promoRes[k].ccodprod + ' pezzi: ' + promoRes[k].ipzz);
     promoRes[k].ipzz = promoRes[k].ipzz * req.body.iqta;
-    Order.newOrderProduct(idOrd, promoRes[k].ccodprod, promoRes[k].ipzz, promoRes[k].psco, false, function (ordErr, ordRes) {
+    Order.newOrderProduct(idOrd, promoRes[k].ccodprod, promoRes[k].ipzz, promoRes[k].psco, promoRes[k].ccod, function (ordErr, ordRes) {
         if (ordErr)
             console.log(ordErr);
         else
