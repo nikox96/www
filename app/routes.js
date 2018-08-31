@@ -112,7 +112,7 @@ module.exports = function (app, passport) {
                         var xy = 0;
                         for (k = 0; k < promoRes.length; k++) {
                             for (i = 0; i < anaPromo.length; i++) {
-                                if (promoRes[k].ccod === anaPromo[i].ccod && promoRes[k].psco == anaPromo[i].psco)
+                                if (promoRes[k].ccod === anaPromo[i].ccod)
                                     b = false;
                             }
                             if (b) {
@@ -2572,7 +2572,7 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
                 var xy = 0;
                 for (k = 0; k < promoRes1.length; k++) {
                     for (i = 0; i < anaPromo.length; i++) {
-                        if (promoRes1[k].ccod === anaPromo[i].ccod && promoRes1[k].psco == anaPromo[i].psco)
+                        if (promoRes1[k].ccod === anaPromo[i].ccod)
                             b = false;
                     }
                     if (b) {
