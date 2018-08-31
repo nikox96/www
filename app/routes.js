@@ -149,7 +149,7 @@ module.exports = function (app, passport) {
                         // render the page and pass in any flash data if it exists
 
                         k = 0;
-                        Order.newOrderProduct(idOrd, promoRes[0].ccod, req.body.iqta, 0, promoRes[0].xdescpromo, function (ordErr, ordRes) {
+                        Order.newOrderProduct(appRes[0].idord, promoRes[0].ccod, req.body.iqta, 0, promoRes[0].xdescpromo, function (ordErr, ordRes) {
                             if (ordErr) {
                                 console.log(ordErr);
                             } else {
