@@ -103,7 +103,14 @@ module.exports = function (app, passport) {
             } else {
                 Product.listPromo('', function (promoErr, promoRes) {
                     if (promoErr) {
-                        req.flash('orderMessage', 'Nessun cliente trovato');
+                        req.flash('orderMessage', 'Errore estrazione promozioni!');
+                        res.render('new-order-promo.ejs', {
+                            messageErr: req.flash('orderMessage'),
+                            messageRes: '',
+                            anaPromo: anaPromo,
+                            promo: promoRes,
+                            idOrd: appRes[0].idord
+                        });
                     } else {
                         req.flash('orderMessage', promoRes.length + ' risultati');
 
@@ -123,7 +130,8 @@ module.exports = function (app, passport) {
                         }
 
                         res.render('new-order-promo.ejs', {
-                            message: req.flash('orderMessage'),
+                            messageErr: '',
+                            messageRes: req.flash('orderMessage'),
                             anaPromo: anaPromo,
                             promo: promoRes,
                             idOrd: appRes[0].idord
