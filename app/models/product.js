@@ -28,7 +28,7 @@ Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, callback) {
     console.log("sven " + sven);
     console.log("xgrp " + xgrp);
     console.log("xprod" + xprod);
-    var query = "SELECT * FROM portale.prodotti WHERE ccod >= " + (ccodda && ccodda !== '' ? ccodda : 0) + " AND ccod <= " + (ccoda && ccoda !== '' ? ccoda : 999999)
+    var query = "SELECT * FROM portale.prodotti WHERE ccod >= " + (ccodda && ccodda !== '' ? ccodda : 0) + " AND ccod <= " + (ccoda && ccoda !== '' ? ccoda : 999998)
         + " AND xgrp LIKE '%" + (xgrp && xgrp !== '' ? xgrp : '') + "%' AND xdesc ILIKE '%" + (xprod && xprod ? xprod : '')
         + "%' AND sven LIKE '%" + (sven && sven !== '' ? sven : '') + "%'";
     console.log(query);

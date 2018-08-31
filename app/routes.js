@@ -864,6 +864,7 @@ module.exports = function (app, passport) {
                     order.xragsoc = ordRes[i].xragsoc;
                     order.iimp = ordRes[i].iimp;
                     order.data = ordRes[i].dreg;
+                    order.xnota = ordRes[i].xnote;
                     orders[i] = order;
                 }
             }
