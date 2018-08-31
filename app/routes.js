@@ -950,7 +950,7 @@ module.exports = function (app, passport) {
                             if (ordErr) {
                                 console.log("errore aggiornamento codice cliente ordine");
                             } else {
-                                Product.list(0, 999999, '', '', '', function (productErr, productRes) {
+                                Product.list(0, 999998, '', '', '', function (productErr, productRes) {
                                     if (productErr) {
                                         req.flash('orderMessage', 'Nessun prodotto trovato');
                                     }
@@ -1020,7 +1020,7 @@ module.exports = function (app, passport) {
                     if (ordErr) {
                         console.log("errore aggiornamento codice cliente ordine");
                     } else {
-                        Product.list(0, 999999, '', '', '', function (productErr, productRes) {
+                        Product.list(0, 999998, '', '', '', function (productErr, productRes) {
                             if (productErr) {
                                 req.flash('orderMessage', 'Nessun prodotto trovato');
                             }

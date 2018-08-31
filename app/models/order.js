@@ -187,7 +187,8 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
                             + iqta + ", "
                             + iimp + ","
                             + psco + ","
-                            + promo + ")"
+                            + "$1)"
+                            , [promo]
 //                            , function (queryErr, queryRes) {
                             , (queryErr, queryRes) => {
                                 if (queryErr) {
