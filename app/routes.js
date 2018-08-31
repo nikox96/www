@@ -155,6 +155,7 @@ module.exports = function (app, passport) {
                                 req.flash('orderMessage', ordErr);
                                 res.render('new-order-promo.ejs', {
                                     messageErr: req.flash('orderMessage'),
+                                    messageRes: '',
                                     idOrd: appRes[0].idOrd
                                 });
                             } else {
@@ -2588,6 +2589,7 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
                 }
 
                 res.render('new-order-promo.ejs', {
+                    messageErr: '',
                     messageRes: req.flash('orderMessage'),
                     anaPromo: anaPromo,
                     promo: promoRes1,
