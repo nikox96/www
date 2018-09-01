@@ -326,7 +326,7 @@ module.exports = function (app, passport) {
                                                 } else {
                                                     req.flash('orderCampionciniRes', 'Ancora ' + (totalRes - ctvCampRes).toFixed(2) + ' euro spendibili in campioncini!');
                                                 }
-                                                res.render('new-order-product.ejs', {
+                                                res.render('new-order-campioncini.ejs', {
                                                     messageErr: req.flash('orderCampionciniErr'),
                                                     messageRes: req.flash('orderCampionciniRes'),
                                                     ccodc: req.body.ccodc,
