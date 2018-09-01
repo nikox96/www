@@ -282,6 +282,7 @@ module.exports = function (app, passport) {
                                                 req.flash('orderMessage', righeErr);
                                             } else {
                                                 i = 0;
+                                                products = [];
                                                 getRighe(res, req, righeRes, cliRes, queryRes, appRes[0].idord);
                                             }
                                         });
@@ -351,8 +352,8 @@ module.exports = function (app, passport) {
                 if (productErr) {
                     req.flash('editProducts', 'Nessun prodotto disponibile');
                 } else {
-                    var products = [];
-                    var product;
+                    products = [];
+                    product;
                     for (i = 0; i < productRes.length; i++) {
                         product = {};
                         product.ccod = productRes[i].ccod;
@@ -1271,7 +1272,6 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                         if (pdferr) return console.log(pdferr);
 
                                         console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
-                                        console.log(htmlGenesi);
 
                                         Appoggio.update(req.user.cage, idOrd, pdfres.filename, function (appErr, appRes) {
                                             if (appErr) return console.log("errore salvataggio path pdf");
@@ -2184,8 +2184,8 @@ function csvRig93() {
 }
 
 function getRigheCSV(res, req, nreg, righe, cliente, agente) {
-    var products = [];
-    var product = {};
+    products = [];
+    product = {};
     var riga = {};
     if (i >= righe.length)
         return;
