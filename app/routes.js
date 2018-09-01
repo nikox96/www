@@ -106,7 +106,6 @@ module.exports = function (app, passport) {
                         req.flash('orderCampionciniErr', 'Nessun campioncino trovato');
                     } else {
                         console.log('clients: ' + campRes.length);
-                        req.flash('orderCampionciniRes', campRes.length + ' risultati');
                         Product.getXgrpCamp(function (grpErr, grpRes) {
                             if (grpErr) {
                                 console.log("errore xgrp");
@@ -312,16 +311,34 @@ module.exports = function (app, passport) {
                                 } else {
                                     console.log("xgrp trovate" + grpRes);
                                 }
-                                res.render('new-order-product.ejs', {
-                                    messageErr: req.flash('orderCampionciniErr'),
-                                    messageRes: req.flash('orderCampionciniRes'),
-                                    ccodc: req.body.ccodc,
-                                    sgrp: req.body.sgrpc,
-                                    sgrpc: req.body.sgrpc,
-                                    xcampc: req.body.xcampc,
-                                    campioncini: campRes,
-                                    lgrp: grpRes,
-                                    idOrd: appRes[0].idord
+                                Order.getTotal(appRes[0].idord, function (totalErr, totalRes) {
+                                    if (totalErr)
+                                        req.flash('orderCampionciniErr', totalErr);
+                                    else {
+                                        Order.getCtvCamp(appRes[0].idord, function (ctvCampErr, ctvCampRes) {
+                                            if (ctvCampErr)
+                                                req.flash('orderCampionciniErr', ctvCampErr);
+                                            else {
+                                                totalRes = totalRes / 10;
+                                                if (totalRes < ctvCampRes) {
+                                                    req.flash('orderCampionciniErr', 'Limite campioncini superato: rimuovere dei campioncini!');
+                                                } else {
+                                                    req.flash('orderCampionciniRes', 'Ancora ' + (totalRes - ctvCampRes).toFixed(2) + ' euro spendibili in campioncini!');
+                                                }
+                                                res.render('new-order-product.ejs', {
+                                                    messageErr: req.flash('orderCampionciniErr'),
+                                                    messageRes: req.flash('orderCampionciniRes'),
+                                                    ccodc: req.body.ccodc,
+                                                    sgrp: req.body.sgrpc,
+                                                    sgrpc: req.body.sgrpc,
+                                                    xcampc: req.body.xcampc,
+                                                    campioncini: campRes,
+                                                    lgrp: grpRes,
+                                                    idOrd: appRes[0].idord
+                                                });
+                                            }
+                                        });
+                                    }
                                 });
                             });
                         }
