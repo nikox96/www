@@ -277,7 +277,6 @@ module.exports = function (app, passport) {
                                     if (cliErr)
                                         req.flash('orderMessage', cliErr);
                                     else {
-                                        righeRes = null;
                                         Order.findProduct(appRes[0].idord, function (righeErr, righeRes) {
                                             if (righeErr) {
                                                 req.flash('orderMessage', righeErr);
@@ -1200,6 +1199,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
     if (i >= righe.length)
         return;
 
+    console.log('getRighe rows number: ' + righe.length);
     Product.find(righe[i].ccodprod, function (prodErr, prodRes) {
         if (prodErr) {
             req.flash('orderMessage', prodErr);
@@ -1212,7 +1212,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
             product.psco = riga.psco;
             product.iimp = riga.iimp;
             products[i] = product;
-            if (i === righe.length - 1) {
+            if (i == righe.length - 1) {
                 var condpag;
                 db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag
 //                    , function (condErr, condRes) {
@@ -1231,6 +1231,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                 condRes = (condRes.rows && condRes.rows.length > 0 ? condRes.rows : condRes);
                                 condpag = condRes[0];
                             }
+                            console.log('getRighe products count: ' + products.length);
                             Order.getNota(idOrd, function (notaErr, notaRes) {
                                 res.render('new-order-sum.ejs', {
                                     message: req.flash('orderMessage'),
