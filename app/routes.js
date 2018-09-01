@@ -299,7 +299,7 @@ module.exports = function (app, passport) {
                     if (orderErr)
                         req.flash('orderCampionciniErr', orderErr);
 
-                    Product.listCamp((req.body.ccodc && req.body.ccodc != '' ? req.body.ccodc : ''), (req.body.sgrpc && req.body.sgrpc !== '' ? req.body.sgrpp : ''), (req.body.xcampc && req.body.xcampc !== '' ? req.body.xcampc : ''), function (campErr, campRes) {
+                    Product.listCamp((req.body.ccodc && req.body.ccodc != '' ? req.body.ccodc : ''), (req.body.sgrpc && req.body.sgrpc !== '' ? req.body.sgrpc : ''), (req.body.xcampc && req.body.xcampc !== '' ? req.body.xcampc : ''), function (campErr, campRes) {
                         if (campErr && !(orderErr)) {
                             req.flash('orderCampionciniErr', 'Nessun campioncino trovato');
                         } else {
@@ -315,8 +315,8 @@ module.exports = function (app, passport) {
                                     messageErr: req.flash('orderCampionciniErr'),
                                     messageRes: req.flash('orderCampionciniRes'),
                                     ccodc: req.query.ccodc,
-                                    sgrp: req.query.sgrp,
-                                    xcamp: req.query.xcamp,
+                                    sgrpc: req.query.sgrpc,
+                                    xcampc: req.query.xcampc,
                                     campioncini: campRes,
                                     lgrp: grpRes,
                                     idOrd: appRes[0].idord
