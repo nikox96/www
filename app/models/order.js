@@ -267,7 +267,7 @@ Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, callback) {
         "WHERE a.ccod = b.ccod AND a.ccli = c.ccod "
         + ((cage || cage === 0) && cage !== '' ? "AND a.cage = " + cage : 'AND 1 <> 1')
         + ((cstt || cstt === 0) && cstt !== '' ? " AND a.cstt = " + cstt : '')
-        + (xcli && xcli !== '' ? " AND c.xragsoc ilike $1" : '');
+        + " AND c.xragsoc ilike $1";
     //console.log(query);
     db.query(query
         , ['%' + xcli + '%']
