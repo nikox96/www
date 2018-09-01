@@ -368,6 +368,7 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
                         iqtaold = queryRes[0].iqta;
                     }
                     var iimp = res.iprz * (iqta - iqtaold);
+                    console.log('newordercamp: iqta ' + iqta + ' iqtaold ' + iqtaold + ' iimp ' + iimp);
                     Camp.getCtvCamp(ccod, function (ctvCampErr, ctvCampRes) {
                         if (ctvCampErr)
                             callback(ctvCampErr, null);
@@ -382,6 +383,7 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
                                         callback('Limite campioncini superato: rimuovere dei campioncini!', null);
                                         return;
                                     } else {
+                                        console.log('%j', queryRes);
                                         if (queryErr || queryRes.rowCount == 0 || (queryRes.length && queryRes.length <= 0)) {
                                             console.log('insert order camp');
                                             db.query("INSERT INTO portale.camp_ordini (ccod, ccamp, iqta) VALUES("
@@ -400,8 +402,7 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
                                                         callback(null, "Campioncino inserito corretamente");
                                                     }
                                                 });
-                                        }
-                                        else {
+                                        } else {
                                             console.log('update order camp');
                                             if (iqta == 0) {
                                                 db.query("DELETE FROM portale.camp_ordini WHERE ccod = " + ccod + " AND ccamp = $1"
