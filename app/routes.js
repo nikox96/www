@@ -126,7 +126,7 @@ module.exports = function (app, passport) {
                                             if (totalRes < ctvCampRes) {
                                                 req.flash('orderCampionciniErr', 'Limite campioncini superato: rimuovere dei campioncini!');
                                             } else {
-                                                req.flash('orderCampionciniRes', 'Ancora ' + (totalRes - ctvCampRes) + ' euro spendibili in campioncini!');
+                                                req.flash('orderCampionciniRes', 'Ancora ' + (totalRes - ctvCampRes).toFixed(2) + ' euro spendibili in campioncini!');
                                             }
                                             res.render('new-order-campioncini.ejs', {
                                                 messageErr: req.flash('orderCampionciniErr'),
