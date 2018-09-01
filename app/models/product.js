@@ -129,7 +129,7 @@ Product.listCamp = function listCamp(ccod, xgrp, xcamp, callback) {
     var query = "SELECT * FROM portale.campioncini WHERE ccod ILIKE $1 AND xgrp ILIKE $2 AND xdesc ILIKE $3"
     console.log(query);
     db.query(query
-        , ['%' + ccod + '%', '%' + xgrp + '%', '%' + xcamp + '%']
+        , ['%' + (ccod ? ccod : '') + '%', '%' + (xgrp ? xgrp : '') + '%', '%' + (xcamp ? xcamp : '') + '%']
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
