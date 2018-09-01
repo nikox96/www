@@ -384,7 +384,8 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
                                         return;
                                     } else {
                                         console.log('%j', queryRes);
-                                        if (queryErr || queryRes.rowCount == 0 || (queryRes.length && queryRes.length <= 0)) {
+                                        console.log('length queryres', queryRes.length);
+                                        if (queryErr || queryRes.length <= 0) {
                                             console.log('insert order camp');
                                             db.query("INSERT INTO portale.camp_ordini (ccod, ccamp, iqta) VALUES("
                                                 + ccod + ", "
