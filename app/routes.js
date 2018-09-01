@@ -133,7 +133,8 @@ module.exports = function (app, passport) {
                                                 messageRes: req.flash('orderCampionciniRes'),
                                                 ccodc: req.query.ccodc,
                                                 sgrp: req.query.sgrp,
-                                                xcamp: req.query.xcamp,
+                                                sgrpc: req.query.sgrp,
+                                                xcampc: req.query.xcamp,
                                                 campioncini: campRes,
                                                 lgrp: grpRes,
                                                 idOrd: appRes[0].idord
@@ -314,9 +315,10 @@ module.exports = function (app, passport) {
                                 res.render('new-order-product.ejs', {
                                     messageErr: req.flash('orderCampionciniErr'),
                                     messageRes: req.flash('orderCampionciniRes'),
-                                    ccodc: req.query.ccodc,
-                                    sgrpc: req.query.sgrpc,
-                                    xcampc: req.query.xcampc,
+                                    ccodc: req.body.ccodc,
+                                    sgrp: req.body.sgrpc,
+                                    sgrpc: req.body.sgrpc,
+                                    xcampc: req.body.xcampc,
                                     campioncini: campRes,
                                     lgrp: grpRes,
                                     idOrd: appRes[0].idord
