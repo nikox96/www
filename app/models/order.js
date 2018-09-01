@@ -371,7 +371,7 @@ Ordine.getTotal = function getTotal(ccod, callback) {
         });
 };
 
-Ordine.getCtvCamp = function getTotal(ccod, callback) {
+Ordine.getCtvCamp = function getCtvCamp(ccod, callback) {
     //ricerca ordine per codice
     db.query("select sum(t1.iqta*t2.iprz) as itot from portale.camp_ordini as t1 JOIN portale.campioncini as t2 on t1.ccamp = t2.ccod where t1.ccod = $1 group by t1.ccod"
         , [ccod]
