@@ -270,7 +270,7 @@ Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, callback) {
         + " AND c.xragsoc ilike $1";
     //console.log(query);
     db.query(query
-        , ['%' + xcli + '%']
+        , ['%' + (xcli && xcli != '' ? xcli : '') + '%']
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
