@@ -2,6 +2,7 @@ var db = require("../config/database_psql.js");
 var Client = require("./models/client.js");
 var Order = require("./models/order.js");
 var Product = require("./models/product.js");
+var Camp = require("./models/campioncini.js");
 var Agent = require("./models/agent.js");
 var Appoggio = require("./models/appoggio.js");
 var dateFormat = require('dateformat');
@@ -113,11 +114,11 @@ module.exports = function (app, passport) {
                             } else {
                                 console.log("xgrp trovate" + grpRes);
                             }
-                            Order.getTotal(appRes[0].idord, function (totalErr, totalRes) {
+                            Camp.getTotal(appRes[0].idord, function (totalErr, totalRes) {
                                 if (totalErr)
                                     req.flash('orderCampionciniErr', totalErr);
                                 else {
-                                    Order.getCtvCamp(appRes[0].idord, function (ctvCampErr, ctvCampRes) {
+                                    Camp.getCtvCamp(appRes[0].idord, function (ctvCampErr, ctvCampRes) {
                                         if (ctvCampErr)
                                             req.flash('orderCampionciniErr', ctvCampErr);
                                         else {
@@ -311,11 +312,11 @@ module.exports = function (app, passport) {
                                 } else {
                                     console.log("xgrp trovate" + grpRes);
                                 }
-                                Order.getTotal(appRes[0].idord, function (totalErr, totalRes) {
+                                Camp.getTotal(appRes[0].idord, function (totalErr, totalRes) {
                                     if (totalErr)
                                         req.flash('orderCampionciniErr', totalErr);
                                     else {
-                                        Order.getCtvCamp(appRes[0].idord, function (ctvCampErr, ctvCampRes) {
+                                        Camp.getCtvCamp(appRes[0].idord, function (ctvCampErr, ctvCampRes) {
                                             if (ctvCampErr)
                                                 req.flash('orderCampionciniErr', ctvCampErr);
                                             else {
