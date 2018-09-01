@@ -57,7 +57,7 @@ module.exports = function (app, passport) {
             } else {
                 Product.list(req.query.ccodda, req.query.ccoda, req.query.sven, req.query.sgrp, req.query.xprod, function (productErr, productRes) {
                     if (productErr) {
-                        req.flash('orderMessage', 'Nessun cliente trovato');
+                        req.flash('orderMessage', 'Nessun prodotto trovato');
                     } else {
                         console.log('clients: ' + productRes.length);
                         req.flash('orderMessage', productRes.length + ' risultati');
@@ -88,6 +88,59 @@ module.exports = function (app, passport) {
                                     lgrp: grpRes,
                                     idOrd: appRes[0].idord
                                 });
+                            });
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    app.get('/new-order-campioncini', isLoggedIn, function (req, res) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                Product.listCamp(req.query.ccodc, req.query.sgrp, req.query.xcamp, function (campErr, campRes) {
+                    if (campErr) {
+                        req.flash('orderCampionciniErr', 'Nessun campioncino trovato');
+                    } else {
+                        console.log('clients: ' + campRes.length);
+                        req.flash('orderCampionciniRes', campRes.length + ' risultati');
+                        Product.getXgrpCamp(function (grpErr, grpRes) {
+                            if (grpErr) {
+                                console.log("errore xgrp");
+                                grpRes = {};
+                            } else {
+                                console.log("xgrp trovate" + grpRes);
+                            }
+                            Order.getTotal(appRes[0].idord, function (totalErr, totalRes) {
+                                if (totalErr)
+                                    req.flash('orderCampionciniErr', totalErr);
+                                else {
+                                    Order.getCtvCamp(appRes[0].idord, function (ctvCampErr, ctvCampRes) {
+                                        if (ctvCampErr)
+                                            req.flash('orderCampionciniErr', ctvCampErr);
+                                        else {
+                                            totalRes = totalRes / 10;
+                                            if (totalRes < ctvCampRes) {
+                                                req.flash('orderCampionciniErr', 'Limite campioncini superato: rimuovere dei campioncini!');
+                                            } else {
+                                                req.flash('orderCampionciniRes', 'Ancora ' + (totalRes - ctvCampRes) + ' euro spendibili in campioncini!');
+                                            }
+                                            res.render('new-order-campioncini.ejs', {
+                                                messageErr: req.flash('orderCampionciniErr'),
+                                                messageRes: req.flash('orderCampionciniRes'),
+                                                ccodc: req.query.ccodc,
+                                                sgrp: req.query.sgrp,
+                                                xcamp: req.query.xcamp,
+                                                campioncini: campRes,
+                                                lgrp: grpRes,
+                                                idOrd: appRes[0].idord
+                                            });
+                                        }
+                                    });
+                                }
                             });
                         });
                     }
@@ -227,6 +280,46 @@ module.exports = function (app, passport) {
                                         lgrp: grpRes,
                                         idOrd: appRes[0].idord
                                     });
+                                });
+                            });
+                        }
+                    });
+                });
+            }
+        });
+    });
+
+    app.post('/new-order-campioncini', isLoggedIn, function (req, res) {
+        Appoggio.find(req.user.cage, '', function (appErr, appRes) {
+            if (appErr) {
+                console.log("errore recupero codice ordine");
+            } else {
+                var msg;
+                Order.newOrderCamp(appRes[0].idord, req.body.ccodcamp, req.body.iqta, function (orderErr, orderRes) {
+                    if (orderErr)
+                        req.flash('orderCampionciniErr', orderErr);
+
+                    Product.listCamp((req.body.ccodc && req.body.ccodc != '' ? req.body.ccodc : ''), (req.body.sgrpc && req.body.sgrpc !== '' ? req.body.sgrpp : ''), (req.body.xcampc && req.body.xcampc !== '' ? req.body.xcampc : ''), function (campErr, campRes) {
+                        if (campErr && !(orderErr)) {
+                            req.flash('orderCampionciniErr', 'Nessun campioncino trovato');
+                        } else {
+                            console.log('campioncini: ' + campRes.length);
+                            Product.getXgrp(function (grpErr, grpRes) {
+                                if (grpErr) {
+                                    console.log("errore xgrp");
+                                    grpRes = {};
+                                } else {
+                                    console.log("xgrp trovate" + grpRes);
+                                }
+                                res.render('new-order-product.ejs', {
+                                    messageErr: req.flash('orderCampionciniErr'),
+                                    messageRes: req.flash('orderCampionciniRes'),
+                                    ccodc: req.query.ccodc,
+                                    sgrp: req.query.sgrp,
+                                    xcamp: req.query.xcamp,
+                                    campioncini: campRes,
+                                    lgrp: grpRes,
+                                    idOrd: appRes[0].idord
                                 });
                             });
                         }
@@ -645,10 +738,10 @@ module.exports = function (app, passport) {
         })
     });
 
-    // =====================================
-    // LOGIN ===============================
-    // =====================================
-    // show the login form
+// =====================================
+// LOGIN ===============================
+// =====================================
+// show the login form
     app.get('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
         var order = {};

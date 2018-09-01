@@ -29,10 +29,10 @@ Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, callback) {
     console.log("xgrp " + xgrp);
     console.log("xprod" + xprod);
     var query = "SELECT * FROM portale.prodotti WHERE ccod >= " + (ccodda && ccodda !== '' ? ccodda : 0) + " AND ccod <= " + (ccoda && ccoda !== '' ? ccoda : 999998)
-        + " AND xgrp LIKE '%" + (xgrp && xgrp !== '' ? xgrp : '') + "%' AND xdesc ILIKE '%" + (xprod && xprod ? xprod : '')
-        + "%' AND sven LIKE '%" + (sven && sven !== '' ? sven : '') + "%'";
+        + " AND xgrp ILIKE $1 AND xdesc ILIKE $2 AND sven ILIKE $3";
     console.log(query);
     db.query(query
+        , ['%' + xgrp + '%', '%' + xprod + '%', '%' + sven + '%']
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -54,9 +54,9 @@ Product.getSven = function getSven(callback) {
     db.query(query
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
-            if (queryErr){
+            if (queryErr) {
                 callback(queryErr, null);
-            }else{
+            } else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 callback(null, queryRes);
             }
@@ -70,9 +70,9 @@ Product.getXgrp = function getXgrp(callback) {
     db.query(query
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
-            if (queryErr){
+            if (queryErr) {
                 callback(queryErr, null);
-            }else{
+            } else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 callback(null, queryRes);
             }
@@ -100,6 +100,64 @@ Product.listPromo = function listPromo(ccod, callback) {
                 console.log("record: " + queryRes.length);
             }
         });
+};
+
+Product.findCamp = function findCamp(ccamp, callback) {
+    var query = "SELECT * FROM portale.campioncini WHERE ccod = $1";
+    console.log(query);
+    db.query(query
+        , [ccamp]
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
+            if (queryErr) {
+                callback(queryErr, null);
+                console.log("error: " + queryErr);
+            }
+            else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                callback(null, queryRes[0]);
+                console.log("record: " + queryRes.length);
+            }
+        });
+};
+
+Product.listCamp = function listCamp(ccod, xgrp, xcamp, callback) {
+    console.log("ricerca lista prodotti");
+    console.log("ccod " + ccod);
+    console.log("xgrp " + xgrp);
+    console.log("xcamp " + xcamp);
+    var query = "SELECT * FROM portale.campioncini WHERE ccod ILIKE $1 AND xgrp ILIKE $2 AND xdesc ILIKE $3"
+    console.log(query);
+    db.query(query
+        , ['%' + ccod + '%', '%' + xgrp + '%', '%' + xcamp + '%']
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
+            if (queryErr) {
+                callback(queryErr, null);
+                console.log("error: " + queryErr);
+            }
+            else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                callback(null, queryRes);
+                console.log("listCamp record: " + queryRes.length);
+            }
+        });
+};
+
+Product.getXgrpCamp = function getXgrpCamp(callback) {
+    console.log("ricerca categoria campioncini");
+    var query = "SELECT xgrp FROM portale.campioncini group by xgrp";
+    console.log(query);
+    db.query(query
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
+            if (queryErr) {
+                callback(queryErr, null);
+            } else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                callback(null, queryRes);
+            }
+        })
 };
 
 module.exports = Product;

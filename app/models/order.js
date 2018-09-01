@@ -207,7 +207,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
                     else {
                         console.log('update order prod');
                         if (iqta == 0) {
-                            if (promo.length > 6){
+                            if (promo.length > 6) {
                                 db.query("DELETE FROM portale.righe_ordini WHERE descrpromo = $1"
                                     , [promo]
 //                                  , function (queryErr, queryRes) {
@@ -267,9 +267,10 @@ Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, callback) {
         "WHERE a.ccod = b.ccod AND a.ccli = c.ccod "
         + ((cage || cage === 0) && cage !== '' ? "AND a.cage = " + cage : 'AND 1 <> 1')
         + ((cstt || cstt === 0) && cstt !== '' ? " AND a.cstt = " + cstt : '')
-        + (xcli && xcli !== '' ? " AND c.xragsoc like '%" + xcli + "%'" : '');
+        + (xcli && xcli !== '' ? " AND c.xragsoc ilike $1" : '');
     //console.log(query);
     db.query(query
+        , ['%' + xcli + '%']
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -346,4 +347,142 @@ Ordine.getNota = function getNota(ccod, callback) {
             callback("Nessun ordine trovato", null);
         });
 };
+
+Ordine.getTotal = function getTotal(ccod, callback) {
+    //ricerca ordine per codice
+    db.query("SELECT SUM(iimp) as itot FROM portale.righe_ordini WHERE ccod = "
+        + ccod + " group by ccod"
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
+            if (queryErr) {
+                console.log("error: " + queryErr);
+            }
+            else {
+                queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
+                if (queryRes.length > 0) {
+                    callback(null, queryRes[0].itot);
+                    return;
+                } else if (queryRes.length == 0) {
+                    callback(null, 0);
+                    return;
+                }
+            }
+            callback("Errore calcolo totale ordine", null);
+        });
+};
+
+Ordine.getCtvCamp = function getTotal(ccod, callback) {
+    //ricerca ordine per codice
+    db.query("select sum(t1.iqta*t2.iprz) as itot from portale.camp_ordini as t1 JOIN portale.campioncini as t2 on t1.ccamp = t2.ccod where t1.ccod = $1 group by t1.ccod"
+        , [ccod]
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
+            if (queryErr) {
+                console.log("error: " + queryErr);
+            }
+            else {
+                queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
+                if (queryRes.length > 0) {
+                    callback(null, queryRes[0].itot);
+                    return;
+                } else if (queryRes.length == 0) {
+                    callback(null, 0);
+                    return;
+                }
+            }
+            callback("Errore calcolo controvalore campioncini", null);
+        });
+};
+
+Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
+    var iqtaold;
+    //ricerco il prodotto da inserire
+    Prodotto.findCamp(ccodcamp, function (err, res) {
+        if (err) {
+            callback('Campioncino inesistente', null);
+        } else {
+            //se il campioncino era già presente nel carrello per quest'ordine allora aggiorno quantità
+            db.query("SELECT iqta FROM portale.camp_ordini WHERE ccod = " + ccod + " AND ccamp = $1"
+                , [ccodcamp]
+//                , function (queryErr, queryRes) {
+                , (queryErr, queryRes) => {
+                    queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
+                    if (queryErr || queryRes.length == 0) {
+                        iqtaold = 0;
+                    } else {
+                        iqtaold = queryRes[0].iqta;
+                    }
+                    var iimp = res.iprz * (iqta - iqtaold);
+                    this.getCtvCamp(ccod, function (ctvCampErr, ctvCampRes) {
+                        if (ctvCampErr)
+                            callback(ctvCampErr, null);
+                        else {
+                            iimp += ctvCampRes;
+                            this.getTotal(ccod, function (totalErr, totalRes) {
+                                if (totalErr)
+                                    callback(totalErr, null);
+                                else {
+                                    totalRes = totalRes / 10;
+                                    if (totalRes < iimp) {
+                                        callback('Limite campioncini superato: rimuovere dei campioncini!', null);
+                                        return;
+                                    } else {
+                                        if (queryErr || queryRes.rowCount == 0 || (queryRes.length && queryRes.length <= 0)) {
+                                            console.log('insert order camp');
+                                            db.query("INSERT INTO portale.camp_ordini (ccod, ccamp, iqta) VALUES("
+                                                + ccod + ", "
+                                                + "$1 , "
+                                                + iqta + ")"
+                                                , [ccodcamp]
+//                            , function (queryErr, queryRes) {
+                                                , (queryErr, queryRes) => {
+                                                    if (queryErr) {
+                                                        console.log('errore insert camp: ' + queryErr);
+                                                        callback('Errore inserimento campioncino', null);
+                                                    }
+                                                    else {
+                                                        console.log('insert camp res: ');
+                                                        callback(null, "Campioncino inserito corretamente");
+                                                    }
+                                                });
+                                        }
+                                        else {
+                                            console.log('update order camp');
+                                            if (iqta == 0) {
+                                                db.query("DELETE FROM portale.camp_ordini WHERE ccod = " + ccod + " AND ccamp = $1"
+                                                    , [ccodcamp]
+//                                  , function (queryErr, queryRes) {
+                                                    , (queryErr, queryRes) => {
+                                                        if (queryErr) {
+                                                            callback("Errore delete campioncino", null);
+                                                        }
+                                                        else {
+                                                            callback(null, "Campioncino aggiornato");
+                                                        }
+                                                    });
+                                            } else {
+                                                db.query("UPDATE portale.camp_ordini SET iqta = " + iqta
+                                                    + " WHERE ccod = " + ccod + " AND ccamp = $1"
+                                                    , [ccodcamp]
+//                            , function (queryErr, queryRes) {
+                                                    , (queryErr, queryRes) => {
+                                                        if (queryErr) {
+                                                            callback("Errore aggiornamento campioncino", null);
+                                                        }
+                                                        else {
+                                                            callback(null, "Campioncino aggiornato");
+                                                        }
+                                                    });
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+        }
+    });
+};
+
 module.exports = Ordine;

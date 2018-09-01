@@ -156,6 +156,9 @@ CREATE TABLE righe_ordini (	ccod INT(9) NOT NULL COMMENT 'ID ordine',
 					REFERENCES ordini(ccod)
 					ON UPDATE CASCADE ON DELETE CASCADE) ENGINE=INNODB;
 
+create table portale.camp_ordini(ccod INT NOT NULL, ccamp CHAR(6) NOT NULL, iqta numeric(5) DEFAULT 0, PRIMARY KEY (ccod, ccamp), FOREIGN KEY (ccamp) REFERENCES portale.campioncini(ccod) on update cascade on delete cascade, FOREIGN K
+EY (ccod) REFERENCES portale.ordini(ccod) on update cascade on delete cascade);
+
 -- load
    LOAD DATA LOCAL INFILE 'insert_ana_agenti.txt' INTO TABLE agenti LINES TERMINATED BY '\r\n';
    LOAD DATA LOCAL INFILE 'insert_ana_clienti.txt' INTO TABLE clienti LINES TERMINATED BY '\r\n';
