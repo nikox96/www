@@ -1,6 +1,7 @@
 var db = require("../../config/database_psql.js");
 var mysql = require('mysql');
 var Prodotto = require("./product.js");
+var Camp = require("./campioncini.js");
 
 var Ordine = {};
 
@@ -348,52 +349,6 @@ Ordine.getNota = function getNota(ccod, callback) {
         });
 };
 
-Ordine.getTotal = function getTotal(ccod, callback) {
-    //ricerca ordine per codice
-    db.query("SELECT SUM(iimp) as itot FROM portale.righe_ordini WHERE ccod = "
-        + ccod + " group by ccod"
-//        , function (queryErr, queryRes) {
-        , (queryErr, queryRes) => {
-            if (queryErr) {
-                console.log("error: " + queryErr);
-            }
-            else {
-                queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
-                if (queryRes.length > 0) {
-                    callback(null, queryRes[0].itot);
-                    return;
-                } else if (queryRes.length == 0) {
-                    callback(null, 0);
-                    return;
-                }
-            }
-            callback("Errore calcolo totale ordine", null);
-        });
-};
-
-Ordine.getCtvCamp = function getCtvCamp(ccod, callback) {
-    //ricerca ordine per codice
-    db.query("select sum(t1.iqta*t2.iprz) as itot from portale.camp_ordini as t1 JOIN portale.campioncini as t2 on t1.ccamp = t2.ccod where t1.ccod = $1 group by t1.ccod"
-        , [ccod]
-//        , function (queryErr, queryRes) {
-        , (queryErr, queryRes) => {
-            if (queryErr) {
-                console.log("error: " + queryErr);
-            }
-            else {
-                queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
-                if (queryRes.length > 0) {
-                    callback(null, queryRes[0].itot);
-                    return;
-                } else if (queryRes.length == 0) {
-                    callback(null, 0);
-                    return;
-                }
-            }
-            callback("Errore calcolo controvalore campioncini", null);
-        });
-};
-
 Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
     var iqtaold;
     //ricerco il prodotto da inserire
@@ -413,12 +368,12 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
                         iqtaold = queryRes[0].iqta;
                     }
                     var iimp = res.iprz * (iqta - iqtaold);
-                    this.getCtvCamp(ccod, function (ctvCampErr, ctvCampRes) {
+                    Camp.getCtvCamp(ccod, function (ctvCampErr, ctvCampRes) {
                         if (ctvCampErr)
                             callback(ctvCampErr, null);
                         else {
                             iimp += ctvCampRes;
-                            this.getTotal(ccod, function (totalErr, totalRes) {
+                            Camp.getTotal(ccod, function (totalErr, totalRes) {
                                 if (totalErr)
                                     callback(totalErr, null);
                                 else {
