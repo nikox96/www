@@ -1434,8 +1434,6 @@ function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
             campioncino.iimp = 0;
             campioncini[j] = campioncino;
             if (j == camps.length - 1) {
-
-
                 var condpag;
                 db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag
 //                    , function (condErr, condRes) {
