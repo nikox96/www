@@ -416,7 +416,7 @@ module.exports = function (app, passport) {
             } else {
                 Appoggio.insert(req.user.cage, req.query.ccod, function (appInsErr, appInsRes) {
                     if (appInsErr) {
-                        console.log("Errore lettura appogigo conferma inserimento ordine!");
+                        console.log("Errore lettura appoggio conferma inserimento ordine!");
                     } else {
                         Order.find(req.query.ccod, function (queryErr, queryRes) {
                             if (queryErr)
@@ -1327,6 +1327,112 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
             product.iimp = riga.iimp;
             products[i] = product;
             if (i == righe.length - 1) {
+
+                Order.findCamp(idOrd, function (findCampErr, findCampRes) {
+                    if (findCampRes)
+                        getRigheCamp(res, req, findCampRes, cliente, cond, idOrd);
+                    else {
+                        var condpag;
+                        db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag
+//                    , function (condErr, condRes) {
+                            , (condErr, condRes) => {
+                                if (condErr) {
+                                    req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
+                                } else {
+                                    if (condRes.rows.length === 0) {
+                                        condpag = {
+                                            ccod: -1,
+                                            xcond: 'Condizione di pagamento non trovata',
+                                            psco: 0,
+                                            nsca: 0
+                                        };
+                                    } else {
+                                        condRes = (condRes.rows && condRes.rows.length > 0 ? condRes.rows : condRes);
+                                        condpag = condRes[0];
+                                    }
+                                    console.log('getRighe products count: ' + products.length);
+                                    Order.getNota(idOrd, function (notaErr, notaRes) {
+                                        res.render('new-order-sum.ejs', {
+                                            message: req.flash('orderMessage'),
+                                            idOrd: idOrd,
+                                            client: cliente,
+                                            products: products,
+                                            campioncini: [{}],
+                                            xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
+                                            condpag: condpag
+                                        }, function (err, htmlGenesi) {
+                                            if (err) return console.log(err);
+                                            var options = {
+                                                directory: "/tmp",
+                                                border: {
+                                                    "top": "2cm",
+                                                    "right": "1cm",
+                                                    "bottom": "2cm",
+                                                    "left": "1.5cm"
+                                                },
+                                                type: "pdf",
+                                                format: "A4"
+                                            };
+
+                                            var footerInit = htmlGenesi.indexOf("<footer");
+                                            footerInit = (footerInit === -1 ? 0 : footerInit);
+                                            var footerExit = htmlGenesi.indexOf("</footer>");
+                                            footerExit = (footerExit === -1 ? htmlGenesi.length : footerExit);
+                                            var htmlMod;
+
+                                            if (!(footerExit === htmlGenesi.length || footerInit === 0)) {
+                                                htmlMod = htmlGenesi.substr(0, footerInit - 1);
+                                                htmlMod += htmlGenesi.substr(footerExit + 9, htmlGenesi.length);
+                                            } else {
+                                                htmlMod = htmlGenesi;
+                                            }
+
+                                            pdf.create(htmlMod, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
+                                                if (pdferr) return console.log(pdferr);
+
+                                                console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
+
+                                                Appoggio.update(req.user.cage, idOrd, pdfres.filename, function (appErr, appRes) {
+                                                    if (appErr) return console.log("errore salvataggio path pdf");
+
+                                                    res.send(htmlGenesi);
+                                                });
+                                            });
+                                        });
+                                    });
+                                }
+                            });
+                    }
+                });
+            }
+            i++;
+            getRighe(res, req, righe, cliente, cond, idOrd);
+        }
+    });
+}
+
+function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
+
+    if (i >= camps.length)
+        return;
+
+    console.log('getRighe rows number: ' + righe.length);
+    Product.findCamp(camps[i].ccamp, function (prodErr, prodRes) {
+        if (prodErr) {
+            req.flash('orderMessage', prodErr);
+        } else {
+            // @todo: dichiarare campioncino e campioncini
+            campioncino = {};
+            riga = camps[i];
+            campioncino.ccod = prodRes.ccod;
+            campioncino.xdesc = riga.xdesc;
+            campioncino.iqta = riga.iqta;
+            campioncino.psco = 100;
+            campioncino.iimp = 0;
+            campioncini[i] = campioncino;
+            if (i == camps.length - 1) {
+
+
                 var condpag;
                 db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag
 //                    , function (condErr, condRes) {
@@ -1352,6 +1458,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                     idOrd: idOrd,
                                     client: cliente,
                                     products: products,
+                                    campioncini: campioncini,
                                     xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
                                     condpag: condpag
                                 }, function (err, htmlGenesi) {
@@ -1398,7 +1505,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                     });
             }
             i++;
-            getRighe(res, req, righe, cliente, cond, idOrd);
+            getRigheCamp(res, req, camps, cliente, cond, idOrd);
         }
     });
 }

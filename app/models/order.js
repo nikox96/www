@@ -442,4 +442,27 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
     });
 };
 
+Ordine.findCamp = function findCamp(ccod, callback) {
+    //ricerco i prodotti per un determinato ordine
+    db.query("SELECT * FROM portale.camp_ordini WHERE ccod = "
+        + ccod
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
+            if (queryErr) {
+                console.log("error: " + queryErr);
+            }
+            else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                console.log('findProduct: ' + queryRes.length);
+                if (queryRes.length > 0) {
+                    callback(null, queryRes);
+                    return;
+                } else {
+                    console.log("campioncini non presenti");
+                }
+            }
+            callback("Nessun campioncino inserito nell'ordine", null);
+        });
+};
+
 module.exports = Ordine;

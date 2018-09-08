@@ -32,7 +32,7 @@ Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, callback) {
         + " AND xgrp ILIKE $1 AND xdesc ILIKE $2 AND sven ILIKE $3";
     console.log(query);
     db.query(query
-        , ['%' + xgrp + '%', '%' + xprod + '%', '%' + sven + '%']
+        , ['%' + (xgrp !== 'undefined' && xgrp !== null ? xgrp : '') + '%', '%' + (xprod !== 'undefined' && xprod !== null ? xprod : '') + '%', '%' + (sven !== 'undefined' && sven !== null ? sven : '') + '%']
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
