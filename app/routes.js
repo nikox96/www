@@ -1419,7 +1419,7 @@ function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
     if (j >= camps.length)
         return;
 
-    console.log('getRighe rows number: ' + righe.length);
+    console.log('getRigheCamp rows number: ' + camps.length);
     Product.findCamp(camps[i].ccamp, function (prodErr, prodRes) {
         if (prodErr) {
             req.flash('orderMessage', prodErr);
