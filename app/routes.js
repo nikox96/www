@@ -11,6 +11,8 @@ var i = 0, k = 0, csvEl = 0;
 var rig, tes, rec, iva, par, csv;
 var products = [];
 var product = {};
+var campioncini = [];
+var campioncino = {};
 var riga = {};
 
 module.exports = function (app, passport) {
@@ -1322,6 +1324,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
             riga = righe[i];
             product.ccod = prodRes.ccod;
             product.xdesc = (prodRes.ccod == 999999 ? riga.descrpromo : prodRes.xdesc);
+            product.iprz = prodRes.iprz;
             product.iqta = riga.iqta;
             product.psco = riga.psco;
             product.iimp = riga.iimp;
@@ -1421,11 +1424,11 @@ function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
         if (prodErr) {
             req.flash('orderMessage', prodErr);
         } else {
-            // @todo: dichiarare campioncino e campioncini
             campioncino = {};
             riga = camps[i];
             campioncino.ccod = prodRes.ccod;
             campioncino.xdesc = riga.xdesc;
+            campioncino.iprz = 0;
             campioncino.iqta = riga.iqta;
             campioncino.psco = 100;
             campioncino.iimp = 0;
