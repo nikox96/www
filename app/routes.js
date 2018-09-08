@@ -7,7 +7,7 @@ var Agent = require("./models/agent.js");
 var Appoggio = require("./models/appoggio.js");
 var dateFormat = require('dateformat');
 var pdf = require('html-pdf');
-var i = 0, k = 0, csvEl = 0;
+var i = 0, j = 0, k = 0, csvEl = 0;
 var rig, tes, rec, iva, par, csv;
 var products = [];
 var product = {};
@@ -1330,11 +1330,11 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
             product.iimp = riga.iimp;
             products[i] = product;
             if (i == righe.length - 1) {
-
                 Order.findCamp(idOrd, function (findCampErr, findCampRes) {
-                    if (findCampRes)
+                    if (findCampRes) {
+                        j = 0;
                         getRigheCamp(res, req, findCampRes, cliente, cond, idOrd);
-                    else {
+                    } else {
                         var condpag;
                         db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag
 //                    , function (condErr, condRes) {
@@ -1416,7 +1416,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
 
 function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
 
-    if (i >= camps.length)
+    if (j >= camps.length)
         return;
 
     console.log('getRighe rows number: ' + righe.length);
@@ -1425,15 +1425,15 @@ function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
             req.flash('orderMessage', prodErr);
         } else {
             campioncino = {};
-            riga = camps[i];
+            riga = camps[j];
             campioncino.ccod = prodRes.ccod;
             campioncino.xdesc = riga.xdesc;
             campioncino.iprz = 0;
             campioncino.iqta = riga.iqta;
             campioncino.psco = 100;
             campioncino.iimp = 0;
-            campioncini[i] = campioncino;
-            if (i == camps.length - 1) {
+            campioncini[j] = campioncino;
+            if (j == camps.length - 1) {
 
 
                 var condpag;
@@ -1507,7 +1507,7 @@ function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
                         }
                     });
             }
-            i++;
+            j++;
             getRigheCamp(res, req, camps, cliente, cond, idOrd);
         }
     });
