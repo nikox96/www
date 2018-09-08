@@ -1420,7 +1420,7 @@ function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
         return;
 
     console.log('getRigheCamp rows number: ' + camps.length);
-    Product.findCamp(camps[i].ccamp, function (prodErr, prodRes) {
+    Product.findCamp(camps[j].ccamp, function (prodErr, prodRes) {
         if (prodErr) {
             req.flash('orderMessage', prodErr);
         } else {
@@ -1454,7 +1454,6 @@ function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
                                 condRes = (condRes.rows && condRes.rows.length > 0 ? condRes.rows : condRes);
                                 condpag = condRes[0];
                             }
-                            console.log('getRighe products count: ' + products.length);
                             Order.getNota(idOrd, function (notaErr, notaRes) {
                                 res.render('new-order-sum.ejs', {
                                     message: req.flash('orderMessage'),
