@@ -2410,7 +2410,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
     if (i >= righe.length)
         return;
 
-    if (righe[i].descrpromo) {
+    if (righe[i].descrpromo && righe[i].descrpromo.length > 6) {
         initializeCSV();
         rec.tipRec = 'RIG';
         rig.tipRig = '1';
