@@ -94,7 +94,7 @@
                 </thead>
                 <tbody>
                 <% orders.forEach(function(order) { %>
-                <tr>
+                <tr<%- (order.cstt == 50) ? ' class="table-success"' : '' %>>
                     <th scope="row"><%= order.ccod %></th>
                     <td><%= order.xragsoc %></td>
                     <td><%= order.iimp %></td>
