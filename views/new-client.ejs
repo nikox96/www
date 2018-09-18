@@ -124,7 +124,7 @@
         </div>
 
         <div class="form-row">
-            <% if (user.cage === 9999) { %>
+            <% if (user.cage === 9999 || user.cage == 0) { %>
             <div class="form-group col">
                 <label>Agente</label>
                 <input type="number" class="form-control" name="cage" maxlength="5" required>
@@ -170,10 +170,6 @@
                     <option value="PROF">Professionale</option>
                     <option value="RIVEN">Rivendita</option>
                 </select>
-            </div>
-            <div class="form-group col">
-                <label>Agente</label>
-                <input type="number" class="form-control" name="ccat" maxlength="2" value="30" required>
             </div>
             <div class="form-group col">
                 <!--<% if (user.cage == 9) { %>
