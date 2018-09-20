@@ -503,259 +503,255 @@ module.exports = function (app, passport) {
                 return;
             else {
                 Order.findCamp(req.query.ccod, function (ordCampErr, ordCampRes) {
-                    if (ordCampErr)
-                        return;
-                    else {
-                        Agent.find(ordRes.cage, function (ageErr, ageRes) {
-                            if (ageErr) {
-                                return
-                            } else {
-                                Client.find(ordRes.ccli, function (cliErr, cliRes) {
-                                    if (cliErr)
-                                        return;
-                                    else {
-                                        Order.findProduct(req.query.ccod, function (righeErr, righeRes) {
-                                            console.log('ordRes.dreg pre: ' + ordRes.dreg);
-                                            ordRes.dreg = dateFormat(ordRes.dreg, "dd/mm/yyyy");
-                                            console.log('ordRes.dreg post: ' + ordRes.dreg);
-                                            Order.updateNreg(ordRes.ccod, function (nregErr, nregRes) {
-                                                // @todo: cosa fare in caso di errore?!
-                                                if (nregErr) {
-                                                    console.log(nregErr);
-                                                } else {
-                                                    rec.tipRec = 'TES';
-                                                    tes.cDocAut = '000';
-                                                    tes.dreg = (ordRes.dreg && ordRes.dreg !== '' ? ordRes.dreg : '');
-                                                    tes.tipDocFttVen = '000';
-                                                    tes.tipDocFttAcq = '000';
-                                                    tes.tipDocPreVen = '000';
-                                                    tes.tipDocPreAcq = '000';
-                                                    tes.tipDocOrdVen = '701';
-                                                    tes.tipDocOrdAcq = '000';
-                                                    tes.tipDocDdtVen = '000';
-                                                    tes.tipDocDdtAcq = '000';
-                                                    console.log('nregres after update: ' + nregRes);
-                                                    tes.nreg = (nregRes && nregRes !== '' ? nregRes : '');
-                                                    tes.appDigReg = '';
-                                                    tes.nAttIva = '00';
-                                                    tes.nAttIvaAltroSis = '';
-                                                    tes.tipRegIva = '0';
-                                                    tes.cRegIva = '00';
-                                                    tes.cRegIvaAltroSis = '';
-                                                    tes.ddoc = tes.dreg;
-                                                    tes.ndoc = '';
-                                                    tes.nregAnn = '0000000';
-                                                    tes.appDigRegAnn = '';
-                                                    tes.cConCont = '';
-                                                    tes.cConContAltroSis = '';
-                                                    tes.cPartAltroSis = '';
-                                                    tes.cPart = (ordRes.ccli && ordRes.ccli !== '' ? ordRes.ccli : '');
-                                                    tes.psco = (cliRes.psco ? cliRes.psco : '0.00');
-                                                    tes.cfisPart = (cliRes.cfis && cliRes.cfis !== '' ? cliRes.cfis : '');
-                                                    tes.pivaPart = (cliRes.piva && cliRes.piva !== '' ? cliRes.piva : '');
-                                                    tes.addAut = '';
-                                                    tes.cValDoc = (ordRes.cval && ordRes.cval !== '' ? ordRes.cval : '');
-                                                    tes.camb = '1.0';
-                                                    tes.cValIntr = '';
-                                                    tes.cCambIntr = '';
-                                                    tes.cimp = '1';
-                                                    tes.filler = '';
-                                                    tes.iimp = (ordRes.iinc && ordRes.iinc !== '' ? ordRes.iinc : '');
-                                                    tes.fpag = '000';
-                                                    tes.civaNonImp = '';
-                                                    tes.civaNonImpAltroSis = '';
-                                                    tes.ccatRegIvaSpec = '000';
-                                                    tes.regIvaSpecPrev = '';
-                                                    tes.contRegDocIva = '0';
-                                                    tes.indetr = '0';
-                                                    tes.cas1 = '';
-                                                    tes.cas2 = '';
-                                                    tes.cas3 = '';
-                                                    tes.rifVs = '';
-                                                    tes.rifNs = '';
-                                                    tes.ddtDaFtt = '0';
-                                                    tes.ddtInc = '0';
-                                                    tes.ddtFttSosp = '0';
-                                                    tes.ddtDaFttTipFtt = '000';
-                                                    tes.ragrFtt = '';
-                                                    tes.cage = ((ordRes.cage || ordRes.cage === 0) && ordRes.cage !== '' ? ordRes.cage : '');
-                                                    tes.cageAltroSis = '';
-                                                    tes.provvAge = (ageRes.provv && ageRes.provv !== '' ? ageRes.provv : '');
-                                                    tes.provCapoArea = '0.00';
-                                                    tes.ccondPag = (ordRes.ccondPag && ordRes.ccondPag !== '' ? ordRes.ccondPag : '');
-                                                    tes.ccondPagAltroSis = '';
-                                                    tes.scoCondPag = '0.00';
-                                                    tes.rilTrackFlussiFin = '';
-                                                    tes.rilTrackFlussiFinAltroSis = '';
-                                                    tes.idGara = '';
-                                                    tes.idProg = '';
-                                                    tes.descTrackFlussiFin = '';
-                                                    tes.scoTes = '0.00';
-                                                    tes.sScoAna = '';
-                                                    tes.dini = '';
-                                                    tes.dfin = '';
-                                                    tes.eseComp = '';
-                                                    tes.ddecor = '';
-                                                    tes.cBancaNs = '';
-                                                    tes.cBancaNsAltroSis = '';
-                                                    tes.descBancaRif = '';
-                                                    tes.cAppBanc = '000';
-                                                    tes.cabi = '';
-                                                    tes.ccab = '';
-                                                    tes.ccin = '';
-                                                    tes.ccin2 = '';
-                                                    tes.nconcor = '';
-                                                    tes.cbic = '';
-                                                    tes.cpae = '';
-                                                    tes.rifBancaEstera = '';
-                                                    tes.ciban = '';
-                                                    tes.xcau = '';
-                                                    tes.cauAggRegIva1 = '';
-                                                    tes.cauAggRegIva2 = '';
-                                                    tes.cauAggRegIva3 = '';
-                                                    tes.cauAggRegIva4 = '';
-                                                    tes.annCompIva = (ordRes.dreg && ordRes.dreg !== '' ? ordRes.dreg.substr(6, 4) : '');
-                                                    tes.perCompIva = '';
-                                                    tes.dopr = '';
-                                                    tes.cessCliPriv = '';
-                                                    tes.annRifOpr = tes.annCompIva;
-                                                    tes.perRifOpr = '';
-                                                    tes.rilBlackList = '';
-                                                    tes.cAziendaRapp = '';
-                                                    tes.cAziendaRappAltroSis = '';
-                                                    tes.terrIva = '0';
-                                                    tes.filler2 = '';
-                                                    tes.totDocVal = '0.0';
-                                                    tes.nRifInd = '';
-                                                    tes.ragSoc1 = '';
-                                                    tes.ragSoc2 = '';
-                                                    tes.xind1 = '';
-                                                    tes.xind2 = '';
-                                                    tes.ccap = '';
-                                                    tes.xloc1 = '';
-                                                    tes.xloc2 = '';
-                                                    tes.cprv = '';
-                                                    tes.ciso = '';
-                                                    tes.ccatCli = '';
-                                                    tes.xcatCli = '';
-                                                    tes.tipGesList = '';
-                                                    tes.clis = '';
-                                                    tes.cdep = '';
-                                                    tes.cdepRic = '';
-                                                    tes.ccauTrasp = '';
-                                                    tes.xcauTrasp = '';
-                                                    tes.aspBen = '';
-                                                    tes.xAspBen = '';
-                                                    tes.cporto = '';
-                                                    tes.xporto = '';
-                                                    tes.traspMez = '';
-                                                    tes.xTraspMex = '';
-                                                    tes.diniTrasp = '';
-                                                    tes.oiniTrasp = '';
-                                                    tes.xmezz = '';
-                                                    tes.targaMez = '';
-                                                    tes.cvet = '';
-                                                    tes.cvetAltroSis = '';
-                                                    tes.vetRagSoc1 = '';
-                                                    tes.vetRagSoc2 = '';
-                                                    tes.xvettInd1 = '';
-                                                    tes.xvettInd2 = '';
-                                                    tes.ccapVet = '';
-                                                    tes.xvetLoc1 = '';
-                                                    tes.xvetLoc2 = '';
-                                                    tes.cprvVet = '';
-                                                    tes.cisoVet = '';
-                                                    tes.cvet2 = '';
-                                                    tes.cvetAltroSis2 = '';
-                                                    tes.vetRagSoc12 = '';
-                                                    tes.vetRagSoc22 = '';
-                                                    tes.xvettInd12 = '';
-                                                    tes.xvettInd22 = '';
-                                                    tes.ccapVet2 = '';
-                                                    tes.xvetLoc12 = '';
-                                                    tes.xvetLoc22 = '';
-                                                    tes.cprvVet2 = '';
-                                                    tes.cisoVet2 = '';
-                                                    tes.copr = '';
-                                                    tes.compElenchiIvaAnniPrec = '';
-                                                    tes.partitaCollRit = '';
-                                                    tes.ctipOprRit = '';
-                                                    tes.ctipOprRitAltroSis = '';
-                                                    tes.tipContributoPrev = '';
-                                                    tes.tipContributoPrevAltroSis = '';
-                                                    tes.derivaSpesePie = '';
-                                                    tes.iBollo = '';
-                                                    tes.iInc = '';
-                                                    tes.iSpesa1 = '';
-                                                    tes.iSpesa2 = '';
-                                                    tes.iBolloOprEse = '';
-                                                    tes.codCoint1 = '';
-                                                    tes.cfisCoin1 = '';
-                                                    tes.pivaCoin1 = '';
-                                                    tes.ragSoc1Coin1 = '';
-                                                    tes.ragSoc2Coin1 = '';
-                                                    tes.xnoteCoin1 = '';
-                                                    tes.codCoint2 = '';
-                                                    tes.cfisCoin2 = '';
-                                                    tes.pivaCoin2 = '';
-                                                    tes.ragSoc1Coin2 = '';
-                                                    tes.ragSoc2Coin2 = '';
-                                                    tes.xnoteCoin2 = '';
-                                                    tes.codCoint3 = '';
-                                                    tes.cfisCoin3 = '';
-                                                    tes.pivaCoin3 = '';
-                                                    tes.ragSoc1Coin3 = '';
-                                                    tes.ragSoc2Coin3 = '';
-                                                    tes.xnoteCoin3 = '';
-                                                    tes.codCoint4 = '';
-                                                    tes.cfisCoin4 = '';
-                                                    tes.pivaCoin4 = '';
-                                                    tes.ragSoc1Coin4 = '';
-                                                    tes.ragSoc2Coin4 = '';
-                                                    tes.xnoteCoin4 = '';
-                                                    tes.codCoint5 = '';
-                                                    tes.cfisCoin5 = '';
-                                                    tes.pivaCoin5 = '';
-                                                    tes.ragSoc1Coin5 = '';
-                                                    tes.ragSoc2Coin5 = '';
-                                                    tes.xnoteCoin5 = '';
-                                                    tes.tipProd = '';
-                                                    tes.ddecorPag = '';
-                                                    tes.datiAggFttEle = '';
-                                                    tes.ccentroAnalisi = '';
-                                                    tes.ccentroAnalisiAltroSis = '';
-                                                    tes.ccomm = '';
-                                                    tes.ccommALtroSis = '';
-                                                    tes.docRil = '';
-                                                    tes.cfisDef = '';
-                                                    tes.xcognDef = '';
-                                                    tes.xnomeDef = '';
-                                                    tes.intAutPlafond = '';
-                                                    tes.tipAnaVen = '';
-                                                    tes.cven = '';
-                                                    tes.cvenEst = '';
-                                                    tes.cvenInd = '';
+                    Agent.find(ordRes.cage, function (ageErr, ageRes) {
+                        if (ageErr) {
+                            return;
+                        } else {
+                            Client.find(ordRes.ccli, function (cliErr, cliRes) {
+                                if (cliErr)
+                                    return;
+                                else {
+                                    Order.findProduct(req.query.ccod, function (righeErr, righeRes) {
+                                        console.log('ordRes.dreg pre: ' + ordRes.dreg);
+                                        ordRes.dreg = dateFormat(ordRes.dreg, "dd/mm/yyyy");
+                                        console.log('ordRes.dreg post: ' + ordRes.dreg);
+                                        Order.updateNreg(ordRes.ccod, function (nregErr, nregRes) {
+                                            // @todo: cosa fare in caso di errore?!
+                                            if (nregErr) {
+                                                console.log(nregErr);
+                                            } else {
+                                                rec.tipRec = 'TES';
+                                                tes.cDocAut = '000';
+                                                tes.dreg = (ordRes.dreg && ordRes.dreg !== '' ? ordRes.dreg : '');
+                                                tes.tipDocFttVen = '000';
+                                                tes.tipDocFttAcq = '000';
+                                                tes.tipDocPreVen = '000';
+                                                tes.tipDocPreAcq = '000';
+                                                tes.tipDocOrdVen = '701';
+                                                tes.tipDocOrdAcq = '000';
+                                                tes.tipDocDdtVen = '000';
+                                                tes.tipDocDdtAcq = '000';
+                                                console.log('nregres after update: ' + nregRes);
+                                                tes.nreg = (nregRes && nregRes !== '' ? nregRes : '');
+                                                tes.appDigReg = '';
+                                                tes.nAttIva = '00';
+                                                tes.nAttIvaAltroSis = '';
+                                                tes.tipRegIva = '0';
+                                                tes.cRegIva = '00';
+                                                tes.cRegIvaAltroSis = '';
+                                                tes.ddoc = tes.dreg;
+                                                tes.ndoc = '';
+                                                tes.nregAnn = '0000000';
+                                                tes.appDigRegAnn = '';
+                                                tes.cConCont = '';
+                                                tes.cConContAltroSis = '';
+                                                tes.cPartAltroSis = '';
+                                                tes.cPart = (ordRes.ccli && ordRes.ccli !== '' ? ordRes.ccli : '');
+                                                tes.psco = (cliRes.psco ? cliRes.psco : '0.00');
+                                                tes.cfisPart = (cliRes.cfis && cliRes.cfis !== '' ? cliRes.cfis : '');
+                                                tes.pivaPart = (cliRes.piva && cliRes.piva !== '' ? cliRes.piva : '');
+                                                tes.addAut = '';
+                                                tes.cValDoc = (ordRes.cval && ordRes.cval !== '' ? ordRes.cval : '');
+                                                tes.camb = '1.0';
+                                                tes.cValIntr = '';
+                                                tes.cCambIntr = '';
+                                                tes.cimp = '1';
+                                                tes.filler = '';
+                                                tes.iimp = (ordRes.iinc && ordRes.iinc !== '' ? ordRes.iinc : '');
+                                                tes.fpag = '000';
+                                                tes.civaNonImp = '';
+                                                tes.civaNonImpAltroSis = '';
+                                                tes.ccatRegIvaSpec = '000';
+                                                tes.regIvaSpecPrev = '';
+                                                tes.contRegDocIva = '0';
+                                                tes.indetr = '0';
+                                                tes.cas1 = '';
+                                                tes.cas2 = '';
+                                                tes.cas3 = '';
+                                                tes.rifVs = '';
+                                                tes.rifNs = '';
+                                                tes.ddtDaFtt = '0';
+                                                tes.ddtInc = '0';
+                                                tes.ddtFttSosp = '0';
+                                                tes.ddtDaFttTipFtt = '000';
+                                                tes.ragrFtt = '';
+                                                tes.cage = ((ordRes.cage || ordRes.cage === 0) && ordRes.cage !== '' ? ordRes.cage : '');
+                                                tes.cageAltroSis = '';
+                                                tes.provvAge = (ageRes.provv && ageRes.provv !== '' ? ageRes.provv : '');
+                                                tes.provCapoArea = '0.00';
+                                                tes.ccondPag = (ordRes.ccondPag && ordRes.ccondPag !== '' ? ordRes.ccondPag : '');
+                                                tes.ccondPagAltroSis = '';
+                                                tes.scoCondPag = '0.00';
+                                                tes.rilTrackFlussiFin = '';
+                                                tes.rilTrackFlussiFinAltroSis = '';
+                                                tes.idGara = '';
+                                                tes.idProg = '';
+                                                tes.descTrackFlussiFin = '';
+                                                tes.scoTes = '0.00';
+                                                tes.sScoAna = '';
+                                                tes.dini = '';
+                                                tes.dfin = '';
+                                                tes.eseComp = '';
+                                                tes.ddecor = '';
+                                                tes.cBancaNs = '';
+                                                tes.cBancaNsAltroSis = '';
+                                                tes.descBancaRif = '';
+                                                tes.cAppBanc = '000';
+                                                tes.cabi = '';
+                                                tes.ccab = '';
+                                                tes.ccin = '';
+                                                tes.ccin2 = '';
+                                                tes.nconcor = '';
+                                                tes.cbic = '';
+                                                tes.cpae = '';
+                                                tes.rifBancaEstera = '';
+                                                tes.ciban = '';
+                                                tes.xcau = '';
+                                                tes.cauAggRegIva1 = '';
+                                                tes.cauAggRegIva2 = '';
+                                                tes.cauAggRegIva3 = '';
+                                                tes.cauAggRegIva4 = '';
+                                                tes.annCompIva = (ordRes.dreg && ordRes.dreg !== '' ? ordRes.dreg.substr(6, 4) : '');
+                                                tes.perCompIva = '';
+                                                tes.dopr = '';
+                                                tes.cessCliPriv = '';
+                                                tes.annRifOpr = tes.annCompIva;
+                                                tes.perRifOpr = '';
+                                                tes.rilBlackList = '';
+                                                tes.cAziendaRapp = '';
+                                                tes.cAziendaRappAltroSis = '';
+                                                tes.terrIva = '0';
+                                                tes.filler2 = '';
+                                                tes.totDocVal = '0.0';
+                                                tes.nRifInd = '';
+                                                tes.ragSoc1 = '';
+                                                tes.ragSoc2 = '';
+                                                tes.xind1 = '';
+                                                tes.xind2 = '';
+                                                tes.ccap = '';
+                                                tes.xloc1 = '';
+                                                tes.xloc2 = '';
+                                                tes.cprv = '';
+                                                tes.ciso = '';
+                                                tes.ccatCli = '';
+                                                tes.xcatCli = '';
+                                                tes.tipGesList = '';
+                                                tes.clis = '';
+                                                tes.cdep = '';
+                                                tes.cdepRic = '';
+                                                tes.ccauTrasp = '';
+                                                tes.xcauTrasp = '';
+                                                tes.aspBen = '';
+                                                tes.xAspBen = '';
+                                                tes.cporto = '';
+                                                tes.xporto = '';
+                                                tes.traspMez = '';
+                                                tes.xTraspMex = '';
+                                                tes.diniTrasp = '';
+                                                tes.oiniTrasp = '';
+                                                tes.xmezz = '';
+                                                tes.targaMez = '';
+                                                tes.cvet = '';
+                                                tes.cvetAltroSis = '';
+                                                tes.vetRagSoc1 = '';
+                                                tes.vetRagSoc2 = '';
+                                                tes.xvettInd1 = '';
+                                                tes.xvettInd2 = '';
+                                                tes.ccapVet = '';
+                                                tes.xvetLoc1 = '';
+                                                tes.xvetLoc2 = '';
+                                                tes.cprvVet = '';
+                                                tes.cisoVet = '';
+                                                tes.cvet2 = '';
+                                                tes.cvetAltroSis2 = '';
+                                                tes.vetRagSoc12 = '';
+                                                tes.vetRagSoc22 = '';
+                                                tes.xvettInd12 = '';
+                                                tes.xvettInd22 = '';
+                                                tes.ccapVet2 = '';
+                                                tes.xvetLoc12 = '';
+                                                tes.xvetLoc22 = '';
+                                                tes.cprvVet2 = '';
+                                                tes.cisoVet2 = '';
+                                                tes.copr = '';
+                                                tes.compElenchiIvaAnniPrec = '';
+                                                tes.partitaCollRit = '';
+                                                tes.ctipOprRit = '';
+                                                tes.ctipOprRitAltroSis = '';
+                                                tes.tipContributoPrev = '';
+                                                tes.tipContributoPrevAltroSis = '';
+                                                tes.derivaSpesePie = '';
+                                                tes.iBollo = '';
+                                                tes.iInc = '';
+                                                tes.iSpesa1 = '';
+                                                tes.iSpesa2 = '';
+                                                tes.iBolloOprEse = '';
+                                                tes.codCoint1 = '';
+                                                tes.cfisCoin1 = '';
+                                                tes.pivaCoin1 = '';
+                                                tes.ragSoc1Coin1 = '';
+                                                tes.ragSoc2Coin1 = '';
+                                                tes.xnoteCoin1 = '';
+                                                tes.codCoint2 = '';
+                                                tes.cfisCoin2 = '';
+                                                tes.pivaCoin2 = '';
+                                                tes.ragSoc1Coin2 = '';
+                                                tes.ragSoc2Coin2 = '';
+                                                tes.xnoteCoin2 = '';
+                                                tes.codCoint3 = '';
+                                                tes.cfisCoin3 = '';
+                                                tes.pivaCoin3 = '';
+                                                tes.ragSoc1Coin3 = '';
+                                                tes.ragSoc2Coin3 = '';
+                                                tes.xnoteCoin3 = '';
+                                                tes.codCoint4 = '';
+                                                tes.cfisCoin4 = '';
+                                                tes.pivaCoin4 = '';
+                                                tes.ragSoc1Coin4 = '';
+                                                tes.ragSoc2Coin4 = '';
+                                                tes.xnoteCoin4 = '';
+                                                tes.codCoint5 = '';
+                                                tes.cfisCoin5 = '';
+                                                tes.pivaCoin5 = '';
+                                                tes.ragSoc1Coin5 = '';
+                                                tes.ragSoc2Coin5 = '';
+                                                tes.xnoteCoin5 = '';
+                                                tes.tipProd = '';
+                                                tes.ddecorPag = '';
+                                                tes.datiAggFttEle = '';
+                                                tes.ccentroAnalisi = '';
+                                                tes.ccentroAnalisiAltroSis = '';
+                                                tes.ccomm = '';
+                                                tes.ccommALtroSis = '';
+                                                tes.docRil = '';
+                                                tes.cfisDef = '';
+                                                tes.xcognDef = '';
+                                                tes.xnomeDef = '';
+                                                tes.intAutPlafond = '';
+                                                tes.tipAnaVen = '';
+                                                tes.cven = '';
+                                                tes.cvenEst = '';
+                                                tes.cvenInd = '';
 
-                                                    rec.tes = tes;
-                                                    rec.rig = rig;
-                                                    rec.iva = iva;
-                                                    rec.par = par;
+                                                rec.tes = tes;
+                                                rec.rig = rig;
+                                                rec.iva = iva;
+                                                rec.par = par;
 
-                                                    csvRig93();
-                                                    i = 0;
-                                                    getRigheCSV(res, req, nregRes, righeRes, ordCampRes, cliRes, ageRes);
-                                                }
-                                            });
-
+                                                csvRig93();
+                                                i = 0;
+                                                getRigheCSV(res, req, nregRes, righeRes, (ordCampRes ? ordCampRes : null), cliRes, ageRes);
+                                            }
                                         });
-                                    }
-                                });
-                            }
-                        });
-                    }
+
+                                    });
+                                }
+                            });
+                        }
+                    });
+
                 });
             }
-        });
     });
 
     app.post('/del-order', isLoggedIn, function (req, res) {
@@ -2416,7 +2412,8 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
     products = [];
     product = {};
     var riga = {};
-    if (i >= righe.length && camp.length == 0) {
+    if (i >= righe.length && (camp.length == 0 || camp === undefined || (!camp) || camp == null)) {
+        console.log('getRigheCSV: exit updatestatus and download csv');
         Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
             if (sttErr) {
                 console.log(sttErr);
@@ -2433,6 +2430,8 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
         camp = [];
         i = 0;
     }
+
+
 
     console.log('getRigheCSV: %j', righe[i]);
     console.log('getRigheCSV: %j', camp);
