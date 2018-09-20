@@ -2413,7 +2413,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
     products = [];
     product = {};
     var riga = {};
-    if (i >= righe.length && (camp.length == 0 || camp === undefined || (!camp) || camp == null)) {
+    if (i >= righe.length && (camp === undefined || (!camp) || camp == null) || (camp && camp.length == 0)) {
         console.log('getRigheCSV: exit updatestatus and download csv');
         Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
             if (sttErr) {
