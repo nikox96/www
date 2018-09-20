@@ -752,6 +752,7 @@ module.exports = function (app, passport) {
 
                 });
             }
+        });
     });
 
     app.post('/del-order', isLoggedIn, function (req, res) {
@@ -2430,7 +2431,6 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
         camp = [];
         i = 0;
     }
-
 
 
     console.log('getRigheCSV: %j', righe[i]);
