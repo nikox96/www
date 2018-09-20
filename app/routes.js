@@ -2566,11 +2566,11 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 				Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
 					if (sttErr) {
 						console.log(sttErr);
+						return;
 					} else {
 						res.download(sendFile(nreg, righe[0].ccod));
 					}
 				});
-				return;
 			}
 			i++;
 			getRigheCSV(res, req, nreg, righe, camp, cliente, agente);
@@ -2729,11 +2729,11 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 						Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
 							if (sttErr) {
 								console.log(sttErr);
+								return;
 							} else {
 								res.download(sendFile(nreg, righe[0].ccod));
 							}
 						});
-						return;
 					}
 					i++;
 					getRigheCSV(res, req, nreg, righe, camp, cliente, agente);
@@ -2887,16 +2887,15 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 					rec.rig = rig;
 					csvRig93();
 
-
 					if (i == righe.length - 1) {
 						Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
 							if (sttErr) {
 								console.log(sttErr);
+								return;
 							} else {
 								res.download(sendFile(nreg, righe[0].ccod));
 							}
 						});
-						return;
 					}
 					i++;
 					getRigheCSV(res, req, nreg, righe, camp, cliente, agente);
