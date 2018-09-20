@@ -28,11 +28,11 @@ Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, callback) {
     console.log("sven " + sven);
     console.log("xgrp " + xgrp);
     console.log("xprod" + xprod);
-    var query = "SELECT * FROM portale.prodotti WHERE ccod >= " + (ccodda && ccodda !== '' ? ccodda : 0) + " AND ccod <= " + (ccoda && ccoda !== '' ? ccoda : 999998)
-        + " AND xgrp ILIKE $1 AND xdesc ILIKE $2 AND sven ILIKE $3 ORDER BY ccod";
+    var query = "SELECT * FROM portale.prodotti WHERE ccod >= $1 AND ccod <= $2"
+        + " AND xgrp ILIKE $3 AND xdesc ILIKE $4 AND sven ILIKE $5 ORDER BY ccod, descrpromo";
     console.log(query);
     db.query(query
-        , ['%' + (xgrp !== 'undefined' && xgrp !== null ? xgrp : '') + '%', '%' + (xprod !== 'undefined' && xprod !== null ? xprod : '') + '%', '%' + (sven !== 'undefined' && sven !== null ? sven : '') + '%']
+        , [(ccodda && ccodda !== '' ? ccodda : 0), (ccoda && ccoda !== '' ? ccoda : 999998), '%' + (xgrp !== 'undefined' && xgrp !== null ? xgrp : '') + '%', '%' + (xprod !== 'undefined' && xprod !== null ? xprod : '') + '%', '%' + (sven !== 'undefined' && sven !== null ? sven : '') + '%']
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -126,7 +126,7 @@ Product.listCamp = function listCamp(ccod, xgrp, xcamp, callback) {
     console.log("ccod " + ccod);
     console.log("xgrp " + xgrp);
     console.log("xcamp " + xcamp);
-    var query = "SELECT * FROM portale.campioncini WHERE ccod ILIKE $1 AND xgrp ILIKE $2 AND xdesc ILIKE $3";
+    var query = "SELECT * FROM portale.campioncini WHERE ccod ILIKE $1 AND xgrp ILIKE $2 AND xdesc ILIKE $3 ORDER BY ccod";
     console.log(query);
     db.query(query
         , ['%' + (ccod ? ccod : '') + '%', '%' + (xgrp ? xgrp : '') + '%', '%' + (xcamp ? xcamp : '') + '%']

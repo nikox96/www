@@ -2412,7 +2412,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
     if (i >= righe.length)
         return;
 
-    if (righe[i].descrpromo && righe[i].descrpromo.length > 6) {
+    if (righe[i].descrpromo && righe[i].descrpromo.length > 7) {
         initializeCSV();
         rec.tipRec = 'RIG';
         rig.tipRig = '1';
@@ -2432,7 +2432,7 @@ function getRigheCSV(res, req, nreg, righe, cliente, agente) {
         rig.cpartitarioAltriContiAltroSis = '';
         rig.descPartAltriConti = '';
         rig.opzComposto = '';
-        rig.descrizione1 = (righe[i].descrpromo.length > 6 ? righe[i].descrpromo : '');
+        rig.descrizione1 = (righe[i].descrpromo.length > 7 ? righe[i].descrpromo : '');
         rig.descrizione2 = '';
         rig.descrizione3 = '';
         rig.descrizione4 = '';
