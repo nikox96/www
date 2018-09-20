@@ -2412,20 +2412,26 @@ function csvRig93() {
 }
 
 function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
+	console.log('getRigheCSV: i = ' + i + ', num righe prod = ' + righe.length + ', num righe camp = ' + camp.length);
     products = [];
     product = {};
     var riga = {};
     if (i >= righe.length && (!(camp) || (camp.length && camp.length == 0)))
+		console.log('getRigheCSV: esco per fine prodotti e campioncini');
         return;
 	else if (i >= righe.length && camp && camp.length && camp.length > 0){
+		console.log('getRigheCSV: resetto righe con camp e svuoto camp');
 		righe = camp;
 		camp = [];
 		i = 0;
 	}
 	
-
+	console.log('getRigheCSV: %j', righe[i]);
+	console.log('getRigheCSV: %j', camp);
+	
     if (righe[i].descrpromo){
 		if (righe[i].descrpromo.length > 7) {
+			console.log('getRigheCSV: promozione');
 			initializeCSV();
 			rec.tipRec = 'RIG';
 			rig.tipRig = '1';
@@ -2577,6 +2583,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 		}
     } else {
 		if (righe[i].ccodprod){
+			console.log('getRigheCSV: prodotto');
 			Product.find(righe[i].ccodprod, function (prodErr, prodRes) {
 				if (prodErr) {
 					req.flash('orderMessage', prodErr);
@@ -2740,6 +2747,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 				}
 			});
 		} else if (righe[i].ccamp){
+			console.log('getRigheCSV: campioncino');
 			Product.findCamp(righe[i].ccamp, function (prodErr, prodRes) {
 				if (prodErr) {
 					req.flash('orderMessage', prodErr);
