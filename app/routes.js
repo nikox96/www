@@ -2409,7 +2409,7 @@ function csvRig93() {
 }
 
 function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
-    console.log('getRigheCSV: i = ' + i + ', num righe prod = ' + righe.length + ', num righe camp = ' + camp.length);
+    console.log('getRigheCSV: i = ' + i + ', num righe prod = ' + righe.length + ', num righe camp = ' + ((camp) ? camp.length : 0));
     products = [];
     product = {};
     var riga = {};
