@@ -2417,8 +2417,15 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
     product = {};
     var riga = {};
     if (i >= righe.length && camp.length == 0){
-		console.log('getRigheCSV: esco per fine prodotti e campioncini');
-        return;
+        Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
+            if (sttErr) {
+                console.log(sttErr);
+                return;
+            } else {
+                res.download(sendFile(nreg, righe[0].ccod));
+                return;
+            }
+        });
 	}else if (i >= righe.length && camp && camp.length && camp.length > 0){
 		console.log('getRigheCSV: resetto righe con camp e svuoto camp');
 		righe = camp;
@@ -2567,17 +2574,6 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 			rec.rig = rig;
 			csvRig93();
 
-
-			if (i == righe.length - 1 && (!(camp) || (camp.length && camp.length == 0))) {
-				Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
-					if (sttErr) {
-						console.log(sttErr);
-						return;
-					} else {
-						res.download(sendFile(nreg, righe[0].ccod));
-					}
-				});
-			}
 			i++;
 			getRigheCSV(res, req, nreg, righe, camp, cliente, agente);
 		} else {
@@ -2730,17 +2726,6 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 						rec.rig = rig;
 						csvRig93();
 
-
-						if (i == righe.length - 1 && (!(camp) || (camp.length && camp.length == 0))) {
-							Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
-								if (sttErr) {
-									console.log(sttErr);
-									return;
-								} else {
-									res.download(sendFile(nreg, righe[0].ccod));
-								}
-							});
-						}
 						i++;
 						getRigheCSV(res, req, nreg, righe, camp, cliente, agente);
 					}
@@ -2894,16 +2879,6 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 						rec.rig = rig;
 						csvRig93();
 
-						if (i == righe.length - 1) {
-							Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
-								if (sttErr) {
-									console.log(sttErr);
-									return;
-								} else {
-									res.download(sendFile(nreg, righe[0].ccod));
-								}
-							});
-						}
 						i++;
 						getRigheCSV(res, req, nreg, righe, camp, cliente, agente);
 					}
@@ -3060,17 +3035,6 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 					rec.rig = rig;
 					csvRig93();
 
-
-					if (i == righe.length - 1 && (!(camp) || (camp.length && camp.length == 0))) {
-						Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
-							if (sttErr) {
-								console.log(sttErr);
-								return;
-							} else {
-								res.download(sendFile(nreg, righe[0].ccod));
-							}
-						});
-					}
 					i++;
 					getRigheCSV(res, req, nreg, righe, camp, cliente, agente);
 				}
@@ -3224,16 +3188,6 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 					rec.rig = rig;
 					csvRig93();
 
-					if (i == righe.length - 1) {
-						Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
-							if (sttErr) {
-								console.log(sttErr);
-								return;
-							} else {
-								res.download(sendFile(nreg, righe[0].ccod));
-							}
-						});
-					}
 					i++;
 					getRigheCSV(res, req, nreg, righe, camp, cliente, agente);
 				}
