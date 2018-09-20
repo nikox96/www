@@ -2416,10 +2416,10 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
     products = [];
     product = {};
     var riga = {};
-    if (i >= righe.length && (!(camp) || (camp.length && camp.length == 0)))
+    if (i >= righe.length && (!(camp) || (camp.length && camp.length == 0))){
 		console.log('getRigheCSV: esco per fine prodotti e campioncini');
         return;
-	else if (i >= righe.length && camp && camp.length && camp.length > 0){
+	}else if (i >= righe.length && camp && camp.length && camp.length > 0){
 		console.log('getRigheCSV: resetto righe con camp e svuoto camp');
 		righe = camp;
 		camp = [];
