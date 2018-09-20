@@ -2753,7 +2753,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 					} else {
 						product = {};
 						riga = righe[i];
-						product.ccod = prodRes.ccamp;
+						product.ccod = prodRes.ccod;
 						product.xdesc = prodRes.xdesc;
 						product.iqta = riga.iqta;
 						product.iimp = 0;
@@ -2762,7 +2762,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 						initializeCSV();
 						rec.tipRec = 'RIG';
 						rig.tipRig = '1';
-						rig.carticolo = product.ccamp;
+						rig.carticolo = product.ccod;
 						rig.carticoloAltroSis = '';
 						rig.cbarre = '';
 						rig.carticoloTerzi = '';
@@ -3083,7 +3083,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 				} else {
 					product = {};
 					riga = righe[i];
-					product.ccod = prodRes.ccamp;
+					product.ccod = prodRes.ccod;
 					product.xdesc = prodRes.xdesc;
 					product.iqta = riga.iqta;
 					product.iimp = 0;
@@ -3092,7 +3092,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 					initializeCSV();
 					rec.tipRec = 'RIG';
 					rig.tipRig = '1';
-					rig.carticolo = product.ccamp;
+					rig.carticolo = product.ccod;
 					rig.carticoloAltroSis = '';
 					rig.cbarre = '';
 					rig.carticoloTerzi = '';
