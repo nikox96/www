@@ -743,7 +743,7 @@ module.exports = function (app, passport) {
 
 													csvRig93();
 													i = 0;
-													getRigheCSV(res, req, nregRes, righeRes, campRes, cliRes, ageRes);
+													getRigheCSV(res, req, nregRes, righeRes, ordCampRes, cliRes, ageRes);
 												}
 											});
 
