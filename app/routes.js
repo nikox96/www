@@ -2888,7 +2888,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 					csvRig93();
 
 
-					if (i == righe.length - 1 && (!(camp) || (camp.length && camp.length == 0))) {
+					if (i == righe.length - 1) {
 						Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
 							if (sttErr) {
 								console.log(sttErr);
