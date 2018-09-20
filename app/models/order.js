@@ -77,7 +77,7 @@ Ordine.delOrder = function delOrder(ccod, cstt, callback) {
 Ordine.findProduct = function findProduct(ccod, callback) {
     //ricerco i prodotti per un determinato ordine
     db.query("SELECT * FROM portale.righe_ordini WHERE ccod = "
-        + ccod
+        + ccod + " ORDER BY descrpromo"
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {

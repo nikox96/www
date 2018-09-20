@@ -29,7 +29,7 @@ Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, callback) {
     console.log("xgrp " + xgrp);
     console.log("xprod" + xprod);
     var query = "SELECT * FROM portale.prodotti WHERE ccod >= $1 AND ccod <= $2"
-        + " AND xgrp ILIKE $3 AND xdesc ILIKE $4 AND sven ILIKE $5 ORDER BY descrpromo";
+        + " AND xgrp ILIKE $3 AND xdesc ILIKE $4 AND sven ILIKE $5 ORDER BY ccod";
     console.log(query);
     db.query(query
         , [(ccodda && ccodda !== '' ? ccodda : 0), (ccoda && ccoda !== '' ? ccoda : 999998), '%' + (xgrp !== 'undefined' && xgrp !== null ? xgrp : '') + '%', '%' + (xprod !== 'undefined' && xprod !== null ? xprod : '') + '%', '%' + (sven !== 'undefined' && sven !== null ? sven : '') + '%']
