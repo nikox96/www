@@ -2415,14 +2415,16 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
     var riga = {};
     if (i >= righe.length && (camp === undefined || (!camp) || camp == null) || (camp && camp.length == 0)) {
         console.log('getRigheCSV: exit updatestatus and download csv');
-        Order.updateStatus(righe[0].ccod, 50, '', function (sttErr, sttRes) {
-            if (sttErr) {
-                console.log(sttErr);
-                return;
-            } else {
-                res.download(sendFile(nreg, righe[0].ccod));
-                return;
-            }
+        Order.getNota(righe[0].ccod, function (notaErr, notaRes) {
+            Order.updateStatus(righe[0].ccod, 50, (notaRes ? notaRes : ''), function (sttErr, sttRes) {
+                if (sttErr) {
+                    console.log(sttErr);
+                    return;
+                } else {
+                    res.download(sendFile(nreg, righe[0].ccod));
+                    return;
+                }
+            });
         });
         return;
     } else if (i >= righe.length && camp && camp.length && camp.length > 0) {
