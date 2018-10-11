@@ -1,4 +1,5 @@
 999999	riga per descrizione promozioni	0	0		
+200000	BOX DAILY BEAUTY CARE	box	40	DAILY BEAUTY CARE	Vendita
 200333	BB 01 Cream Perfect.Daily Cr. 50ml	50 ml	13.6	SELVERT BB CREAM	Vendita
 200334	BB 02 Cream Perfect.Daily Cr. 50ml	50 ml	13.6	SELVERT BB CREAM	Vendita
 203211	Anti Ageing Premium Cream + Vit C   50ML	50 ml	24.5	DAILY BEAUTY CARE	Vendita
@@ -18,6 +19,7 @@
 202211	Selv.Prot. Barr.Spray SPF30+ ml200	200 ml	24.69	SOLARI	Vendita
 202212	Selv.Prot.Barrier Spr.SPF50+ml200	200 ml	24.69	SOLARI	Vendita
 203122	POST DEPIL EMULSION   500 ML	500 ml	19	ESSENTIAL LINE	Cabina
+204000	BOX AQUAWEAR PROMO	box	45	AQUA WEAR	Vendita
 204101	Aquawear Experience The Moisture Tr		105	AQUA WEAR	Vendita
 204202	Aquawear Intensive Moist.cr.L50 ml.	50 ml	31.5	AQUA WEAR	Vendita
 204203	Aquawear Intensive Moist.Cr.R.50 ml	50 ml	34	AQUA WEAR	Vendita
@@ -43,6 +45,7 @@
 308207	CELL VITALE GEL PURIFIANT 50 ML	50 ml	15.25	CELL VITALE A.G.	Vendita
 308208	CELL VITALE MASQUE ÉQUILIBR.50 ML	50 ml	14.15	CELL VITALE A.G.	Vendita
 308209	Cleansing Gel / Acne-Pr.skins 100ML	100 ml	17.2	CELL VITALE A.G.	Vendita
+308000	XMAS GIFT BOX  CELL VITALE	box	55	CELL VITALE A.G.	Vendita
 311000	HYALURONIQUE Box	box	46	HYALURONIQUE	Vari
 311201	24-HOUR INTENSE HYDRATION CREAM 50M	50 ml	43	HYALURONIQUE	Vendita
 311202	Intensive Wrinkle Repleni Cr. 50ML	50 ml	54	HYALURONIQUE	Vendita
@@ -139,11 +142,13 @@
 319205	White Perfection Clarity- The Serum   30ML	30 ml	31	ESPRIT DERMATOLOGIQUE	Cabina
 319206	Anti Ageing- The Cream    50ML	50 ml	25	ESPRIT DERMATOLOGIQUE	Cabina
 319207	Anti Ageing- The Serum   30ML	30 ml	25.5	ESPRIT DERMATOLOGIQUE	Cabina
-319208	Anti-Ageing Concentrate-4 unit pack	box	88	ESPRIT DERMATOLOGIQUE	Cabina
-319209	Regeneration Concent- 4 unit pack	box	88	ESPRIT DERMATOLOGIQUE	Cabina
-319210	Oxygen.Pollution Protec.Conce 4unit	box	88	ESPRIT DERMATOLOGIQUE	Cabina
-319211	DayNight DNA Rep.Concent.4unit pak	box	88	ESPRIT DERMATOLOGIQUE	Cabina
-319603	EXPO DERMAT. 16 unit pack- 4 types	box	352	ESPRIT DERMATOLOGIQUE	Cabina
+319208	Anti-Ageing Concentrate-4 unit pack	box	88	ESPRIT DERMATOLOGIQUE	Vendita
+319209	Regeneration Concent- 4 unit pack	box	88	ESPRIT DERMATOLOGIQUE	Vendita
+319210	Oxygen.Pollution Protec.Conce 4unit	box	88	ESPRIT DERMATOLOGIQUE	Vendita
+319211	DayNight DNA Rep.Concent.4unit pak	box	88	ESPRIT DERMATOLOGIQUE	Vendita
+319603	EXPO DERMAT. 16 unit pack- 4 types	box	352	ESPRIT DERMATOLOGIQUE	Vendita
+319201	Eye Bags and Dark Circles Balm	15 ml	23	ESPRIT DERMATOLOGIQUE	Vendita
+319604	Exhibitor Eye Bags and Dark Circles Balm	box 	184	ESPRIT DERMATOLOGIQUE	Vendita
 330501	CALENDARIO AVVENTO PROMO 15 NOVEMRE	box	42		vendita
 701106	30% Mandelic acid - gel*  100ML	100 ml	47.5	DERMIULAB	Cabina
 701108	Dermium Lab SOS cream 200 ML	200 ml	66.5	DERMIULAB	Cabina
@@ -162,4 +167,3 @@
 701217	DERMIUM SMOOTH.SER.FOR FINE&WR 30ML	30 ml	29.9	DERMIULAB	Vendita
 701501	Post Peeling Regenerating Skin		21.5	DERMIULAB	Vendita
 701602	DERMIUM TENSOR FLASH EXHIBITOR 12X2	12x200 ml	106.2	DERMIULAB	Vendita
-308000	XMAS GIFT BOX  CELL VITALE	box	55	CELL VITALE A.G.	Vendita
