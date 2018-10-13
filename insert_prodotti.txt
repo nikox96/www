@@ -148,7 +148,7 @@
 319211	DayNight DNA Rep.Concent.4unit pak	box	88	ESPRIT DERMATOLOGIQUE	Vendita
 319603	EXPO DERMAT. 16 unit pack- 4 types	box	352	ESPRIT DERMATOLOGIQUE	Vendita
 319201	Eye Bags and Dark Circles Balm	15 ml	23	ESPRIT DERMATOLOGIQUE	Vendita
-319604	Exhibitor Eye Bags and Dark Circles Balm	box 	184	ESPRIT DERMATOLOGIQUE	Vendita
+319604	Exhibitor Eye Bags and Dark Circles Balm 8 pz.	box 	184	ESPRIT DERMATOLOGIQUE	Vendita
 330501	CALENDARIO AVVENTO PROMO 15 NOVEMRE	box	42		vendita
 701106	30% Mandelic acid - gel*  100ML	100 ml	47.5	DERMIULAB	Cabina
 701108	Dermium Lab SOS cream 200 ML	200 ml	66.5	DERMIULAB	Cabina
