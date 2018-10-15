@@ -26,7 +26,7 @@ Client.find = function find(ccod, callback) {
         });
 };
 
-Client.delete = function delete(ccod, callback) {
+Client.delClient = function delClient(ccod, callback) {
     console.log("cancellazione cliente codice " + ccod);
     var query = "DELETE FROM portale.clienti WHERE ccod = " + ccod;
     console.log(query);
