@@ -37,7 +37,7 @@ Ordine.delOrder = function delOrder(ccod, cstt, callback) {
             }
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
-                if (queryRes.length > 0 && queryRes[0].cstt !== cstt) {
+                if (queryRes.length > 0 && queryRes[0].cstt != cstt) {
                     //ricerca ordine per codice
                     var qryStrTmp = "DELETE FROM portale.ordini WHERE ccod = "
                         + ccod;

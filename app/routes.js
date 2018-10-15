@@ -756,7 +756,7 @@ module.exports = function (app, passport) {
     });
 
     app.post('/del-order', isLoggedIn, function (req, res) {
-        Order.delOrder(req.body.ccod, 0, function (queryErr, queryRes) {
+        Order.delOrder(req.body.ccod, 50, function (queryErr, queryRes) {
             if (queryErr)
                 console.log(queryErr);
             res.redirect('/order-list');
