@@ -84,13 +84,14 @@
                     <th scope="col">Agente</th>
                     <th></th>
                     <th></th>
-                    <% if (user.cage === 9999 || user.cage === 0) { %>
+                    <% if (user.cage === 9999 || user.cage == 0) { %>
                     <th></th>
                     <% } %>
                 </tr>
                 </thead>
                 <tbody>
                 <% clients.forEach(function(client) { %>
+                <% if (client.cage == user.cage || user.cage == 0 || user.cage == 9999) {%>
                 <tr>
                     <th scope="row"><%= client.ccod %></th>
                     <td><%= client.xragsoc %></td>
@@ -118,6 +119,7 @@
                     </td>
                     <% } %>
                 </tr>
+                <% } %>
                 <% }); %>
                 </tbody>
             </table>
