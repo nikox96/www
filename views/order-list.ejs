@@ -147,6 +147,11 @@
                             <input type="hidden" name="ccod" value="<%= order.ccod %>">
                             <button type="submit" class="btn btn-link"><i class="material-icons">&#xe872</i></button>
                         </form>
+                    <% } else { %>
+                        <form action="/del-order" method="post">
+                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
+                            <button type="submit" class="btn btn-link" disabled><i class="material-icons">&#xe872</i></button>
+                        </form>
                     <% } %>
                     </td>
                     <% if (user.cage == 9999 || user.cage == 0) { %>
