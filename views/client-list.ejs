@@ -86,6 +86,7 @@
                     <th></th>
                     <% if (user.cage === 9999 || user.cage == 0) { %>
                     <th></th>
+                    <th></th>
                     <% } %>
                 </tr>
                 </thead>
@@ -110,11 +111,17 @@
                             <button type="submit" class="btn btn-link"><i class="material-icons">&#xe254</i></button>
                         </form>
                     </td>
-                    <% if (user.cage === 9999) { %>
+                    <% if (user.cage === 9999 || user.cage == 0) { %>
                     <td>
                         <form action="/get-csv-client" method="get">
                             <input type="hidden" name="ccod" value="<%= client.ccod %>">
                             <button type="submit" class="btn btn-link"><i class="material-icons">&#xe2c4</i></button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/delete-client" method="post">
+                            <input type="hidden" name="ccod" value="<%= client.ccod %>">
+                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe872</i></button>
                         </form>
                     </td>
                     <% } %>
