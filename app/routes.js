@@ -826,7 +826,7 @@ module.exports = function (app, passport) {
     });
 
     app.post('/delete-client', isLoggedIn, function (req, res) {
-        Client.delete(req.body.ccod, function(delErr, delRes){
+        Client.delClient(req.body.ccod, function(delErr, delRes){
             var clients = [];
 
             Client.list(null, null, function (cliErr, cliRes) {
