@@ -26,6 +26,23 @@ Client.find = function find(ccod, callback) {
         });
 };
 
+Client.delete = function delete(ccod, callback) {
+    console.log("cancellazione cliente codice " + ccod);
+    var query = "DELETE FROM portale.clienti WHERE ccod = " + ccod;
+    console.log(query);
+    db.query(query
+//        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
+            if (queryErr) {
+                console.log("error: " + queryErr);
+                callback(queryErr, null);
+            }
+            else {
+                callback(null, "Cliente eliminato correttamente");
+            }
+        });
+};
+
 Client.insert = function insert(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage, cabi, ccab, ncont, ntel, psco, callback) {
     Client.find(ccod, function (findErr, findRes) {
         if (findErr) {
