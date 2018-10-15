@@ -1,4 +1,4 @@
-999999	riga per descrizione promozioni	0	0		
+﻿999999	riga per descrizione promozioni	0	0		
 200000	BOX DAILY BEAUTY CARE	box	40	DAILY BEAUTY CARE	Vendita
 200333	BB 01 Cream Perfect.Daily Cr. 50ml	50 ml	13.6	SELVERT BB CREAM	Vendita
 200334	BB 02 Cream Perfect.Daily Cr. 50ml	50 ml	13.6	SELVERT BB CREAM	Vendita
@@ -154,8 +154,8 @@
 701108	Dermium Lab SOS cream 200 ML	200 ml	66.5	DERMIULAB	Cabina
 701111	Acne Prone 15% Salic. acid 15% 100M	100 ml	47.6	DERMIULAB	Cabina
 701114	Depigmentant 20% Lactic ac. 100ml	100 ml	54.5	DERMIULAB	Cabina
-701115	Anti-ageing 20% Mand.Acid 30% 100ML	100 ml	29.9	DERMIULAB	Cabina
-701116	10% Salicylic acid - solution*		21.5	DERMIULAB	Cabina
+701115	Anti-ageing 20% Mand.Acid 30% 100ML	100 ml	55.5	DERMIULAB	Cabina
+701116	10% Salicylic acid - solution*		36	DERMIULAB	Cabina
 701118	Hydrating Skin Protector   15ml	15 ml	9	DERMIULAB	Cabina
 701120	Derm.CELLULITE REDUCTION CR.500ml	500 ml	65.9	DERMIULAB	Cabina
 701121	DERMIUM FIRMING CREAM 500ML	500 ml	56	DERMIULAB	Cabina
