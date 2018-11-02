@@ -2,41 +2,41 @@
 <!doctype html>
 <html lang="it">
 <head>
-    <title>Portale Innovazioni</title>
-    <!--<link rel="manifest" href="/public/manifest.json">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="msapplication-TileImage" content="/img/icon-24x24.svg">
-    <meta name="msapplication-TileColor" content="#2F3BA2">
-    <meta name="theme-color" content="#317EFB"/>-->
-    <% include head %>
-    <style>
-        body {
-            padding-top: 80px;
-        }
-    </style>
+	<title>Portale Innovazioni</title>
+	<!--<link rel="manifest" href="/public/manifest.json">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="msapplication-TileImage" content="/img/icon-24x24.svg">
+	<meta name="msapplication-TileColor" content="#2F3BA2">
+	<meta name="theme-color" content="#317EFB"/>-->
+	<% include head %>
+	<style>
+		body {
+			padding-top: 80px;
+		}
+	</style>
 </head>
 <body>
 <div class="container">
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Portale Innovazioni</h1>
+	<div class="jumbotron text-center">
+		<h1><span class="fa fa-lock"></span> Portale Innovazioni</h1>
 
-        <p>Entra o Registrati da qui:</p>
+		<p>Entra o Registrati da qui:</p>
 
-        <a href="/login" class="btn btn-primary"><span class="fa fa-user"></span> Entra</a>
-        <a href="/signup" class="btn btn-primary"><span class="fa fa-user"></span> Registrati</a>
-    </div>
+		<a href="/login" class="btn btn-primary"><span class="fa fa-user"></span> Entra</a>
+		<a href="/signup" class="btn btn-primary"><span class="fa fa-user"></span> Registrati</a>
+	</div>
 </div>
 </body>
 <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/public/service-worker.js')
-      .then(function(reg){
-        console.log("Service worker registered!");
-      }).catch(function(err) {
-        console.log("There was some kind of problem... This happened: ", err)
-      });
-  }
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/public/service-worker.js')
+            .then(function (reg) {
+                console.log("Service worker registered!");
+            }).catch(function (err) {
+            console.log("There was some kind of problem... This happened: ", err)
+        });
+    }
 </script>
 </html>
