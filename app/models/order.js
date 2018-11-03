@@ -373,13 +373,15 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
                         if (ctvCampErr)
                             callback(ctvCampErr, null);
                         else {
+                            console.log('newordercamp: ctvCampRes ' + ctvCampRes);
                             iimp += ctvCampRes;
                             Camp.getTotal(ccod, function (totalErr, totalRes) {
                                 if (totalErr)
                                     callback(totalErr, null);
                                 else {
                                     totalRes = totalRes / 10;
-                                    if (totalRes < iimp) {
+                                    console.log('newordercamp: totalRes ' + totalRes);
+                                    if (totalRes <= iimp) {
                                         callback('Limite campioncini superato: rimuovere dei campioncini!', null);
                                         return;
                                     } else {

@@ -2,176 +2,179 @@
 <!doctype html>
 <html lang="it">
 <head>
-    <title>Portale Innovazioni - Nuovo ordine</title>
-    <!--<link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
-          integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-    <% include head %>
+	<title>Portale Innovazioni - Nuovo ordine</title>
+	<!--<link rel="manifest" href="/manifest.json">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+		  integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+			crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+			crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+	<% include head %>
 </head>
 <body>
 <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <div class="row justify-content-md-center">
-        <div class="col-md-auto">
-            <a class="navbar-brand" href="#">Nuovo Ordine <%= idOrd %></a>
-        </div>
+	<div class="row justify-content-md-center">
+		<div class="col-md-auto">
+			<a class="navbar-brand" href="#">Nuovo Ordine <%= idOrd %></a>
+		</div>
 
-        <div class="col-md-auto">
-            <div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
-                <div class="col-md-auto">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Azioni
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
-                                <li><a class="dropdown-item" href="/new-order">Cliente</a></li>
-                                <li><a class="dropdown-item" href="/new-order-product">Prodotti</a></li>
-                                <li><a class="dropdown-item" href="/new-order-promo">Promozioni</a></li>
-                                <li><a class="dropdown-item" href="/new-order-campioncini">Campioncini</a></li>
-                                <li><a class="dropdown-item" href="/new-order-cond-pag">Condizioni di Pagamento</a></li>
-                                <div class="dropdown-divider"></div>
-                                <li><a class="dropdown-item" href="/home">Annulla</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+		<div class="col-md-auto">
+			<div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
+				<div class="col-md-auto">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+							   data-toggle="dropdown"
+							   aria-haspopup="true" aria-expanded="false">
+								Azioni
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+								<li><a class="dropdown-item" href="/new-order">Cliente</a></li>
+								<li><a class="dropdown-item" href="/new-order-product">Prodotti</a></li>
+								<li><a class="dropdown-item" href="/new-order-promo">Promozioni</a></li>
+								<li><a class="dropdown-item" href="/new-order-campioncini">Campioncini</a></li>
+								<li><a class="dropdown-item" href="/new-order-cond-pag">Condizioni di Pagamento</a></li>
+								<div class="dropdown-divider"></div>
+								<li><a class="dropdown-item" href="/home">Annulla</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </nav>
 <div class="container-fluid" data-target="#navbar-ordine">
-    <div class="row">
-        <div class="col">
-            <h4>Cliente: <%= client.ccod %>
-                <small class="text-muted"><%= client.xragsoc %></small>
-            </h4>
-        </div>
-        <div class="col">
-            <h4>Ordine N°: <%= idOrd %></h4>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-        </div>
-        <div class="col">
-            <h4>Condizione di pagamento: <%= condpag.xcond %>
-                <small class="text-muted">N° scadenze: <%= condpag.nsca %></small>
-            </h4>
-        </div>
-    </div>
-    <div data-spy="scroll" data-offset="0">
-        <div id="product">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">Codice Prodotto</th>
-                    <th scope="col">Descrizione</th>
-                    <th scope="col">Prezzo</th>
-                    <th scope="col">Quantità</th>
-                    <th scope="col">Importo</th>
-                    <th scope="col">Sconto</th>
-                </tr>
-                </thead>
-                <tbody>
-                <% var itot = 0.00; %>
-                <% for(var i = 0; i < products.length;i++) { %>
-                <% itot += parseFloat(products[i].iimp); %>
-                <tr>
-                    <th scope="row"><%= products[i].ccod %></th>
-                    <td><%= products[i].xdesc %></td>
-                    <td><%= products[i].iprz %></td>
-                    <td><%= products[i].iqta %></td>
-                    <td><%= products[i].iimp %></td>
-                    <td><%= products[i].psco %></td>
-                </tr>
-                <% } %>
-                <% for(var j = 0; j < campioncini.length; j++) { %>
-                <tr>
-                    <th scope="row"><%= campioncini[j].ccod %></th>
-                    <td><%= campioncini[j].xdesc %></td>
-                    <td><%= campioncini[j].iprz %></td>
-                    <td><%= campioncini[j].iqta %></td>
-                    <td><%= campioncini[j].iimp %></td>
-                    <td><%= campioncini[j].psco %></td>
-                </tr>
-                <% } %>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <th scope="col">Totale</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <th scope="col"><%= itot.toFixed(2) %></th>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col">
+			<h4>Cliente: <%= client.ccod %>
+				<small class="text-muted"><%= client.xragsoc %></small>
+			</h4>
+		</div>
+		<div class="col">
+			<h4>Ordine N°: <%= idOrd %></h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+		</div>
+		<div class="col">
+			<h4>Condizione di pagamento: <%= condpag.xcond %>
+				<small class="text-muted">N° scadenze: <%= condpag.nsca %></small>
+			</h4>
+		</div>
+	</div>
+	<div data-spy="scroll" data-offset="0">
+		<div id="product">
+			<table class="table table-hover">
+				<thead>
+				<tr>
+					<th scope="col">Codice Prodotto</th>
+					<th scope="col">Descrizione</th>
+					<th scope="col">Prezzo</th>
+					<th scope="col">Quantità</th>
+					<th scope="col">Sconto</th>
+					<th scope="col">Importo</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% var itot = 0.00; %>
+				<% for(var i = 0; i < products.length;i++) { %>
+				<% itot += parseFloat(products[i].iimp); %>
+				<tr>
+					<th scope="row"><%= products[i].ccod %></th>
+					<td><%= products[i].xdesc %></td>
+					<td><%= products[i].iprz %></td>
+					<td><%= products[i].iqta %></td>
+					<td><%= products[i].psco %></td>
+					<td><%= products[i].iimp %></td>
+				</tr>
+				<% } %>
+				<% if (campioncini != null) { %>
+				<% for(var j = 0; j < campioncini.length; j++) { %>
+				<tr>
+					<th scope="row"><%= campioncini[j].ccod %></th>
+					<td><%= campioncini[j].xdesc %></td>
+					<td><%= campioncini[j].iprz %></td>
+					<td><%= campioncini[j].iqta %></td>
+					<td><%= campioncini[j].psco %></td>
+					<td><%= campioncini[j].iimp %></td>
+				</tr>
+				<% } %>
+				<% } %>
+				</tbody>
+				<tfoot>
+				<tr>
+					<th scope="col">Totale</th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<th scope="col"><%= itot.toFixed(2) %></th>
+				</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
 </div>
 </body>
 <footer class="footer sticky-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <form action="/req-pdf-order" method="get">
-                    <input type="hidden" name="idOrd" value="<%= idOrd %>">
-                    <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
-                        <i class="material-icons">&#xe415</i> Salva
-                    </button>
-                </form>
-            </div>
-            <div class="col-md-auto">
-                <button class="btn-primary bg-transparent text-primary border-0 align-bottom"
-                        data-toggle="modal"
-                        data-target="#noteModal">
-                    <i class="material-icons">&#xe85d</i> Aggiungi Note
-                </button>
-            </div>
-            <div class="col-md-auto">
-                <form id="updateOrderNote" method="post" action="/new-order-sum">
-                    <input type="hidden" name="idOrd" value="<%= idOrd %>">
-                    <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
-                        <i class="material-icons">&#xe161</i> Conferma
-                    </button>
-                </form>
-                <div class="modal fade" id="noteModal" tabindex="-1" role="dialog"
-                     aria-labelledby="noteModal" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title"
-                                    id="noteModalTitle">Aggiungi note all'ordine</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<form action="/req-pdf-order" method="get">
+					<input type="hidden" name="idOrd" value="<%= idOrd %>">
+					<button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+						<i class="material-icons">&#xe415</i> Salva
+					</button>
+				</form>
+			</div>
+			<div class="col-md-auto">
+				<button class="btn-primary bg-transparent text-primary border-0 align-bottom"
+						data-toggle="modal"
+						data-target="#noteModal">
+					<i class="material-icons">&#xe85d</i> Aggiungi Note
+				</button>
+			</div>
+			<div class="col-md-auto">
+				<form id="updateOrderNote" method="post" action="/new-order-sum">
+					<input type="hidden" name="idOrd" value="<%= idOrd %>">
+					<button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+						<i class="material-icons">&#xe161</i> Conferma
+					</button>
+				</form>
+				<div class="modal fade" id="noteModal" tabindex="-1" role="dialog"
+					 aria-labelledby="noteModal" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title"
+									id="noteModalTitle">Aggiungi note all'ordine</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
                                     <textarea class="form-control" name="xnote" maxlength="1000"
-                                              spellcheck="false" form="updateOrderNote"><%= xnota %></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+											  spellcheck="false" form="updateOrderNote"><%= xnota %></textarea>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </footer>
 </html>

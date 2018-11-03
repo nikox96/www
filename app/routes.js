@@ -100,6 +100,7 @@ module.exports = function (app, passport) {
     });
 
     app.get('/new-order-campioncini', isLoggedIn, function (req, res) {
+        req.session.flash = [];
         Appoggio.find(req.user.cage, '', function (appErr, appRes) {
             if (appErr) {
                 console.log("errore recupero codice ordine");
@@ -293,6 +294,7 @@ module.exports = function (app, passport) {
     });
 
     app.post('/new-order-campioncini', isLoggedIn, function (req, res) {
+        req.session.flash = [];
         Appoggio.find(req.user.cage, '', function (appErr, appRes) {
             if (appErr) {
                 console.log("errore recupero codice ordine");
@@ -826,7 +828,7 @@ module.exports = function (app, passport) {
     });
 
     app.post('/delete-client', isLoggedIn, function (req, res) {
-        Client.delClient(req.body.ccod, function(delErr, delRes){
+        Client.delClient(req.body.ccod, function (delErr, delRes) {
             var clients = [];
 
             Client.list(null, null, function (cliErr, cliRes) {
@@ -856,7 +858,7 @@ module.exports = function (app, passport) {
             });
         });
     });
-    
+
     app.get('/get-csv-client', isLoggedIn, function (req, res) {
         var xrig = "";
         Client.list(req.query.ccod, null, function (cliErr, cliRes) {
@@ -1397,7 +1399,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                             idOrd: idOrd,
                                             client: cliente,
                                             products: products,
-                                            campioncini: [{}],
+                                            campioncini: null,
                                             xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
                                             condpag: condpag
                                         }, function (err, htmlGenesi) {
