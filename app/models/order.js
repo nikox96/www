@@ -367,14 +367,14 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
                     } else {
                         iqtaold = queryRes[0].iqta;
                     }
-                    var iimp = res.iprz * (iqta - iqtaold);
+                    var iimp = Number((res.iprz * (iqta - iqtaold)).toFixed(2));
                     console.log('newordercamp: iqta ' + iqta + ' iqtaold ' + iqtaold + ' iimp ' + iimp);
                     Camp.getCtvCamp(ccod, function (ctvCampErr, ctvCampRes) {
                         if (ctvCampErr)
                             callback(ctvCampErr, null);
                         else {
                             console.log('newordercamp: ctvCampRes ' + ctvCampRes);
-                            iimp += ctvCampRes;
+                            iimp += Number(ctvCampRes);
                             console.log('newordercamp: iimp + ctvCampRes ' + iimp);
                             Camp.getTotal(ccod, function (totalErr, totalRes) {
                                 if (totalErr)
