@@ -375,6 +375,7 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
                         else {
                             console.log('newordercamp: ctvCampRes ' + ctvCampRes);
                             iimp += ctvCampRes;
+                            console.log('newordercamp: iimp + ctvCampRes ' + iimp);
                             Camp.getTotal(ccod, function (totalErr, totalRes) {
                                 if (totalErr)
                                     callback(totalErr, null);
