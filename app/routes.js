@@ -1081,7 +1081,7 @@ module.exports = function (app, passport) {
 
     app.post('/new-client', isLoggedIn, function (req, res) {
         var xcli1 = req.body.xnome + req.body.xcogn;
-        Client.insert(req.body.ccod, req.body.cpiva, req.body.xragsoc, req.body.cfis, xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, req.body.cabi, req.body.ccab, req.body.ncont, req.body.ntel, req.body.psco, function (cliInsErr, cliInsRes) {
+        Client.insert(req.body.ccod, req.body.cpiva, req.body.xragsoc, req.body.cfis, xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, Number(req.body.cabi), Number(req.body.ccab), req.body.ncont, req.body.ntel, req.body.psco, function (cliInsErr, cliInsRes) {
             if (cliInsErr) {
                 console.log("Errore censimento cliente!");
                 res.render('new-client.ejs', {
