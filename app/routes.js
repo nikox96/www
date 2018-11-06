@@ -2450,7 +2450,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
     if (i >= righe.length && (camp === undefined || (!camp) || camp == null) || (camp && camp.length == 0)) {
         console.log('getRigheCSV: exit updatestatus and download csv');
         Order.getNota(righe[0].ccod, function (notaErr, notaRes) {
-            Order.updateStatus(righe[0].ccod, 50, (notaRes ? notaRes : ''), function (sttErr, sttRes) {
+            Order.updateStatus(righe[0].ccod, 50, (notaRes && notaRes.xnote ? notaRes.xnote : ''), function (sttErr, sttRes) {
                 if (sttErr) {
                     console.log(sttErr);
                     return;
