@@ -581,7 +581,7 @@ module.exports = function (app, passport) {
                                                 tes.cageAltroSis = '';
                                                 tes.provvAge = (ageRes.provv && ageRes.provv !== '' ? ageRes.provv : '');
                                                 tes.provCapoArea = '0.00';
-                                                tes.ccondPag = (ordRes.ccondPag && ordRes.ccondPag !== '' ? ordRes.ccondPag : '');
+                                                tes.ccondPag = (ordRes.ccondpag && ordRes.ccondpag !== '' ? ordRes.ccondpag : '');
                                                 tes.ccondPagAltroSis = '';
                                                 tes.scoCondPag = '0.00';
                                                 tes.rilTrackFlussiFin = '';
