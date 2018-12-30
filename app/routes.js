@@ -6,7 +6,8 @@ var Camp = require("./models/campioncini.js");
 var Agent = require("./models/agent.js");
 var Appoggio = require("./models/appoggio.js");
 var dateFormat = require('dateformat');
-var pdf = require('html-pdf');
+var pdf = require('carbone');
+var fs = require('fs');
 var i = 0, j = 0, k = 0, csvEl = 0;
 var rig, tes, rec, iva, par, csv;
 var products = [];
@@ -46,7 +47,7 @@ module.exports = function (app, passport) {
     app.get('/login', function (req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login.ejs', {message: req.flash('loginMessage')});
+        res.render('login.ejs', { message: req.flash('loginMessage') });
     });
 
     // =====================================
@@ -359,7 +360,7 @@ module.exports = function (app, passport) {
                 console.log("errore recupero codice ordine");
             } else {
                 db.query("SELECT * FROM portale.condizioni_pagamento"
-//                 , function (queryErr, queryRes) {
+                    //                 , function (queryErr, queryRes) {
                     , (queryErr, queryRes) => {
                         if (queryErr) {
                             req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
@@ -765,10 +766,10 @@ module.exports = function (app, passport) {
         })
     });
 
-// =====================================
-// LOGIN ===============================
-// =====================================
-// show the login form
+    // =====================================
+    // LOGIN ===============================
+    // =====================================
+    // show the login form
     app.get('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
         var order = {};
@@ -1233,36 +1234,36 @@ module.exports = function (app, passport) {
         });
     });
 
-// process the login form
-// app.post('/login', do all our passport stuff here);
+    // process the login form
+    // app.post('/login', do all our passport stuff here);
 
-// =====================================
-// SIGNUP ==============================
-// =====================================
-// show the signup form
+    // =====================================
+    // SIGNUP ==============================
+    // =====================================
+    // show the signup form
     app.get('/signup', function (req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('signup.ejs', {message: req.flash('signupMessage')});
+        res.render('signup.ejs', { message: req.flash('signupMessage') });
     });
 
-// process the signup form
+    // process the signup form
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect: '/home', // redirect to the secure profile section
         failureRedirect: '/signup', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
 
-// process the login form
+    // process the login form
     app.post('/login', passport.authenticate('local-login', {
         successRedirect: '/home', // redirect to the secure profile section
         failureRedirect: '/login', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
 
-// =====================================
-// LOGOUT ==============================
-// =====================================
+    // =====================================
+    // LOGOUT ==============================
+    // =====================================
     app.get('/logout', function (req, res) {
         Appoggio.delApp(req.user.cage, '', function (errApp, resApp) {
             if (errApp) {
@@ -1273,7 +1274,7 @@ module.exports = function (app, passport) {
         });
     });
 }
-;
+    ;
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
@@ -1376,7 +1377,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                     } else {
                         var condpag;
                         db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag
-//                    , function (condErr, condRes) {
+                            //                    , function (condErr, condRes) {
                             , (condErr, condRes) => {
                                 if (condErr) {
                                     req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
@@ -1403,38 +1404,17 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                             xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
                                             condpag: condpag
                                         }, function (err, htmlGenesi) {
-                                            if (err) return console.log(err);
                                             var options = {
-                                                directory: "/tmp",
-                                                border: {
-                                                    "top": "2cm",
-                                                    "right": "1cm",
-                                                    "bottom": "2cm",
-                                                    "left": "1.5cm"
-                                                },
-                                                type: "pdf",
-                                                format: "A4"
+                                                convertTo: 'pdf' //can be docx, txt, ...
                                             };
 
-                                            var footerInit = htmlGenesi.indexOf("<footer");
-                                            footerInit = (footerInit === -1 ? 0 : footerInit);
-                                            var footerExit = htmlGenesi.indexOf("</footer>");
-                                            footerExit = (footerExit === -1 ? htmlGenesi.length : footerExit);
-                                            var htmlMod;
-
-                                            if (!(footerExit === htmlGenesi.length || footerInit === 0)) {
-                                                htmlMod = htmlGenesi.substr(0, footerInit - 1);
-                                                htmlMod += htmlGenesi.substr(footerExit + 9, htmlGenesi.length);
-                                            } else {
-                                                htmlMod = htmlGenesi;
-                                            }
-
-                                            pdf.create(htmlMod, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
+                                            pdf.render(__dirname + '/../public/template/invoice.odt', jsonToPrint, options, function (pdferr, pdfres) {
                                                 if (pdferr) return console.log(pdferr);
 
+                                                fs.writeFileSync(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', pdfres);
                                                 console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
 
-                                                Appoggio.update(req.user.cage, idOrd, pdfres.filename, function (appErr, appRes) {
+                                                Appoggio.update(req.user.cage, idOrd, __dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (appErr, appRes) {
                                                     if (appErr) return console.log("errore salvataggio path pdf");
 
                                                     res.send(htmlGenesi);
@@ -1454,7 +1434,6 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
 }
 
 function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
-
     if (j >= camps.length)
         return;
 
@@ -1475,7 +1454,7 @@ function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
             if (j == camps.length - 1) {
                 var condpag;
                 db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag
-//                    , function (condErr, condRes) {
+                    //                    , function (condErr, condRes) {
                     , (condErr, condRes) => {
                         if (condErr) {
                             req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
@@ -3233,7 +3212,6 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 }
 
 function sendFile(nreg, idOrd) {
-    var fs = require('fs');
     var fd;
     var d = new Date();
     var file = '';
@@ -3259,7 +3237,6 @@ function sendFile(nreg, idOrd) {
 }
 
 function sendCliFile(ccod, xrig) {
-    var fs = require('fs');
     var fd;
     var d = new Date();
     var file = '';
