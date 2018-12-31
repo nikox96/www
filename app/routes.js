@@ -14,12 +14,6 @@ var product = {};
 var campioncini = [];
 var campioncino = {};
 var riga = {};
-var options = {
-    templatePath: __dirname + '/../public/template/',
-    convertTo: 'pdf', //can be docx, txt, ...
-    startFactory: false
-};
-pdf.set(options);
 module.exports = function (app, passport) {
 
     // =====================================
