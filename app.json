@@ -3,6 +3,7 @@
   "description": "Portale Innovazioni",
   "main": "portale.js",
   "scripts": {
+    "preinstall": "$temp_dir/.profile.d/libreoffice.sh",
     "start": "node portale.js"
   },
   "env": {
@@ -21,6 +22,12 @@
     }
   ],
   "buildpacks": [
+    {
+      "url": "heroku/java"
+    },
+    {
+      "url": "https://github.com/rishihahs/heroku-buildpack-libreoffice"
+    },
     {
       "url": "heroku/nodejs"
     }

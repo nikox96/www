@@ -15,7 +15,12 @@ var product = {};
 var campioncini = [];
 var campioncino = {};
 var riga = {};
-
+var options = {
+    templatePath: __dirname + '/../public/template/',
+    convertTo: 'pdf', //can be docx, txt, ...
+    startFactory: false
+};
+pdf.set(options);
 module.exports = function (app, passport) {
 
     // =====================================
@@ -1404,10 +1409,6 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                             xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
                                             condpag: condpag
                                         }, function (err, htmlGenesi) {
-                                            var options = {
-                                                convertTo: 'pdf' //can be docx, txt, ...
-                                            };
-
                                             pdf.render(__dirname + '/../public/template/invoice.odt', jsonToPrint, options, function (pdferr, pdfres) {
                                                 if (pdferr) return console.log(pdferr);
 
