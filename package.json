@@ -2,6 +2,7 @@
   "name": "portale-innovazioni",
   "main": "portale.js",
   "scripts": {
+    "preinstall": "$temp_dir/.profile.d/libreoffice.sh",
     "start": "node portale.js"
   },
   "bugs": {
