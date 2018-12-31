@@ -1408,9 +1408,6 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                             xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
                                             condpag: condpag
                                         }, function (err, htmlGenesi) {
-<<<<<<< HEAD
-                                            pdf.render(__dirname + '/../public/template/invoice.odt', jsonToPrint, options, function (pdferr, pdfres) {
-=======
                                             if (err) return console.log(err);
                                             var options = {
                                                 directory: "/tmp",
@@ -1438,7 +1435,6 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                             }
 
                                             pdf.create(htmlMod, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
->>>>>>> parent of f318b20... update pdf print, using carbone
                                                 if (pdferr) return console.log(pdferr);
 
                                                 console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
