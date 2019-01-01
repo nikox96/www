@@ -45,7 +45,7 @@ module.exports = function (app, passport) {
     app.get('/login', function (req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login.ejs', {message: req.flash('loginMessage')});
+        res.render('login.ejs', { message: req.flash('loginMessage') });
     });
 
     // =====================================
@@ -358,7 +358,7 @@ module.exports = function (app, passport) {
                 console.log("errore recupero codice ordine");
             } else {
                 db.query("SELECT * FROM portale.condizioni_pagamento"
-//                 , function (queryErr, queryRes) {
+                    //                 , function (queryErr, queryRes) {
                     , (queryErr, queryRes) => {
                         if (queryErr) {
                             req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
@@ -764,10 +764,10 @@ module.exports = function (app, passport) {
         })
     });
 
-// =====================================
-// LOGIN ===============================
-// =====================================
-// show the login form
+    // =====================================
+    // LOGIN ===============================
+    // =====================================
+    // show the login form
     app.get('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
         var order = {};
@@ -921,29 +921,32 @@ module.exports = function (app, passport) {
             if (cliErr) {
                 req.flash('list-client-message', cliErr);
             } else {
-                res.render('detail-client.ejs', {
-                    cazi: 'inq',
-                    ccod: cliRes[0].ccod,
-                    cfis: cliRes[0].cfis,
-                    cpiva: cliRes[0].cpiva,
-                    xragsoc: cliRes[0].xragsoc,
-                    xcli: cliRes[0].xcli1,
-                    xind: cliRes[0].xind,
-                    xcom: cliRes[0].xcom,
-                    cprv: cliRes[0].cprv,
-                    ccap: cliRes[0].ccap,
-                    xnaz: cliRes[0].xnaz,
-                    xmail: cliRes[0].xmail,
-                    ccat: cliRes[0].ccat,
-                    ctipcom: cliRes[0].ctipcomm,
-                    czona: cliRes[0].czona,
-                    cage: cliRes[0].cage,
-                    cabi: cliRes[0].cabi,
-                    ccab: cliRes[0].ccab,
-                    ncont: cliRes[0].ncont,
-                    ntel: cliRes[0].ntel,
-                    psco: cliRes[0].psco,
-                    user: req.user
+                Order.getSumCtv(cliRes[0].ccod, function (getSumCtvErr, getSumCtvRes) {
+                    res.render('detail-client.ejs', {
+                        cazi: 'inq',
+                        ccod: cliRes[0].ccod,
+                        cfis: cliRes[0].cfis,
+                        cpiva: cliRes[0].cpiva,
+                        xragsoc: cliRes[0].xragsoc,
+                        xcli: cliRes[0].xcli1,
+                        xind: cliRes[0].xind,
+                        xcom: cliRes[0].xcom,
+                        cprv: cliRes[0].cprv,
+                        ccap: cliRes[0].ccap,
+                        xnaz: cliRes[0].xnaz,
+                        xmail: cliRes[0].xmail,
+                        ccat: cliRes[0].ccat,
+                        ctipcom: cliRes[0].ctipcomm,
+                        czona: cliRes[0].czona,
+                        cage: cliRes[0].cage,
+                        cabi: cliRes[0].cabi,
+                        ccab: cliRes[0].ccab,
+                        ncont: cliRes[0].ncont,
+                        ntel: cliRes[0].ntel,
+                        psco: cliRes[0].psco,
+                        sumCtvOrd: (getSumCtvErr ? 0 : getSumCtv.sumctv),
+                        user: req.user
+                    });
                 });
             }
         });
@@ -1232,36 +1235,36 @@ module.exports = function (app, passport) {
         });
     });
 
-// process the login form
-// app.post('/login', do all our passport stuff here);
+    // process the login form
+    // app.post('/login', do all our passport stuff here);
 
-// =====================================
-// SIGNUP ==============================
-// =====================================
-// show the signup form
+    // =====================================
+    // SIGNUP ==============================
+    // =====================================
+    // show the signup form
     app.get('/signup', function (req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('signup.ejs', {message: req.flash('signupMessage')});
+        res.render('signup.ejs', { message: req.flash('signupMessage') });
     });
 
-// process the signup form
+    // process the signup form
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect: '/home', // redirect to the secure profile section
         failureRedirect: '/signup', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
 
-// process the login form
+    // process the login form
     app.post('/login', passport.authenticate('local-login', {
         successRedirect: '/home', // redirect to the secure profile section
         failureRedirect: '/login', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
 
-// =====================================
-// LOGOUT ==============================
-// =====================================
+    // =====================================
+    // LOGOUT ==============================
+    // =====================================
     app.get('/logout', function (req, res) {
         Appoggio.delApp(req.user.cage, '', function (errApp, resApp) {
             if (errApp) {
@@ -1272,7 +1275,7 @@ module.exports = function (app, passport) {
         });
     });
 }
-;
+    ;
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
@@ -1375,7 +1378,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                     } else {
                         var condpag;
                         db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag
-//                    , function (condErr, condRes) {
+                            //                    , function (condErr, condRes) {
                             , (condErr, condRes) => {
                                 if (condErr) {
                                     req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
@@ -1474,7 +1477,7 @@ function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
             if (j == camps.length - 1) {
                 var condpag;
                 db.query("SELECT * FROM portale.condizioni_pagamento WHERE ccod = " + cond.ccondpag
-//                    , function (condErr, condRes) {
+                    //                    , function (condErr, condRes) {
                     , (condErr, condRes) => {
                         if (condErr) {
                             req.flash('orderMessage', 'Nessuna condizione di pagamento trovata');
