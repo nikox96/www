@@ -764,6 +764,44 @@ module.exports = function (app, passport) {
         })
     });
 
+    app.get('/product-list', isLoggedIn, function (req, res) {
+        Product.list(0, 999998, '', '', '', function (productErr, productRes) {
+            if (productErr) {
+                req.flash('orderMessage', 'Nessun prodotto trovato');
+            }
+            if (productRes) {
+                console.log('prodotti: ' + productRes.length);
+                req.flash('productListMsg', productRes.length + ' risultati');
+                Product.getSven(function (venErr, venRes) {
+                    if (venErr) {
+                        console.log("errore sven");
+                        venRes = {};
+                    } else {
+                        console.log("sven trovate: " + venRes.length);
+                    }
+                    Product.getXgrp(function (grpErr, grpRes) {
+                        if (grpErr) {
+                            console.log("errore xgrp");
+                            grpRes = {};
+                        } else {
+                            console.log("xgrp trovate" + grpRes);
+                        }
+                        res.render('product-list.ejs', {
+                            message: req.flash('productListMsg'),
+                            products: productRes,
+                            ccodda: '',
+                            ccoda: '',
+                            sven: '',
+                            sgrp: '',
+                            xprod: '',
+                            lven: venRes,
+                            lgrp: grpRes
+                        });
+                    });
+                });
+            }
+        });
+    });
     // =====================================
     // LOGIN ===============================
     // =====================================
@@ -772,7 +810,7 @@ module.exports = function (app, passport) {
         var orders = [];
         var order = {};
 
-        Order.getUserOrder(req.user.cage, null, null, function (ordErr, ordRes) {
+        Order.getUserOrder(req.user.cage, null, null, null, function (ordErr, ordRes) {
             if (ordErr) {
                 req.flash('list-order-message', ordErr);
             } else {
@@ -1024,7 +1062,7 @@ module.exports = function (app, passport) {
     app.post('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
 
-        Order.getUserOrder(((req.body.cageric || req.body.cageric == 0) && (req.user.cage == 9999 || req.user.cage == 0) ? req.body.cageric : req.user.cage), false, req.body.xragsoc, function (ordErr, ordRes) {
+        Order.getUserOrder(((req.body.cageric || req.body.cageric == 0) && (req.user.cage == 9999 || req.user.cage == 0) ? req.body.cageric : req.user.cage), false, req.body.xragsoc, req.body.fall, function (ordErr, ordRes) {
             if (ordErr) {
                 req.flash('list-order-message', ordErr);
             } else {

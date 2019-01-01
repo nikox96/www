@@ -9,7 +9,7 @@ Ordine.find = function find(ccod, callback) {
     //ricerca ordine per codice
     db.query("SELECT * FROM portale.ordini WHERE ccod = "
         + ccod
-//        , function (queryErr, queryRes) {
+        //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("error: " + queryErr);
@@ -30,7 +30,7 @@ Ordine.find = function find(ccod, callback) {
 Ordine.delOrder = function delOrder(ccod, cstt, callback) {
     db.query("SELECT cstt FROM portale.ordini WHERE ccod = "
         + ccod
-//        , function (queryErr, queryRes) {
+        //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("error: " + queryErr);
@@ -43,7 +43,7 @@ Ordine.delOrder = function delOrder(ccod, cstt, callback) {
                         + ccod;
                     console.log("query del order: " + qryStrTmp);
                     db.query(qryStrTmp
-//                        , function (delErr, delRes) {
+                        //                        , function (delErr, delRes) {
                         , (delErr, delRes) => {
                             if (delErr) {
                                 console.log(delErr);
@@ -51,7 +51,7 @@ Ordine.delOrder = function delOrder(ccod, cstt, callback) {
                             else {
                                 db.query("DELETE FROM portale.righe_ordini WHERE ccod = "
                                     + ccod
-//                                    , function (err2, res2) {
+                                    //                                    , function (err2, res2) {
                                     , (err2, res2) => {
                                         if (err2) {
                                             console.log("errore canc righe ordini");
@@ -78,7 +78,7 @@ Ordine.findProduct = function findProduct(ccod, callback) {
     //ricerco i prodotti per un determinato ordine
     db.query("SELECT * FROM portale.righe_ordini WHERE ccod = "
         + ccod + " ORDER BY descrpromo, psco"
-//        , function (queryErr, queryRes) {
+        //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("error: " + queryErr);
@@ -103,7 +103,7 @@ Ordine.updateCondPag = function updateCondPag(ccod, cond_pag, callback) {
         + ccod;
 
     db.query(query
-//             , function (queryErr, queryRes) {
+        //             , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
                 callback("Errore in aggiornamento record", null);
@@ -118,7 +118,7 @@ Ordine.updateStatus = function updateStatus(ccod, cstt, xnote, callback) {
     //aggiorno lo status dell'ordine
     db.query("UPDATE portale.ordini SET cstt = ($1), xnote = ($2) WHERE ccod = ($3)"
         , [cstt, xnote, ccod]
-//        , function (queryErr, queryRes) {
+        //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
                 callback("Errore in aggiornamento record", null);
@@ -133,7 +133,7 @@ Ordine.updateCcli = function updateCcli(ccod, ccli, callback) {
     //aggiorno lo status dell'ordine
     db.query("UPDATE portale.ordini SET ccli = " + ccli + (ccod && ccod !== '' ? " WHERE ccod = "
         + ccod : "WHERE 1<>1")
-//        , function (queryErr, queryRes) {
+        //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
                 callback("Errore in aggiornamento record", null);
@@ -151,7 +151,7 @@ Ordine.newOrder = function newOrder(ctiprec, ccli, cage, callback) {
         + mysql.escape(new Date()) + ", "
         + mysql.escape(0) + ", 'EUR', 1, 10, "
         + cage + ") RETURNING ccod"
-//                , function (queryErr, queryRes) {
+        //                , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
                 callback('Errore inserimento ordine', null);
@@ -180,7 +180,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
             //se il prodotto era già presente nel carrello per quest'ordine allora aggiorno quantità e importo
             db.query("SELECT 1 FROM portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0) + " AND descrpromo = $1"
                 , [promo + "z"]
-//                , function (queryErr, queryRes) {
+                //                , function (queryErr, queryRes) {
                 , (queryErr, queryRes) => {
                     queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                     if (queryErr || queryRes.rowCount == 0 || (queryRes.length && queryRes.length <= 0)) {
@@ -193,7 +193,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
                             + psco + ", "
                             + "$1 )"
                             , [promo + "z"]
-//                            , function (queryErr, queryRes) {
+                            //                            , function (queryErr, queryRes) {
                             , (queryErr, queryRes) => {
                                 if (queryErr) {
                                     console.log('errore insert prod: ' + queryErr);
@@ -211,7 +211,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
                             if (promo.length > 6) {
                                 db.query("DELETE FROM portale.righe_ordini WHERE descrpromo = $1"
                                     , [promo + "z"]
-//                                  , function (queryErr, queryRes) {
+                                    //                                  , function (queryErr, queryRes) {
                                     , (queryErr, queryRes) => {
                                         if (queryErr) {
                                             callback("Errore aggiornamento prodotto", null);
@@ -223,7 +223,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
                             } else {
                                 db.query("DELETE FROM portale.righe_ordini WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0) + "AND descrpromo = $1"
                                     , [promo + "z"]
-//                                  , function (queryErr, queryRes) {
+                                    //                                  , function (queryErr, queryRes) {
                                     , (queryErr, queryRes) => {
                                         if (queryErr) {
                                             callback("Errore aggiornamento prodotto", null);
@@ -237,7 +237,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
                             db.query("UPDATE portale.righe_ordini SET iqta = " + iqta + ", iimp = " + iimp
                                 + " WHERE ccod = " + ccod + " AND ccodprod = " + ccodprod + " AND psco = " + (psco && psco >= 0 ? psco : 0) + "AND descrpromo = $1"
                                 , [promo + "z"]
-//                            , function (queryErr, queryRes) {
+                                //                            , function (queryErr, queryRes) {
                                 , (queryErr, queryRes) => {
                                     if (queryErr) {
                                         callback("Errore aggiornamento prodotto", null);
@@ -254,7 +254,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
     });
 };
 
-Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, callback) {
+Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, fall, callback) {
     //ricerca ordine per codice agente/status/cliente
     var query = "SELECT a.*, b.iimp, c.xragsoc " +
         "FROM " +
@@ -265,14 +265,15 @@ Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, callback) {
         "GROUP BY ccod) AS b, " +
         "(SELECT ccod, xragsoc " +
         "FROM portale.clienti) AS c " +
-        "WHERE a.ccod = b.ccod AND a.ccli = c.ccod "
-        + ((cage || cage === 0) && cage !== '' ? "AND a.cage = " + cage : 'AND 1 <> 1')
+        "WHERE a.ccod = b.ccod AND a.ccli = c.ccod " +
+        (fall =='on' ? "" : "AND a.dreg >= '" + new Date().getFullYear() + "-01-01'::date ")
+        + ((cage || cage === 0) && cage !== '' ? " AND a.cage = " + cage : 'AND 1 <> 1')
         + ((cstt || cstt === 0) && cstt !== '' ? " AND a.cstt = " + cstt : '')
         + " AND c.xragsoc ilike $1 ORDER BY a.ccod";
     //console.log(query);
     db.query(query
         , ['%' + (xcli && xcli != '' ? xcli : '') + '%']
-//        , function (queryErr, queryRes) {
+        //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("getUserOrder: " + queryErr);
@@ -292,7 +293,7 @@ Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, callback) {
 
 Ordine.updateNreg = function updateNreg(ccod, callback) {
     db.query("SELECT max(nreg) AS nreg FROM portale.ordini WHERE cstt = 50"
-//             , function (nregErr, nregRes) {
+        //             , function (nregErr, nregRes) {
         , (nregErr, nregRes) => {
             if (nregErr) {
                 callback('Nessun numero di registrazione presente in archivio', null);
@@ -312,7 +313,7 @@ Ordine.updateNreg = function updateNreg(ccod, callback) {
                 //inserisco l'ordine con il numero di registrazione calcolato
                 db.query("UPDATE portale.ordini set nreg = " + nregRes[0].nreg + " WHERE cstt <> 50 AND "
                     + (ccod && ccod !== '' ? 'ccod = ' + ccod : '1 <> 1')
-//                , function (queryErr, queryRes) {
+                    //                , function (queryErr, queryRes) {
                     , (queryErr, queryRes) => {
                         if (queryErr) {
                             console.log(queryErr);
@@ -330,7 +331,7 @@ Ordine.getNota = function getNota(ccod, callback) {
     //ricerca ordine per codice
     db.query("SELECT xnote FROM portale.ordini WHERE ccod = "
         + ccod
-//        , function (queryErr, queryRes) {
+        //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("error: " + queryErr);
@@ -351,7 +352,7 @@ Ordine.getNota = function getNota(ccod, callback) {
 
 Ordine.getSumCtv = function getSumCtv(ccli, callback) {
     //ricerca ordine per codice
-    db.query("select case when c.iimp>0 then c.iimp else 0.00 end - case when sum(b.iimp)>0 then sum(b.iimp) else 0.00 end as sumctv from portale.ordini a inner join portale.righe_ordini b on a.ccod=b.ccod left outer join portale.contratti c on a.ccli=c.ccli where a.ccli = $1 and nreg <> 999 group by c.iimp;"
+    db.query("select case when c.iimp>0 then c.iimp else 0.00 end - case when sum(b.iimp)>0 then sum(b.iimp) else 0.00 end as sumctv from portale.ordini a inner join portale.righe_ordini b on a.ccod=b.ccod left outer join portale.contratti c on a.ccli=c.ccli where a.ccli = $1 and cannrif = " + new Date().getFullYear + " and nreg <> 999 group by c.iimp;"
         , [ccli]
         //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
@@ -380,7 +381,7 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
             //se il campioncino era già presente nel carrello per quest'ordine allora aggiorno quantità
             db.query("SELECT iqta FROM portale.camp_ordini WHERE ccod = " + ccod + " AND ccamp = $1"
                 , [ccodcamp]
-//                , function (queryErr, queryRes) {
+                //                , function (queryErr, queryRes) {
                 , (queryErr, queryRes) => {
                     queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
                     if (queryErr || queryRes.length == 0) {
@@ -416,7 +417,7 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
                                                 + "$1 , "
                                                 + iqta + ")"
                                                 , [ccodcamp]
-//                            , function (queryErr, queryRes) {
+                                                //                            , function (queryErr, queryRes) {
                                                 , (queryErr, queryRes) => {
                                                     if (queryErr) {
                                                         console.log('errore insert camp: ' + queryErr);
@@ -432,7 +433,7 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
                                             if (iqta == 0) {
                                                 db.query("DELETE FROM portale.camp_ordini WHERE ccod = " + ccod + " AND ccamp = $1"
                                                     , [ccodcamp]
-//                                  , function (queryErr, queryRes) {
+                                                    //                                  , function (queryErr, queryRes) {
                                                     , (queryErr, queryRes) => {
                                                         if (queryErr) {
                                                             callback("Errore delete campioncino", null);
@@ -445,7 +446,7 @@ Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
                                                 db.query("UPDATE portale.camp_ordini SET iqta = " + iqta
                                                     + " WHERE ccod = " + ccod + " AND ccamp = $1"
                                                     , [ccodcamp]
-//                            , function (queryErr, queryRes) {
+                                                    //                            , function (queryErr, queryRes) {
                                                     , (queryErr, queryRes) => {
                                                         if (queryErr) {
                                                             callback("Errore aggiornamento campioncino", null);
@@ -470,7 +471,7 @@ Ordine.findCamp = function findCamp(ccod, callback) {
     //ricerco i prodotti per un determinato ordine
     db.query("SELECT * FROM portale.camp_ordini WHERE ccod = "
         + ccod
-//        , function (queryErr, queryRes) {
+        //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("error: " + queryErr);

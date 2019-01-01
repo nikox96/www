@@ -1,6 +1,7 @@
 <!-- views/order-list.ejs -->
 <!doctype html>
 <html lang="it">
+
 <head>
     <title>Portale Innovazioni - Lista ordini</title>
     <!--<link rel="manifest" href="/manifest.json">
@@ -19,155 +20,172 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <% include head %>
 </head>
-<body>
-<div class="sticky-top">
-    <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="row justify-content-md-center">
-            <div class="col-md-auto">
-                <a class="navbar-brand" href="#">Lista Ordini</a>
-            </div>
 
-            <div class="col-md-auto">
-                <div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
-                    <div class="col-md-auto">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
-                                   data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    Azioni
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
-                                    <li><a class="dropdown-item" href="/home">Home</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-auto">
-                        <form action="/order-list" method="post" class="form-inline">
-                            <div class="form-row align-items-center">
-                                <div class="col-auto">
-                                    <label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
-                                    <input type="text" name="xragsoc" class="form-control mb-2"
-                                           id="inlineFormInputRagSoc"
-                                           placeholder="Ragione sociale">
+<body>
+    <div class="sticky-top">
+        <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                    <a class="navbar-brand" href="#">Lista Ordini</a>
+                </div>
+
+                <div class="col-md-auto">
+                    <div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
+                        <div class="col-md-auto">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Azioni
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                                        <li><a class="dropdown-item" href="/home">Home</a></li>
+                                        <li><a class="dropdown-item" href="/order-list-all">Visualizza tutti gli ordini</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-auto">
+                            <form action="/order-list" method="post" class="form-inline">
+                                <div class="form-row align-items-center">
+                                    <div class="col-auto">
+                                        <label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
+                                        <input type="text" name="xragsoc" class="form-control mb-2" id="inlineFormInputRagSoc"
+                                            placeholder="Ragione sociale">
+                                    </div>
+                                    <% if (user.cage === 9999 || user.cage === 0) { %>
+                                    <div class="col-auto">
+                                        <label class="sr-only" for="inlineFormCage">Codice agente</label>
+                                        <input type="text" name="cageric" class="form-control mb-2" id="inlineFormInputCage"
+                                            placeholder="Codice agente">
+                                    </div>
+                                    <% } %>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-checkbox">
+                                            <label class="sr-only" for="inlineFormCage">Visualizza tutti gli ordini</label>
+                                            <input type="checkbox" name="fall" class="custom-control-input" id="inlineFormInputCage">
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary mb-2">Cerca</button>
+                                    </div>
                                 </div>
-                                <% if (user.cage === 9999 || user.cage === 0) { %>
-                                <div class="col-auto">
-                                    <label class="sr-only" for="inlineFormCage">Codice agente</label>
-                                    <input type="text" name="cageric" class="form-control mb-2" id="inlineFormInputCage"
-                                           placeholder="Codice agente">
-                                </div>
-                                <% } %>
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary mb-2">Cerca</button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+        </nav>
+    </div>
+    <div class="container-fluid">
+        <!-- show any messages that come back with authentication -->
+        <% if (message.length > 0) { %>
+        <div class="alert alert-danger">
+            <%= message %>
         </div>
-    </nav>
-</div>
-<div class="container-fluid">
-    <!-- show any messages that come back with authentication -->
-    <% if (message.length > 0) { %>
-    <div class="alert alert-danger"><%= message %></div>
-    <% } %>
-    <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
-        <div id="client">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">Codice Ordine</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Importo</th>
-                    <th scope="col">Data</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <% if (user.cage == 9999 || user.cage == 0) { %>
-                    <th></th>
-                    <% } %>
-                </tr>
-                </thead>
-                <tbody>
-                <% orders.forEach(function(order) { %>
-                <tr<%- (order.cstt == 50) ? ' class="table-success"' : '' %>>
-                    <th scope="row"><%= order.ccod %></th>
-                    <td><%= order.xragsoc %></td>
-                    <td><%= order.iimp %></td>
-                    <td><%= order.data %></td>
-                    <td>
-                        <button class="btn btn-link"
-                                data-toggle="modal"
-                                data-target="#noteModal<%= order.ccod %>" <%- (order.xnota != '') ? '' : 'disabled' %>>
-                            <i class="material-icons">&#x<%- (order.xnota != '') ? 'e8cd' : 'e92a' %></i>
-                        </button>
-                        <div class="modal fade" id="noteModal<%= order.ccod %>" tabindex="-1" role="dialog"
-                             aria-labelledby="noteModal" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title"
-                                            id="noteModalTitle<%= order.ccod %>">Note dell'ordine</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <textarea class="form-control" name="xnote<%= order.ccod %>" maxlength="1000"
-                                              spellcheck="false" readonly><%= order.xnota %></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
+        <% } %>
+        <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
+            <div id="client">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Codice Ordine</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Importo</th>
+                            <th scope="col">Data</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <% if (user.cage == 9999 || user.cage == 0) { %>
+                            <th></th>
+                            <% } %>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% orders.forEach(function(order) { %>
+                        <tr<%- (order.cstt==50) ? ' class="table-success"' : '' %>>
+                            <th scope="row">
+                                <%= order.ccod %>
+                            </th>
+                            <td>
+                                <%= order.xragsoc %>
+                            </td>
+                            <td>
+                                <%= order.iimp %>
+                            </td>
+                            <td>
+                                <%= order.data %>
+                            </td>
+                            <td>
+                                <button class="btn btn-link" data-toggle="modal" data-target="#noteModal<%= order.ccod %>"
+                                    <%- (order.xnota !='' ) ? '' : 'disabled' %>>
+                                    <i class="material-icons">&#x
+                                        <%- (order.xnota != '') ? 'e8cd' : 'e92a' %></i>
+                                </button>
+                                <div class="modal fade" id="noteModal<%= order.ccod %>" tabindex="-1" role="dialog"
+                                    aria-labelledby="noteModal" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="noteModalTitle<%= order.ccod %>">Note
+                                                    dell'ordine</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <textarea class="form-control" name="xnote<%= order.ccod %>" maxlength="1000"
+                                                    spellcheck="false" readonly><%= order.xnota %></textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <% if (order.cstt == 10 || user.cage == 9999 || user.cage == 0) { %>
-                        <form action="/new-order-sum" method="get">
-                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
-                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe254</i></button>
-                        </form>
-                        <% } else {%>
-                        <form action="#" method="get">
-                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
-                            <button type="submit" class="btn btn-link" disabled><i class="material-icons">&#xe254</i></button>
-                        </form>
-                        <% } %>
-                    </td>
-                    <td>
-                    <% if (order.cstt != 50  || user.cage == 9999 || user.cage == 0) { %>
-                        <form action="/del-order" method="post">
-                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
-                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe872</i></button>
-                        </form>
-                    <% } else { %>
-                        <form action="/del-order" method="post">
-                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
-                            <button type="submit" class="btn btn-link" disabled><i class="material-icons">&#xe872</i></button>
-                        </form>
-                    <% } %>
-                    </td>
-                    <% if (user.cage == 9999 || user.cage == 0) { %>
-                    <td>
-                        <form action="/get-csv" method="get">
-                            <input type="hidden" name="ccod" value="<%= order.ccod %>">
-                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe2c4</i></button>
-                        </form>
-                    </td>
-                    <% } %>
-                </tr>
-                <% }); %>
-                </tbody>
-            </table>
+                            </td>
+                            <td>
+                                <% if (order.cstt == 10 || user.cage == 9999 || user.cage == 0) { %>
+                                <form action="/new-order-sum" method="get">
+                                    <input type="hidden" name="ccod" value="<%= order.ccod %>">
+                                    <button type="submit" class="btn btn-link"><i class="material-icons">&#xe254</i></button>
+                                </form>
+                                <% } else {%>
+                                <form action="#" method="get">
+                                    <input type="hidden" name="ccod" value="<%= order.ccod %>">
+                                    <button type="submit" class="btn btn-link" disabled><i class="material-icons">&#xe254</i></button>
+                                </form>
+                                <% } %>
+                            </td>
+                            <td>
+                                <% if (order.cstt != 50  || user.cage == 9999 || user.cage == 0) { %>
+                                <form action="/del-order" method="post">
+                                    <input type="hidden" name="ccod" value="<%= order.ccod %>">
+                                    <button type="submit" class="btn btn-link"><i class="material-icons">&#xe872</i></button>
+                                </form>
+                                <% } else { %>
+                                <form action="/del-order" method="post">
+                                    <input type="hidden" name="ccod" value="<%= order.ccod %>">
+                                    <button type="submit" class="btn btn-link" disabled><i class="material-icons">&#xe872</i></button>
+                                </form>
+                                <% } %>
+                            </td>
+                            <% if (user.cage == 9999 || user.cage == 0) { %>
+                            <td>
+                                <form action="/get-csv" method="get">
+                                    <input type="hidden" name="ccod" value="<%= order.ccod %>">
+                                    <button type="submit" class="btn btn-link"><i class="material-icons">&#xe2c4</i></button>
+                                </form>
+                            </td>
+                            <% } %>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>
