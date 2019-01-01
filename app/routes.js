@@ -979,6 +979,7 @@ module.exports = function (app, passport) {
                     ncont: cliRes[0].ncont,
                     ntel: cliRes[0].ntel,
                     psco: cliRes[0].psco,
+                    sumCtvOrd: 0,
                     user: req.user
                 });
             }
