@@ -352,7 +352,7 @@ Ordine.getNota = function getNota(ccod, callback) {
 
 Ordine.getSumCtv = function getSumCtv(ccli, callback) {
     //ricerca ordine per codice
-    db.query("select case when c.iimp>0 then c.iimp else 0.00 end - case when sum(b.iimp)>0 then sum(b.iimp) else 0.00 end as sumctv from portale.ordini a inner join portale.righe_ordini b on a.ccod=b.ccod left outer join portale.contratti c on a.ccli=c.ccli where a.ccli = $1 and cannrif = " + new Date().getFullYear + " and nreg <> 999 group by c.iimp;"
+    db.query("select case when c.iimp>0 then c.iimp else 0.00 end - case when sum(b.iimp)>0 then sum(b.iimp) else 0.00 end as sumctv from portale.ordini a inner join portale.righe_ordini b on a.ccod=b.ccod left outer join portale.contratti c on a.ccli=c.ccli where a.ccli = $1 and c.cannrif = " + new Date().getFullYear + " and nreg <> 999 group by c.iimp;"
         , [ccli]
         //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
