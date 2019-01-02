@@ -1062,8 +1062,7 @@ module.exports = function (app, passport) {
     app.post('/order-list', isLoggedIn, function (req, res) {
         var orders = [];
 
-        console.log('order-list fall: ' + req.body.fall);
-        Order.getUserOrder(((req.body.cageric || req.body.cageric == 0) && (req.user.cage == 9999 || req.user.cage == 0) ? req.body.cageric : req.user.cage), false, req.body.xragsoc, req.body.fall, function (ordErr, ordRes) {
+        Order.getUserOrder(((req.body.cageric || req.body.cageric == 0) && (req.user.cage == 9999 || req.user.cage == 0) && req.body.cageric != '' ? req.body.cageric : req.user.cage), false, req.body.xragsoc, req.body.fall, function (ordErr, ordRes) {
             if (ordErr) {
                 req.flash('list-order-message', ordErr);
             } else {
