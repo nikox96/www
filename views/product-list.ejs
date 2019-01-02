@@ -87,13 +87,14 @@
     <div class="alert alert-danger"><%= message %></div>
     <% } %>
     <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
-        <div id="client">
+        <div id="client" class="card-columns">
             <% products.forEach(function(product) { %>
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="http://www.selvertshopping.com/images/products/big/P<%= product.ccod %>.jpg" alt="Immagine non disponibile sul sito selvert! :-(">
                     <div class="card-body">
-                      <h5 class="card-title"><%= product.ccod %> - <%= product.iprz %></h5>
+                      <h5 class="card-title"><%= product.ccod %></h5>
                       <p class="card-text"><%= product.xdesc %></p>
+                      <a href="#" class="btn btn-primary"><%= product.iprz %></a>
                     </div>
                   </div>
             <% }); %>    
