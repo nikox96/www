@@ -117,8 +117,7 @@
                             <td>
                                 <button class="btn btn-link" data-toggle="modal" data-target="#noteModal<%= order.ccod %>"
                                     <%- (order.xnota !='' ) ? '' : 'disabled' %>>
-                                    <i class="material-icons">&#x
-                                        <%- (order.xnota != '') ? 'e8cd' : 'e92a' %></i>
+                                    <i class="material-icons">&#x<%- (order.xnota != '') ? 'e8cd' : 'e92a' %></i>
                                 </button>
                                 <div class="modal fade" id="noteModal<%= order.ccod %>" tabindex="-1" role="dialog"
                                     aria-labelledby="noteModal" aria-hidden="true">
