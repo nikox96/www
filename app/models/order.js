@@ -266,7 +266,7 @@ Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, fall, callback) {
         "(SELECT ccod, xragsoc " +
         "FROM portale.clienti) AS c " +
         "WHERE a.ccod = b.ccod AND a.ccli = c.ccod " +
-        (fall == 'on' ? "" : "AND a.dreg >= date_part('year', CURRENT_DATE) ")
+        (fall == 'on' ? "" : "AND date_part('year', a.dreg) >= date_part('year', CURRENT_DATE) ")
         + ((cage || cage === 0) && cage !== '' ? " AND a.cage = " + cage : '')
         + ((cstt || cstt === 0) && cstt !== '' ? " AND a.cstt = " + cstt : '')
         + " AND c.xragsoc ilike $1 ORDER BY a.ccod";
