@@ -94,7 +94,7 @@ module.exports = function (app, passport) {
                                         sven: req.query.sven,
                                         sgrp: req.query.sgrp,
                                         xprod: req.query.xprod,
-                                        products: productRes
+                                        products: productRes,
                                         lven: venRes,
                                         lgrp: grpRes,
                                         idOrd: appRes[0].idord
