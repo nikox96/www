@@ -32,7 +32,7 @@ Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, callback) {
         + " AND xgrp ILIKE $3 AND xdesc ILIKE $4 AND sven ILIKE $5 ORDER BY ccod";
     console.log(query);
     db.query(query
-        , [(ccodda && ccodda !== '' ? ccodda : 0), (ccoda && ccoda !== '' ? ccoda : 999998), '%' + (xgrp !== 'undefined' && xgrp !== null ? xgrp : '') + '%', '%' + (xprod !== 'undefined' && xprod !== null ? xprod : '') + '%', '%' + (sven !== 'undefined' && sven !== null ? sven : '') + '%']
+        , [(ccodda && ccodda !== '' && ccoda !== 'undefined' && ccoda !== null ? ccodda : 0), (ccoda && ccoda !== '' && ccoda !== 'undefined' && ccoda !== null ? ccoda : 999998), '%' + (xgrp !== 'undefined' && xgrp !== null ? xgrp : '') + '%', '%' + (xprod !== 'undefined' && xprod !== null ? xprod : '') + '%', '%' + (sven !== 'undefined' && sven !== null ? sven : '') + '%']
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
