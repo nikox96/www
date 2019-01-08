@@ -143,7 +143,7 @@
             <div class="form-group col">
                 <label>Categoria</label>
                 <select class="custom-select" name="ccat" form="formDettCli"
-                        id="inputGroupSelect01" <%- (cazi && cazi === 'var') ? '' : 'readonly' %>>
+                        id="inputGroupSelect01" <%- (cazi && cazi === 'var') ? '' : 'readonly disabled' %>>
                     <option <%- (ccat && ccat != '') ? '' : 'selected' %>>Selezionare una voce</option>
                     <option value="PRIVAT" <%- (ccat && ccat === 'PRIVAT') ? 'selected' : '' %>>Privato</option>
                     <option value="PROF" <%- (ccat && ccat === 'PROF') ? 'selected' : '' %>>Professionale</option>
@@ -153,7 +153,7 @@
             <div class="form-group col">
                 <label>Zona</label>
                 <select class="custom-select" name="czona" form="formDettCli"
-                        id="inputGroupSelect01" <%- (cazi && cazi === 'var') ? '' : 'readonly' %>>
+                        id="inputGroupSelect01" <%- (cazi && cazi === 'var') ? '' : 'readonly disabled' %>>
                     <option <%- (czona && czona != '') ? '' : 'selected' %>>Selezionare una voce</option>
                     <option value="1" <%- (czona && czona === '1') ? 'selected' : '' %>>Veneto</option>
                     <option value="2" <%- (czona && czona === '2') ? 'selected' : '' %>>Lombardia</option>
