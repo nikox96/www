@@ -267,31 +267,41 @@ module.exports = function (app, passport) {
                             console.log('clients: ' + productRes.length);
                             req.flash('orderMessage', productRes.length + ' risultati');
 
-                            // render the page and pass in any flash data if it exists
-                            Product.getSven(function (venErr, venRes) {
-                                if (venErr) {
-                                    console.log("errore sven");
-                                } else {
-                                    console.log("sven trovate: " + venRes.length);
-                                }
-                                Product.getXgrp(function (grpErr, grpRes) {
-                                    if (grpErr) {
-                                        console.log("errore xgrp");
-                                        grpRes = {};
-                                    } else {
-                                        console.log("xgrp trovate" + grpRes);
+                            Order.findProduct(appRes[0].idord, function (ordProdErr, ordProdRes){
+                                for(i=0; i < ordProdRes.length;i++){
+                                    for (var k = 0;k < productRes.length;k++){
+                                        if(ordProdRes[i].ccodprod == productRes[k].ccod){
+                                            productRes[k].iqta = ordProdRes[i].iqta;
+                                            productRes[k].psco = ordProdRes[i].psco;
+                                        }
                                     }
-                                    res.render('new-order-product.ejs', {
-                                        message: req.flash('orderMessage'),
-                                        products: productRes,
-                                        ccodda: req.body.ccoddap,
-                                        ccoda: req.body.ccodap,
-                                        sven: req.body.svenp,
-                                        sgrp: req.body.sgrpp,
-                                        xprod: req.body.xprodp,
-                                        lven: venRes,
-                                        lgrp: grpRes,
-                                        idOrd: appRes[0].idord
+                                }
+                                // render the page and pass in any flash data if it exists
+                                Product.getSven(function (venErr, venRes) {
+                                    if (venErr) {
+                                        console.log("errore sven");
+                                    } else {
+                                        console.log("sven trovate: " + venRes.length);
+                                    }
+                                    Product.getXgrp(function (grpErr, grpRes) {
+                                        if (grpErr) {
+                                            console.log("errore xgrp");
+                                            grpRes = {};
+                                        } else {
+                                            console.log("xgrp trovate" + grpRes);
+                                        }
+                                        res.render('new-order-product.ejs', {
+                                            message: req.flash('orderMessage'),
+                                            products: productRes,
+                                            ccodda: req.body.ccoddap,
+                                            ccoda: req.body.ccodap,
+                                            sven: req.body.svenp,
+                                            sgrp: req.body.sgrpp,
+                                            xprod: req.body.xprodp,
+                                            lven: venRes,
+                                            lgrp: grpRes,
+                                            idOrd: appRes[0].idord
+                                        });
                                     });
                                 });
                             });
