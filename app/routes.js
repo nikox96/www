@@ -61,7 +61,7 @@ module.exports = function (app, passport) {
                     if (productErr) {
                         req.flash('orderMessage', 'Nessun prodotto trovato');
                     } else {
-                        console.log('clients: ' + productRes.length);
+                        console.log('prodotti: ' + productRes.length);
                         req.flash('orderMessage', productRes.length + ' risultati');
 
                         Product.getSven(function (venErr, venRes) {
