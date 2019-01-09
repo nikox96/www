@@ -21,18 +21,13 @@ Product.find = function find(cprod, callback) {
         });
 };
 
-Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, callback) {
+Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, idord, callback) {
     console.log("ricerca lista prodotti");
-    console.log("ccodda " + ccodda);
-    console.log("ccoda " + ccoda);
-    console.log("sven " + sven);
-    console.log("xgrp " + xgrp);
-    console.log("xprod" + xprod);
-    var query = "SELECT * FROM portale.prodotti WHERE ccod >= $1 AND ccod <= $2"
-        + " AND xgrp ILIKE $3 AND xdesc ILIKE $4 AND sven ILIKE $5 ORDER BY ccod";
+    console.log("idord " + idord);
+    var query = "select a.*, b.iqta, b.psco from portale.prodotti a left outer join (select ccodprod, iqta, psco from portale.righe_ordini where ccod = $6) b on a.ccod=b.ccodprod and a.ccod >= $1 AND a.ccod <= $2 AND a.xgrp ILIKE $3 AND a.xdesc ILIKE $4 AND a.sven ILIKE $5 ORDER BY a.ccod, b.iqta;";
     console.log(query);
     db.query(query
-        , [(ccodda && ccodda !== '' && ccoda !== 'undefined' && ccoda !== null ? ccodda : 0), (ccoda && ccoda !== '' && ccoda !== 'undefined' && ccoda !== null ? ccoda : 999998), '%' + (xgrp !== 'undefined' && xgrp !== null ? xgrp : '') + '%', '%' + (xprod !== 'undefined' && xprod !== null ? xprod : '') + '%', '%' + (sven !== 'undefined' && sven !== null ? sven : '') + '%']
+        , [(ccodda && ccodda !== '' && ccoda !== 'undefined' && ccoda !== null ? ccodda : 0), (ccoda && ccoda !== '' && ccoda !== 'undefined' && ccoda !== null ? ccoda : 999998), '%' + (xgrp !== 'undefined' && xgrp !== null ? xgrp : '') + '%', '%' + (xprod !== 'undefined' && xprod !== null ? xprod : '') + '%', '%' + (sven !== 'undefined' && sven !== null ? sven : '') + '%', (idord && idord !== 'undefined' && idord !== null ? idord : -1)]
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
