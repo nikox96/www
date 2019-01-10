@@ -24,7 +24,7 @@ Product.find = function find(cprod, callback) {
 Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, idord, callback) {
     console.log("ricerca lista prodotti");
     console.log("idord " + idord);
-    var query = "select z.* from (select a.*, b.iqta, b.psco from portale.prodotti a left outer join (select ccodprod, iqta, psco from portale.righe_ordini where ccod = $6) b on a.ccod=b.ccodprod and a.ccod >= $1 AND a.ccod <= $2 AND a.xgrp ILIKE $3 AND a.xdesc ILIKE $4 AND a.sven ILIKE $5) z ORDER BY z.iqta desc, z.ccod asc, z.psco desc;";
+    var query = "select z.* from (select a.*, CASE WHEN b.iqta IS NULL THEN 0 ELSE b.iqta END AS iqta, CASE WHEN b.psco IS NULL THEN 0 ELSE b.psco END AS pscofrom portale.prodotti a left outer join (select ccodprod, iqta, psco from portale.righe_ordini where ccod = $6) b on a.ccod=b.ccodprod WHERE (a.ccod >= $1 AND a.ccod <= $2 AND a.xgrp ILIKE $3 AND a.xdesc ILIKE $4 AND a.sven ILIKE $5) OR b. iqta IS NOT NULL) z ORDER BY z.iqta desc, z.ccod asc, z.psco desc;";
     console.log(query);
     db.query(query
         , [(ccodda && ccodda !== '' && ccoda !== 'undefined' && ccoda !== null ? ccodda : 0), (ccoda && ccoda !== '' && ccoda !== 'undefined' && ccoda !== null ? ccoda : 999998), '%' + (xgrp !== 'undefined' && xgrp !== null ? xgrp : '') + '%', '%' + (xprod !== 'undefined' && xprod !== null ? xprod : '') + '%', '%' + (sven !== 'undefined' && sven !== null ? sven : '') + '%', (idord && idord !== 'undefined' && idord !== null ? idord : -1)]
