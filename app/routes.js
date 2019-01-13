@@ -756,11 +756,11 @@ module.exports = function (app, passport) {
                         res.render('product-list.ejs', {
                             message: req.flash('productListMsg'),
                             products: productRes,
-                            ccodda: (req.query.ccodda ? req.query.ccodda : ''),
-                            ccoda: (req.query.ccoda ? req.query.ccoda : ''),
-                            sven: (req.query.sven ? req.query.sven : ''),
-                            sgrp: (req.query.xgrp ? req.query.xgrp : ''),
-                            xprod: (req.query.xprod ? req.query.xprod : ''),
+                            ccodda: req.query.ccodda,
+                            ccoda: req.query.ccoda,
+                            sven: req.query.sven,
+                            sgrp: req.query.sgrp,
+                            xprod: req.query.xprod,
                             lven: venRes,
                             lgrp: grpRes
                         });
