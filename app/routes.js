@@ -732,7 +732,7 @@ module.exports = function (app, passport) {
     });
 
     app.get('/product-list', isLoggedIn, function (req, res) {
-        Product.list((req.body.ccodda && req.body.ccodda > 0 ? req.body.ccodda : 0), (req.body.ccoda && req.body.ccoda > 0 ? req.body.ccoda : 999999), (req.body.sven && req.body.sven !== '' ? req.body.sven : ''), (req.body.sgrp && req.body.sgrp !== '' ? req.body.sgrp : ''), (req.body.xprod && req.body.xprod !== '' ? req.body.xprod : ''), null, function (productErr, productRes) {
+        Product.list((req.query.ccodda && req.query.ccodda > 0 ? req.query.ccodda : 0), (req.query.ccoda && req.query.ccoda > 0 ? req.query.ccoda : 999999), (req.query.sven && req.query.sven !== '' ? req.query.sven : ''), (req.query.sgrp && req.query.sgrp !== '' ? req.query.sgrp : ''), (req.query.xprod && req.query.xprod !== '' ? req.query.xprod : ''), null, function (productErr, productRes) {
             if (productErr) {
                 req.flash('orderMessage', 'Nessun prodotto trovato');
             }
@@ -756,11 +756,11 @@ module.exports = function (app, passport) {
                         res.render('product-list.ejs', {
                             message: req.flash('productListMsg'),
                             products: productRes,
-                            ccodda: (req.body.ccodda ? req.body.ccodda : ''),
-                            ccoda: (req.body.ccoda ? req.body.ccoda : ''),
-                            sven: (req.body.sven ? req.body.sven : ''),
-                            sgrp: (req.body.xgrp ? req.body.xgrp : ''),
-                            xprod: (req.body.xprod ? req.body.xprod : ''),
+                            ccodda: (req.query.ccodda ? req.query.ccodda : ''),
+                            ccoda: (req.query.ccoda ? req.query.ccoda : ''),
+                            sven: (req.query.sven ? req.query.sven : ''),
+                            sgrp: (req.query.xgrp ? req.query.xgrp : ''),
+                            xprod: (req.query.xprod ? req.query.xprod : ''),
                             lven: venRes,
                             lgrp: grpRes
                         });
