@@ -732,7 +732,7 @@ module.exports = function (app, passport) {
     });
 
     app.get('/product-list', isLoggedIn, function (req, res) {
-        Product.list(0, 999998, '', '', '', null, function (productErr, productRes) {
+        Product.list((req.body.ccodda && req.body.ccodda > 0 ? req.body.ccodda : 0), (req.body.ccoda && req.body.ccoda > 0 ? req.body.ccoda : 999999), (req.body.sven && req.body.sven !== '' ? req.body.sven : ''), (req.body.sgrp && req.body.sgrp !== '' ? req.body.sgrp : ''), (req.body.xprod && req.body.xprod !== '' ? req.body.xprod : ''), null, function (productErr, productRes) {
             if (productErr) {
                 req.flash('orderMessage', 'Nessun prodotto trovato');
             }
@@ -756,11 +756,11 @@ module.exports = function (app, passport) {
                         res.render('product-list.ejs', {
                             message: req.flash('productListMsg'),
                             products: productRes,
-                            ccodda: '',
-                            ccoda: '',
-                            sven: '',
-                            sgrp: '',
-                            xprod: '',
+                            ccodda: (req.body.ccodda ? req.body.ccodda : ''),
+                            ccoda: (req.body.ccoda ? req.body.ccoda : ''),
+                            sven: (req.body.sven ? req.body.sven : ''),
+                            sgrp: (req.body.xgrp ? req.body.xgrp : ''),
+                            xprod: (req.body.xprod ? req.body.xprod : ''),
                             lven: venRes,
                             lgrp: grpRes
                         });
