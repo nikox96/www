@@ -44,7 +44,7 @@ Product.list = function list(ccodda, ccoda, sven, xgrp, xprod, idord, callback) 
 
 Product.getSven = function getSven(callback) {
     console.log("ricerca tipo vendita");
-    var query = "SELECT sven FROM portale.prodotti group by sven";
+    var query = "SELECT sven FROM portale.prodotti where ccod <> 999999 group by sven";
     console.log(query);
     db.query(query
 //        , function (queryErr, queryRes) {
@@ -60,7 +60,7 @@ Product.getSven = function getSven(callback) {
 
 Product.getXgrp = function getXgrp(callback) {
     console.log("ricerca categoria prodotto");
-    var query = "SELECT xgrp FROM portale.prodotti group by xgrp";
+    var query = "SELECT xgrp FROM portale.prodotti where ccod <> 999999 group by xgrp";
     console.log(query);
     db.query(query
 //        , function (queryErr, queryRes) {
