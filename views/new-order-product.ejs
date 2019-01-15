@@ -120,10 +120,10 @@
                     <td><%= products[i].xdesc %></td>
                     <td><%= products[i].iprz %></td>
                     <td>
-                        <button class="btn-primary bg-transparent text-primary border-0 align-bottom"
+                        <button class="btn-primary bg-transparent text-primary border-0 align-bottom" id="button<%= products[i].ccod %>"
                                 data-toggle="modal"
                                 data-target="#Modal<%= i %>">
-                            <i class="material-icons">&#xe410</i>
+                            <i class="material-icons" id="icon<%= products[i].ccod %>">&#xe410</i>
                         </button>
                         <div class="modal fade" id="Modal<%= i %>" tabindex="-1" role="dialog"
                              aria-labelledby="Modal<%= i %>Title" aria-hidden="true">
@@ -137,7 +137,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="http://www.selvertshopping.com/images/products/big/P<%= products[i].ccod %>.jpg" onerror="this.src='/public/img/image_broken.png'" alt="">
+                                        <img src="http://www.selvertshopping.com/images/products/big/P<%= products[i].ccod %>.jpg" onerror="document.getElementById('icon<%= products[i].ccod %>').innerHTML='&#xe3ad';document.getElementById("button<%= products[i].ccod %>").disabled=true" alt="">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
