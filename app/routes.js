@@ -2638,7 +2638,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                         initializeCSV();
                         rec.tipRec = 'RIG';
                         rig.tipRig = '1';
-                        rig.carticolo = product.ccod;
+                        rig.carticolo = (product.xgrp == 'ITP' || product.xgrp == 'ITR' ? product.xgrp + numberPad(product.ccod) : product.ccod);
                         rig.carticoloAltroSis = '';
                         rig.cbarre = '';
                         rig.carticoloTerzi = '';
@@ -2791,7 +2791,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                         initializeCSV();
                         rec.tipRec = 'RIG';
                         rig.tipRig = '1';
-                        rig.carticolo = product.ccod;
+                        rig.carticolo = (product.xgrp == 'ITP' || product.xgrp == 'ITR' ? product.xgrp + numberPad(product.ccod) : product.ccod);
                         rig.carticoloAltroSis = '';
                         rig.cbarre = '';
                         rig.carticoloTerzi = '';
@@ -2947,7 +2947,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                     initializeCSV();
                     rec.tipRec = 'RIG';
                     rig.tipRig = '1';
-                    rig.carticolo = product.ccod;
+                    rig.carticolo = (product.xgrp == 'ITP' || product.xgrp == 'ITR' ? product.xgrp + numberPad(product.ccod) : product.ccod);
                     rig.carticoloAltroSis = '';
                     rig.cbarre = '';
                     rig.carticoloTerzi = '';
@@ -3100,7 +3100,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                     initializeCSV();
                     rec.tipRec = 'RIG';
                     rig.tipRig = '1';
-                    rig.carticolo = product.ccod;
+                    rig.carticolo = (product.xgrp == 'ITP' || product.xgrp == 'ITR' ? product.xgrp + numberPad(product.ccod) : product.ccod);
                     rig.carticoloAltroSis = '';
                     rig.cbarre = '';
                     rig.carticoloTerzi = '';
@@ -3343,4 +3343,10 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
             }
         });
     }
+}
+
+function numberPad(n){
+    var s = n+"";
+    while (s.length < 3) s = "0" + s;
+    return s;
 }
