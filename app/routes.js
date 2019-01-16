@@ -2533,7 +2533,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
             rig.scoUni = '';
             rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
             rig.impVal = 0;
-            rig.cimp = '1';
+            rig.cimp = (product.xgrp == 'ITP' || product.xgrp == 'ITR' ? '0' : '1');
             rig.copeMag = '';
             rig.cdep = '';
             rig.classeStat = '';
@@ -2685,7 +2685,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                         rig.scoUni = '';
                         rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
                         rig.impVal = product.iimp;
-                        rig.cimp = '1';
+                        rig.cimp = (product.xgrp == 'ITP' || product.xgrp == 'ITR' ? '0' : '1');
                         rig.copeMag = '';
                         rig.cdep = '';
                         rig.classeStat = '';
@@ -2838,7 +2838,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                         rig.scoUni = '';
                         rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
                         rig.impVal = product.iimp;
-                        rig.cimp = '1';
+                        rig.cimp = (product.xgrp == 'ITP' || product.xgrp == 'ITR' ? '0' : '1');
                         rig.copeMag = '';
                         rig.cdep = '';
                         rig.classeStat = '';
@@ -2994,7 +2994,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                     rig.scoUni = '';
                     rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
                     rig.impVal = product.iimp;
-                    rig.cimp = '1';
+                    rig.cimp = (product.xgrp == 'ITP' || product.xgrp == 'ITR' ? '0' : '1');
                     rig.copeMag = '';
                     rig.cdep = '';
                     rig.classeStat = '';
@@ -3147,7 +3147,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                     rig.scoUni = '';
                     rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
                     rig.impVal = product.iimp;
-                    rig.cimp = '1';
+                    rig.cimp = (product.xgrp == 'ITP' || product.xgrp == 'ITR' ? '0' : '1');
                     rig.copeMag = '';
                     rig.cdep = '';
                     rig.classeStat = '';
