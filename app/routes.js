@@ -728,7 +728,7 @@ module.exports = function (app, passport) {
             if (queryErr)
                 console.log(queryErr);
             res.redirect('/order-list');
-        })
+        });
     });
 
     app.get('/product-list', isLoggedIn, function (req, res) {
