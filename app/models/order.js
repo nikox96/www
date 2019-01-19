@@ -41,15 +41,18 @@ Ordine.delOrder = function delOrder(ccod, cstt, callback) {
                             if (err2) {
                                 console.log("errore canc righe ordini");
                             } else {
-                                var qryStrTmp = "DELETE FROM portale.ordini WHERE ccod = " + ccod;
-                                db.query(qryStrTmp, (delErr, delRes) => {
-                                    if (delErr) {
-                                        console.log(delErr);
-                                        callback("Errore cancellazione dettaglio: comunicare n° ordine all'amministratore: " + ccod, null);
-                                    } else {
-                                        return;
-                                    }
-                                });
+                                db.query("DELETE FROM portale.camp_ordini WHERE ccod = " + ccod
+                                    , (err3, res3) => {
+                                        var qryStrTmp = "DELETE FROM portale.ordini WHERE ccod = " + ccod;
+                                        db.query(qryStrTmp, (delErr, delRes) => {
+                                            if (delErr) {
+                                                console.log(delErr);
+                                                callback("Errore cancellazione dettaglio: comunicare n° ordine all'amministratore: " + ccod, null);
+                                            } else {
+                                                return;
+                                            }
+                                        });
+                                    });
                             }
                         });
                 } else {
