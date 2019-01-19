@@ -4,7 +4,7 @@ var Product = {};
 
 Product.find = function find(cprod, callback) {
     console.log("ricerca codice prodotto " + cprod);
-    var query = "SELECT * FROM portale.prodotti WHERE ccod = " + cprod + " AND sval = true";
+    var query = "SELECT * FROM portale.prodotti WHERE ccod = " + cprod;
     console.log(query);
     db.query(query
 //        , function (queryErr, queryRes) {
