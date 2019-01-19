@@ -1,10 +1,87 @@
-701000	701106	1	0
-701000	701111	1	0
-701000	701114	1	0
-701000	701115	1	0
-701000	701116	1	0
-701000	701118	1	0
-701000	316103	1	0
-701000	701204	3	0
-701000	701208	3	0
-701000	701501	2	100
+update portale.prodotti set iprz = 14.5 where ccod = 200333;
+update portale.prodotti set iprz = 14.5 where ccod = 200334;
+update portale.prodotti set iprz = 25 where ccod = 203211;
+update portale.prodotti set iprz = 14 where ccod = 203213;
+update portale.prodotti set iprz = 24 where ccod = 205203;
+update portale.prodotti set iprz = 14 where ccod = 200343;
+update portale.prodotti set iprz = 120 where ccod = 200628;
+update portale.prodotti set iprz = 19 where ccod = 202207;
+update portale.prodotti set iprz = 24 where ccod = 202208;
+update portale.prodotti set iprz = 21 where ccod = 202209;
+update portale.prodotti set iprz = 23 where ccod = 202210;
+update portale.prodotti set iprz = 24 where ccod = 202211;
+update portale.prodotti set iprz = 24 where ccod = 202212;
+update portale.prodotti set iprz = 32 where ccod = 204202;
+update portale.prodotti set iprz = 36 where ccod = 204204;
+update portale.prodotti set iprz = 39 where ccod = 308104;
+update portale.prodotti set iprz = 39 where ccod = 308105;
+update portale.prodotti set iprz = 39 where ccod = 308106;
+update portale.prodotti set iprz = 39 where ccod = 308107;
+update portale.prodotti set iprz = 132 where ccod = 311601;
+update portale.prodotti set iprz = 22 where ccod = 313102;
+update portale.prodotti set iprz = 22 where ccod = 313103;
+update portale.prodotti set iprz = 25 where ccod = 313104;
+update portale.prodotti set iprz = 20 where ccod = 313105;
+update portale.prodotti set iprz = 20 where ccod = 313106;
+update portale.prodotti set iprz = 30 where ccod = 313107;
+update portale.prodotti set iprz = 22 where ccod = 313108;
+update portale.prodotti set iprz = 26 where ccod = 313109;
+update portale.prodotti set iprz = 27 where ccod = 313110;
+update portale.prodotti set iprz = 36 where ccod = 313111;
+update portale.prodotti set iprz = 29 where ccod = 313112;
+update portale.prodotti set iprz = 38 where ccod = 313113;
+update portale.prodotti set iprz = 39 where ccod = 313114;
+update portale.prodotti set iprz = 24 where ccod = 313115;
+update portale.prodotti set iprz = 30 where ccod = 313116;
+update portale.prodotti set iprz = 33 where ccod = 313117;
+update portale.prodotti set iprz = 33 where ccod = 313118;
+update portale.prodotti set iprz = 35 where ccod = 313119;
+update portale.prodotti set iprz = 23 where ccod = 313120;
+update portale.prodotti set iprz = 65 where ccod = 313122;
+update portale.prodotti set iprz = 19 where ccod = 313206;
+update portale.prodotti set iprz = 19 where ccod = 313207;
+update portale.prodotti set iprz = 18 where ccod = 313208;
+update portale.prodotti set iprz = 19 where ccod = 313209;
+update portale.prodotti set iprz = 16 where ccod = 313210;
+update portale.prodotti set iprz = 190 where ccod = 314101;
+update portale.prodotti set iprz = 41 where ccod = 315101;
+update portale.prodotti set iprz = 36 where ccod = 315102;
+update portale.prodotti set iprz = 57 where ccod = 315103;
+update portale.prodotti set iprz = 43 where ccod = 315104;
+update portale.prodotti set iprz = 65 where ccod = 315105;
+update portale.prodotti set iprz = 66 where ccod = 315106;
+update portale.prodotti set iprz = 63 where ccod = 315107;
+update portale.prodotti set iprz = 52 where ccod = 315108;
+update portale.prodotti set iprz = 52 where ccod = 315109;
+update portale.prodotti set iprz = 48 where ccod = 315110;
+update portale.prodotti set iprz = 42 where ccod = 315111;
+update portale.prodotti set iprz = 22 where ccod = 315112;
+update portale.prodotti set iprz = 49.5 where ccod = 315113;
+update portale.prodotti set iprz = 49.5 where ccod = 315114;
+update portale.prodotti set iprz = 25 where ccod = 315115;
+update portale.prodotti set iprz = 26 where ccod = 315116;
+update portale.prodotti set iprz = 43 where ccod = 315117;
+update portale.prodotti set iprz = 43 where ccod = 315118;
+update portale.prodotti set iprz = 25 where ccod = 315202;
+update portale.prodotti set iprz = 25 where ccod = 315203;
+update portale.prodotti set iprz = 30 where ccod = 315204;
+update portale.prodotti set iprz = 300 where ccod = 315205;
+update portale.prodotti set iprz = 25 where ccod = 315255;
+update portale.prodotti set iprz = 135 where ccod = 316101;
+update portale.prodotti set iprz = 62 where ccod = 316102;
+update portale.prodotti set iprz = 60 where ccod = 316103;
+update portale.prodotti set iprz = 44 where ccod = 316104;
+update portale.prodotti set iprz = 35 where ccod = 316105;
+update portale.prodotti set iprz = 35 where ccod = 316106;
+update portale.prodotti set iprz = 35 where ccod = 316107;
+update portale.prodotti set iprz = 40 where ccod = 316201;
+update portale.prodotti set iprz = 44 where ccod = 316202;
+update portale.prodotti set iprz = 30 where ccod = 316203;
+update portale.prodotti set iprz = 138 where ccod = 316601;
+update portale.prodotti set iprz = 17.5 where ccod = 319203;
+update portale.prodotti set iprz = 28 where ccod = 319206;
+update portale.prodotti set iprz = 28.5 where ccod = 319207;
+update portale.prodotti set iprz = 92 where ccod = 319208;
+update portale.prodotti set iprz = 92 where ccod = 319209;
+update portale.prodotti set iprz = 92 where ccod = 319210;
+update portale.prodotti set iprz = 92 where ccod = 319211;

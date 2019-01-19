@@ -28,9 +28,7 @@ Ordine.find = function find(ccod, callback) {
 };
 
 Ordine.delOrder = function delOrder(ccod, cstt, callback) {
-    db.query("SELECT cstt FROM portale.ordini WHERE ccod = "
-        + ccod
-        //        , function (queryErr, queryRes) {
+    db.query("SELECT cstt FROM portale.ordini WHERE ccod = " + ccod
         , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("error: " + queryErr);
@@ -38,39 +36,26 @@ Ordine.delOrder = function delOrder(ccod, cstt, callback) {
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0 && queryRes[0].cstt != cstt) {
-                    //ricerca ordine per codice
-                    var qryStrTmp = "DELETE FROM portale.ordini WHERE ccod = "
-                        + ccod;
-                    console.log("query del order: " + qryStrTmp);
-                    db.query(qryStrTmp
-                        //                        , function (delErr, delRes) {
-                        , (delErr, delRes) => {
-                            if (delErr) {
-                                console.log(delErr);
-                            }
-                            else {
-                                db.query("DELETE FROM portale.righe_ordini WHERE ccod = "
-                                    + ccod
-                                    //                                    , function (err2, res2) {
-                                    , (err2, res2) => {
-                                        if (err2) {
-                                            console.log("errore canc righe ordini");
-                                        } else {
-                                            callback(null, "Cancellato sia ordine che dettaglio");
-                                            return
-                                        }
+                    db.query("DELETE FROM portale.righe_ordini WHERE ccod = " + ccod
+                        , (err2, res2) => {
+                            if (err2) {
+                                console.log("errore canc righe ordini");
+                            } else {
+                                var qryStrTmp = "DELETE FROM portale.ordini WHERE ccod = " + ccod;
+                                db.query(qryStrTmp, (delErr, delRes) => {
+                                    if (delErr) {
+                                        console.log(delErr);
                                         callback("Errore cancellazione dettaglio: comunicare n° ordine all'amministratore: " + ccod, null);
-                                    });
-                                return;
+                                    } else {
+                                        return;
+                                    }
+                                });
                             }
-                            callback("Errore cancellazione ordine", null);
                         });
-                    return;
                 } else {
-                    console.log("non ghe mia");
+                    callback("Ordine non revocabile", null);
                 }
             }
-            callback("Ordine non revocabile", null);
         });
 };
 
