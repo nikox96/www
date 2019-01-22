@@ -1,6 +1,7 @@
 <!-- views/new-order-product.ejs -->
 <!doctype html>
 <html lang="it">
+
 <head>
     <title>Portale Innovazioni - Nuovo ordine</title>
     <!--<link rel="manifest" href="/manifest.json">
@@ -19,77 +20,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <% include head %>
 </head>
-<body>
-<nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <div class="row justify-content-md-center">
-        <div class="col-md-auto">
-            <a class="navbar-brand" href="#">Nuovo Ordine <%= idOrd %></a>
-        </div>
 
-        <div class="col-md-auto">
-            <div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
-                <div class="col-md-auto">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Azioni
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
-                                <li><a class="dropdown-item" href="/new-order-cond-pag">Avanti</a></li>
-                                <li><a class="dropdown-item" href="/new-order">Indietro</a></li>
-                                <div class="dropdown-divider"></div>
-                                <li><a class="dropdown-item" href="/new-order-campioncini">Campioncini</a></li>
-                                <li><a class="dropdown-item" href="/new-order-promo">Promozioni</a></li>
-                                <div class="dropdown-divider"></div>
-                                <li><a class="dropdown-item" href="/home">Annulla</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-auto">
-                    <form action="/new-order-product" method="get" class="form-inline">
+<body>
+    <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <a class="navbar-brand" href="#">Nuovo Ordine
+                    <%= idOrd %></a>
+            </div>
+            <div class="col-md-auto">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Azioni
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                            <li><a class="dropdown-item" href="/new-order-cond-pag">Avanti</a></li>
+                            <li><a class="dropdown-item" href="/new-order">Indietro</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="/new-order-campioncini">Campioncini</a></li>
+                            <li><a class="dropdown-item" href="/new-order-promo">Promozioni</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="/home">Annulla</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-auto">
+                <button class="btn-primary bg-transparent text-primary border-0 align-bottom" type="button" data-toggle="collapse"
+                    data-target="#filterForm" aria-expanded="false" aria-controls="filterForm">
+                    <i class="material-icons">&#xe152</i>
+                </button>
+                <div class="collapse" id="filterForm">
+                    <form action="/new-order-product" method="get" class="form">
                         <input type="hidden" name="idOrd" value="<%= idOrd %>">
                         <div class="form-row align-items-center">
-                            <div class="w-10 col">
+                            <div class="col-md-auto">
                                 <label class="sr-only" for="inlineFormCodDa">Codice prodotto da</label>
                                 <input type="number" name="ccodda" class="form-control mb-2" id="inlineFormInputCodDa"
-                                       placeholder="Codice prodotto da">
+                                    placeholder="Codice prodotto da">
                             </div>
-                            <div class="w-10 col">
+                            <div class="col-md-auto">
                                 <label class="sr-only" for="inlineFormCodA">A</label>
                                 <input type="number" name="ccoda" class="form-control mb-2" id="inlineFormInputCodA"
-                                       placeholder="Codice prodotto a">
+                                    placeholder="Codice prodotto a">
                             </div>
+                        </div>
+                        <div class="form-row align-items-center">
                             <div class="w-10 col">
                                 <label class="sr-only" for="inlineFormXprod">A</label>
                                 <input type="text" name="xprod" class="form-control mb-2" id="inlineFormInputXprod"
-                                       placeholder="Descrizione prodotto">
+                                    placeholder="Descrizione prodotto">
                             </div>
-                            <div class="w-10 col">
+                        </div>
+                        <div class="form-row align-items-center">
+                            <div class="col-md-auto">
                                 <select class=" form-control custom-select mb-2" name="sven">
-                                    <option value="" <%- (!(sven) || sven === '') ? 'selected' : '' %>>Tipo vendita
+                                    <option value="" <%- (!(sven) || sven==='' ) ? 'selected' : '' %>>Tipo vendita
                                     </option>
                                     <% lven.forEach(function(lven){ %>
-                                    <option value="<%= lven.sven %>" <%- (sven && sven === lven.sven) ? 'selected' : '' %>>
+                                    <option value="<%= lven.sven %>" <%- (sven && sven===lven.sven) ? 'selected' : '' %>>
                                         <%= lven.sven %>
                                     </option>
                                     <% }); %>
                                 </select>
                             </div>
-                            <div class="w-10 col">
+                            <div class="col-md-auto">
                                 <select class="form-control custom-select mb-2" name="sgrp">
-                                    <option value="" <%- (!(sgrp) || sgrp === '') ? 'selected' : '' %>>Categoria
+                                    <option value="" <%- (!(sgrp) || sgrp==='' ) ? 'selected' : '' %>>Categoria
                                         prodotto
                                     </option>
                                     <% lgrp.forEach(function(xgrpl){ %>
-                                    <option value="<%= xgrpl.xgrp %>" <%- (sgrp && sgrp === xgrpl.xgrp) ? 'selected' : '' %>>
+                                    <option value="<%= xgrpl.xgrp %>" <%- (sgrp && sgrp===xgrpl.xgrp) ? 'selected' : ''
+                                        %>>
                                         <%= xgrpl.xgrp %>
                                     </option>
                                     <% }); %>
                                 </select>
                             </div>
+                        </div>
+                        <div class="form-row align-items-center">
                             <div class="w-5 col">
                                 <button type="submit" class="btn btn-primary mb-2">Cerca</button>
                             </div>
@@ -98,87 +109,93 @@
                 </div>
             </div>
         </div>
-    </div>
-</nav>
-<div class="container-fluid">
-    <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
-        <div id="product">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">Codice Prodotto</th>
-                    <th scope="col">Descrizione</th>
-                    <th scope="col">Prezzo</th>
-                    <th scope="col">Anteprima</th>
-                    <th scope="col">Quantità</th>
-                </tr>
-                </thead>
-                <tbody>
-                <% for(var i = 0; i < products.length;i++) { %>
-                <tr>
-                    <th scope="row"><%= products[i].ccod %></th>
-                    <td><%= products[i].xdesc %></td>
-                    <td><%= products[i].iprz %></td>
-                    <td>
-                        <button class="btn-primary bg-transparent text-primary border-0 align-bottom" id="button<%= products[i].ccod %>"
-                                data-toggle="modal"
-                                data-target="#Modal<%= i %>">
-                            <i class="material-icons" id="icon<%= products[i].ccod %>">&#xe410</i>
-                        </button>
-                        <div class="modal fade" id="Modal<%= i %>" tabindex="-1" role="dialog"
-                             aria-labelledby="Modal<%= i %>Title" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title"
-                                            id="Modal<%= i %>Title">Anteprima prodotto</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img src="http://www.selvertshopping.com/images/products/big/P<%= products[i].ccod %>.jpg" onerror="document.getElementById('icon<%= products[i].ccod %>').innerHTML='&#xe3ad';document.getElementById('button<%= products[i].ccod %>').disabled=true" alt="">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
+    </nav>
+    <div class="container-fluid">
+        <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
+            <div id="product">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Codice Prodotto</th>
+                            <th scope="col">Descrizione</th>
+                            <th scope="col">Prezzo</th>
+                            <th scope="col">Anteprima</th>
+                            <th scope="col">Quantità</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i = 0; i < products.length;i++) { %>
+                        <tr>
+                            <th scope="row">
+                                <%= products[i].ccod %>
+                            </th>
+                            <td>
+                                <%= products[i].xdesc %>
+                            </td>
+                            <td>
+                                <%= products[i].iprz %>
+                            </td>
+                            <td>
+                                <button class="btn-primary bg-transparent text-primary border-0 align-bottom" id="button<%= products[i].ccod %>"
+                                    data-toggle="modal" data-target="#Modal<%= i %>">
+                                    <i class="material-icons" id="icon<%= products[i].ccod %>">&#xe410</i>
+                                </button>
+                                <div class="modal fade" id="Modal<%= i %>" tabindex="-1" role="dialog" aria-labelledby="Modal<%= i %>Title"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="Modal<%= i %>Title">Anteprima prodotto</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img src="http://www.selvertshopping.com/images/products/big/P<%= products[i].ccod %>.jpg"
+                                                    onerror="document.getElementById('icon<%= products[i].ccod %>').innerHTML='&#xe3ad';document.getElementById('button<%= products[i].ccod %>').disabled=true"
+                                                    alt="">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <form action="/new-order-product" method="post" class="form-inline">
-                            <input type="hidden" name="ccod" value="<%= idOrd %>">
-                            <input type="hidden" name="ccoddap" value="<%= ccodda %>">
-                            <input type="hidden" name="ccodap" value="<%= ccoda %>">
-                            <input type="hidden" name="svenp" value="<%= sven %>">
-                            <input type="hidden" name="sgrpp" value="<%= sgrp %>">
-                            <input type="hidden" name="xprodp" value="<%= xprod %>">
-                            <input type="hidden" name="ccodprod" value="<%= products[i].ccod %>">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Q.ta</span>
-                                </div>
-                                <input type="number" name="iqta" class="form-control" value="<%- (products[i].iqta) ? products[i].iqta : 0 %>">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Sconto</span>
-                                </div>
-                                <input type="number" name="psco" class="form-control" value="<%- (products[i].psco) ? products[i].psco : 0 %>">
-                            </div>
-                            <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
-                                <i class="material-icons">&#xe854</i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <% } %>
-                </tbody>
-            </table>
+                            </td>
+                            <td>
+                                <form action="/new-order-product" method="post" class="form-inline">
+                                    <input type="hidden" name="ccod" value="<%= idOrd %>">
+                                    <input type="hidden" name="ccoddap" value="<%= ccodda %>">
+                                    <input type="hidden" name="ccodap" value="<%= ccoda %>">
+                                    <input type="hidden" name="svenp" value="<%= sven %>">
+                                    <input type="hidden" name="sgrpp" value="<%= sgrp %>">
+                                    <input type="hidden" name="xprodp" value="<%= xprod %>">
+                                    <input type="hidden" name="ccodprod" value="<%= products[i].ccod %>">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Q.ta</span>
+                                        </div>
+                                        <input type="number" name="iqta" class="form-control" value="<%- (products[i].iqta) ? products[i].iqta : 0 %>">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Sconto</span>
+                                        </div>
+                                        <input type="number" name="psco" class="form-control" value="<%- (products[i].psco) ? products[i].psco : 0 %>">
+                                    </div>
+                                    <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+                                        <i class="material-icons">&#xe854</i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>
