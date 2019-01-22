@@ -52,61 +52,62 @@
                     data-target="#filterForm" aria-expanded="false" aria-controls="filterForm">
                     <i class="material-icons">&#xe152</i>
                 </button>
-                <div class="collapse" id="filterForm">
-                    <form action="/new-order-product" method="get" class="form">
-                        <input type="hidden" name="idOrd" value="<%= idOrd %>">
-                        <div class="form-row align-items-center">
-                            <div class="col-md-auto">
-                                <label class="sr-only" for="inlineFormCodDa">Codice prodotto da</label>
-                                <input type="number" name="ccodda" class="form-control mb-2" id="inlineFormInputCodDa"
-                                    placeholder="Codice prodotto da">
-                            </div>
-                            <div class="col-md-auto">
-                                <label class="sr-only" for="inlineFormCodA">A</label>
-                                <input type="number" name="ccoda" class="form-control mb-2" id="inlineFormInputCodA"
-                                    placeholder="Codice prodotto a">
-                            </div>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="collapse" id="filterForm">
+                <form action="/new-order-product" method="get" class="form">
+                    <input type="hidden" name="idOrd" value="<%= idOrd %>">
+                    <div class="form-row align-items-center">
+                        <div class="col-md-auto">
+                            <label class="sr-only" for="inlineFormCodDa">Codice prodotto da</label>
+                            <input type="number" name="ccodda" class="form-control mb-2" id="inlineFormInputCodDa"
+                                placeholder="Codice prodotto da">
                         </div>
-                        <div class="form-row align-items-center">
-                            <div class="w-10 col">
-                                <label class="sr-only" for="inlineFormXprod">A</label>
-                                <input type="text" name="xprod" class="form-control mb-2" id="inlineFormInputXprod"
-                                    placeholder="Descrizione prodotto">
-                            </div>
+                        <div class="col-md-auto">
+                            <label class="sr-only" for="inlineFormCodA">A</label>
+                            <input type="number" name="ccoda" class="form-control mb-2" id="inlineFormInputCodA"
+                                placeholder="Codice prodotto a">
                         </div>
-                        <div class="form-row align-items-center">
-                            <div class="col-md-auto">
-                                <select class=" form-control custom-select mb-2" name="sven">
-                                    <option value="" <%- (!(sven) || sven==='' ) ? 'selected' : '' %>>Tipo vendita
-                                    </option>
-                                    <% lven.forEach(function(lven){ %>
-                                    <option value="<%= lven.sven %>" <%- (sven && sven===lven.sven) ? 'selected' : '' %>>
-                                        <%= lven.sven %>
-                                    </option>
-                                    <% }); %>
-                                </select>
-                            </div>
-                            <div class="col-md-auto">
-                                <select class="form-control custom-select mb-2" name="sgrp">
-                                    <option value="" <%- (!(sgrp) || sgrp==='' ) ? 'selected' : '' %>>Categoria
-                                        prodotto
-                                    </option>
-                                    <% lgrp.forEach(function(xgrpl){ %>
-                                    <option value="<%= xgrpl.xgrp %>" <%- (sgrp && sgrp===xgrpl.xgrp) ? 'selected' : ''
-                                        %>>
-                                        <%= xgrpl.xgrp %>
-                                    </option>
-                                    <% }); %>
-                                </select>
-                            </div>
+                    </div>
+                    <div class="form-row align-items-center">
+                        <div class="w-10 col">
+                            <label class="sr-only" for="inlineFormXprod">A</label>
+                            <input type="text" name="xprod" class="form-control mb-2" id="inlineFormInputXprod"
+                                placeholder="Descrizione prodotto">
                         </div>
-                        <div class="form-row align-items-center">
-                            <div class="w-5 col">
-                                <button type="submit" class="btn btn-primary mb-2">Cerca</button>
-                            </div>
+                    </div>
+                    <div class="form-row align-items-center">
+                        <div class="col-md-auto">
+                            <select class=" form-control custom-select mb-2" name="sven">
+                                <option value="" <%- (!(sven) || sven==='' ) ? 'selected' : '' %>>Tipo vendita
+                                </option>
+                                <% lven.forEach(function(lven){ %>
+                                <option value="<%= lven.sven %>" <%- (sven && sven===lven.sven) ? 'selected' : '' %>>
+                                    <%= lven.sven %>
+                                </option>
+                                <% }); %>
+                            </select>
                         </div>
-                    </form>
-                </div>
+                        <div class="col-md-auto">
+                            <select class="form-control custom-select mb-2" name="sgrp">
+                                <option value="" <%- (!(sgrp) || sgrp==='' ) ? 'selected' : '' %>>Categoria
+                                    prodotto
+                                </option>
+                                <% lgrp.forEach(function(xgrpl){ %>
+                                <option value="<%= xgrpl.xgrp %>" <%- (sgrp && sgrp===xgrpl.xgrp) ? 'selected' : '' %>>
+                                    <%= xgrpl.xgrp %>
+                                </option>
+                                <% }); %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row align-items-center">
+                        <div class="w-5 col">
+                            <button type="submit" class="btn btn-primary mb-2">Cerca</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </nav>
