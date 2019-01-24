@@ -1,118 +1,138 @@
 <!-- views/new-order-campioncini.ejs -->
 <!doctype html>
 <html lang="it">
+
 <head>
     <title>Portale Innovazioni - Nuovo ordine</title>
     <% include head %>
 </head>
-<body>
-<nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <div class="row justify-content-md-center">
-        <div class="col-md-auto">
-            <a class="navbar-brand" href="#">Nuovo Ordine <%= idOrd %></a>
-        </div>
 
-        <div class="col-md-auto">
-            <div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
-                <div class="col-md-auto">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Azioni
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
-                                <li><a class="dropdown-item" href="/new-order-cond-pag">Avanti</a></li>
-                                <li><a class="dropdown-item" href="/new-order-product">Prodotti</a></li>
-                                <li><a class="dropdown-item" href="/new-order-promo">Promozioni</a></li>
-                                <div class="dropdown-divider"></div>
-                                <li><a class="dropdown-item" href="/home">Annulla</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-auto">
-                    <form action="/new-order-campioncini" method="get" class="form-inline">
-                        <input type="hidden" name="idOrd" value="<%= idOrd %>">
-                        <div class="form-row align-items-center">
-                            <div class="w-10 col">
-                                <label class="sr-only" for="inlineFormCodDa">Codice campioncino</label>
-                                <input type="number" name="ccodc" class="form-control mb-2" id="inlineFormInputCodDa"
-                                       placeholder="Codice campioncino">
-                            </div>
-                            <div class="w-10 col">
-                                <label class="sr-only" for="inlineFormXprod">Descrizione </label>
-                                <input type="text" name="xcamp" class="form-control mb-2" id="inlineFormInputXprod"
-                                       placeholder="Descrizione campioncino">
-                            </div>
-                            <div class="w-10 col">
-                                <select class="form-control custom-select mb-2" name="sgrp">
-                                    <option value="" <%- (!(sgrp) || sgrp === '') ? 'selected' : '' %>>Categoria
-                                        prodotto
-                                    </option>
-                                    <% lgrp.forEach(function(xgrpl){ %>
-                                    <option value="<%= xgrpl.xgrp %>" <%- (sgrp && sgrp === xgrpl.xgrp) ? 'selected' : '' %>>
-                                        <%= xgrpl.xgrp %>
-                                    </option>
-                                    <% }); %>
-                                </select>
-                            </div>
-                            <div class="w-5 col">
-                                <button type="submit" class="btn btn-primary mb-2">Cerca</button>
-                            </div>
-                        </div>
-                    </form>
+<body>
+    <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <a class="navbar-brand" href="#">Nuovo Ordine
+                    <%= idOrd %></a>
+            </div>
+            <div class="col-md-auto">
+                <button class="btn-primary bg-transparent text-primary border-0 align-bottom" type="button" data-toggle="collapse"
+                    data-target="#filterForm" aria-expanded="false" aria-controls="filterForm">
+                    <i class="material-icons">&#xe152</i>
+                </button>
+            </div>
+            <div class="col-md-auto">
+                <div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
+                    <div class="col-md-auto">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Azioni
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                                    <li><a class="dropdown-item" href="/new-order-cond-pag">Avanti</a></li>
+                                    <li><a class="dropdown-item" href="/new-order-product">Prodotti</a></li>
+                                    <li><a class="dropdown-item" href="/new-order-promo">Promozioni</a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li><a class="dropdown-item" href="/home">Annulla</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</nav>
-<div class="container-fluid">
-    <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
-        <div id="campioncini">
-            <!-- show any messages that come back with authentication -->
-            <% if (messageErr.length > 0) { %>
-            <div class="alert alert-danger"><%= messageErr %></div>
-            <% } %>
-            <!-- show any messages that come back with authentication -->
-            <% if (messageRes.length > 0) { %>
-            <div class="alert alert-warning"><%= messageRes %></div>
-            <% } %>
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">Codice Campioncino</th>
-                    <th scope="col">Descrizione</th>
-                    <th scope="col">Prezzo</th>
-                    <th scope="col">Quantità</th>
-                </tr>
-                </thead>
-                <tbody>
-                <% for(var i = 0; i < campioncini.length;i++) { %>
-                <tr>
-                    <th scope="row"><%= campioncini[i].ccod %></th>
-                    <td><%= campioncini[i].xdesc %></td>
-                    <td><%= campioncini[i].iprz %></td>
-                    <td>
-                        <form action="/new-order-campioncini" method="post" class="form-inline">
-                            <input type="hidden" name="ccod" value="<%= idOrd %>">
-                            <input type="hidden" name="ccodc" value="<%= ccodc %>">
-                            <input type="hidden" name="sgrpc" value="<%= sgrpc %>">
-                            <input type="hidden" name="xcampc" value="<%= xcampc %>">
-                            <input type="hidden" name="ccodcamp" value="<%= campioncini[i].ccod %>">
-                            <input type="number" name="iqta" class="form-control">
-                            <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
-                                <i class="material-icons">&#xe854</i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+        <div class="row justify-content-md-center">
+            <div class="collapse" id="filterForm">
+                <form action="/new-order-campioncini" method="get" class="form-inline">
+                    <input type="hidden" name="idOrd" value="<%= idOrd %>">
+                    <div class="form-row align-items-center">
+                        <div class="w-10 col">
+                            <label class="sr-only" for="inlineFormCodDa">Codice campioncino</label>
+                            <input type="number" name="ccodc" class="form-control mb-2" id="inlineFormInputCodDa"
+                                placeholder="Codice campioncino">
+                        </div>
+                        <div class="w-10 col">
+                            <label class="sr-only" for="inlineFormXprod">Descrizione </label>
+                            <input type="text" name="xcamp" class="form-control mb-2" id="inlineFormInputXprod"
+                                placeholder="Descrizione campioncino">
+                        </div>
+                        <div class="w-10 col">
+                            <select class="form-control custom-select mb-2" name="sgrp">
+                                <option value="" <%- (!(sgrp) || sgrp==='' ) ? 'selected' : '' %>>Categoria
+                                    prodotto
+                                </option>
+                                <% lgrp.forEach(function(xgrpl){ %>
+                                <option value="<%= xgrpl.xgrp %>" <%- (sgrp && sgrp===xgrpl.xgrp) ? 'selected' : '' %>>
+                                    <%= xgrpl.xgrp %>
+                                </option>
+                                <% }); %>
+                            </select>
+                        </div>
+                        <div class="w-5 col">
+                            <button type="submit" class="btn btn-primary mb-2">Cerca</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
+            <div id="campioncini">
+                <!-- show any messages that come back with authentication -->
+                <% if (messageErr.length > 0) { %>
+                <div class="alert alert-danger">
+                    <%= messageErr %>
+                </div>
                 <% } %>
-                </tbody>
-            </table>
+                <!-- show any messages that come back with authentication -->
+                <% if (messageRes.length > 0) { %>
+                <div class="alert alert-warning">
+                    <%= messageRes %>
+                </div>
+                <% } %>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Codice Campioncino</th>
+                            <th scope="col">Descrizione</th>
+                            <th scope="col">Prezzo</th>
+                            <th scope="col">Quantità</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i = 0; i < campioncini.length;i++) { %>
+                        <tr>
+                            <th scope="row">
+                                <%= campioncini[i].ccod %>
+                            </th>
+                            <td>
+                                <%= campioncini[i].xdesc %>
+                            </td>
+                            <td>
+                                <%= campioncini[i].iprz %>
+                            </td>
+                            <td>
+                                <form action="/new-order-campioncini" method="post" class="form-inline">
+                                    <input type="hidden" name="ccod" value="<%= idOrd %>">
+                                    <input type="hidden" name="ccodc" value="<%= ccodc %>">
+                                    <input type="hidden" name="sgrpc" value="<%= sgrpc %>">
+                                    <input type="hidden" name="xcampc" value="<%= xcampc %>">
+                                    <input type="hidden" name="ccodcamp" value="<%= campioncini[i].ccod %>">
+                                    <input type="number" name="iqta" class="form-control">
+                                    <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+                                        <i class="material-icons">&#xe854</i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>
