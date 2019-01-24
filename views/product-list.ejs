@@ -1,105 +1,127 @@
 <!-- views/product-list.ejs -->
 <!doctype html>
 <html lang="it">
+
 <head>
     <title>Portale Innovazioni - Lista prodotti</title>
     <% include head %>
 </head>
-<body>
-<div class="sticky-top">
-    <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="row justify-content-md-center">
-            <div class="col-md-auto">
-                <a class="navbar-brand" href="#">Lista Ordini</a>
-            </div>
 
-            <div class="col-md-auto">
-                <div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
-                    <div class="col-md-auto">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
-                                   data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    Azioni
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
-                                    <li><a class="dropdown-item" href="/home">Home</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-auto">
-                        <form action="/product-list" method="get" class="form-inline">
-                            <div class="form-row align-items-center">
-                                <div class="w-10 col">
-                                    <label class="sr-only" for="inlineFormCodDa">Codice prodotto da</label>
-                                    <input type="number" name="ccodda" class="form-control mb-2" id="inlineFormInputCodDa"
-                                           placeholder="Codice prodotto da" value="<%= ccodda %>">
-                                </div>
-                                <div class="w-10 col">
-                                    <label class="sr-only" for="inlineFormCodA">A</label>
-                                    <input type="number" name="ccoda" class="form-control mb-2" id="inlineFormInputCodA"
-                                           placeholder="Codice prodotto a" value="<%= ccoda %>">
-                                </div>
-                                <div class="w-10 col">
-                                    <label class="sr-only" for="inlineFormXprod">A</label>
-                                    <input type="text" name="xprod" class="form-control mb-2" id="inlineFormInputXprod"
-                                           placeholder="Descrizione prodotto"  value="<%= xprod %>">
-                                </div>
-                                <div class="w-10 col">
-                                    <select class=" form-control custom-select mb-2" name="sven">
-                                        <option value="" <%- (!(sven) || sven === '') ? 'selected' : '' %>>Tipo vendita
-                                        </option>
-                                        <% lven.forEach(function(lven){ %>
-                                        <option value="<%= lven.sven %>" <%- (sven && sven === lven.sven) ? 'selected' : '' %>>
-                                            <%= lven.sven %>
-                                        </option>
-                                        <% }); %>
-                                    </select>
-                                </div>
-                                <div class="w-10 col">
-                                    <select class="form-control custom-select mb-2" name="sgrp">
-                                        <option value="" <%- (!(sgrp) || sgrp === '') ? 'selected' : '' %>>Categoria
-                                            prodotto
-                                        </option>
-                                        <% lgrp.forEach(function(xgrpl){ %>
-                                        <option value="<%= xgrpl.xgrp %>" <%- (sgrp && sgrp === xgrpl.xgrp) ? 'selected' : '' %>>
-                                            <%= xgrpl.xgrp %>
-                                        </option>
-                                        <% }); %>
-                                    </select>
-                                </div>
-                                <div class="w-5 col">
-                                    <button type="submit" class="btn btn-primary mb-2">Cerca</button>
-                                </div>
-                            </div>
-                        </form>
+<body>
+    <div class="sticky-top">
+        <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                    <a class="navbar-brand" href="#">Lista Ordini</a>
+                </div>
+                <div class="col-md-auto">
+                    <button class="btn-primary bg-transparent text-primary border-0 align-bottom" type="button"
+                        data-toggle="collapse" data-target="#filterForm" aria-expanded="false" aria-controls="filterForm">
+                        <i class="material-icons">&#xe152</i>
+                    </button>
+                </div>
+                <div class="col-md-auto">
+                    <div class="navbar-collapse" id="navbarSupportedContent">
+                        <div class="col-md-auto">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Azioni
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                                        <li><a class="dropdown-item" href="/home">Home</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                    <form action="/product-list" method="get" class="form">
+                        <div class="form-row align-items-center">
+                            <div class="col-md-auto">
+                                <label class="sr-only" for="inlineFormCodDa">Codice prodotto da</label>
+                                <input type="number" name="ccodda" class="form-control mb-2" id="inlineFormInputCodDa"
+                                    placeholder="Codice prodotto da" value="<%= ccodda %>">
+                            </div>
+                            <div class="col-md-auto">
+                                <label class="sr-only" for="inlineFormCodA">A</label>
+                                <input type="number" name="ccoda" class="form-control mb-2" id="inlineFormInputCodA"
+                                    placeholder="Codice prodotto a" value="<%= ccoda %>">
+                            </div>
+                        </div>
+                        <div class="form-row align-items-center">
+                            <div class="col-md-auto">
+                                <label class="sr-only" for="inlineFormXprod">Descrizione</label>
+                                <input type="text" name="xprod" class="form-control mb-2" id="inlineFormInputXprod"
+                                    placeholder="Descrizione prodotto" value="<%= xprod %>">
+                            </div>
+                        </div>
+                        <div class="form-row align-items-center">
+                            <div class="col-md-auto">
+                                <select class=" form-control custom-select mb-2" name="sven">
+                                    <option value="" <%- (!(sven) || sven==='' ) ? 'selected' : '' %>>Tipo vendita
+                                    </option>
+                                    <% lven.forEach(function(lven){ %>
+                                    <option value="<%= lven.sven %>" <%- (sven && sven===lven.sven) ? 'selected' : '' %>>
+                                        <%= lven.sven %>
+                                    </option>
+                                    <% }); %>
+                                </select>
+                            </div>
+                            <div class="col-md-auto">
+                                <select class="form-control custom-select mb-2" name="sgrp">
+                                    <option value="" <%- (!(sgrp) || sgrp==='' ) ? 'selected' : '' %>>Categoria
+                                        prodotto
+                                    </option>
+                                    <% lgrp.forEach(function(xgrpl){ %>
+                                    <option value="<%= xgrpl.xgrp %>" <%- (sgrp && sgrp===xgrpl.xgrp) ? 'selected' : ''
+                                        %>>
+                                        <%= xgrpl.xgrp %>
+                                    </option>
+                                    <% }); %>
+                                </select>
+                            </div>
+                            <div class="col-md-auto">
+                                <button type="submit" class="btn btn-primary mb-2">Cerca</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid">
+        <!-- show any messages that come back with authentication -->
+        <% if (message.length > 0) { %>
+        <div class="alert alert-danger">
+            <%= message %>
         </div>
-    </nav>
-</div>
-<div class="container-fluid">
-    <!-- show any messages that come back with authentication -->
-    <% if (message.length > 0) { %>
-    <div class="alert alert-danger"><%= message %></div>
-    <% } %>
-    <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
-        <div id="client" class="card-columns">
-            <% products.forEach(function(product) { %>
+        <% } %>
+        <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
+            <div id="client" class="card-columns">
+                <% products.forEach(function(product) { %>
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="http://www.selvertshopping.com/images/products/big/P<%= product.ccod %>.jpg" alt="" onerror="this.src='/public/img/image_broken.png'">
+                    <img class="card-img-top" src="http://www.selvertshopping.com/images/products/big/P<%= product.ccod %>.jpg"
+                        alt="" onerror="this.src='/public/img/image_broken.png'">
                     <div class="card-body">
-                      <h5 class="card-title"><%= product.ccod %></h5>
-                      <p class="card-text"><%= product.xdesc %></p>
-                      <a href="#" class="btn btn-primary"><i class="material-icons">&#xe926</i><%= product.iprz %></a>
+                        <h5 class="card-title">
+                            <%= product.ccod %>
+                        </h5>
+                        <p class="card-text">
+                            <%= product.xdesc %>
+                        </p>
+                        <a href="#" class="btn btn-primary"><i class="material-icons">&#xe926</i>
+                            <%= product.iprz %></a>
                     </div>
-                  </div>
-            <% }); %>    
+                </div>
+                <% }); %>
+            </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>
