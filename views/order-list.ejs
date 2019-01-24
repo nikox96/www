@@ -28,7 +28,12 @@
                 <div class="col-md-auto">
                     <a class="navbar-brand" href="#">Lista Ordini</a>
                 </div>
-
+                <div class="col-md-auto">
+                    <button class="btn-primary bg-transparent text-primary border-0 align-bottom" type="button" data-toggle="collapse"
+                        data-target="#filterForm" aria-expanded="false" aria-controls="filterForm">
+                        <i class="material-icons">&#xe152</i>
+                    </button>
+                </div>
                 <div class="col-md-auto">
                     <div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
                         <div class="col-md-auto">
@@ -44,34 +49,35 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-md-auto">
-                            <form action="/order-list" method="post" class="form-inline">
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto">
-                                        <label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
-                                        <input type="text" name="xragsoc" class="form-control mb-2" id="inlineFormInputRagSoc"
-                                            placeholder="Ragione sociale">
-                                    </div>
-                                    <% if (user.cage === 9999 || user.cage === 0) { %>
-                                    <div class="col-auto">
-                                        <label class="sr-only" for="inlineFormCage">Codice agente</label>
-                                        <input type="text" name="cageric" class="form-control mb-2" id="inlineFormInputCage"
-                                            placeholder="Codice agente">
-                                    </div>
-                                    <% } %>
-                                    <div class="col-auto">
-                                            <label class="nav-link" for="inlineFormCage">Visualizza storico</label>
-                                            <input type="checkbox" name="fall" id="inlineFormInputCage">
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <button type="submit" class="btn btn-primary mb-2">Cerca</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="collapse" id="filterForm">
+                    <form action="/order-list" method="post" class="form-inline">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
+                                <input type="text" name="xragsoc" class="form-control mb-2" id="inlineFormInputRagSoc"
+                                    placeholder="Ragione sociale">
+                            </div>
+                            <% if (user.cage === 9999 || user.cage === 0) { %>
+                            <div class="col-auto">
+                                <label class="sr-only" for="inlineFormCage">Codice agente</label>
+                                <input type="text" name="cageric" class="form-control mb-2" id="inlineFormInputCage"
+                                    placeholder="Codice agente">
+                            </div>
+                            <% } %>
+                            <div class="col-auto">
+                                <label class="nav-link" for="inlineFormCage">Visualizza storico</label>
+                                <input type="checkbox" name="fall" id="inlineFormInputCage">
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-2">Cerca</button>
+                        </div>
+                </div>
+                </form>
             </div>
         </nav>
     </div>
@@ -117,7 +123,8 @@
                             <td>
                                 <button class="btn btn-link" data-toggle="modal" data-target="#noteModal<%= order.ccod %>"
                                     <%- (order.xnota !='' ) ? '' : 'disabled' %>>
-                                    <i class="material-icons">&#x<%- (order.xnota != '') ? 'e8cd' : 'e92a' %></i>
+                                    <i class="material-icons">&#x
+                                        <%- (order.xnota != '') ? 'e8cd' : 'e92a' %></i>
                                 </button>
                                 <div class="modal fade" id="noteModal<%= order.ccod %>" tabindex="-1" role="dialog"
                                     aria-labelledby="noteModal" aria-hidden="true">
