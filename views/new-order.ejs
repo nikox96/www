@@ -1,6 +1,7 @@
 <!-- views/new-order.ejs -->
 <!doctype html>
 <html lang="it">
+
 <head>
     <title>Portale Innovazioni - Nuovo ordine</title>
     <!--<link rel="manifest" href="/manifest.json">
@@ -19,97 +20,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <% include head %>
 </head>
-<body>
-<div class="sticky-top">
-    <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="row justify-content-md-center">
-            <div class="col-md-auto">
-                <a class="navbar-brand" href="#">Nuovo Ordine</a>
-            </div>
 
-            <div class="col-md-auto">
-                <div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
-                    <div class="col-md-auto">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
-                                   data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    Azioni
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
-                                    <li><a class="dropdown-item" href="/new-order-product">Avanti</a></li>
-                                    <li><a class="dropdown-item" href="/home">Annulla</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-auto">
-                        <form action="/new-order" method="get" class="form-inline">
-                            <div class="form-row align-items-center">
-                                <div class="col-md-auto">
-                                    <label class="sr-only" for="inlineFormCodCli">Codice cliente</label>
-                                    <input type="text" name="ccod" class="form-control mb-2" id="inlineFormInputCodCli"
-                                           placeholder="Codice cliente">
-                                </div>
-                                <div class="col-md-auto">
-                                    <label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
-                                    <input type="text" name="xragsoc" class="form-control mb-2"
-                                           id="inlineFormInputRagSoc"
-                                           placeholder="Ragione sociale">
-                                </div>
-                                <div class="col-md-auto">
-                                    <button type="submit" class="btn btn-primary mb-2">Cerca</button>
-                                </div>
-                            </div>
-                        </form>
+<body>
+    <div class="sticky-top">
+        <nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                    <a class="navbar-brand" href="#">Nuovo Ordine</a>
+                </div>
+                <div class="col-md-auto">
+                    <button class="btn-primary bg-transparent text-primary border-0 align-bottom" type="button"
+                        data-toggle="collapse" data-target="#filterForm" aria-expanded="false" aria-controls="filterForm">
+                        <i class="material-icons">&#xe152</i>
+                    </button>
+                </div>
+                <div class="col-md-auto">
+                    <div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
+                        <div class="col-md-auto">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Azioni
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+                                        <li><a class="dropdown-item" href="/new-order-product">Avanti</a></li>
+                                        <li><a class="dropdown-item" href="/home">Annulla</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
-</div>
-<div class="container-fluid">
-    <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
-        <div id="client">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">Partia IVA <a href="/new-client?newOrder=s" role="button"
-                                                  class="btn-primary bg-transparent mr-auto mb-2 text-primary border-0 align-bottom"><i
-                                    class="material-icons">&#xe05e</i></a></th>
-                    <th scope="col">Ragione sociale</th>
-                    <th scope="col">Comune</th>
-                    <th scope="col">C.A.P.</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <% clients.forEach(function(clients) { %>
-                <% if(user.cage === clients.cage || user.cage === 9999 || user.cage === 0){ %>
-                <tr>
-                    <th scope="row">
-                        <% if (clients.cpiva = '') { %>
-                        <%= clients.cpiva %>
-                        <% } else { %>
-                        <%= clients.cfis %>
-                        <% } %>
-                    </th>
-                    <td><%= clients.xragsoc %></td>
-                    <td><%= clients.xcom %></td>
-                    <td><%= clients.ccap %></td>
-                    <td>
-                        <form action="/new-order" method="post">
-                            <input type="hidden" name="ccod" value="<%= clients.ccod %>">
-                            <button type="submit" class="btn btn-link"><i class="material-icons">&#xe5c8</i></button>
-                        </form>
-                    </td>
-                </tr>
-                <% }}); %>
-                </tbody>
-            </table>
+            <div class="row justify-content-md-center">
+                <div class="collapse" id="filterForm">
+                    <form action="/new-order" method="get" class="form-inline">
+                        <div class="form-row align-items-center">
+                            <div class="col-md-auto">
+                                <label class="sr-only" for="inlineFormCodCli">Codice cliente</label>
+                                <input type="text" name="ccod" class="form-control mb-2" id="inlineFormInputCodCli"
+                                    placeholder="Codice cliente">
+                            </div>
+                            <div class="col-md-auto">
+                                <label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
+                                <input type="text" name="xragsoc" class="form-control mb-2" id="inlineFormInputRagSoc"
+                                    placeholder="Ragione sociale">
+                            </div>
+                            <div class="col-md-auto">
+                                <button type="submit" class="btn btn-primary mb-2">Cerca</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid">
+        <div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
+            <div id="client">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Partia IVA <a href="/new-client?newOrder=s" role="button" class="btn-primary bg-transparent mr-auto mb-2 text-primary border-0 align-bottom"><i
+                                        class="material-icons">&#xe05e</i></a></th>
+                            <th scope="col">Ragione sociale</th>
+                            <th scope="col">Comune</th>
+                            <th scope="col">C.A.P.</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% clients.forEach(function(clients) { %>
+                        <% if(user.cage === clients.cage || user.cage === 9999 || user.cage === 0){ %>
+                        <tr>
+                            <th scope="row">
+                                <% if (clients.cpiva = '') { %>
+                                <%= clients.cpiva %>
+                                <% } else { %>
+                                <%= clients.cfis %>
+                                <% } %>
+                            </th>
+                            <td>
+                                <%= clients.xragsoc %>
+                            </td>
+                            <td>
+                                <%= clients.xcom %>
+                            </td>
+                            <td>
+                                <%= clients.ccap %>
+                            </td>
+                            <td>
+                                <form action="/new-order" method="post">
+                                    <input type="hidden" name="ccod" value="<%= clients.ccod %>">
+                                    <button type="submit" class="btn btn-link"><i class="material-icons">&#xe5c8</i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }}); %>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>
