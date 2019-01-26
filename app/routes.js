@@ -45,7 +45,7 @@ module.exports = function (app, passport) {
     app.get('/login', function (req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login.ejs', { message: req.flash('loginMessage') });
+        res.render('login.ejs', {message: req.flash('loginMessage')});
     });
 
     // =====================================
@@ -487,6 +487,7 @@ module.exports = function (app, passport) {
                                             // @todo: cosa fare in caso di errore?!
                                             if (nregErr) {
                                                 console.log(nregErr);
+                                                res.redirect('/order-list');
                                             } else {
                                                 rec.tipRec = 'TES';
                                                 tes.cDocAut = '000';
@@ -1251,7 +1252,7 @@ module.exports = function (app, passport) {
     app.get('/signup', function (req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('signup.ejs', { message: req.flash('signupMessage') });
+        res.render('signup.ejs', {message: req.flash('signupMessage')});
     });
 
     // process the signup form
@@ -1281,7 +1282,7 @@ module.exports = function (app, passport) {
         });
     });
 }
-    ;
+;
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
@@ -3345,8 +3346,8 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
     }
 }
 
-function numberPad(n){
-    var s = n+"";
+function numberPad(n) {
+    var s = n + "";
     while (s.length < 3) s = "0" + s;
     return s;
 }
