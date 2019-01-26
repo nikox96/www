@@ -298,7 +298,7 @@ Ordine.updateNreg = function updateNreg(ccod, callback) {
                 console.log('ccod: ' + ccod);
 
                 //inserisco l'ordine con il numero di registrazione calcolato
-                db.query("UPDATE portale.ordini set nreg = " + nregRes[0].nreg + " WHERE cstt <> 50 AND nreg = 999 AND "
+                db.query("UPDATE portale.ordini set nreg = " + nregRes[0].nreg + " WHERE nreg = 999 AND "
                     + (ccod && ccod !== '' ? 'ccod = ' + ccod : '1 <> 1')
                     //                , function (queryErr, queryRes) {
                     , (queryErr, queryRes) => {
