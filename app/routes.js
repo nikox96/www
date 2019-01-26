@@ -432,6 +432,7 @@ module.exports = function (app, passport) {
                                                 req.flash('orderMessage', righeErr);
                                             } else {
                                                 i = 0;
+                                                products = [];
                                                 getRighe(res, req, righeRes, cliRes, queryRes, req.query.ccod);
                                             }
                                         });
