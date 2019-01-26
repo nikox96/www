@@ -313,6 +313,7 @@ Ordine.updateNreg = function updateNreg(ccod, callback) {
                                     if (getNregErr)
                                         callback(getNregErr, null);
                                     else
+                                        console.log('res updatenreg: %j', getNregRes);
                                         callback(null, getNregRes[0].nreg);
                                 });
                         }
