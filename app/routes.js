@@ -45,7 +45,7 @@ module.exports = function (app, passport) {
     app.get('/login', function (req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login.ejs', {message: req.flash('loginMessage')});
+        res.render('login.ejs', { message: req.flash('loginMessage') });
     });
 
     // =====================================
@@ -77,17 +77,22 @@ module.exports = function (app, passport) {
                                 } else {
                                     console.log("xgrp trovate" + grpRes);
                                 }
-                                res.render('new-order-product.ejs', {
-                                    message: req.flash('orderMessage'),
-                                    ccodda: req.query.ccodda,
-                                    ccoda: req.query.ccoda,
-                                    sven: req.query.sven,
-                                    sgrp: req.query.sgrp,
-                                    xprod: req.query.xprod,
-                                    products: productRes,
-                                    lven: venRes,
-                                    lgrp: grpRes,
-                                    idOrd: appRes[0].idord
+                                Order.find(appRes[0].idord, function (ordCliErr, ordCliRes) {
+                                    Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                                        res.render('new-order-product.ejs', {
+                                            message: req.flash('orderMessage'),
+                                            ccodda: req.query.ccodda,
+                                            ccoda: req.query.ccoda,
+                                            sven: req.query.sven,
+                                            sgrp: req.query.sgrp,
+                                            xprod: req.query.xprod,
+                                            products: productRes,
+                                            lven: venRes,
+                                            lgrp: grpRes,
+                                            ordCtv: (ordCliErr || sumCtvOrdErr ? null : sumCtvOrdRes),
+                                            idOrd: appRes[0].idord
+                                        });
+                                    });
                                 });
                             });
                         });
@@ -129,16 +134,21 @@ module.exports = function (app, passport) {
                                             } else {
                                                 req.flash('orderCampionciniRes', 'Ancora ' + (totalRes - ctvCampRes).toFixed(2) + ' euro spendibili in campioncini!');
                                             }
-                                            res.render('new-order-campioncini.ejs', {
-                                                messageErr: req.flash('orderCampionciniErr'),
-                                                messageRes: req.flash('orderCampionciniRes'),
-                                                ccodc: req.query.ccodc,
-                                                sgrp: req.query.sgrp,
-                                                sgrpc: req.query.sgrp,
-                                                xcampc: req.query.xcamp,
-                                                campioncini: campRes,
-                                                lgrp: grpRes,
-                                                idOrd: appRes[0].idord
+                                            Order.find(appRes[0].idord, function (ordCliErr, ordCliRes) {
+                                                Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                                                    res.render('new-order-campioncini.ejs', {
+                                                        messageErr: req.flash('orderCampionciniErr'),
+                                                        messageRes: req.flash('orderCampionciniRes'),
+                                                        ccodc: req.query.ccodc,
+                                                        sgrp: req.query.sgrp,
+                                                        sgrpc: req.query.sgrp,
+                                                        xcampc: req.query.xcamp,
+                                                        campioncini: campRes,
+                                                        lgrp: grpRes,
+                                                        ordCtv: (ordCliErr || sumCtvOrdErr ? null : sumCtvOrdRes),
+                                                        idOrd: appRes[0].idord
+                                                    });
+                                                });
                                             });
                                         }
                                     });
@@ -156,42 +166,48 @@ module.exports = function (app, passport) {
             if (appErr) {
                 console.log("errore recupero codice ordine");
             } else {
-                Product.listPromo('', function (promoErr, promoRes) {
-                    if (promoErr) {
-                        req.flash('orderMessage', 'Errore estrazione promozioni!');
-                        res.render('new-order-promo.ejs', {
-                            messageErr: req.flash('orderMessage'),
-                            messageRes: '',
-                            anaPromo: anaPromo,
-                            promo: promoRes,
-                            idOrd: appRes[0].idord
-                        });
-                    } else {
-                        req.flash('orderMessage', promoRes.length + ' risultati');
+                Order.find(appRes[0].idord, function (ordCliErr, ordCliRes) {
+                    Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                        Product.listPromo('', function (promoErr, promoRes) {
+                            if (promoErr) {
+                                req.flash('orderMessage', 'Errore estrazione promozioni!');
+                                res.render('new-order-promo.ejs', {
+                                    messageErr: req.flash('orderMessage'),
+                                    messageRes: '',
+                                    anaPromo: anaPromo,
+                                    promo: promoRes,
+                                    ordCtv: (ordCliErr || sumCtvOrdErr ? null : sumCtvOrdRes),
+                                    idOrd: appRes[0].idord
+                                });
+                            } else {
+                                req.flash('orderMessage', promoRes.length + ' risultati');
 
-                        var anaPromo = [];
-                        var b = true;
-                        var xy = 0;
-                        for (k = 0; k < promoRes.length; k++) {
-                            for (i = 0; i < anaPromo.length; i++) {
-                                if (promoRes[k].ccod === anaPromo[i].ccod)
-                                    b = false;
-                            }
-                            if (b) {
-                                anaPromo[xy] = promoRes[k];
-                                xy++;
-                            }
-                            b = true;
-                        }
+                                var anaPromo = [];
+                                var b = true;
+                                var xy = 0;
+                                for (k = 0; k < promoRes.length; k++) {
+                                    for (i = 0; i < anaPromo.length; i++) {
+                                        if (promoRes[k].ccod === anaPromo[i].ccod)
+                                            b = false;
+                                    }
+                                    if (b) {
+                                        anaPromo[xy] = promoRes[k];
+                                        xy++;
+                                    }
+                                    b = true;
+                                }
 
-                        res.render('new-order-promo.ejs', {
-                            messageErr: '',
-                            messageRes: req.flash('orderMessage'),
-                            anaPromo: anaPromo,
-                            promo: promoRes,
-                            idOrd: appRes[0].idord
+                                res.render('new-order-promo.ejs', {
+                                    messageErr: '',
+                                    messageRes: req.flash('orderMessage'),
+                                    anaPromo: anaPromo,
+                                    promo: promoRes,
+                                    ordCtv: (ordCliErr || sumCtvOrdErr ? null : sumCtvOrdRes),
+                                    idOrd: appRes[0].idord
+                                });
+                            }
                         });
-                    }
+                    });
                 });
             }
         });
@@ -202,31 +218,36 @@ module.exports = function (app, passport) {
             if (appErr) {
                 console.log("errore recupero codice ordine");
             } else {
-                Product.listPromo(req.body.ccodpromo, function (promoErr, promoRes) {
-                    if (promoErr) {
-                        req.flash('orderMessage', 'Nessun cliente trovato');
-                    } else {
-                        console.log('clients: ' + promoRes.length);
-                        req.flash('orderMessage', promoRes.length + ' risultati');
-
-                        // render the page and pass in any flash data if it exists
-
-                        k = 0;
-                        Order.newOrderProduct(appRes[0].idord, 999999, req.body.iqta, 0, promoRes[0].ccod + " - " + promoRes[0].xdescpromo, function (ordErr, ordRes) {
-                            if (ordErr) {
-                                console.log(ordErr);
-                                req.flash('orderMessage', ordErr);
-                                res.render('new-order-promo.ejs', {
-                                    messageErr: req.flash('orderMessage'),
-                                    messageRes: '',
-                                    idOrd: appRes[0].idOrd
-                                });
+                Order.find(appRes[0].idord, function (ordCliErr, ordCliRes) {
+                    Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                        Product.listPromo(req.body.ccodpromo, function (promoErr, promoRes) {
+                            if (promoErr) {
+                                req.flash('orderMessage', 'Nessun cliente trovato');
                             } else {
-                                console.log(ordRes);
-                                insertOrderPromo(promoRes, req, res, appRes[0].idord);
+                                console.log('clients: ' + promoRes.length);
+                                req.flash('orderMessage', promoRes.length + ' risultati');
+
+                                // render the page and pass in any flash data if it exists
+
+                                k = 0;
+                                Order.newOrderProduct(appRes[0].idord, 999999, req.body.iqta, 0, promoRes[0].ccod + " - " + promoRes[0].xdescpromo, function (ordErr, ordRes) {
+                                    if (ordErr) {
+                                        console.log(ordErr);
+                                        req.flash('orderMessage', ordErr);
+                                        res.render('new-order-promo.ejs', {
+                                            messageErr: req.flash('orderMessage'),
+                                            messageRes: '',
+                                            ordCtv: (ordCliErr || sumCtvOrdErr ? null : sumCtvOrdRes),
+                                            idOrd: appRes[0].idOrd
+                                        });
+                                    } else {
+                                        console.log(ordRes);
+                                        insertOrderPromo(promoRes, req, res, appRes[0].idord, (ordCliErr || sumCtvOrdErr ? null : sumCtvOrdRes));
+                                    }
+                                });
                             }
                         });
-                    }
+                    });
                 });
             }
         });
@@ -269,17 +290,22 @@ module.exports = function (app, passport) {
                                     } else {
                                         console.log("xgrp trovate" + grpRes);
                                     }
-                                    res.render('new-order-product.ejs', {
-                                        message: req.flash('orderMessage'),
-                                        products: productRes,
-                                        ccodda: req.body.ccoddap,
-                                        ccoda: req.body.ccodap,
-                                        sven: req.body.svenp,
-                                        sgrp: req.body.sgrpp,
-                                        xprod: req.body.xprodp,
-                                        lven: venRes,
-                                        lgrp: grpRes,
-                                        idOrd: appRes[0].idord
+                                    Order.find(appRes[0].idord, function (ordCliErr, ordCliRes) {
+                                        Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                                            res.render('new-order-product.ejs', {
+                                                message: req.flash('orderMessage'),
+                                                products: productRes,
+                                                ccodda: req.body.ccoddap,
+                                                ccoda: req.body.ccodap,
+                                                sven: req.body.svenp,
+                                                sgrp: req.body.sgrpp,
+                                                xprod: req.body.xprodp,
+                                                lven: venRes,
+                                                lgrp: grpRes,
+                                                ordCtv: (ordCliErr || sumCtvOrdErr ? null : sumCtvOrdRes),
+                                                idOrd: appRes[0].idord
+                                            });
+                                        });
                                     });
                                 });
                             });
@@ -327,16 +353,21 @@ module.exports = function (app, passport) {
                                                 } else {
                                                     req.flash('orderCampionciniRes', 'Ancora ' + (totalRes - ctvCampRes).toFixed(2) + ' euro spendibili in campioncini!');
                                                 }
-                                                res.render('new-order-campioncini.ejs', {
-                                                    messageErr: req.flash('orderCampionciniErr'),
-                                                    messageRes: req.flash('orderCampionciniRes'),
-                                                    ccodc: req.body.ccodc,
-                                                    sgrp: req.body.sgrpc,
-                                                    sgrpc: req.body.sgrpc,
-                                                    xcampc: req.body.xcampc,
-                                                    campioncini: campRes,
-                                                    lgrp: grpRes,
-                                                    idOrd: appRes[0].idord
+                                                Order.find(appRes[0].idord, function (ordCliErr, ordCliRes) {
+                                                    Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                                                        res.render('new-order-campioncini.ejs', {
+                                                            messageErr: req.flash('orderCampionciniErr'),
+                                                            messageRes: req.flash('orderCampionciniRes'),
+                                                            ccodc: req.body.ccodc,
+                                                            sgrp: req.body.sgrpc,
+                                                            sgrpc: req.body.sgrpc,
+                                                            xcampc: req.body.xcampc,
+                                                            campioncini: campRes,
+                                                            lgrp: grpRes,
+                                                            ordCtv: (ordCliErr || sumCtvOrdErr ? null : sumCtvOrdRes),
+                                                            idOrd: appRes[0].idord
+                                                        });
+                                                    });
                                                 });
                                             }
                                         });
@@ -355,7 +386,7 @@ module.exports = function (app, passport) {
             if (appErr) {
                 console.log("errore recupero codice ordine");
             } else {
-                db.query("SELECT * FROM portale.condizioni_pagamento"
+                db.query("SELECT * FROM portale.condizioni_pagamento order by ccod"
                     //                 , function (queryErr, queryRes) {
                     , (queryErr, queryRes) => {
                         if (queryErr) {
@@ -1151,17 +1182,20 @@ module.exports = function (app, passport) {
                                                 } else {
                                                     console.log("xgrp trovate" + grpRes);
                                                 }
-                                                res.render('new-order-product.ejs', {
-                                                    message: req.flash('orderMessage'),
-                                                    products: productRes,
-                                                    ccodda: '',
-                                                    ccoda: '',
-                                                    sven: '',
-                                                    sgrp: '',
-                                                    xprod: '',
-                                                    lven: venRes,
-                                                    lgrp: grpRes,
-                                                    idOrd: appRes[0].idord
+                                                Order.getSumCtv(req.body.ccod, function (sumCtvOrdErr, sumCtvOrdRes) {
+                                                    res.render('new-order-product.ejs', {
+                                                        message: req.flash('orderMessage'),
+                                                        products: productRes,
+                                                        ccodda: '',
+                                                        ccoda: '',
+                                                        sven: '',
+                                                        sgrp: '',
+                                                        xprod: '',
+                                                        lven: venRes,
+                                                        lgrp: grpRes,
+                                                        ordCtv: (req.body.ccod == 'undefined' || req.body.ccod == 0 || req.body.ccod == null || sumCtvOrdErr ? null : sumCtvOrdRes),
+                                                        idOrd: appRes[0].idord
+                                                    });
                                                 });
                                             });
                                         });
@@ -1221,17 +1255,20 @@ module.exports = function (app, passport) {
                                         } else {
                                             console.log("xgrp trovate" + grpRes);
                                         }
-                                        res.render('new-order-product.ejs', {
-                                            message: req.flash('orderMessage'),
-                                            products: productRes,
-                                            ccodda: '',
-                                            ccoda: '',
-                                            sven: '',
-                                            sgrp: '',
-                                            xprod: '',
-                                            lven: venRes,
-                                            lgrp: grpRes,
-                                            idOrd: appRes[0].idord
+                                        Order.getSumCtv(req.body.ccod, function (sumCtvOrdErr, sumCtvOrdRes) {
+                                            res.render('new-order-product.ejs', {
+                                                message: req.flash('orderMessage'),
+                                                products: productRes,
+                                                ccodda: '',
+                                                ccoda: '',
+                                                sven: '',
+                                                sgrp: '',
+                                                xprod: '',
+                                                lven: venRes,
+                                                lgrp: grpRes,
+                                                ordCtv: (req.body.ccod == 'undefined' || req.body.ccod == 0 || req.body.ccod == null || sumCtvOrdErr ? null : sumCtvOrdRes),
+                                                idOrd: appRes[0].idord
+                                            });
                                         });
                                     });
                                 });
@@ -1253,7 +1290,7 @@ module.exports = function (app, passport) {
     app.get('/signup', function (req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('signup.ejs', {message: req.flash('signupMessage')});
+        res.render('signup.ejs', { message: req.flash('signupMessage') });
     });
 
     // process the signup form
@@ -1283,7 +1320,6 @@ module.exports = function (app, passport) {
         });
     });
 }
-;
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
@@ -1404,50 +1440,53 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                     }
                                     console.log('getRighe products count: ' + products.length);
                                     Order.getNota(idOrd, function (notaErr, notaRes) {
-                                        res.render('new-order-sum.ejs', {
-                                            message: req.flash('orderMessage'),
-                                            idOrd: idOrd,
-                                            client: cliente,
-                                            products: products,
-                                            campioncini: null,
-                                            xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
-                                            condpag: condpag
-                                        }, function (err, htmlGenesi) {
-                                            if (err) return console.log(err);
-                                            var options = {
-                                                directory: "/tmp",
-                                                border: {
-                                                    "top": "2cm",
-                                                    "right": "1cm",
-                                                    "bottom": "2cm",
-                                                    "left": "1.5cm"
-                                                },
-                                                type: "pdf",
-                                                format: "A4"
-                                            };
+                                        Order.getSumCtv(cliente.ccod, function (sumCtvOrdErr, sumCtvOrdRes) {
+                                            res.render('new-order-sum.ejs', {
+                                                message: req.flash('orderMessage'),
+                                                idOrd: idOrd,
+                                                client: cliente,
+                                                products: products,
+                                                campioncini: null,
+                                                xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
+                                                ordCtv: (sumCtvOrdErr ? null : sumCtvOrdRes),
+                                                condpag: condpag
+                                            }, function (err, htmlGenesi) {
+                                                if (err) return console.log(err);
+                                                var options = {
+                                                    directory: "/tmp",
+                                                    border: {
+                                                        "top": "2cm",
+                                                        "right": "1cm",
+                                                        "bottom": "2cm",
+                                                        "left": "1.5cm"
+                                                    },
+                                                    type: "pdf",
+                                                    format: "A4"
+                                                };
 
-                                            var footerInit = htmlGenesi.indexOf("<footer");
-                                            footerInit = (footerInit === -1 ? 0 : footerInit);
-                                            var footerExit = htmlGenesi.indexOf("</footer>");
-                                            footerExit = (footerExit === -1 ? htmlGenesi.length : footerExit);
-                                            var htmlMod;
+                                                var footerInit = htmlGenesi.indexOf("<footer");
+                                                footerInit = (footerInit === -1 ? 0 : footerInit);
+                                                var footerExit = htmlGenesi.indexOf("</footer>");
+                                                footerExit = (footerExit === -1 ? htmlGenesi.length : footerExit);
+                                                var htmlMod;
 
-                                            if (!(footerExit === htmlGenesi.length || footerInit === 0)) {
-                                                htmlMod = htmlGenesi.substr(0, footerInit - 1);
-                                                htmlMod += htmlGenesi.substr(footerExit + 9, htmlGenesi.length);
-                                            } else {
-                                                htmlMod = htmlGenesi;
-                                            }
+                                                if (!(footerExit === htmlGenesi.length || footerInit === 0)) {
+                                                    htmlMod = htmlGenesi.substr(0, footerInit - 1);
+                                                    htmlMod += htmlGenesi.substr(footerExit + 9, htmlGenesi.length);
+                                                } else {
+                                                    htmlMod = htmlGenesi;
+                                                }
 
-                                            pdf.create(htmlMod, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
-                                                if (pdferr) return console.log(pdferr);
+                                                pdf.create(htmlMod, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
+                                                    if (pdferr) return console.log(pdferr);
 
-                                                console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
+                                                    console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
 
-                                                Appoggio.update(req.user.cage, idOrd, pdfres.filename, function (appErr, appRes) {
-                                                    if (appErr) return console.log("errore salvataggio path pdf");
+                                                    Appoggio.update(req.user.cage, idOrd, pdfres.filename, function (appErr, appRes) {
+                                                        if (appErr) return console.log("errore salvataggio path pdf");
 
-                                                    res.send(htmlGenesi);
+                                                        res.send(htmlGenesi);
+                                                    });
                                                 });
                                             });
                                         });
@@ -1502,50 +1541,53 @@ function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
                                 condpag = condRes[0];
                             }
                             Order.getNota(idOrd, function (notaErr, notaRes) {
-                                res.render('new-order-sum.ejs', {
-                                    message: req.flash('orderMessage'),
-                                    idOrd: idOrd,
-                                    client: cliente,
-                                    products: products,
-                                    campioncini: campioncini,
-                                    xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
-                                    condpag: condpag
-                                }, function (err, htmlGenesi) {
-                                    if (err) return console.log(err);
-                                    var options = {
-                                        directory: "/tmp",
-                                        border: {
-                                            "top": "2cm",
-                                            "right": "1cm",
-                                            "bottom": "2cm",
-                                            "left": "1.5cm"
-                                        },
-                                        type: "pdf",
-                                        format: "A4"
-                                    };
+                                Order.getSumCtv(cliente.ccod, function (sumCtvOrdErr, sumCtvOrdRes) {
+                                    res.render('new-order-sum.ejs', {
+                                        message: req.flash('orderMessage'),
+                                        idOrd: idOrd,
+                                        client: cliente,
+                                        products: products,
+                                        campioncini: campioncini,
+                                        xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
+                                        ordCtv: (sumCtvOrdErr ? null : sumCtvOrdRes),
+                                        condpag: condpag
+                                    }, function (err, htmlGenesi) {
+                                        if (err) return console.log(err);
+                                        var options = {
+                                            directory: "/tmp",
+                                            border: {
+                                                "top": "2cm",
+                                                "right": "1cm",
+                                                "bottom": "2cm",
+                                                "left": "1.5cm"
+                                            },
+                                            type: "pdf",
+                                            format: "A4"
+                                        };
 
-                                    var footerInit = htmlGenesi.indexOf("<footer");
-                                    footerInit = (footerInit === -1 ? 0 : footerInit);
-                                    var footerExit = htmlGenesi.indexOf("</footer>");
-                                    footerExit = (footerExit === -1 ? htmlGenesi.length : footerExit);
-                                    var htmlMod;
+                                        var footerInit = htmlGenesi.indexOf("<footer");
+                                        footerInit = (footerInit === -1 ? 0 : footerInit);
+                                        var footerExit = htmlGenesi.indexOf("</footer>");
+                                        footerExit = (footerExit === -1 ? htmlGenesi.length : footerExit);
+                                        var htmlMod;
 
-                                    if (!(footerExit === htmlGenesi.length || footerInit === 0)) {
-                                        htmlMod = htmlGenesi.substr(0, footerInit - 1);
-                                        htmlMod += htmlGenesi.substr(footerExit + 9, htmlGenesi.length);
-                                    } else {
-                                        htmlMod = htmlGenesi;
-                                    }
+                                        if (!(footerExit === htmlGenesi.length || footerInit === 0)) {
+                                            htmlMod = htmlGenesi.substr(0, footerInit - 1);
+                                            htmlMod += htmlGenesi.substr(footerExit + 9, htmlGenesi.length);
+                                        } else {
+                                            htmlMod = htmlGenesi;
+                                        }
 
-                                    pdf.create(htmlMod, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
-                                        if (pdferr) return console.log(pdferr);
+                                        pdf.create(htmlMod, options).toFile(__dirname + '/../public/file/richiesta_ord_' + idOrd + '.pdf', function (pdferr, pdfres) {
+                                            if (pdferr) return console.log(pdferr);
 
-                                        console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
+                                            console.log('%j', pdfres); // { filename: '/app/businesscard.pdf' }
 
-                                        Appoggio.update(req.user.cage, idOrd, pdfres.filename, function (appErr, appRes) {
-                                            if (appErr) return console.log("errore salvataggio path pdf");
+                                            Appoggio.update(req.user.cage, idOrd, pdfres.filename, function (appErr, appRes) {
+                                                if (appErr) return console.log("errore salvataggio path pdf");
 
-                                            res.send(htmlGenesi);
+                                                res.send(htmlGenesi);
+                                            });
                                         });
                                     });
                                 });
@@ -3334,13 +3376,17 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
                     }
                     b = true;
                 }
-
-                res.render('new-order-promo.ejs', {
-                    messageErr: '',
-                    messageRes: req.flash('orderMessage'),
-                    anaPromo: anaPromo,
-                    promo: promoRes1,
-                    idOrd: idOrd
+                Order.find(idOrd, function (ordCliErr, ordCliRes) {
+                    Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                        res.render('new-order-promo.ejs', {
+                            messageErr: '',
+                            messageRes: req.flash('orderMessage'),
+                            anaPromo: anaPromo,
+                            promo: promoRes1,
+                            ordCtv: (ordCliErr || sumCtvOrdErr ? null : sumCtvOrdRes),
+                            idOrd: idOrd
+                        });
+                    });
                 });
             }
         });
