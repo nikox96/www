@@ -244,14 +244,14 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
 
 Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, fall, callback) {
     //ricerca ordine per codice agente/status/cliente
-    var query = "SELECT a.*, b.iimp, c.xragsoc " +
+    var query = "SELECT a.*, (b.iimp - (b.iimp / 100 * c.psco)), c.xragsoc " +
         "FROM " +
         "(SELECT ccod, dreg, cstt, cage, ccli, xnote " +
         "FROM portale.ordini)  AS a, " +
         "(SELECT ccod, SUM(iimp) AS iimp " +
         "FROM portale.righe_ordini " +
         "GROUP BY ccod) AS b, " +
-        "(SELECT ccod, xragsoc " +
+        "(SELECT ccod, xragsoc, psco " +
         "FROM portale.clienti) AS c " +
         "WHERE a.ccod = b.ccod AND a.ccli = c.ccod " +
         (fall == 'on' ? "" : "AND date_part('year', a.dreg) >= date_part('year', CURRENT_DATE) ")
@@ -347,7 +347,7 @@ Ordine.getNota = function getNota(ccod, callback) {
 
 Ordine.getSumCtv = function getSumCtv(ccli, callback) {
     //ricerca ordine per codice
-    db.query("select case when c.iimp>0 then c.iimp else 0.00 end - case when sum(z.sumord)>0 then sum(z.sumord) else 0.00 end as sumctv " +
+    db.query("select (y.sumctv - y.sumctv / 100 * cli.psco) as sumctv FROM (select case when c.iimp>0 then c.iimp else 0.00 end - case when sum(z.sumord)>0 then sum(z.sumord) else 0.00 end as sumctv , c.ccli" +
         "from (select a.dreg, a.ccli, a.ccod, a.nreg, sum(b.iimp) as sumord " +
         "from portale.ordini a inner join portale.righe_ordini b " +
         "on a.ccod = b.ccod " +
@@ -355,7 +355,7 @@ Ordine.getSumCtv = function getSumCtv(ccli, callback) {
         "group by a.ccod) z " +
         "right outer join portale.contratti c " +
         "on z.ccli = c.ccli and date_part('year', z.dreg) = c.cannrif " +
-        "where c.ccli = $1 and c.cannrif = date_part('year', CURRENT_DATE) group by c.iimp;"
+        "where c.ccli = $1 and c.cannrif = date_part('year', CURRENT_DATE) group by c.ccli, c.iimp) y inner join portale.clienti cli on y.ccli = cli.ccod;"
         , [ccli]
         //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
