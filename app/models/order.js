@@ -339,7 +339,7 @@ Ordine.getNota = function getNota(ccod, callback) {
 
 Ordine.getSumCtv = function getSumCtv(ccli, callback) {
     //ricerca ordine per codice
-    db.query("select case when c.iimp>0 then c.iimp else 0.00 end - case when z.sumord>0 then z.sumord else 0.00 end as sumctv " +
+    db.query("select case when c.iimp>0 then c.iimp else 0.00 end - case when sum(z.sumord)>0 then sum(z.sumord) else 0.00 end as sumctv " +
         "from (select a.dreg, a.ccli, a.ccod, a.nreg, sum(b.iimp) as sumord " +
         "from portale.ordini a inner join portale.righe_ordini b " +
         "on a.ccod = b.ccod " +
@@ -347,7 +347,7 @@ Ordine.getSumCtv = function getSumCtv(ccli, callback) {
         "group by a.ccod) z " +
         "right outer join portale.contratti c " +
         "on z.ccli = c.ccli and date_part('year', z.dreg) = c.cannrif " +
-        "where c.ccli = $1 and c.cannrif = date_part('year', CURRENT_DATE);"
+        "where c.ccli = $1 and c.cannrif = date_part('year', CURRENT_DATE) group by c.iimp;"
         , [ccli]
         //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
