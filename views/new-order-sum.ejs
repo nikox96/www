@@ -58,6 +58,11 @@
 			<h4>Cliente: <%= client.ccod %>
 				<small class="text-muted"><%= client.xragsoc %></small>
 			</h4>
+			<% if (ordCtv != 0){%>
+			<h4>Residuo contratto: 
+				<small class="text-muted"><%= ordCtv %></small>
+			</h4>
+			<% } %>
 		</div>
 		<div class="col">
 			<h4>Ordine N°: <%= idOrd %></h4>
