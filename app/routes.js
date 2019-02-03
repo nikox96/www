@@ -575,7 +575,7 @@ module.exports = function (app, passport) {
                                             tes.ragrFtt = '';
                                             tes.cage = ((cliRes.cage || cliRes.cage == 0) && cliRes.cage !== '' && !(ageErr) ? cliRes.cage : ordRes.cage);
                                             tes.cageAltroSis = '';
-                                            tes.provvAge = (ageRes.provv && ageRes.provv !== '' ? ageRes.provv : '');
+                                            tes.provvAge = (cliRes && cliRes.percprovv ? cliRes.percprovv : (ageRes && ageRes.percprovv ? +ageRes.percprovv - (cliRes.contrattista ? 2 : 0) : ''));
                                             tes.provCapoArea = '0.00';
                                             tes.ccondPag = (ordRes.ccondpag && ordRes.ccondpag !== '' ? ordRes.ccondpag : '');
                                             tes.ccondPagAltroSis = '';
@@ -2576,7 +2576,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
             rig.sco2 = '';
             rig.sco3 = '';
             rig.scoUni = '';
-            rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
+            rig.provvAge = (cliente && cliente.percprovv ? cliente.percprovv : (agente && agente.percprovv ? +agente.percprovv - (cliente.contrattista ? 2 : 0) : ''));
             rig.impVal = 0;
             rig.cimp = '1';
             rig.copeMag = '';
@@ -2728,7 +2728,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                         rig.sco2 = '';
                         rig.sco3 = '';
                         rig.scoUni = '';
-                        rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
+                        rig.provvAge = (cliente && cliente.percprovv ? cliente.percprovv : (agente && agente.percprovv ? +agente.percprovv - (cliente.contrattista ? 2 : 0) : ''));
                         rig.impVal = product.iimp;
                         rig.cimp = (prodRes.xgrp == 'ITP' || prodRes.xgrp == 'ITR' ? '0' : '1');
                         rig.copeMag = '';
@@ -2881,7 +2881,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                         rig.sco2 = '';
                         rig.sco3 = '';
                         rig.scoUni = '';
-                        rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
+                        rig.provvAge = (cliente && cliente.percprovv ? cliente.percprovv : (agente && agente.percprovv ? +agente.percprovv - (cliente.contrattista ? 2 : 0) : ''));
                         rig.impVal = product.iimp;
                         rig.cimp = '1';
                         rig.copeMag = '';
@@ -3037,7 +3037,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                     rig.sco2 = '';
                     rig.sco3 = '';
                     rig.scoUni = '';
-                    rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
+                    rig.provvAge = (cliente && cliente.percprovv ? cliente.percprovv : (agente && agente.percprovv ? +agente.percprovv - (cliente.contrattista ? 2 : 0) : ''));
                     rig.impVal = product.iimp;
                     rig.cimp = (prodRes.xgrp == 'ITP' || prodRes.xgrp == 'ITR' ? '0' : '1');
                     rig.copeMag = '';
@@ -3190,7 +3190,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                     rig.sco2 = '';
                     rig.sco3 = '';
                     rig.scoUni = '';
-                    rig.provvAge = (agente && agente.percprovv ? agente.percprovv : '');
+                    rig.provvAge = (cliente && cliente.percprovv ? cliente.percprovv : (agente && agente.percprovv ? +agente.percprovv - (cliente.contrattista ? 2 : 0) : ''));
                     rig.impVal = product.iimp;
                     rig.cimp = (prodRes.xgrp == 'ITP' || prodRes.xgrp == 'ITR' ? '0' : '1');
                     rig.copeMag = '';

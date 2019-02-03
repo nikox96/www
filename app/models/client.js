@@ -5,7 +5,7 @@ var Client = {};
 
 Client.find = function find(ccod, callback) {
     console.log("ricerca cliente codice " + ccod);
-    var query = "SELECT * FROM portale.clienti WHERE ccod = " + ccod;
+    var query = "SELECT *, (case when (select 1 from portale.contratti where ccli = ccod) = 1 then true else false end) as contrattista FROM portale.clienti WHERE ccod = " + ccod;
     console.log(query);
     db.query(query
 //        , function (queryErr, queryRes) {
