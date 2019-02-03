@@ -915,6 +915,7 @@ module.exports = function (app, passport) {
                 xrig += cliRes[0].xcli2 + ';importato da portale;';
                 xrig += '01;';
                 xrig += cliRes[0].psco + ';';
+                xrig += cliRes[0].csdi + ';';
                 res.download(sendCliFile(cliRes[0].ccod, xrig));
             }
         });
@@ -977,6 +978,7 @@ module.exports = function (app, passport) {
                         ncont: cliRes[0].ncont,
                         ntel: cliRes[0].ntel,
                         psco: cliRes[0].psco,
+                        csdi: cliRes[0].csdi,
                         sumCtvOrd: (getSumCtvErr ? 0 : getSumCtvRes.sumctv),
                         user: req.user
                     });
@@ -1012,6 +1014,7 @@ module.exports = function (app, passport) {
                     ncont: cliRes[0].ncont,
                     ntel: cliRes[0].ntel,
                     psco: cliRes[0].psco,
+                    csdi: cliRes[0].csdi,
                     sumCtvOrd: 0,
                     user: req.user
                 });
@@ -1020,7 +1023,7 @@ module.exports = function (app, passport) {
     });
 
     app.post('/edit-client', isLoggedIn, function (req, res) {
-        Client.update(req.body.ccod, req.body.cpiva, req.body.xragsoc, req.body.cfis, req.body.xcli, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, req.body.cabi, req.body.ccab, req.body.ncont, req.body.ntel, req.body.psco, function (cliUpdErr, cliUpdRes) {
+        Client.update(req.body.ccod, req.body.cpiva, req.body.xragsoc, req.body.cfis, req.body.xcli, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, req.body.cabi, req.body.ccab, req.body.ncont, req.body.ntel, req.body.psco, req.body.csdi, function (cliUpdErr, cliUpdRes) {
             if (cliUpdErr) {
                 console.log("Errore censimento cliente!");
                 res.render('detail-client.ejs', {
@@ -1046,6 +1049,7 @@ module.exports = function (app, passport) {
                     ncont: req.body.ncont,
                     ntel: req.body.ntel,
                     psco: req.body.psco,
+                    csdi: req.body.csdi,
                     user: req.user
                 });
             } else {
@@ -1108,6 +1112,7 @@ module.exports = function (app, passport) {
                     ncont: '',
                     ntel: '',
                     psco: 0.00,
+                    csdi: '0000000',
                     newOrder: req.query.newOrder,
                     user: req.user
                 });
@@ -1117,7 +1122,7 @@ module.exports = function (app, passport) {
 
     app.post('/new-client', isLoggedIn, function (req, res) {
         var xcli1 = req.body.xnome + req.body.xcogn;
-        Client.insert(req.body.ccod, req.body.cpiva, req.body.xragsoc, req.body.cfis, xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, Number(req.body.cabi), Number(req.body.ccab), req.body.ncont, req.body.ntel, req.body.psco, function (cliInsErr, cliInsRes) {
+        Client.insert(req.body.ccod, req.body.cpiva, req.body.xragsoc, req.body.cfis, xcli1, req.body.xind, req.body.xcom, req.body.cprv, req.body.ccap, req.body.xnaz, req.body.xmail, req.body.ccat, req.body.ctipcom, req.body.czona, req.body.cage, Number(req.body.cabi), Number(req.body.ccab), req.body.ncont, req.body.ntel, req.body.psco, req.body.csdi, function (cliInsErr, cliInsRes) {
             if (cliInsErr) {
                 console.log("Errore censimento cliente!");
                 res.render('new-client.ejs', {
@@ -1143,6 +1148,7 @@ module.exports = function (app, passport) {
                     ncont: req.body.ncont,
                     ntel: req.body.ntel,
                     psco: req.body.psco,
+                    csdi: req.body.csdi,
                     newOrder: req.body.newOrder,
                     user: req.user
                 });
