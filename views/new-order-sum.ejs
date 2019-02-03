@@ -58,7 +58,7 @@
 			<h4>Cliente: <%= client.ccod %>
 				<small class="text-muted"><%= client.xragsoc %></small>
 			</h4>
-			<% if (ordCtv.sumctv != 0){%>
+			<% if (ordCtv && ordCtv.sumctv != 0){%>
 			<h4>Residuo contratto: 
 				<small class="text-muted"><%= ordCtv.sumctv %></small>
 			</h4>
