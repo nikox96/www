@@ -347,7 +347,7 @@ Ordine.getNota = function getNota(ccod, callback) {
 
 Ordine.getSumCtv = function getSumCtv(ccli, callback) {
     //ricerca ordine per codice
-    db.query("select (y.sumctv - y.sumctv / 100 * cli.psco) as sumctv FROM (select case when c.iimp>0 then c.iimp else 0.00 end - case when sum(z.sumord)>0 then sum(z.sumord) else 0.00 end as sumctv , c.ccli" +
+    db.query("select (y.sumctv - y.sumctv / 100 * cli.psco) as sumctv FROM (select case when c.iimp>0 then c.iimp else 0.00 end - case when sum(z.sumord)>0 then sum(z.sumord) else 0.00 end as sumctv , c.ccli " +
         "from (select a.dreg, a.ccli, a.ccod, a.nreg, sum(b.iimp) as sumord " +
         "from portale.ordini a inner join portale.righe_ordini b " +
         "on a.ccod = b.ccod " +
