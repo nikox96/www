@@ -78,7 +78,7 @@ module.exports = function (app, passport) {
                                     console.log("xgrp trovate" + grpRes);
                                 }
                                 Order.find(appRes[0].idord, function (ordCliErr, ordCliRes) {
-                                    Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                                    Order.getSumCtv(ordCliRes.ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
                                         res.render('new-order-product.ejs', {
                                             message: req.flash('orderMessage'),
                                             ccodda: req.query.ccodda,
@@ -135,7 +135,7 @@ module.exports = function (app, passport) {
                                                 req.flash('orderCampionciniRes', 'Ancora ' + (totalRes - ctvCampRes).toFixed(2) + ' euro spendibili in campioncini!');
                                             }
                                             Order.find(appRes[0].idord, function (ordCliErr, ordCliRes) {
-                                                Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                                                Order.getSumCtv(ordCliRes.ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
                                                     res.render('new-order-campioncini.ejs', {
                                                         messageErr: req.flash('orderCampionciniErr'),
                                                         messageRes: req.flash('orderCampionciniRes'),
@@ -167,7 +167,7 @@ module.exports = function (app, passport) {
                 console.log("errore recupero codice ordine");
             } else {
                 Order.find(appRes[0].idord, function (ordCliErr, ordCliRes) {
-                    Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                    Order.getSumCtv(ordCliRes.ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
                         Product.listPromo('', function (promoErr, promoRes) {
                             if (promoErr) {
                                 req.flash('orderMessage', 'Errore estrazione promozioni!');
@@ -219,7 +219,7 @@ module.exports = function (app, passport) {
                 console.log("errore recupero codice ordine");
             } else {
                 Order.find(appRes[0].idord, function (ordCliErr, ordCliRes) {
-                    Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                    Order.getSumCtv(ordCliRes.ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
                         Product.listPromo(req.body.ccodpromo, function (promoErr, promoRes) {
                             if (promoErr) {
                                 req.flash('orderMessage', 'Nessun cliente trovato');
@@ -291,7 +291,7 @@ module.exports = function (app, passport) {
                                         console.log("xgrp trovate" + grpRes);
                                     }
                                     Order.find(appRes[0].idord, function (ordCliErr, ordCliRes) {
-                                        Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                                        Order.getSumCtv(ordCliRes.ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
                                             res.render('new-order-product.ejs', {
                                                 message: req.flash('orderMessage'),
                                                 products: productRes,
@@ -354,7 +354,7 @@ module.exports = function (app, passport) {
                                                     req.flash('orderCampionciniRes', 'Ancora ' + (totalRes - ctvCampRes).toFixed(2) + ' euro spendibili in campioncini!');
                                                 }
                                                 Order.find(appRes[0].idord, function (ordCliErr, ordCliRes) {
-                                                    Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                                                    Order.getSumCtv(ordCliRes.ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
                                                         res.render('new-order-campioncini.ejs', {
                                                             messageErr: req.flash('orderCampionciniErr'),
                                                             messageRes: req.flash('orderCampionciniRes'),
@@ -3378,7 +3378,7 @@ function insertOrderPromo(promoRes, req, res, idOrd) {
                     b = true;
                 }
                 Order.find(idOrd, function (ordCliErr, ordCliRes) {
-                    Order.getSumCtv(ordCliRes[0].ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
+                    Order.getSumCtv(ordCliRes.ccli, function (sumCtvOrdErr, sumCtvOrdRes) {
                         res.render('new-order-promo.ejs', {
                             messageErr: '',
                             messageRes: req.flash('orderMessage'),
