@@ -1050,6 +1050,7 @@ module.exports = function (app, passport) {
                     ntel: req.body.ntel,
                     psco: req.body.psco,
                     csdi: req.body.csdi,
+                    sumCtvOrd: 0,
                     user: req.user
                 });
             } else {
