@@ -152,7 +152,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <img src="http://www.selvertshopping.com/images/products/big/P<%= products[i].ccod %>.jpg"
+                                                <img src="<%- (products[i].xgrp == 'ITP' || products[i].xgrp == 'ITR' || products[i].ccod == 200628 || products[i].ccod == 311601) ? '/public/img/' + products[i].ccod : 'http://www.selvertshopping.com/images/products/big/P' + products[i].ccod %>.jpg"
                                                     onerror="document.getElementById('icon<%= products[i].ccod %>').innerHTML='&#xe3ad';document.getElementById('button<%= products[i].ccod %>').disabled=true"
                                                     alt="">
                                             </div>

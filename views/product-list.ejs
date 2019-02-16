@@ -105,7 +105,7 @@
             <div id="client" class="card-columns">
                 <% products.forEach(function(product) { %>
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="http://www.selvertshopping.com/images/products/big/P<%= product.ccod %>.jpg"
+                    <img class="card-img-top" src="<%- (products[i].xgrp == 'ITP' || products[i].xgrp == 'ITR' || products[i].ccod == 200628 || products[i].ccod == 311601) ? '/public/img/' + products[i].ccod : 'http://www.selvertshopping.com/images/products/big/P' + products[i].ccod %>.jpg"
                         alt="" onerror="this.src='/public/img/image_broken.png'">
                     <div class="card-body">
                         <h5 class="card-title">
