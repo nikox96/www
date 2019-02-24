@@ -3434,6 +3434,7 @@ function numberPad(n) {
 
 function getContratti(res, cliRes, cage) {
     if (j < cliRes.length) {
+        console.log('situazione contratti: j ' + j + ' cliRes[j].ccod ' + cliRes[j].ccod);
         Client.getContr(cliRes[j].ccod, function (getContrErr, getContrRes) {
             if (getContrErr) {
                 cliRes[j].contrctv = 0;
@@ -3454,7 +3455,7 @@ function getContratti(res, cliRes, cage) {
                     indexContr++;
                     contrattiClienti[indexContr] = cliRes[j];
                 }
-                if (j === cliRes.length) {
+                if (j === cliRes.length - 1) {
                     res.render('contratti.ejs', {
                         clients: contrattiClienti,
                         user: cage
