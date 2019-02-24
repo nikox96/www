@@ -374,6 +374,30 @@ Ordine.getSumCtv = function getSumCtv(ccli, callback) {
         });
 };
 
+Ordine.getOrdiniAgentiXMese = function getOrdiniAgentiXMese(cage, callback) {
+    //ricerca ordine per codice
+    db.query("select date_part('month',dreg) as mese, sum(iimp) as ictv, ccondpag" +
+        " from portale.righe_ordini a join portale.ordini b on a.ccod=b.ccod" +
+        " where cage = $1 and date_part('year',dreg) = date_part('year',CURRENT_DATE)" +
+        " group by mese, ccondpag;"
+        , [ccli]
+        //        , function (queryErr, queryRes) {
+        , (queryErr, queryRes) => {
+            if (queryErr) {
+                console.log(queryErr);
+            }
+            else {
+                queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
+                if (queryRes.length > 0) {
+                    console.log('sum iimp ord cli: \n %j', queryRes);
+                    callback(null, queryRes[0]);
+                    return;
+                }
+            }
+            callback("Errore somma controvalore ordini cliente", null);
+        });
+};
+
 Ordine.newOrderCamp = function newOrderCamp(ccod, ccodcamp, iqta, callback) {
     var iqtaold;
     //ricerco il prodotto da inserire

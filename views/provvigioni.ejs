@@ -1,0 +1,96 @@
+<!-- views/provvigioni.ejs -->
+<!doctype html>
+<html lang="it">
+
+<head>
+	<title>Portale Innovazioni - Provvigioni</title>
+	<% include head %>
+</head>
+
+<body>
+<div class="sticky-top">
+	<nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="row justify-content-md-center">
+			<div class="col-md-auto">
+				<a class="navbar-brand" href="#">Provvigioni</a>
+			</div>
+			<!--<div class="col-md-auto">
+				<button class="btn-primary bg-transparent text-primary border-0 align-bottom" type="button"
+					data-toggle="collapse" data-target="#filterForm" aria-expanded="false" aria-controls="filterForm">
+					<i class="material-icons">&#xe152</i>
+				</button>
+			</div>-->
+			<div class="col-md-auto">
+				<div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
+					<div class="col-md-auto">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+								   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Azioni
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+									<li><a class="dropdown-item" href="/home">Home</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<div class="row justify-content-md-center">
+			<div class="collapse" id="filterForm">
+				<form action="/client-list" method="post" class="form-inline">
+					<div class="form-row align-items-center">
+						<div class="col-md-auto">
+							<label class="sr-only" for="inlineFormCodCli">Codice cliente</label>
+							<input type="text" name="ccod" class="form-control mb-2" id="inlineFormInputCodCli"
+								placeholder="Codice cliente">
+						</div>
+						<div class="col-md-auto">
+							<label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
+							<input type="text" name="xragsoc" class="form-control mb-2" id="inlineFormInputRagSoc"
+								placeholder="Ragione sociale">
+						</div>
+						<div class="col-md-auto">
+							<button type="submit" class="btn btn-primary mb-2">Cerca</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>-->
+	</nav>
+</div>
+<div class="container-fluid">
+	<div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
+		<div id="client">
+			<table class="table table-hover">
+				<thead>
+				<tr>
+					<th scope="col">Mese</th>
+					<th scope="col">Provvigioni dirette</th>
+					<th scope="col">Provvigioni indirette</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% provvMeseArr.forEach(function(provvMese) { %>
+				<tr>
+					<th scope="row">
+						<%= provvMese.mese %>
+					</th>
+					<td>
+						<%= provvMese.provvdir %>
+					</td>
+					<td>
+						<%= provvMese.provvindir %>
+					</td>
+				</tr>
+				<% }); %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+
+</html>
