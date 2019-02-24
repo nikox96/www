@@ -138,7 +138,7 @@ Client.getNewCod = function getNewCod(callback) {
 
 Client.getContr = function getContr(ccod, callback) {
     if (ccod == null || ccod == 0 || ccod == ''){
-        callback(null, 0);
+        callback(null, [{iimp: 0}]);
         return;
     }
     var query = "SELECT iimp FROM portale.contratti WHERE ccli = $1 AND CANNRIF = date_part('year', CURRENT_DATE)";
@@ -149,6 +149,7 @@ Client.getContr = function getContr(ccod, callback) {
         }
         else {
             queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
+            console.log('risultato getContr: %j', queryRes);
             callback(null, queryRes);
         }
     });
