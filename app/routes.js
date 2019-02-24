@@ -15,6 +15,7 @@ var campioncini = [];
 var campioncino = {};
 var riga = {};
 var contrattiClienti = [];
+var clienteContr = {};
 module.exports = function (app, passport) {
 
     // =====================================
@@ -997,6 +998,7 @@ module.exports = function (app, passport) {
             j = 0;
             indexContr = 0;
             contrattiClienti = [];
+            client = {};
             getContratti(res, cliRes, req.user.cage);
         });
     });
@@ -3433,27 +3435,29 @@ function numberPad(n) {
 }
 
 function getContratti(res, cliRes, cage) {
+    clienteContr = {};
     if (j < cliRes.length) {
         console.log('situazione contratti: j ' + j + ' cliRes[j].ccod ' + cliRes[j].ccod);
-        Client.getContr(cliRes[j].ccod, function (getContrErr, getContrRes) {
+        clienteContr = cliRes[j];
+        Client.getContr(clienteContr.ccod, function (getContrErr, getContrRes) {
             if (getContrErr) {
-                cliRes[j].contrctv = 0;
-                cliRes[j].contrmen = 0;
+                clienteContr.contrctv = 0;
+                clienteContr.contrmen = 0;
             } else {
-                cliRes[j].contrctv = getContrRes.iimp;
-                cliRes[j].contrmen = (getContrRes.iimp / 12).toFixed(2);
+                clienteContr.contrctv = getContrRes.iimp;
+                clienteContr.contrmen = (getContrRes.iimp / 12).toFixed(2);
             }
-            Order.getSumCtv(cliRes[j].ccod, function (getSumCtvErr, getSumCtvRes) {
+            Order.getSumCtv(clienteContr.ccod, function (getSumCtvErr, getSumCtvRes) {
                 if (getSumCtvErr) {
-                    cliRes[j].contrres = 0;
-                    cliRes[j].ctvord = 0;
+                    clienteContr.contrres = 0;
+                    clienteContr.ctvord = 0;
                 } else {
-                    cliRes[j].contrres = getSumCtvRes.sumctv;
-                    cliRes[j].ctvord = cliRes[j].contrctv - cliRes[j].contrres;
+                    clienteContr.contrres = getSumCtvRes.sumctv;
+                    clienteContr.ctvord = clienteContr.contrctv - clienteContr.contrres;
                 }
-                console.log('situazione contratti: indexContr ' + indexContr + ' cliRes[j].contrctv ' + cliRes[j].contrctv);
-                if (cliRes[j].contrctv > 0) {
-                    contrattiClienti[indexContr] = cliRes[j];
+                console.log('situazione contratti: indexContr ' + indexContr + ' clienteContr.contrctv ' + clienteContr.contrctv);
+                if (clienteContr.contrctv > 0) {
+                    contrattiClienti[indexContr] = clienteContr;
                     indexContr++;
                 }
 
