@@ -1,0 +1,123 @@
+<!-- views/contratti.ejs -->
+<!doctype html>
+<html lang="it">
+
+<head>
+	<title>Portale Innovazioni - Contratti clienti</title>
+	<!--
+	<link rel="manifest" href="/public/manifest.json">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+			crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+			crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+	<% include head %>
+</head>
+
+<body>
+<div class="sticky-top">
+	<nav id="navbar-ordine" class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="row justify-content-md-center">
+			<div class="col-md-auto">
+				<a class="navbar-brand" href="#">Contratti Clienti</a>
+			</div>
+			<!--<div class="col-md-auto">
+				<button class="btn-primary bg-transparent text-primary border-0 align-bottom" type="button"
+					data-toggle="collapse" data-target="#filterForm" aria-expanded="false" aria-controls="filterForm">
+					<i class="material-icons">&#xe152</i>
+				</button>
+			</div>-->
+			<div class="col-md-auto">
+				<div class="row justify-content-md-center navbar-collapse" id="navbarSupportedContent">
+					<div class="col-md-auto">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="dropdownAzioni" role="button"
+								   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Azioni
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="dropdownAzioni">
+									<li><a class="dropdown-item" href="/home">Home</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<div class="row justify-content-md-center">
+			<div class="collapse" id="filterForm">
+				<form action="/client-list" method="post" class="form-inline">
+					<div class="form-row align-items-center">
+						<div class="col-md-auto">
+							<label class="sr-only" for="inlineFormCodCli">Codice cliente</label>
+							<input type="text" name="ccod" class="form-control mb-2" id="inlineFormInputCodCli"
+								placeholder="Codice cliente">
+						</div>
+						<div class="col-md-auto">
+							<label class="sr-only" for="inlineFormRagSoc">Ragione sociale</label>
+							<input type="text" name="xragsoc" class="form-control mb-2" id="inlineFormInputRagSoc"
+								placeholder="Ragione sociale">
+						</div>
+						<div class="col-md-auto">
+							<button type="submit" class="btn btn-primary mb-2">Cerca</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>-->
+	</nav>
+</div>
+<div class="container-fluid">
+	<div data-spy="scroll" data-target="#navbar-ordine" data-offset="0">
+		<div id="client">
+			<table class="table table-hover">
+				<thead>
+				<tr>
+					<th scope="col">Codice Cliente</th>
+					<th scope="col">Ragione sociale</th>
+					<th scope="col">Valore contratto</th>
+					<th scope="col">Residuo contratto</th>
+					<th scope="col">Rata mensile</th>
+					<th scope="col">Valore ordinato</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% clients.forEach(function(client) { %>
+				<tr>
+					<th scope="row">
+						<%= client.ccod %>
+					</th>
+					<td>
+						<%= client.xragsoc %>
+					</td>
+					<td>
+						<%= client.contrctv %>
+					</td>
+					<td>
+						<%= client.contrres %>
+					</td>
+					<td>
+						<%= client.contrmen %>
+					</td>
+					<td>
+						<%= client.ctvord %>
+					</td>
+				</tr>
+				<% }); %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+
+</html>

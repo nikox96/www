@@ -66,6 +66,27 @@
         </div>
     </div>
     <!--% } %>-->
+    <% if (user && (user.cage &&  (user.cage == 0 || user.cage === 9999))) { %>
+    <div class="row">
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <h4 class="display-6">Situazione Contratti</h4>
+                <hr class="my-6">
+                <p class="lead">Visualizza situazione contratti!</p>
+                <a href="/contratti" class="btn btn-primary btn-lg" role="button">Visualizza</a>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <h4 class="display-6">Provvigioni</h4>
+                <hr class="my-6">
+                <p class="lead">Visualizza provvigioni!</p>
+                <a href="/provvigioni" class="btn btn-primary btn-lg" role="button">Visualizza</a>
+            </div>
+        </div>
+    </div>
+    <% } %>
 </div>
 </body>
 </html>

@@ -39,7 +39,7 @@ User.login = function login(cage, xpwd, callback) {
     }
     var query = "SELECT * FROM portale.users WHERE cage = "
         + cage;
-    console.log("se non bestemmio guarda: "+ query);
+    console.log("se non bestemmio guarda: " + query);
     db.query(query
 //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
@@ -61,7 +61,7 @@ User.login = function login(cage, xpwd, callback) {
                     });
                 } else {
                     console.log("length: " + queryRes.length);
-                    for(const j = 0; j< queryRes.length;j++){
+                    for (const j = 0; j < queryRes.length; j++) {
                         console.log("cage: " + queryRes[j].cage);
                         console.log("cuser: " + queryRes[j].cuser);
                     }

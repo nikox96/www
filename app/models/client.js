@@ -88,12 +88,13 @@ Client.update = function update(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, c
     });
 };
 
-Client.list = function list(ccod, xragsoc, callback) {
+Client.list = function list(ccod, xragsoc, cage, callback) {
     console.log("ricerca lista clienti");
     console.log("ccod " + ccod);
     console.log("xragsoc " + xragsoc);
+    console.log("cage " + cage);
     xragsoc = "%" + (xragsoc && xragsoc !== '' ? xragsoc : "") + "%";
-    var query = "SELECT * FROM portale.clienti WHERE " + (ccod && ccod !== '' ? "ccod = " + ccod + " AND " : "") + "xragsoc ILIKE " + mysql.escape(xragsoc) + " ORDER BY ccod";
+    var query = "SELECT * FROM portale.clienti WHERE " + (ccod && ccod !== '' ? "ccod = " + ccod + " AND " : "") + (cage && cage !== '' && cage !== 9999 ? "cage = " + cage + " AND " : "") + "xragsoc ILIKE " + mysql.escape(xragsoc) + " ORDER BY ccod";
     console.log(query);
     db.query(query
 //        , function (queryErr, queryRes) {
@@ -131,6 +132,24 @@ Client.getNewCod = function getNewCod(callback) {
                 return;
             }
             callback(null, newCod);
+        }
+    });
+};
+
+Client.getContr = function getContr(ccod, callback) {
+    if (ccod == null || ccod == 0 || ccod == ''){
+        callback(null, 0);
+        return;
+    }
+    var query = "SELECT iimp FROM portale.contratti WHERE ccli = $1 AND CANNRIF = date_part('year', CURRENT_DATE)";
+    db.query(query, [ccod], (queryErr, queryRes) => {
+        if (queryErr) {
+            callback(queryErr, null);
+            console.log("get contratto: " + queryErr);
+        }
+        else {
+            queryRes = (queryRes.rows && queryRes.rows.length >= 0 ? queryRes.rows : queryRes);
+            callback(null, queryRes);
         }
     });
 };

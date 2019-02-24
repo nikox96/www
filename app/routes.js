@@ -45,7 +45,7 @@ module.exports = function (app, passport) {
     app.get('/login', function (req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login.ejs', { message: req.flash('loginMessage') });
+        res.render('login.ejs', {message: req.flash('loginMessage')});
     });
 
     // =====================================
@@ -576,7 +576,7 @@ module.exports = function (app, passport) {
                                             tes.cage = ((cliRes.cage || cliRes.cage == 0) && cliRes.cage !== '' && !(ageErr) ? cliRes.cage : ordRes.cage);
                                             tes.cageAltroSis = '';
                                             tes.provvAge = (cliRes && cliRes.percprovv ? cliRes.percprovv : (ageRes && ageRes.percprovv ? +ageRes.percprovv - (cliRes.contrattista ? 2 : 0) : ''));
-                                            tes.provCapoArea = '0.00';
+                                            tes.provCapoArea = (ageRes && ageRes.capoarea != null ? '5.00' : '0.00');
                                             tes.ccondPag = (ordRes.ccondpag && ordRes.ccondpag !== '' ? ordRes.ccondpag : '');
                                             tes.ccondPagAltroSis = '';
                                             tes.scoCondPag = '0.00';
@@ -832,7 +832,7 @@ module.exports = function (app, passport) {
     app.post('/client-list', isLoggedIn, function (req, res) {
         var clients = [];
 
-        Client.list(req.body.ccod, req.body.xragsoc, function (cliErr, cliRes) {
+        Client.list(req.body.ccod, req.body.xragsoc, null, function (cliErr, cliRes) {
             if (cliErr) {
                 req.flash('clientListMessage', 'Nessun cliente trovato');
             }
@@ -863,7 +863,7 @@ module.exports = function (app, passport) {
         Client.delClient(req.body.ccod, function (delErr, delRes) {
             var clients = [];
 
-            Client.list(null, null, function (cliErr, cliRes) {
+            Client.list(null, null, null, function (cliErr, cliRes) {
                 if (cliErr) {
                     req.flash('clientListMessage', 'Nessun cliente trovato');
                 }
@@ -893,7 +893,7 @@ module.exports = function (app, passport) {
 
     app.get('/get-csv-client', isLoggedIn, function (req, res) {
         var xrig = "";
-        Client.list(req.query.ccod, null, function (cliErr, cliRes) {
+        Client.list(req.query.ccod, null, null, function (cliErr, cliRes) {
             if (cliErr) {
                 req.flash('list-client-message', cliErr);
             } else {
@@ -924,7 +924,7 @@ module.exports = function (app, passport) {
     app.get('/client-list', isLoggedIn, function (req, res) {
         var clients = [];
 
-        Client.list(null, null, function (cliErr, cliRes) {
+        Client.list(null, null, null, function (cliErr, cliRes) {
             if (cliErr) {
                 req.flash('list-client-message', cliErr);
             } else {
@@ -951,7 +951,7 @@ module.exports = function (app, passport) {
     });
 
     app.get('/detail-client', isLoggedIn, function (req, res) {
-        Client.list(req.query.ccod, null, function (cliErr, cliRes) {
+        Client.list(req.query.ccod, null, null, function (cliErr, cliRes) {
             if (cliErr) {
                 req.flash('list-client-message', cliErr);
             } else {
@@ -987,8 +987,53 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.get('/contratti', isLoggedIn, function (req, res) {
+        Client.list(null, null, req.user.cage, function (cliErr, cliRes) {
+            if (cliErr) {
+                req.flash('list-client-message', cliErr);
+            }
+            cliRes.forEach((cli) => {
+                Client.getContr(cli.ccod, function (getContrErr, getContrRes) {
+                    if (getContrErr) {
+                        cli.contrctv = 0;
+                        cli.contrmen = 0;
+                    } else {
+                        cli.contrctv = getContrRes.iimp;
+                        cli.contrmen = (getContrRes.iimp / 12).toFixed(2);
+                    }
+                    Order.getSumCtv(cli.ccod, function (getSumCtvErr, getSumCtvRes) {
+                        if (getSumCtvErr) {
+                            cli.contrres = 0;
+                            cli.ctvord = 0;
+                        } else {
+                            cli.contrres = getSumCtvRes.sumctv;
+                            cli.ctvord = cli.contrctv - cli.contrres;
+                        }
+                    });
+                });
+            });
+        });
+    });
+
+    app.get('/provvigioni', isLoggedIn, function (req, res) {
+        var provvMeseArr = new Array(12);
+        provvMeseArr[0] = {cmese: 1, xmese: 'Gennaio', provvDir: 0, provvInd: 0};
+        provvMeseArr[1] = {cmese: 2, xmese: 'Febbraio', provvDir: 0, provvInd: 0};
+        provvMeseArr[2] = {cmese: 3, xmese: 'Marzo', provvDir: 0, provvInd: 0};
+        provvMeseArr[3] = {cmese: 4, xmese: 'Aprile', provvDir: 0, provvInd: 0};
+        provvMeseArr[4] = {cmese: 5, xmese: 'Maggio', provvDir: 0, provvInd: 0};
+        provvMeseArr[5] = {cmese: 6, xmese: 'Giugno', provvDir: 0, provvInd: 0};
+        provvMeseArr[6] = {cmese: 7, xmese: 'Luglio', provvDir: 0, provvInd: 0};
+        provvMeseArr[7] = {cmese: 8, xmese: 'Agosto', provvDir: 0, provvInd: 0};
+        provvMeseArr[8] = {cmese: 9, xmese: 'Settembre', provvDir: 0, provvInd: 0};
+        provvMeseArr[9] = {cmese: 10, xmese: 'Ottobre', provvDir: 0, provvInd: 0};
+        provvMeseArr[10] = {cmese: 11, xmese: 'Novembre', provvDir: 0, provvInd: 0};
+        provvMeseArr[11] = {cmese: 12, xmese: 'Dicembre', provvDir: 0, provvInd: 0};
+
+    });
+
     app.get('/edit-client', isLoggedIn, function (req, res) {
-        Client.list(req.query.ccod, null, function (cliErr, cliRes) {
+        Client.list(req.query.ccod, null, null, function (cliErr, cliRes) {
             if (cliErr) {
                 req.flash('list-client-message', cliErr);
             } else {
@@ -1292,7 +1337,7 @@ module.exports = function (app, passport) {
     app.get('/signup', function (req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('signup.ejs', { message: req.flash('signupMessage') });
+        res.render('signup.ejs', {message: req.flash('signupMessage')});
     });
 
     // process the signup form
@@ -1341,7 +1386,7 @@ function getClients(req, res) {
             console.log("errore lettura appoggio");
         } else {
             if (appfinRes.length > 0 && appfinRes[0].idord && appfinRes[0].idord !== '') {
-                Client.list(req.query.ccod, req.query.xragsoc, function (clientErr, clientRes) {
+                Client.list(req.query.ccod, req.query.xragsoc, null, function (clientErr, clientRes) {
                     if (clientErr) {
                         req.flash('orderMessage', 'Nessun cliente trovato');
                     }
@@ -1368,7 +1413,7 @@ function getClients(req, res) {
                             if (appErr) {
                                 console.log("Errore inserimento appoggio: " + appErr);
                             } else {
-                                Client.list(req.query.ccod, req.query.xragsoc, function (clientErr, clientRes) {
+                                Client.list(req.query.ccod, req.query.xragsoc, null, function (clientErr, clientRes) {
                                     if (clientErr) {
                                         req.flash('orderMessage', 'Nessun cliente trovato');
                                     }
