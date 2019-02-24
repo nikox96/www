@@ -3451,10 +3451,12 @@ function getContratti(res, cliRes, cage) {
                     cliRes[j].contrres = getSumCtvRes.sumctv;
                     cliRes[j].ctvord = cliRes[j].contrctv - cliRes[j].contrres;
                 }
+                console.log('situazione contratti: indexContr ' + indexContr + ' cliRes[j].contrctv ' + cliRes[j].contrctv);
                 if (cliRes[j].contrctv > 0) {
-                    indexContr++;
                     contrattiClienti[indexContr] = cliRes[j];
+                    indexContr++;
                 }
+
                 if (j === cliRes.length - 1) {
                     res.render('contratti.ejs', {
                         clients: contrattiClienti,
