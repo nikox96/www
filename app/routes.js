@@ -7,13 +7,14 @@ var Agent = require("./models/agent.js");
 var Appoggio = require("./models/appoggio.js");
 var dateFormat = require('dateformat');
 var pdf = require('html-pdf');
-var i = 0, j = 0, k = 0, csvEl = 0;
+var i = 0, j = 0, k = 0, csvEl = 0, indexContr = 0;
 var rig, tes, rec, iva, par, csv;
 var products = [];
 var product = {};
 var campioncini = [];
 var campioncino = {};
 var riga = {};
+var contrattiClienti = [];
 module.exports = function (app, passport) {
 
     // =====================================
@@ -992,26 +993,11 @@ module.exports = function (app, passport) {
             if (cliErr) {
                 req.flash('list-client-message', cliErr);
             }
-            cliRes.forEach((cli) => {
-                Client.getContr(cli.ccod, function (getContrErr, getContrRes) {
-                    if (getContrErr) {
-                        cli.contrctv = 0;
-                        cli.contrmen = 0;
-                    } else {
-                        cli.contrctv = getContrRes.iimp;
-                        cli.contrmen = (getContrRes.iimp / 12).toFixed(2);
-                    }
-                    Order.getSumCtv(cli.ccod, function (getSumCtvErr, getSumCtvRes) {
-                        if (getSumCtvErr) {
-                            cli.contrres = 0;
-                            cli.ctvord = 0;
-                        } else {
-                            cli.contrres = getSumCtvRes.sumctv;
-                            cli.ctvord = cli.contrctv - cli.contrres;
-                        }
-                    });
-                });
-            });
+
+            j = 0;
+            indexContr = 0;
+            contrattiClienti = [];
+            getContratti(res, cliRes, req.user.cage);
         });
     });
 
@@ -3444,4 +3430,40 @@ function numberPad(n) {
     var s = n + "";
     while (s.length < 3) s = "0" + s;
     return s;
+}
+
+function getContratti(res, cliRes, cage) {
+    if (j < cliRes.length) {
+        Client.getContr(cliRes[j].ccod, function (getContrErr, getContrRes) {
+            if (getContrErr) {
+                cliRes[j].contrctv = 0;
+                cliRes[j].contrmen = 0;
+            } else {
+                cliRes[j].contrctv = getContrRes.iimp;
+                cliRes[j].contrmen = (getContrRes.iimp / 12).toFixed(2);
+            }
+            Order.getSumCtv(cliRes[j].ccod, function (getSumCtvErr, getSumCtvRes) {
+                if (getSumCtvErr) {
+                    cliRes[j].contrres = 0;
+                    cliRes[j].ctvord = 0;
+                } else {
+                    cliRes[j].contrres = getSumCtvRes.sumctv;
+                    cliRes[j].ctvord = cliRes[j].contrctv - cliRes[j].contrres;
+                }
+                if (cliRes[j].contrctv > 0) {
+                    indexContr++;
+                    contrattiClienti[indexContr] = cliRes[j];
+                }
+                if (j === cliRes.length) {
+                    res.render('contratti.ejs', {
+                        clients: cliRes,
+                        user: cage
+                    });
+                } else {
+                    j++;
+                    getContratti(cliRes);
+                }
+            });
+        });
+    }
 }
