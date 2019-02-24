@@ -3456,12 +3456,12 @@ function getContratti(res, cliRes, cage) {
                 }
                 if (j === cliRes.length) {
                     res.render('contratti.ejs', {
-                        clients: cliRes,
+                        clients: contrattiClienti,
                         user: cage
                     });
                 } else {
                     j++;
-                    getContratti(cliRes);
+                    getContratti(res, cliRes, cage);
                 }
             });
         });
