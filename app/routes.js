@@ -3444,8 +3444,8 @@ function getContratti(res, cliRes, cage) {
                 clienteContr.contrctv = 0;
                 clienteContr.contrmen = 0;
             } else {
-                clienteContr.contrctv = getContrRes.iimp;
-                clienteContr.contrmen = (getContrRes.iimp / 12).toFixed(2);
+                clienteContr.contrctv = getContrRes[0].iimp;
+                clienteContr.contrmen = (getContrRes[0].iimp / 12).toFixed(2);
             }
             Order.getSumCtv(clienteContr.ccod, function (getSumCtvErr, getSumCtvRes) {
                 if (getSumCtvErr) {
