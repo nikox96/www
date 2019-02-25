@@ -3444,7 +3444,7 @@ function getContratti(res, cliRes, cage) {
                 clienteContr.contrctv = 0;
                 clienteContr.contrmen = 0;
             } else {
-                clienteContr.contrctv = (getContrRes.length > 0 ? getContrRes[0].iimp : 0);
+                clienteContr.contrctv = ((getContrRes.length > 0 ? getContrRes[0].iimp : 0)).toFixed(2);
                 clienteContr.contrmen = ((getContrRes.length > 0 ? getContrRes[0].iimp : 0) / 12).toFixed(2);
             }
             Order.getSumCtv(clienteContr.ccod, function (getSumCtvErr, getSumCtvRes) {
@@ -3452,8 +3452,8 @@ function getContratti(res, cliRes, cage) {
                     clienteContr.contrres = 0;
                     clienteContr.ctvord = 0;
                 } else {
-                    clienteContr.contrres = getSumCtvRes.sumctv;
-                    clienteContr.ctvord = clienteContr.contrctv - clienteContr.contrres;
+                    clienteContr.contrres = (getSumCtvRes.sumctv).toFixed(2);
+                    clienteContr.ctvord = (clienteContr.contrctv - clienteContr.contrres).toFixed(2);
                 }
                 console.log('situazione contratti: indexContr ' + indexContr + ' clienteContr.contrctv ' + clienteContr.contrctv);
                 if (clienteContr.contrctv > 0) {
