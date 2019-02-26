@@ -60,7 +60,7 @@
 			</h4>
 			<% if (ordCtv && ordCtv.sumctv != 0){%>
 			<h4>Residuo contratto: 
-				<small class="text-muted"><%= (ordCtv.sumctv).toFixed(2) %></small>
+				<small class="text-muted"><%= (parseFloat(ordCtv.sumctv)).toFixed(2) %></small>
 			</h4>
 			<% } %>
 		</div>
