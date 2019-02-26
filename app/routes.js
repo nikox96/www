@@ -3452,8 +3452,8 @@ function getContratti(res, cliRes, cage) {
                     clienteContr.contrres = 0;
                     clienteContr.ctvord = 0;
                 } else {
-                    clienteContr.contrres = perseFloat(getSumCtvRes.sumctv).toFixed(2);
-                    clienteContr.ctvord = perseFloat(+clienteContr.contrctv - clienteContr.contrres).toFixed(2);
+                    clienteContr.contrres = parseFloat(getSumCtvRes.sumctv).toFixed(2);
+                    clienteContr.ctvord = parseFloat(+clienteContr.contrctv - clienteContr.contrres).toFixed(2);
                 }
                 console.log('situazione contratti: indexContr ' + indexContr + ' clienteContr.contrctv ' + clienteContr.contrctv);
                 if (clienteContr.contrctv > 0) {
