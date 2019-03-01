@@ -48,7 +48,7 @@ Client.insert = function insert(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, c
         if (findErr) {
             db.query("INSERT INTO portale.clienti (ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcomm, czona, cage, cabi, ccab, ncont, ntel, psco)" +
                 " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)"
-                , [ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage, cabi, ccab, ncont, ntel, (psco == "" ? 0 : psco), (csdi == "" ? '0000000' : csdi)]
+                , [ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage, cabi, ccab, ncont, ntel, (psco == "" ? 0 : psco), (csdi ? (csdi == "" ? '0000000' : csdi) : '0000000')]
                 , (queryErr, queryRes) => {
                     if (queryErr) {
                         console.log("error: " + queryErr);
@@ -73,7 +73,7 @@ Client.update = function update(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, c
             callback("Cliente non censito!", null);
         } else {
             db.query("UPDATE portale.clienti set cpiva = $1, xragsoc=$2, cfis=$3, xcli1=$4, xind=$5, xcom=$6, cprv=$7, ccap=$8, xnaz=$9, xmail=$10, ccat=$11, ctipcomm=$12, czona=$13, cage=$14, cabi=$15, ccab=$16, ncont=$17, ntel=$18, psco=$19, csdi=$21 where ccod = $20"
-                , [cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage, cabi, ccab, ncont, ntel, (psco == "" ? 0 : psco), ccod, (csdi == "" ? '0000000' : csdi)]
+                , [cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage, cabi, ccab, ncont, ntel, (psco == "" ? 0 : psco), ccod, (csdi ? (csdi == "" ? '0000000' : csdi) : '0000000')]
                 , (queryErr, queryRes) => {
                     if (queryErr) {
                         console.log("error: " + queryErr);
