@@ -46,7 +46,7 @@ Client.delClient = function delClient(ccod, callback) {
 Client.insert = function insert(ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage, cabi, ccab, ncont, ntel, psco, csdi, callback) {
     Client.find(ccod, function (findErr, findRes) {
         if (findErr) {
-            db.query("INSERT INTO portale.clienti (ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcomm, czona, cage, cabi, ccab, ncont, ntel, psco)" +
+            db.query("INSERT INTO portale.clienti (ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcomm, czona, cage, cabi, ccab, ncont, ntel, psco, csdi)" +
                 " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)"
                 , [ccod, cpiva, xragsoc, cfis, xcli1, xind, xcom, cprv, ccap, xnaz, xmail, ccat, ctipcom, czona, cage, cabi, ccab, ncont, ntel, (psco == "" ? 0 : psco), (csdi ? (csdi == "" ? '0000000' : csdi) : '0000000')]
                 , (queryErr, queryRes) => {
