@@ -2561,6 +2561,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
 
     if (righe[i].descrpromo) {
         if (righe[i].descrpromo.length > 7) {
+            /* scarto righe con ccod 999999
             console.log('getRigheCSV: promozione');
             initializeCSV();
             rec.tipRec = 'RIG';
@@ -2696,7 +2697,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
             rig.cvocAltroSis = '';
             rec.rig = rig;
             csvRig93();
-
+*/
             i++;
             getRigheCSV(res, req, nreg, righe, camp, cliente, agente);
         } else {
@@ -2756,15 +2757,15 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                         rig.qdocScoMerce = '';
                         rig.qExpUmSec = '';
                         rig.qExpUmMag = '';
-                        rig.iprz = prodRes.iprz;
-                        rig.sco1 = product.psco;
+                        rig.iprz = (product.psco === 100 ? '0' : prodRes.iprz);
+                        rig.sco1 = (product.psco === 100 ? '0' : product.psco);
                         rig.fscoAna = '';
                         rig.sco2 = '';
                         rig.sco3 = '';
                         rig.scoUni = '';
                         rig.provvAge = (cliente && cliente.percprovv ? cliente.percprovv : (agente && agente.percprovv ? +agente.percprovv - (cliente.contrattista ? 2 : 0) : ''));
-                        rig.impVal = product.iimp;
-                        rig.cimp = (prodRes.xgrp == 'ITP' || prodRes.xgrp == 'ITR' ? '0' : '1');
+                        rig.impVal = (product.psco === 100 ? '0' : product.iimp);
+                        rig.cimp = (prodRes.xgrp === 'ITP' || prodRes.xgrp === 'ITR' ? '0' : '1');
                         rig.copeMag = '';
                         rig.cdep = '';
                         rig.classeStat = '';
@@ -2909,14 +2910,14 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                         rig.qdocScoMerce = '';
                         rig.qExpUmSec = '';
                         rig.qExpUmMag = '';
-                        rig.iprz = prodRes.iprz;
-                        rig.sco1 = product.psco;
+                        rig.iprz = (product.psco === 100 ? '0' : prodRes.iprz);
+                        rig.sco1 = (product.psco === 100 ? '0' : product.psco);
                         rig.fscoAna = '';
                         rig.sco2 = '';
                         rig.sco3 = '';
                         rig.scoUni = '';
                         rig.provvAge = (cliente && cliente.percprovv ? cliente.percprovv : (agente && agente.percprovv ? +agente.percprovv - (cliente.contrattista ? 2 : 0) : ''));
-                        rig.impVal = product.iimp;
+                        rig.impVal = (product.psco === 100 ? '0' : product.iimp);
                         rig.cimp = '1';
                         rig.copeMag = '';
                         rig.cdep = '';
@@ -3065,15 +3066,15 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                     rig.qdocScoMerce = '';
                     rig.qExpUmSec = '';
                     rig.qExpUmMag = '';
-                    rig.iprz = prodRes.iprz;
-                    rig.sco1 = product.psco;
+                    rig.iprz = (product.psco === 100 ? '0' : prodRes.iprz);
+                    rig.sco1 = (product.psco === 100 ? '0' : product.psco);
                     rig.fscoAna = '';
                     rig.sco2 = '';
                     rig.sco3 = '';
                     rig.scoUni = '';
                     rig.provvAge = (cliente && cliente.percprovv ? cliente.percprovv : (agente && agente.percprovv ? +agente.percprovv - (cliente.contrattista ? 2 : 0) : ''));
-                    rig.impVal = product.iimp;
-                    rig.cimp = (prodRes.xgrp == 'ITP' || prodRes.xgrp == 'ITR' ? '0' : '1');
+                    rig.impVal = (product.psco === 100 ? '0' :product.iimp);
+                    rig.cimp = (prodRes.xgrp === 'ITP' || prodRes.xgrp === 'ITR' ? '0' : '1');
                     rig.copeMag = '';
                     rig.cdep = '';
                     rig.classeStat = '';
@@ -3218,15 +3219,15 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                     rig.qdocScoMerce = '';
                     rig.qExpUmSec = '';
                     rig.qExpUmMag = '';
-                    rig.iprz = prodRes.iprz;
-                    rig.sco1 = product.psco;
+                    rig.iprz = (product.psco === 100 ? '0' : prodRes.iprz);
+                    rig.sco1 = (product.psco === 100 ? '0' : product.psco);
                     rig.fscoAna = '';
                     rig.sco2 = '';
                     rig.sco3 = '';
                     rig.scoUni = '';
                     rig.provvAge = (cliente && cliente.percprovv ? cliente.percprovv : (agente && agente.percprovv ? +agente.percprovv - (cliente.contrattista ? 2 : 0) : ''));
-                    rig.impVal = product.iimp;
-                    rig.cimp = (prodRes.xgrp == 'ITP' || prodRes.xgrp == 'ITR' ? '0' : '1');
+                    rig.impVal = (product.psco === 100 ? '0' : product.iimp);
+                    rig.cimp = (prodRes.xgrp === 'ITP' || prodRes.xgrp === 'ITR' ? '0' : '1');
                     rig.copeMag = '';
                     rig.cdep = '';
                     rig.classeStat = '';

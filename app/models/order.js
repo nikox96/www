@@ -314,7 +314,7 @@ Ordine.updateNreg = function updateNreg(ccod, callback) {
                                         callback(getNregErr, null);
                                     else
                                         console.log('res updatenreg: %j', getNregRes);
-                                        callback(null, getNregRes.rows[0].nreg);
+                                    callback(null, getNregRes.rows[0].nreg);
                                 });
                         }
                     });
@@ -376,11 +376,11 @@ Ordine.getSumCtv = function getSumCtv(ccli, callback) {
 
 Ordine.getOrdiniAgentiXMese = function getOrdiniAgentiXMese(cage, callback) {
     //ricerca ordine per codice
-    db.query("select date_part('month',dreg) as mese, sum(iimp) as ictv, ccondpag" +
-        " from portale.righe_ordini a join portale.ordini b on a.ccod=b.ccod" +
-        " where cage = $1 and date_part('year',dreg) = date_part('year',CURRENT_DATE)" +
-        " group by mese, ccondpag;"
-        , [ccli]
+    db.query("select date_part('year',dreg) as anno, date_part('month',dreg) as mese, sum(iimp) as ictv, ccondpag" +
+        " from portale.righe_ordini a join portale.ordini b on a.ccod = b.ccod" +
+        " where cage = $1 and nreg > 999 and date_part('year',dreg) between date_part('year',CURRENT_DATE) - 1 and date_part('year',CURRENT_DATE) and ccondpag <> 19" +
+        " group by anno, mese, ccondpag order by anno asc, mese asc;"
+        , [cage]
         //        , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
@@ -389,12 +389,12 @@ Ordine.getOrdiniAgentiXMese = function getOrdiniAgentiXMese(cage, callback) {
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
                 if (queryRes.length > 0) {
-                    console.log('sum iimp ord cli: \n %j', queryRes);
+                    console.log('sum iimp ord age x mese: \n %j', queryRes);
                     callback(null, queryRes[0]);
                     return;
                 }
             }
-            callback("Errore somma controvalore ordini cliente", null);
+            callback("Errore somma ordini agente per mese", null);
         });
 };
 
