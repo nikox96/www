@@ -119,6 +119,7 @@
                         <tr>
                             <th scope="col">Codice Prodotto</th>
                             <th scope="col">Descrizione</th>
+                            <th scope="col">Promo</th>
                             <th scope="col">Prezzo</th>
                             <th scope="col">Anteprima</th>
                             <th scope="col">Quantità</th>
@@ -131,7 +132,10 @@
                                 <%= products[i].ccod %>
                             </th>
                             <td>
-                                <%= products[i].xdesc %>
+								<%= products[i].xdesc %>
+                            </td>
+                            <td>
+								<%= products[i].descrpromo %>
                             </td>
                             <td>
                                 <%= products[i].iprz %>
