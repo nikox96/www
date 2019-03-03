@@ -177,15 +177,15 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Q.ta</span>
                                         </div>
-                                        <input type="number" name="iqta" class="form-control" value="<%- (products[i].iqta) ? products[i].iqta : 0 %>">
+                                        <input type="number" name="iqta" class="form-control" value="<%- (products[i].iqta) ? products[i].iqta : 0 %>" <%- (products[i].descrpromo && products[i].descrpromo.length > 7) ? 'disabled' : '' %>>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Sconto</span>
                                         </div>
-                                        <input type="number" name="psco" class="form-control" value="<%- (products[i].psco) ? products[i].psco : 0 %>">
+                                        <input type="number" name="psco" class="form-control" value="<%- (products[i].psco) ? products[i].psco : 0 %>" <%- (products[i].descrpromo && products[i].descrpromo.length > 7) ? 'disabled' : '' %>>
                                     </div>
-                                    <button type="submit" class="btn-primary bg-transparent text-primary border-0 align-bottom">
+                                    <button type="submit" class="btn-primary bg-transparent <%- (products[i].descrpromo && products[i].descrpromo.length > 7) ? 'text-muted' : 'text-primary' %> border-0 align-bottom"  <%- (products[i].descrpromo && products[i].descrpromo.length > 7) ? 'disabled' : '' %>>
                                         <i class="material-icons">&#xe854</i>
                                     </button>
                                 </form>
