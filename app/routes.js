@@ -520,6 +520,7 @@ module.exports = function (app, passport) {
                                             Order.getSumCtv(ordRes.ccli, function (ctvContrErr, ctvContrRes) {
                                                 if (ordRes.ccondPag === 19 && ctvContrRes && ctvContrRes.sumctv && +ctvContrRes.sumctv < 0){
                                                     ordRes.ccondpag = 5;
+                                                    //@todo: aggiornare condizione di pagamento in tabella
                                                 }
                                                 rec.tipRec = 'TES';
                                                 tes.cDocAut = '000';
