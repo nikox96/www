@@ -244,7 +244,7 @@ Ordine.newOrderProduct = function newOrderProduct(ccod, ccodprod, iqta, psco, pr
 
 Ordine.getUserOrder = function getUserOrder(cage, cstt, xcli, fall, callback) {
     //ricerca ordine per codice agente/status/cliente
-    var query = "SELECT a.*, (b.iimp - (b.iimp / 100 * c.psco)), c.xragsoc " +
+    var query = "SELECT a.*, (b.iimp / 100 * (100 - c.psco)) as iimp, c.xragsoc " +
         "FROM " +
         "(SELECT ccod, to_char(dreg, 'YYYY/MM/DD HH:MM') AS data, dreg, cstt, cage, ccli, xnote " +
         "FROM portale.ordini)  AS a, " +
