@@ -8,7 +8,7 @@ var Appoggio = require("./models/appoggio.js");
 var dateFormat = require('dateformat');
 var pdf = require('html-pdf');
 var i = 0, j = 0, k = 0, csvEl = 0, indexContr = 0;
-var rig, tes, rec, iva, par, csv;
+var rig, tes, rec, iva, par, csv, condPagCsv, totCSV;
 var products = [];
 var product = {};
 var campioncini = [];
@@ -738,6 +738,7 @@ module.exports = function (app, passport) {
                                             rec.iva = iva;
                                             rec.par = par;
 
+                                            condPagCsv = tes.ccondPag;
                                             csvRig93();
                                             i = 0;
                                             getRigheCSV(res, req, nregRes, righeRes, (ordCampRes ? ordCampRes : null), cliRes, ageRes);
@@ -2426,6 +2427,9 @@ function csvRig() {
 
 function csvRig93() {
     var str = '';
+    if (rec.rig.tipRig != '2'){
+        totCSV = +totCSV + +rec.rig.impVal;
+    }
 
     str += rec.tipRec + ';';
     str += rec.tes.tipDocOrdVen + ';';
@@ -2542,6 +2546,26 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                     console.log(sttErr);
                     return;
                 } else {
+                    if (condPagCsv == 19){
+                        initializeCSV();
+                        rec.tipRec='RIG';
+                        rig.tipRig='2';
+                        rig.cpartitarioAna = cliente.ccod;
+                        rig.descrizione1 = 'STORNO QUOTA ORDINE';
+                        rig.descrizioneInterna = rig.descrizione1;
+                        rig.clistino = '01';
+                        rig.qdoc = '1';
+                        rig.iprz = +totCSV * -1;
+                        rig.sco1 = 0;
+                        rig.uMis = 'N.';
+                        rig.provvAge = (cliente && cliente.percprovv ? cliente.percprovv : (agente && agente.percprovv ? +agente.percprovv - (cliente.contrattista ? 2 : 0) : ''));
+                        rig.civa = '22';
+                        rig.cconto = '390107';
+                        rig.impVal = +totCSV * -1;
+                        rig.cimp = '1';
+                        rec.rig = rig;
+                        csvRig93();
+                    }
                     res.download(sendFile(nreg, righe[0].ccod));
                     return;
                 }
