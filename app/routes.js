@@ -739,6 +739,7 @@ module.exports = function (app, passport) {
                                             rec.par = par;
 
                                             condPagCsv = tes.ccondPag;
+                                            totCSV = 0;
                                             csvRig93();
                                             i = 0;
                                             getRigheCSV(res, req, nregRes, righeRes, (ordCampRes ? ordCampRes : null), cliRes, ageRes);
