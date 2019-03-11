@@ -2548,7 +2548,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                 if (sttErr) {
                     console.log(sttErr);
                     return;
-                } else {
+                } else {/*
                     if (condPagCsv === 19) {
                         initializeCSV();
                         rec.tipRec = 'RIG';
@@ -2568,7 +2568,7 @@ function getRigheCSV(res, req, nreg, righe, camp, cliente, agente) {
                         rig.cimp = '1';
                         rec.rig = rig;
                         csvRig93();
-                    }
+                    }*/
                     res.download(sendFile(nreg, righe[0].ccod));
                     return;
                 }
