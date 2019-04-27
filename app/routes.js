@@ -6,7 +6,7 @@ var Camp = require("./models/campioncini.js");
 var Agent = require("./models/agent.js");
 var Appoggio = require("./models/appoggio.js");
 var dateFormat = require('dateformat');
-var pdf = require('html-pdf');
+//var pdf = require('html-pdf');
 var i = 0, j = 0, k = 0, csvEl = 0, indexContr = 0;
 var rig, tes, rec, iva, par, csv, condPagCsv, totCSV;
 var products = [];
@@ -759,9 +759,10 @@ module.exports = function (app, passport) {
 
     app.post('/del-order', isLoggedIn, function (req, res) {
         Order.delOrder(req.body.ccod, 50, function (queryErr, queryRes) {
-            if (queryErr)
+            if (queryErr){
                 console.log(queryErr);
-            res.redirect('/order-list');
+	    }
+            return res.redirect('/order-list');
         });
     });
 
@@ -1257,7 +1258,7 @@ module.exports = function (app, passport) {
 
     app.get('/req-pdf-order', isLoggedIn, function (req, res) {
         Appoggio.find(req.user.cage, req.query.idOrd, function (appErr, appRes) {
-            if (appErr) return console.log("Errore recupero pdf!");
+            if (appErr || appRes.length <= 0) return console.log("Errore recupero pdf!");
             res.download(appRes[0].xdata, 'conferma_ricezione_ordine.pdf', function (downloadErr) {
                 if (downloadErr) return console.log(downloadErr);
             });
@@ -1436,8 +1437,9 @@ function getClients(req, res) {
 
 function getRighe(res, req, righe, cliente, cond, idOrd) {
 
-    if (i >= righe.length)
-        return;
+    if (i >= righe.length){
+      return;
+    }
 
     console.log('getRighe rows number: ' + righe.length);
     Product.find(righe[i].ccodprod, function (prodErr, prodRes) {
@@ -1489,7 +1491,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                                 xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
                                                 ordCtv: (sumCtvOrdErr ? null : sumCtvOrdRes),
                                                 condpag: condpag
-                                            }, function (err, htmlGenesi) {
+                                            }/*, function (err, htmlGenesi) {
                                                 if (err) return console.log(err);
                                                 var options = {
                                                     directory: "/tmp",
@@ -1527,7 +1529,7 @@ function getRighe(res, req, righe, cliente, cond, idOrd) {
                                                         res.send(htmlGenesi);
                                                     });
                                                 });
-                                            });
+                                            }*/);
                                         });
                                     });
                                 }
@@ -1590,7 +1592,7 @@ function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
                                         xnota: (notaRes && notaRes.xnote ? notaRes.xnote : ''),
                                         ordCtv: (sumCtvOrdErr ? null : sumCtvOrdRes),
                                         condpag: condpag
-                                    }, function (err, htmlGenesi) {
+                                    }/*, function (err, htmlGenesi) {
                                         if (err) return console.log(err);
                                         var options = {
                                             directory: "/tmp",
@@ -1628,7 +1630,7 @@ function getRigheCamp(res, req, camps, cliente, cond, idOrd) {
                                                 res.send(htmlGenesi);
                                             });
                                         });
-                                    });
+                                    }*/);
                                 });
                             });
                         }

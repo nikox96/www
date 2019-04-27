@@ -32,6 +32,7 @@ Ordine.delOrder = function delOrder(ccod, cstt, callback) {
         , (queryErr, queryRes) => {
             if (queryErr) {
                 console.log("error: " + queryErr);
+		callback('Errore ordine da eliminare non trovato', null);
             }
             else {
                 queryRes = (queryRes.rows && queryRes.rows.length > 0 ? queryRes.rows : queryRes);
@@ -40,6 +41,7 @@ Ordine.delOrder = function delOrder(ccod, cstt, callback) {
                         , (err2, res2) => {
                             if (err2) {
                                 console.log("errore canc righe ordini");
+				callback('Errore del righe ordini', null);
                             } else {
                                 db.query("DELETE FROM portale.camp_ordini WHERE ccod = " + ccod
                                     , (err3, res3) => {
@@ -49,7 +51,7 @@ Ordine.delOrder = function delOrder(ccod, cstt, callback) {
                                                 console.log(delErr);
                                                 callback("Errore cancellazione dettaglio: comunicare n° ordine all'amministratore: " + ccod, null);
                                             } else {
-                                                return;
+	               				callback(null, true);
                                             }
                                         });
                                     });
@@ -142,6 +144,7 @@ Ordine.newOrder = function newOrder(ctiprec, ccli, cage, callback) {
         //                , function (queryErr, queryRes) {
         , (queryErr, queryRes) => {
             if (queryErr) {
+		console.log(queryErr);
                 callback('Errore inserimento ordine', null);
             }
             else {

@@ -1,0 +1,24 @@
+html-pdf: Failed to load PhantomJS module. { Error: Cannot find module 'phantomjs-prebuilt'
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:582:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:508:25)
+    at Module.require (internal/modules/cjs/loader.js:637:17)
+    at require (internal/modules/cjs/helpers.js:22:18)
+    at Object.<anonymous> (/root/git/www/node_modules/html-pdf/lib/pdf.js:7:19)
+    at Module._compile (internal/modules/cjs/loader.js:701:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:712:10)
+    at Module.load (internal/modules/cjs/loader.js:600:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:539:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:531:3) code: 'MODULE_NOT_FOUND' }
+The magic happens on port 3000
+[0mGET / [32m200 [0m106.348 ms - 3474[0m
+[0mGET /material-design-icons/iconfont/material-icons.css [36m304 [0m78.248 ms - -[0m
+[0mGET /public/img/favicon.ico [32m200 [0m33.662 ms - 15086[0m
+[0mGET /login [36m304 [0m9.244 ms - -[0m
+[0mGET /material-design-icons/iconfont/material-icons.css [36m304 [0m2.640 ms - -[0m
+login for: 9999 1234
+se non bestemmio guarda: SELECT * FROM portale.users WHERE cage = 9999
+error: error: permission denied for schema portale
+local-login err Nessun utente trovato
+[0mPOST /login [36m302 [0m251.231 ms - 56[0m
+[0mGET /login [32m200 [0m4.944 ms - 3573[0m
+[0mGET /material-design-icons/iconfont/material-icons.css [36m304 [0m1.773 ms - -[0m

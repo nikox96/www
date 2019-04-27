@@ -4,7 +4,7 @@
 // get all the tools we need
 var express = require('express');
 var app = express();
-var port = process.env.PORT;
+var port = 3000; // per HEROKU: process.env.PORT;
 var passport = require('passport');
 var flash = require('connect-flash');
 
